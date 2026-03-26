@@ -1,0 +1,32 @@
+.foto-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover; /* 👈 MUITO importante */
+  margin-left: auto;
+  margin-right: 12px;
+  }  
+
+#btn-perfil {
+  border: none;
+  background:none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.usuario-info {
+  white-space: nowrap;
+}
+
+.conteudo-dropdown {
+  border: 1px dotted  #ddd ;
+}
+
+.conteudo-dropdown li {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.escondido {
+  display: none;
+}

@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css')}}">
+
+<header class="header">
+  <div class="header-left">
+    <a href="{{url_for('principal.pagina_principal')}}">← Voltar</a>
+  </div>
+  <div class="header-center">
+    {% include 'components/_barra_pesquisa.html' %}
+  </div>
+  <div class="header-right">
+    {% include 'components/_menu_dropdown.html' %}
+  </div>
+</header>

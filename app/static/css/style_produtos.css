@@ -1,0 +1,54 @@
+.pagina-produto {
+  display: flex;
+  justify-content: center;   /* centraliza o bloco */
+  align-items: flex-start;   /* alinha topo */
+  gap: 40px;
+
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* IMAGEM */
+.produto-imagem {
+  flex: 1;
+}
+
+.produto-imagem img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 60px;
+  
+}
+
+
+/* INFO */
+.produto-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preco {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+strong {
+  white-space: nowrap;
+}
+
+.pagina-produto-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  
+}

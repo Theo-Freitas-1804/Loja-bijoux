@@ -1,0 +1,54 @@
+<! DOCTYPE HTML>
+<html>
+  <head>
+    <title> Gerenciar Estoque | Kordonê Bijoux</title>
+    <meta charset= "utf-8">
+    <meta name = "viewport" content="width = device-width, initial-scale = 1.0">
+    <meta name = "description" content= "Kordonê Bijoux - Site oficial">
+    <meta name = "author" content = "Theodoro Meiel">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_table.css') }}">
+  </head>
+  <body>
+    <h1> Produtos</h1>
+    <a href="{{ url_for('novo_produto.adicionar_novo_acessorio') }}" class="novo-produto">
+  + Novo Produto
+</a>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Imagem
+          </th>
+          <th>
+            ID
+          </th>
+          <th>
+            Nome
+          </th>
+          <th>
+            Preço
+          </th>
+          <th>
+            Ações
+          </th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for produto in produtos %}
+        <tr>
+          <td>
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagem) }}" width="60">
+</td>
+          <td>{{ produto.id_acessorio}}</td>
+          <td> {{produto.nome}}</td>
+          <td>{{ produto.preco}}</td>
+          <td>
+            <a href="#"> Editar</a>
+            <a href="#"> Deletar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

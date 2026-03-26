@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+}
+
+.header-left {
+  min-width: 80px;
+}
+
+.header-left a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-right {
+  min-width: 80px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header {
+  border-bottom: 1px solid #eee;
+  background-color: white;
+}

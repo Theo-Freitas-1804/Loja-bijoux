@@ -1,0 +1,45 @@
+/* GRID (HOME / PADRÃO) */
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* CARD BASE */
+.card-produto {
+  border: 1px dotted gold;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  background: white;
+}
+
+/* IMAGEM BASE */
+.card-produto img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* MODO HORIZONTAL (PÁGINA DE PESQUISA) */
+.pagina-produto-horizontal .card-produto {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left; /* melhora leitura */
+}
+
+/* IMAGEM NO MODO HORIZONTAL */
+.pagina-produto-horizontal .card-produto img {
+  width: 100px;
+  flex-shrink: 0; /* impede a imagem de encolher */
+}
+
+/* TEXTO AGRUPADO */
+.info-produto {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  text-align: center;
+}

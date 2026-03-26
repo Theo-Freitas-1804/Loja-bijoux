@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title> Kordonê Bijoux | E-comerce Oficial</title>
+    <meta charset= "utf-8">
+    <meta name = "viewport" content="width = device-width, initial-scale = 1.0">
+    <meta name = "description" content= "Kordonê Bijoux - Produtos">
+    <meta name = "author" content = "Theodoro Meiel">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_produtos.css') }}">
+    </head>
+    <body>
+      <div class="pagina-produto">
+        <!-- LADO ESQUERDO -->
+        <div class="produto-imagem">
+          <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagem) }}">
+        </div>
+        <!-- LADO DIREITO -->
+        <div class="produto-info">
+          <h1>{{ produto.nome }}</h1>
+          <p class="preco">R$ {{ produto.preco }}</p>
+          <p><strong>Material:</strong> {{ produto.material }}</p>
+          <p><strong>Tamanho:</strong> {{ produto.tamanho }}</p>
+          {% if produto.colecao %}
+          <p><strong>Coleção:</strong> {{ produto.colecao }}</p>
+          {% endif %}
+          <p><strong>Estoque:</strong> {{ produto.em_estoque }}</p>
+          <!-- BOTÃO -->
+          <form method="POST">
+            <button type="submit">Adicionar ao carrinho</button>
+            </form>
+        </div>
+    </div>
+    </body>
+</html>

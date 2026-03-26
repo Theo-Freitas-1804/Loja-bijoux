@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: #f5f5f5;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.novo-produto{
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.novo-produto:hover {
+  background: #333;
+}

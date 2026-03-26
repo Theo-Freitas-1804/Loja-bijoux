@@ -1,0 +1,52 @@
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/style_dropdown.css') }}">
+
+<div class="perfil">
+  <button id="btn-perfil">
+    <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil)}}" class="foto-perfil">
+  </button>
+</div>
+
+<div id="menu-dropdown" class="escondido">
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil)}}" class="foto-perfil" alt="A" id="foto-interna">
+  <div class="usuario-info">
+    <p>
+      <strong>
+        Olá , {{current_user.nome}}
+      </strong>
+    </p>
+  </div>
+  <ul class="conteudo-dropdown">
+    {% if current_user.is_admin%}
+    <li>
+      <a href="{{url_for('admin.dashboard')}}"> Painel Admin</a>
+    </li>
+    <li>
+      <a href="#">
+        Ver todos os pedidos
+      </a>
+    </li>
+    <li>
+      <a href="#"> Gerenciar Estoque </a>
+    </li>
+    <li>
+      <a href="{{url_for('usuario.sair')}}"> Sair </a>
+    </li>
+    {% else %}
+    <li>
+      <a href="#"> Meus endereços</a>
+    </li>
+    <li>
+      <a href="#"> Meus pedidos</a>
+    </li>
+    <li>
+      <a href="#"> Peças favoritas</a>
+    </li>
+    <li>
+      <a href="#"> Ajuda</a>
+    </li>
+    <li>
+      <a href="{{ url_for('auth.logout') }}">Sair</a>
+    </li>
+    {%endif%}
+  </ul>
+</div>

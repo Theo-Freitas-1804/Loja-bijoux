@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+  <head>
+    <title> Adicionar Novo Acessório | Kordonê Bijoux</title>
+    <meta charset= "utf-8">
+    <meta name = "description" content="Kordonê Bijoux | Site Oficial">
+    <meta name = "viewport" content="width = device-width , initial-scale = 1.0">
+    <meta name = "description" content= "Kordonê Bijoux - Site oficial">
+    <meta name = "keywords" content ="">
+    <meta name="author" content="Theodoro Meiel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/novo_produto.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      {% include 'components/_header_interno.html'%}
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <div id="produtos">
+      <form method="POST" enctype="multipart/form-data" id="ficha-produtos" onsubmit="return false;">
+        <br>
+        <br>
+        <input type="file" id="foto-acessorio" name="foto-acessorio">
+        <br>
+        <br>
+        <label> Informações da peça</label>
+        <br>
+        <br>
+        <input type="text" placeholder="Nome" name="nome-bijuteria" id="Nome"> 
+        <br>
+        <br>
+        <input type="text" placeholder="Coleçâo" name="colecao" id="Colecao">
+        <br>
+        <br>
+        <input type="text" placeholder="Tamanho"  name="Tamanho" id="Tamanho">
+        <br>
+        <br>
+        <input type="text" placeholder="Material" name="material" id="Material">
+        <br>
+        <br>
+        <input type="text" placeholder="Preço" name="preco" id="Preco">
+        <br>
+        <br>
+        <input type="text" placeholder="Estoque" name="Estoque" id="qtd">
+        <br>
+        <br>
+        <label> A foto é uma:</label>
+        <br>
+        <br>
+        <div id="opcao">
+          <input type="radio" name="categoria" value="Capa de Coleção" class="opcao" id="capa">
+          <label for="capa"> Capa de colecao</label>
+          <input type="radio" name="categoria" value="Bijuteria" class="opcao" id="acessorio">
+          <label for="acessorio"> Bijuteria</label>
+          <input type="radio" name="categoria" 
+          value="Banner" class="opcao" id="banner">
+          <label for="banner"> Banner para a página principal</label>
+          </div>
+        
+          <br>
+        <br>
+       
+        <button type="button" id="adicionar-a-fila">Adicionar à fila</button>
+        <br>
+        <br>
+        <div id="preview-container" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+          <h3>Itens na fila de envio:</h3>
+          <ul id="lista-preview" style="list-style: none; padding: 0;">
+            
+          </ul>
+          </div>
+          <br>
+          <br>
+        <div>
+          <button type="button" id="btn-enviar">Cadastrar</button>
+        </div>
+        
+      </form>
+    </div>
+    
+    <script src="{{ url_for('static', filename='Js/novo_produto.js') }}"></script>
+  </body>
