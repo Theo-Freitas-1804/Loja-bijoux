@@ -7,7 +7,7 @@
     <meta name = "viewport" content="width = device-width , initial_scale = 1.0">
     <meta name = "keywords" content => </meta>
     <meta name = "author" content = "Theodoro Meiel"> </meta>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cadastro.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -28,17 +28,10 @@
     <div id="Cadastro">
         <h3> Tenha seu próprio carrinho , salve endereços , peças favoritas e mais!</h3>
       <form action="{{url_for('auth.criar_conta')}}" method="POST">
-        <br>
-        <br>
         <input type="Text" placeholder="Nome" name= "Nome_cliente" required>
-        <br>
-        <br>
         <input type="email" placeholder="E-mail" name="email_cliente"required>
-        <br>
-        <br>
+      
         <input type="password" placeholder="Senha" name="senha_cliente" required>
-        <br>
-        <br>
         <button type="submit"> Criar Conta </button>
         <h3> Jà tem uma conta? <a href="{{ url_for('auth.entrar') }}" id="Entrada"> Entrar</a></h3>
       </form>

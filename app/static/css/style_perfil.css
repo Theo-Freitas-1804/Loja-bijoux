@@ -1,0 +1,54 @@
+
+ #sessao-dados {
+    width: 400px; /* 💡 Largura definida (pode ajustar), essencial para margin: auto */
+    margin: 50px auto 0 auto; /* 50px em cima, 'auto' nas laterais (centraliza), 0px embaixo */
+    padding: 20px; /* Um respiro interno */
+    /* border: 1px solid #ccc;  Opcional: Para ver o limite da caixa */
+    text-align: center;
+}
+
+
+#sessao-dados label {
+  white-space: nowrap;
+  text-align:center;
+}
+
+#sessao-dados label {
+    white-space: nowrap;
+    text-align: center; /* ⬅️ CORRIGIDO: twxt-align se torna text-align */
+}
+
+/* 1. ESTILO VISÍVEL (APLICADO À LABEL) */
+/* Este seletor garante que SÓ a LABEL receba o visual 3D */
+.botao-estilizado label { 
+    display: inline-block;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: 'Sua-Fonte-Estilizada', serif; 
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+    /* 💥 O EFEITO 3D ESTÁ AQUI 💥 */
+    position: relative; 
+    box-shadow: 0 5px 0 #888; /* Sombra de profundidade */
+    transition: all 0.1s ease;
+}
+
+/* 2. INPUT INVISÍVEL (APLICADO AO INPUT) */
+/* As propriedades de ocultação foram movidas de volta para cá */
+.botao-estilizado input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#foto-user {
+  width: 40px;
+  height: 40px;
+  border: 1px dotted gold;
+  border-radius: 50%;
+}

@@ -28,19 +28,23 @@
       </ul>
     </nav>
   </header>
-    <div id="Login">
-      <form action="{{url_for('auth.entrar')}}" method="POST">
-        <br>
-        <br>
+    <div id="login">
+      <form action="{{url_for('auth.entrar')}}" method="POST" class="form-login">
         <input type="Text" placeholder="Insira seu nome ou e-mail" name= "id_cliente" required class="login">
-        <div id="senha">
-          <input type="password" placeholder="Insira sua Senha" name="senha_cliente" required id="senha_cliente" class="login">
+        <div class="campo-senha">
+          <input type="password" placeholder="Insira sua Senha" id="senha_cliente" class="login" name="senha_cliente">
           <button type="button" id="btn_senha">
             <i class="ri-eye-line" id="ver_senha"></i>
           </button>
         </div>
         <button type="submit"> Entrar</button>
+        <p>
+          Esqueceu sua senha?
+        </p>
+        <strong>
+          <a href="{{url_for('senha.gerar_codigo_senha')}}"> Recuperar Senha</a>
+        </strong>
+        
     </form>
     <script src="{{ url_for('static', filename='Js/entrar.js') }}"></script>
-
   </body>      

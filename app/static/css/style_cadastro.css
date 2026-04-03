@@ -1,0 +1,68 @@
+* {
+  margin: 0px;
+  padding:0px;
+}
+
+h2 , #Cadastro h3 {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#Cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+#Cadastro input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  font-size: 14px;
+}
+
+#Cadastro input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+#Cadastro button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
+
+  transition: 0.2s;
+}
+
+#Cadastro button:hover {
+  opacity: 0.8;
+}
+
+#Cadastro h3 {
+  font-weight: normal;
+  font-size: 16px;
+  text-align: center;
+}
+
+#Cadastro form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

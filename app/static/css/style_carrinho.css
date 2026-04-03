@@ -1,0 +1,53 @@
+#carrinho-pip {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 320px;
+  height: 100vh;
+
+  background: white;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  z-index: 999999;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#carrinho-pip.ativo {
+  transform: translateX(0);
+}
+
+.carrinho-header {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+#conteudo-carrinho {
+  padding: 10px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.conteudo-carrinho {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.conteudo-carrinho img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.conteudo-carrinho div {
+  display: flex;
+  flex-direction: column;
+}

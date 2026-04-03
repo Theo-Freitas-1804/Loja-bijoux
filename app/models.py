@@ -27,6 +27,10 @@ class Usuario(UserMixin , db.Model):
     is_admin= db.Column(db.Boolean , default=False)
     foto_perfil = db.Column(db.String(255) , nullable = True , unique= False)
     data_registro = db.Column(db.DateTime,default=lambda: dt.datetime.now(fuso_brasilia))
+    token_reset = db.Column(db.String(20), nullable=True)
+    token_expira = db.Column(db.DateTime, nullable=True)
+    
+    
     def __repr__(self):
         return f"<Usuario {self.Nome}>"
     def get_id(self):
@@ -48,7 +52,7 @@ class Produtos(db.Model):
     ativo = db.Column(db.Boolean, default=True)
     categoria = db.Column(db.String(50))
     def __repr__(self):
-        return f"<Acessório: {self.nome} | {self.Status.value}>"
+        return f"<Acessório: {self.nome} | {self.status.value}>"
         
 class Colecoes(db.Model):
 
@@ -68,3 +72,33 @@ class Banners(db.Model):
   
   def __repr__(self):
     return f"<Banner {self.id} {self.arquivo} >"
+    
+
+class Favorito(db.Model):
+    __tablename__ = "favoritos"
+    id = db.Column(db.Integer, primary_key=True)
+    produto_id = db.Column(
+        db.Integer,
+        db.ForeignKey("Produtos.id_acessorio"),
+        nullable=False
+        )
+
+    usuario_id = db.Column(
+        db.Integer,
+        db.ForeignKey("Clientes.id_usuaria"),
+        nullable=False
+        )
+        
+
+class Carrinho(db.Model):
+  __tablename__ = "carrinho"
+  id = db.Column(db.Integer, primary_key=True)
+  usuario_id = db.Column(
+    db.Integer,
+    db.ForeignKey("Clientes.id_usuaria", name="fk_carrinho_usuario")
+    )
+  produto_id = db.Column(
+    db.Integer,
+    db.ForeignKey("Produtos.id_acessorio", name="fk_carrinho_produto")
+    )
+  quantidade = db.Column(db.Integer, default=1)

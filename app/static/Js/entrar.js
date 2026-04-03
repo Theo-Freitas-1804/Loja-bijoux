@@ -16,7 +16,20 @@ document.addEventListener("DOMContentLoaded", function () {
       inputSenha.type = "password";
       ver.className = "ri-eye-line";
     }
+});
 
+const campo = document.querySelector('input[name="id_cliente"]');
+campo.addEventListener("input", function() {
+  const valor = campo.value.trim();
+  const ehEmail = valor.includes("@");
+  const ehNome = valor.length >= 3; // mínimo aceitável
+  if (ehEmail || ehNome) {
+    campo.classList.remove("erro");
+    campo.classList.add("sucesso");
+  } else {
+    campo.classList.remove("sucesso");
+    campo.classList.add("erro");
+  }
 });
 
 });

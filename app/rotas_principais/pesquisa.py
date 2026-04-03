@@ -1,5 +1,5 @@
 from .. models import db , Produtos
-from flask import current_app , Blueprint , render_template , request
+from flask import current_app , Blueprint , render_template , request , jsonify , url_for
 from decimal import Decimal
 
 
@@ -23,8 +23,6 @@ def pesquisa():
     query = query.filter(Produtos.categoria == categoria)
   
   produtos = query.all()
-  print(type(produtos[0].preco))
-  print(type(produtos[0].preco))
   
   return render_template(
     "pesquisa.html",
@@ -35,3 +33,23 @@ def pesquisa():
     categoria=categoria
 )
   
+#Pesquisa dinâmica
+
+@bp_pesquisa.route("/api/pesquisa")
+def pesquisa_dinamica():
+  termo = request.args.get("item")
+  query = Produtos.query
+  if termo:
+    query = query.filter(Produtos.nome.ilike(f"%{termo}%"))
+  produtos = query.limit(5).all()
+
+  resultado = []
+  
+  for p in produtos:
+    resultado.append({
+      "nome": p.nome,
+      "id": p.id_acessorio,
+      "imagem": url_for("static", filename=f"imagens/UPLOADS_FOTOS_BIJOUX/{p.imagem}")
+    })
+
+  return jsonify(resultado)

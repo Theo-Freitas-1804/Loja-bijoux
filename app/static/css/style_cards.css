@@ -1,4 +1,7 @@
-/* GRID (HOME / PADRÃO) */
+
+/* =========================
+   GRID (HOME)
+========================= */
 .grid-produtos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -6,40 +9,140 @@
   padding: 16px;
 }
 
-/* CARD BASE */
+
+/* =========================
+   CARD BASE
+========================= */
 .card-produto {
-  border: 1px dotted gold;
+  border: 1px solid #eee;
   border-radius: 8px;
   padding: 12px;
-  text-align: center;
   background: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* IMAGEM BASE */
+
+/* =========================
+   IMAGEM (PADRÃO)
+========================= */
 .card-produto img {
   width: 100%;
   height: auto;
   border-radius: 6px;
 }
-
-/* MODO HORIZONTAL (PÁGINA DE PESQUISA) */
-.pagina-produto-horizontal .card-produto {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  text-align: left; /* melhora leitura */
+.produto-imagem img {
+  width: auto !important;
+  max-width: 350px !important;
 }
 
-/* IMAGEM NO MODO HORIZONTAL */
-.pagina-produto-horizontal .card-produto img {
-  width: 100px;
-  flex-shrink: 0; /* impede a imagem de encolher */
-}
 
-/* TEXTO AGRUPADO */
+
+/* =========================
+   INFO PRODUTO
+========================= */
 .info-produto {
   display: flex;
   flex-direction: column;
-  white-space: nowrap;
-  text-align: center;
+  gap: 4px;
 }
+
+.info-produto strong {
+  font-size: 14px;
+}
+
+.info-produto p {
+  font-size: 13px;
+  color: #666;
+}
+
+
+/* =========================
+   LINK / BOTÃO
+========================= */
+.card-produto .link {
+  margin-top: auto;
+  font-size: 13px;
+  text-decoration: none;
+  color: black;
+}
+
+/* =========================
+   BUSCA (HORIZONTAL)
+========================= */
+
+.resultados-busca {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.resultados-busca .card-produto {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.resultados-busca .card-produto img {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.resultados-busca .info-produto {
+  flex: 1;
+}
+
+.resultados-busca .link {
+  white-space: nowrap;
+}
+
+/* Botão de fsvoritos */
+.acoes-produto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-favorito {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-favorito i {
+  font-size: 20px;
+  color: #999;
+}
+
+/* ESTADO ATIVO */
+.btn-favorito.ativo i {
+  color: red;              /* preenchimento */
+  -webkit-text-stroke: 1px black; /* borda preta */
+}
+
+
+/* ====== Card de coleção */
+
+.card-colecao {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-colecao img {
+  width: 100%;
+  aspect-ratio: 1/1;   /* 🔥 mantém quadrado */
+  object-fit: cover;   /* 🔥 corta sem distorcer */
+  border-radius: 6px;
+}
+

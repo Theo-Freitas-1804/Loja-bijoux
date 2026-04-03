@@ -16,8 +16,10 @@ from .rotas_principais.produto import bp_produto
 from .rotas_principais.pesquisa import bp_pesquisa
 from .rotas_principais.admin import admin_bp
 from .models import db
-# ...
+from .rotas_principais.favorito import bp_favoritos
+from .rotas_principais.carrinho import bp_carrinho
 
+from .rota_autenticacao.recuperar_senha import bp_recuperar_senha
 #app/__init__.py
 
 
@@ -28,7 +30,7 @@ db_path = os.path.expanduser('~/.meu_app_db/info.db')
 
 def create_app():
     # app/meu_app.py, dentro de create_app()
-    from .models import Usuario , Produtos , Colecoes
+    from .models import Usuario , Produtos , Colecoes , Favorito
     from flask import blueprints
     from .rotas_colecao.colecoes import bp
     from .rotas_principais.home import bp_principal # ⬅️ ADICIONE ESTA LINHA!
@@ -67,4 +69,8 @@ def create_app():
     app.register_blueprint(bp_produto)
     app.register_blueprint(bp_pesquisa)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(bp_favoritos)
+    app.register_blueprint(bp_carrinho)
+    app.register_blueprint(bp_recuperar_senha)
+    
     return app

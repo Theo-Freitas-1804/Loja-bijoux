@@ -8,5 +8,22 @@
       {{produto.preco}}
     </p>
     </div>
-    <a href="{{url_for('produto.pagina_produto' , id = produto.id_acessorio)}}" class="link"> Saiba Mais</a>
+    <div id="acoes-produto">
+      <a href="{{url_for('produto.pagina_produto' , id = produto.id_acessorio)}}" class="link">
+        Saiba Mais
+      </a>
+      {% if contexto is not defined or contexto != "favoritos" %}
+      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}">
+        {% if produto.id_acessorio in favoritos_ids %}
+        <i class="ri-heart-fill"></i>
+        {% else %}
+        <i class="ri-heart-line"></i>
+        {% endif %}
+      </button>
+      {% endif %}
+      <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
+  Adicionar ao carrinho
+</button>
+    </div>
 </div>
+

@@ -1,9 +1,129 @@
-
-
-.login {
-  margin-bottom: 20px;
+* {
+  box-sizing: border-box;
 }
 
-#ocultar_senha {
-  display: none;
+body {
+  margin: 0;
+  padding: 16px;
 }
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo-senha {
+  position: relative;
+  width: 100%;
+}
+
+.campo-senha input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* espaço pro olho */
+  box-sizing: border-box;
+}
+
+.campo-senha button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.campo-senha button i {
+  font-size: 20px;
+  color: #555;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* Formulário */
+
+.form-login{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.form-login input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  font-size: 14px;
+}
+
+.form-login input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.form-login button[type="submit"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
+}
+
+.campo-senha {
+  position: relative;
+}
+
+.campo-senha input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+#btn_senha {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background: black;
+  color: white;
+  
+  border-radius: 25%;
+  
+  padding: 0;
+  cursor: pointer;
+}
+
+.form-login h3 {
+  font-weight: normal;
+  font-size: 16px;
+  text-align: center;
+}
+
+input.erro {
+  border: 2px solid red;
+}
+
+input.sucesso {
+  border: 2px solid green;
+}
+

@@ -75,7 +75,7 @@ def adicionar_novo_acessorio():
     estoques = request.form.getlist("qtd")
     tipos = request.form.getlist("categoria")
     savepaths = {
-      "Bijuteria": "static/imagens/produtos",
+      "Bijuteria": "static/imagens/UPLOADS_FOTOS_BIJOUX",
       "Banner": "static/imagens/banners",
       "Capa de Coleção": "static/imagens/capas"
     }

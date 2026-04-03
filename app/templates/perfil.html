@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head> <title> Meu Perfil | Kordonê Bijoux </title>
+<head> 
+<title> Meu Perfil | Kordonê Bijoux </title>
     <meta charset="utf-8"> 
     <meta name="description" content="Kordonê Bijoux | Site Oficial"> 
-    <meta name="viewport" content="width=device-width, initial_scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kordonê Bijoux - Site oficial"> 
     <meta name="keywords" content=""> 
     <meta name="author" content="Theodoro Meiel"> 
+    <!-- BASE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_dropdown.css') }}">
+    <!-- COMPONENTES -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cards.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_pesquisa.css') }}">
+    <!-- ESPECÍFICOS DA PÁGINA -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_perfil.css') }}">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
   <header>
+    
     {% include 'components/_header_interno.html'%}
   </header>
   <br>
@@ -23,17 +34,17 @@
   <br>
   <br>
   <div id="sessao-dados">
-    <form id="dados-usuaria" method="POST" enctype="multipart/form-data" action="{{ url_for('usuario.upload_foto') }}"> <div class="botao-estilizado">
+    <form id="dados-usuaria" method="POST" enctype="multipart/form-data" action="{{ url_for('usuario.upload_foto') }}">
+      <div class="botao-estilizado">
         {%if not current_user.foto_perfil%}
         <label for="imagem_adicionada"> Escolher imagem de Perfil</label>
         <input type="file" placeholder="Escolher imagem" name="imagem_adicionada" id="imagem_adicionada"> <button type="submit"> Enviar</button>
         {%else%}
-        <br>
-        <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' + current_user.foto_perfil) }}" alt="Foto de Perfil" id="foto_perfil">
+          <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" id="foto-user">
         {%endif%}
         <br>
         <br>
-        <span id="saudacao">Olá, {{ current_user.Nome }}</span>
+        <span id="saudacao">Olá, {{ current_user.nome }}</span>
         <br>
         </div>
         <br>

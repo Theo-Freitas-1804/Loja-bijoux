@@ -2,10 +2,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover; /* 👈 MUITO importante */
+  object-fit: cover; 👈 MUITO importante */ 
+
   margin-left: auto;
   margin-right: 12px;
-  }  
+  }
+
 
 #btn-perfil {
   border: none;
@@ -29,4 +31,15 @@
 
 .escondido {
   display: none;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+i {
+  color: black;
 }

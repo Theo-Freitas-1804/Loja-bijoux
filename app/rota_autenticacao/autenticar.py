@@ -1,7 +1,7 @@
 #app/rotas_auth/auth.py
 
 from flask import Blueprint, render_template , request , redirect , url_for
-from flask_login import login_user
+from flask_login import login_user , logout_user
 
 from werkzeug.security import check_password_hash , generate_password_hash
 from sqlalchemy import or_
