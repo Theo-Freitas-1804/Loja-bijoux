@@ -57,10 +57,11 @@ def dados_carrinho():
   resultado = []
   for item in itens:
     produto = Produtos.query.get(item.produto_id)
+    print(produto)
     resultado.append({
       "nome": produto.nome,
       "preco": produto.preco,
-      "imagem": produto.imagem,
+      "imagem": produto.imagens[0].url if produto.imagens else None ,
       "quantidade": item.quantidade
     })
   return {"itens": resultado}

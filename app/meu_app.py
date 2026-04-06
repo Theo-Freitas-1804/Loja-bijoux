@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 
 import os
 from dotenv import load_dotenv
-from .rotas_colecao.colecoes import colecoes
+from .rotas_colecao.colecoes import bp_colecao
 from .rotas_principais.home import bp_principal
 from .rota_perfil.perfil import bp_usuario
 from .rota_autenticacao.autenticar import bp_auth
@@ -32,7 +32,6 @@ def create_app():
     # app/meu_app.py, dentro de create_app()
     from .models import Usuario , Produtos , Colecoes , Favorito
     from flask import blueprints
-    from .rotas_colecao.colecoes import bp
     from .rotas_principais.home import bp_principal # ⬅️ ADICIONE ESTA LINHA!
     app = Flask(__name__)
           # ...
@@ -61,7 +60,7 @@ def create_app():
         # 2. Define como o Flask-Login deve buscar o usuário por ID
         return Usuario.query.get(int(user_id))
 
-    app.register_blueprint(bp)
+    app.register_blueprint(bp_colecao)
     app.register_blueprint(bp_principal)
     app.register_blueprint(bp_usuario)
     app.register_blueprint(bp_auth)

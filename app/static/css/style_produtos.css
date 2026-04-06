@@ -2,8 +2,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
+
 .pagina-produto img {
   max-width: 100%;
   max-height: auto;
+}
+
+#ant , #prox {
+  background: none;
+  border: 1px dotted black;
+}
+
+.botoes {
+  display: flex;
+  gap: 200px;
+}
+
+.escondido {
+  display: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.desativado {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#foto {
+  transition: opacity 0.3s ease;
 }

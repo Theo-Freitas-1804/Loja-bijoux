@@ -1,6 +1,6 @@
 from flask import Blueprint , render_template , request , session , redirect , url_for , flash
 from flask_login import LoginManager , login_required
-from ..models import db, Usuario , Banners , Colecoes , Produtos
+from ..models import db, Usuario , Banners , Colecoes , Produtos , ProdutosImagens
 # Isso já está certo no seu auth.py
 from ..decorators import admin_required
 
@@ -60,59 +60,98 @@ def gerar_nome_seguro(imagens):
     nomes_seguros.append(nome_unico)
   return nomes_seguros
   
-@bp_novo_produto.route("/admin/adicionar-novo-acessorio", methods=["GET", "POST"])
+@bp_novo_produto.route("/admin/adicionar-novo-acessorio" , methods=["GET" , "POST"])
 @login_required
 @admin_required
 
 def adicionar_novo_acessorio():
-  if request.method == "POST":
-    imagens = request.files.getlist("foto-acessorio")
+  if request.method == "GET":
+    return render_template("novo_produto.html")
+  elif request.method == "POST":
     nomes = request.form.getlist("nome-bijuteria")
+    imagens = request.files.getlist("foto-acessorio")
+    qtds = request.form.getlist("qtd-fotos")
     colecoes = request.form.getlist("colecao")
     tamanhos = request.form.getlist("Tamanho")
     materiais = request.form.getlist("material")
     precos = request.form.getlist("preco")
-    estoques = request.form.getlist("qtd")
-    tipos = request.form.getlist("categoria")
+    quantidades = request.form.getlist("qtd")
+    categorias = request.form.getlist("categoria")
+    
+    indice = 0
+  
     savepaths = {
+      "Capa de Coleção": "static/imagens/CAPAS",
       "Bijuteria": "static/imagens/UPLOADS_FOTOS_BIJOUX",
-      "Banner": "static/imagens/banners",
-      "Capa de Coleção": "static/imagens/capas"
+      "Banner": "static/imagens/banners"
     }
-
-    for img, nome, colecao, tamanho, material, preco, estoque, tipo in zip(
-      imagens, nomes, colecoes, tamanhos, materiais, precos, estoques, tipos
-    ):
-
+    
+    for i, (nome, colecao, tamanho, material, preco, qtd, categoria) in enumerate(zip(
+    nomes, colecoes, tamanhos, materiais, precos, quantidades, categorias
+)):
+      produto_cru = {
+        "nome": nome,
+        "colecao": colecao,
+        "tamanho": tamanho,
+        "material": material,
+        "preco": preco,
+        "qtd": qtd,
+        "tipo_foto": categoria
+      }
+      
+      qtd_fotos = int(qtds[i]) if i < len(qtds) else 0
+      
+      fotos_produto = imagens[indice:indice + qtd_fotos]
+      indice += qtd_fotos
+      produto_limpo = tratar_dados(produto_cru)
+      if produto_limpo is None:
+        continue
+      tipo = produto_limpo["tipo_foto"]
       pasta = savepaths.get(tipo)
-
-      nome_imagem = salvar_imagem_processada(img, pasta)
-
-      if tipo == "Banner":
-        registro = Banners(imagem=nome_imagem)
-
+      if not pasta:
+        continue
+      # =========================
+      # BIJUTERIA
+      # =========================
+      if tipo == "Bijuteria":
+        novo = Produtos(
+          nome=produto_limpo["nome"],
+          tamanho=produto_limpo["tamanho"],
+          material=produto_limpo["material"],
+          preco=produto_limpo["preco"],
+          em_estoque=produto_limpo["qtd"]
+          )
+        db.session.add(novo)
+        db.session.flush()  # 🔥 garante ID
+        for img in fotos_produto:
+          nome_img = salvar_imagem_processada(img, pasta_destino=pasta)
+          nova_img = ProdutosImagens(
+            url=nome_img,
+            produto_id=novo.id_acessorio
+            )
+          db.session.add(nova_img)
+         # =========================
+         # BANNER
+         # =========================
+      elif tipo == "Banner":
+        if not fotos_produto:
+          continue
+        img = fotos_produto[0]
+        nome_img = salvar_imagem_processada(img, pasta_destino=pasta)
+        novo = Banners(imagem=nome_img)
+        db.session.add(novo)
+        # =========================
+        # CAPA DE COLEÇÃO
+        # =========================
       elif tipo == "Capa de Coleção":
-        registro = Colecoes(
-          nome_colecao=colecao,
-          capa_colecao=nome_imagem
-        )
-
-      elif tipo == "Bijuteria":
-        colecao_obj = Colecoes.query.filter_by(nome_colecao=colecao).first()
-
-        registro = Produtos(
-          nome=nome,
-          colecao=colecao_obj,
-          tamanho=tamanho,
-          preco=preco,
-          material=material,
-          em_estoque=estoque,
-          imagem=nome_imagem
-        )
-
-      db.session.add(registro)
-
+        if not fotos_produto:
+          continue
+        nome_img = salvar_imagem_processada(img, pasta_destino=pasta)
+        novo = Colecoes(
+          nome_colecao=produto_limpo["colecao"],
+          capa_colecao=nome_img
+          )
+        db.session.add(novo)
+          # 🔥 commit só uma vez
     db.session.commit()
-    return redirect(url_for("principal.pagina_principal"))
-
-  return render_template("novo_produto.html")
+    return render_template("novo_produto.html")

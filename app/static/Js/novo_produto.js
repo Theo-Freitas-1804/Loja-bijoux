@@ -1,6 +1,5 @@
-alert("JS carregado");
-
 document.addEventListener("DOMContentLoaded", () => {
+  alert("JS carregado");
   let fila = [];
   const form = document.getElementById("ficha-produtos");
   const btnAdicionar = document.getElementById("adicionar-a-fila");
@@ -16,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function criarProduto(){
     const tipoSelecionado =
     document.querySelector('input[name="categoria"]:checked');
+    let listafotos = Array.from(inputFoto.files);
     return {
       nome: nome.value,
       colecao: colecao.value,
@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
       material: material.value,
       preco: parseFloat(preco.value.replace(",", ".")) || 0,
       qtd: parseInt(estoque.value) || 0,
-      foto: inputFoto.files[0],
+      fotos: listafotos,
       tipo: tipoSelecionado ? tipoSelecionado.value : null
-};
+    };
 }
 
 function validarProduto(produto){
@@ -33,7 +33,7 @@ function validarProduto(produto){
     alert("Escolha o tipo de item");
     return false;
   }
-  if(!produto.foto){
+  if(produto.fotos.length ===0){
     alert("Selecione uma foto");
     return false;
   }
@@ -59,21 +59,30 @@ function validarProduto(produto){
 
 function atualizarPreview(){
   preview.innerHTML = "";
-  fila.forEach(item => {
+
+  fila.forEach((item) => {
     const li = document.createElement("li");
-    const urlFoto = URL.createObjectURL(item.foto);
+    const containerImgs = document.createElement("div");
+    containerImgs.classList.add("preview-container");
     li.innerHTML = `
-    <img src="${urlFoto}" width="60" style="border-radius:5px;margin-right:10px;">
     <strong>${item.nome || "Item sem nome"}</strong>
     | Tipo: ${item.tipo}
     | Preço: R$ ${item.preco.toFixed(2)}
-`;
-  preview.appendChild(li);
+    `;
+    item.fotos.forEach((foto) => {
+      const urlFoto = URL.createObjectURL(foto);
+      const img = document.createElement("img");
+      img.src = urlFoto;
+      img.classList.add("preview-img");
+      li.appendChild(img);
+    });
 
-});
-
+    preview.appendChild(li); // ✔ dentro do loop
+    
+    
+    
+  });
 }
-
 
 function adicionarFila(){
 
@@ -93,33 +102,36 @@ form.reset();
 
 }
 
-
 function enviarFila(){
+  const dados = new FormData();
+  
   if(fila.length === 0){
     alert("Nenhum item na fila");
     return;
-}
-  const dados = new FormData();
+  }
 
-  fila.forEach((item)=>{
-  
-  dados.append("foto-acessorio", item.foto);
-  dados.append("nome-bijuteria", item.nome);
-  dados.append("colecao", item.colecao);
-  dados.append("Tamanho", item.tamanho);
-  dados.append("material", item.material);
-  dados.append("preco", item.preco);
-  dados.append("qtd", item.qtd);
-  dados.append("categoria", item.tipo);
-  
+  fila.forEach((item) => {
+
+    item.fotos.forEach((foto) => {
+      dados.append("foto-acessorio", foto);
+    });
+
+    dados.append("qtd-fotos", item.fotos.length);
+    dados.append("nome-bijuteria", item.nome);
+    dados.append("colecao", item.colecao);
+    dados.append("Tamanho", item.tamanho);
+    dados.append("material", item.material);
+    dados.append("preco", item.preco);
+    dados.append("qtd", item.qtd);
+    dados.append("categoria", item.tipo);
+
   });
-  
-  alert([...dados.entries()]);
-  /* futuro envio real */
+
+  console.log([...dados.entries()]); // 👈 MELHOR QUE ALERT
+
   fetch("/admin/adicionar-novo-acessorio",{
     method:"POST",
     body:dados
-    
   })
   .then(res=>res.text())
   .then(resposta=>{
@@ -127,12 +139,10 @@ function enviarFila(){
     alert("Produtos enviados!");
     fila=[];
     atualizarPreview();
-    
   })
   .catch(erro=>{
     console.error("Erro:",erro);
-});
-
+  });
 }
 
 btnAdicionar.addEventListener("click", adicionarFila);

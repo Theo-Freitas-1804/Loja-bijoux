@@ -1,5 +1,7 @@
 <div class="card-produto">
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagem) }}">
+  {% if produto.imagens %}
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}">
+{% endif %}
    <div class="info-produto">
     <strong>
       {{produto.nome}}

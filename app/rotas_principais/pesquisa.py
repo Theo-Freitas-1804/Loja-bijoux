@@ -1,7 +1,7 @@
 from .. models import db , Produtos
 from flask import current_app , Blueprint , render_template , request , jsonify , url_for
 from decimal import Decimal
-
+from sqlalchemy import case
 
 bp_pesquisa =  Blueprint("pesquisa" , __name__)
 
@@ -37,10 +37,18 @@ def pesquisa():
 
 @bp_pesquisa.route("/api/pesquisa")
 def pesquisa_dinamica():
-  termo = request.args.get("item")
+  termo = request.args.get("item", "").strip()
   query = Produtos.query
-  if termo:
-    query = query.filter(Produtos.nome.ilike(f"%{termo}%"))
+  if not termo:
+    return jsonify([])
+  query = query.filter(Produtos.nome.ilike(f"%{termo}%"))
+  query = query.order_by(
+    case(
+      (Produtos.nome.ilike(f"{termo}%") , 0) ,
+      (Produtos.nome.ilike(f"%{termo}%") , 1) ,
+      else_ = 2
+    ))
+
   produtos = query.limit(5).all()
 
   resultado = []

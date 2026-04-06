@@ -167,6 +167,7 @@ form {
   text-decoration: none;
   color: black;
   font-size: 14px;
+  white-space: nowrap;
 }
 .item-busca:hover {
   background: #f5f5f5;

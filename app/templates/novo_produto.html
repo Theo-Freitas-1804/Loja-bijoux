@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css' )}}">
     
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/novo_produto.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_novo_produto.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   </head>
   <body>
@@ -37,59 +37,30 @@
 
     <div id="produtos">
       <form method="POST" enctype="multipart/form-data" id="ficha-produtos" onsubmit="return false;">
-        <br>
-        <br>
-        <input type="file" id="foto-acessorio" name="foto-acessorio">
-        <br>
-        <br>
+        <input type="file" id="foto-acessorio" name="foto-acessorio" multiple>
         <label> Informações da peça</label>
-        <br>
-        <br>
         <input type="text" placeholder="Nome" name="nome-bijuteria" id="Nome"> 
-        <br>
-        <br>
         <input type="text" placeholder="Coleçâo" name="colecao" id="Colecao">
-        <br>
-        <br>
         <input type="text" placeholder="Tamanho"  name="Tamanho" id="Tamanho">
-        <br>
-        <br>
         <input type="text" placeholder="Material" name="material" id="Material">
-        <br>
-        <br>
         <input type="text" placeholder="Preço" name="preco" id="Preco">
-        <br>
-        <br>
         <input type="text" placeholder="Estoque" name="Estoque" id="qtd">
-        <br>
-        <br>
         <label> A foto é uma:</label>
-        <br>
-        <br>
         <div id="opcao">
           <input type="radio" name="categoria" value="Capa de Coleção" class="opcao" id="capa">
-          <label for="capa"> Capa de colecao</label>
+          <label for="capa"> Capa de coleção</label>
           <input type="radio" name="categoria" value="Bijuteria" class="opcao" id="acessorio">
           <label for="acessorio"> Bijuteria</label>
           <input type="radio" name="categoria" 
           value="Banner" class="opcao" id="banner">
           <label for="banner"> Banner para a página principal</label>
           </div>
-        
-          <br>
-        <br>
-       
         <button type="button" id="adicionar-a-fila">Adicionar à fila</button>
-        <br>
-        <br>
-        <div id="preview-container" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+        <div id="preview-container">
           <h3>Itens na fila de envio:</h3>
-          <ul id="lista-preview" style="list-style: none; padding: 0;">
-            
+          <ul id="lista-preview">
           </ul>
           </div>
-          <br>
-          <br>
         <div>
           <button type="button" id="btn-enviar">Cadastrar</button>
         </div>
