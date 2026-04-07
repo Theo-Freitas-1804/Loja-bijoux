@@ -1,7 +1,28 @@
+# Python padrão
+__pycache__/
+*.py[codz]
+*$py.class
 
-__pycache__/ 
-*.pyc 
-instance/ 
-.env 
+# Ambiente virtual
 venv/
-app/static/imagens/
+.venv/
+env/
+
+# Variáveis sensíveis
+.env
+
+# Flask
+instance/
+.webassets-cache
+
+# Banco (opcional)
+db.sqlite3
+
+# Logs
+*.log
+
+# VSCode (opcional)
+.vscode/
+
+# Imagens (SE quiser ignorar uploads)
+# app/static/imagens/
