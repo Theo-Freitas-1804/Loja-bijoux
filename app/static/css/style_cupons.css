@@ -1,0 +1,79 @@
+#tabela-cupons {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+#tabela-cupons thead {
+  background: #f5f5f5;
+}
+
+#tabela-cupons th,
+#tabela-cupons td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#tabela-cupons tr:hover {
+  background: #f9f9f9;
+}
+
+/* BOTÕES */
+.btn-novo {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.btn-editar {
+  color: #007bff;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.btn-deletar {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* BADGES */
+.badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.ativo {
+  background: #d4edda;
+  color: #155724;
+}
+
+.inativo {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.infinito {
+  background: #e2e3ff;
+  color: #383d8b;
+}
+
+.tipo {
+  background: #e9ecef;
+  color: #333;
+}
+
+#tabela-cupons a {
+  text-decoration: none;
+  color: black;
+}

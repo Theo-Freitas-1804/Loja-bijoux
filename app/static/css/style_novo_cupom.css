@@ -1,0 +1,52 @@
+#form-cupom {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+#form-cupom input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  font-size: 14px;
+}
+
+#form-cupom input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+#form-cupom button[type="submit"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
+}
+
+.grupo-inputs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.grupo-radio label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.escondido {
+  display: none;
+}

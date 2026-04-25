@@ -1,45 +1,53 @@
-.foto-perfil {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover; 👈 MUITO importante */ 
-
-  margin-left: auto;
-  margin-right: 12px;
-  }
-
+.perfil {
+  position: relative
+  display: flex;
+  padding-bottom: 20px;
+}
 
 #btn-perfil {
+  background: none;
   border: none;
-  background:none;
-  padding: 0;
-  cursor: pointer;
 }
 
-.usuario-info {
-  white-space: nowrap;
+#imagem-perfil {
+  width: 40px;
+  height: auto;
+  border-radius: 50%;
 }
 
-.conteudo-dropdown {
-  border: 1px dotted  #ddd ;
+#foto-interna {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.conteudo-dropdown li {
-  padding: 8px 12px;
-  border-bottom: 1px solid #ddd;
+#menu-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+
+  width: 220px;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  z-index: 999;
 }
 
 .escondido {
   display: none;
 }
 
-.btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+.conteudo-dropdown li {
+  border: 1px dotted black;
 }
 
-i {
-  color: black;
+.usuario-info , .conteudo-dropdown {
+  text-align: center;
+}
+
+#ver-carrinho {
+  background: none;
 }

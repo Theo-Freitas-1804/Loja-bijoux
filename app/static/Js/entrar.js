@@ -32,4 +32,26 @@ campo.addEventListener("input", function() {
   }
 });
 
+const form = document.querySelector(".form-login");
+const btn = document.querySelector("#entrar");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  btn.classList.add("loading");
+  btn.textContent = "Entrando...";
+
+  setTimeout(() => {
+    btn.classList.remove("loading");
+    btn.classList.add("success");
+
+    btn.textContent = "Bem-vinda!";
+
+    setTimeout(() => {
+      form.submit();
+    }, 800);
+
+  }, 1200); // 👈 faltava tempo aqui
+});
+
 });

@@ -37,14 +37,21 @@
         {% for produto in produtos %}
         <tr>
           <td>
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagem) }}" width="60">
-</td>
+            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}" width="60">
+          </td>
           <td>{{ produto.id_acessorio}}</td>
           <td> {{produto.nome}}</td>
           <td>{{ produto.preco}}</td>
           <td>
             <a href="#"> Editar</a>
-            <a href="#"> Deletar</a>
+            <form method="POST"
+            action="{{ url_for('novo_produto.deletar_produto', id=produto.id_acessorio) }}"
+            style="display:inline;">
+              <button type="submit"
+              onclick="return confirm('Tem certeza que deseja deletar este produto?')">
+                🗑️
+              </button>
+            </form>
           </td>
         </tr>
         {% endfor %}

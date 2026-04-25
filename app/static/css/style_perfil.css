@@ -1,54 +1,103 @@
-
- #sessao-dados {
-    width: 400px; /* 💡 Largura definida (pode ajustar), essencial para margin: auto */
-    margin: 50px auto 0 auto; /* 50px em cima, 'auto' nas laterais (centraliza), 0px embaixo */
-    padding: 20px; /* Um respiro interno */
-    /* border: 1px solid #ccc;  Opcional: Para ver o limite da caixa */
-    text-align: center;
+#user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-#sessao-dados label {
-  white-space: nowrap;
-  text-align:center;
+#opcoes-perfil {
+  width: 100%;
+  margin-top: 20px;
 }
 
-#sessao-dados label {
-    white-space: nowrap;
-    text-align: center; /* ⬅️ CORRIGIDO: twxt-align se torna text-align */
+/* LISTA */
+#opcoes-perfil ul {
+  display: flex;
+  justify-content: center; /* 👈 centraliza bonito */
+  gap: 20px;
+
+  padding: 0;
+  margin: 0;
+
+  border-bottom: 1px solid #eee; /* 👈 linha sutil */
 }
 
-/* 1. ESTILO VISÍVEL (APLICADO À LABEL) */
-/* Este seletor garante que SÓ a LABEL receba o visual 3D */
-.botao-estilizado label { 
-    display: inline-block;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-family: 'Sua-Fonte-Estilizada', serif; 
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    
-    /* 💥 O EFEITO 3D ESTÁ AQUI 💥 */
-    position: relative; 
-    box-shadow: 0 5px 0 #888; /* Sombra de profundidade */
-    transition: all 0.1s ease;
+/* ITENS */
+#opcoes-perfil li {
+  list-style: none;
 }
 
-/* 2. INPUT INVISÍVEL (APLICADO AO INPUT) */
-/* As propriedades de ocultação foram movidas de volta para cá */
-.botao-estilizado input[type="file"] {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+/* BOTÕES */
+#opcoes-perfil button {
+  background: none;
+  border: none;
+  padding: 10px 8px;
+
+  font-size: 14px;
+  color: #666;
+
+  cursor: pointer;
+
+  position: relative;
 }
 
-#foto-user {
-  width: 40px;
-  height: 40px;
-  border: 1px dotted gold;
-  border-radius: 50%;
+/* HOVER SUAVE */
+#opcoes-perfil button:hover {
+  color: black;
+}
+
+/* 🔥 ATIVO (O MAIS IMPORTANTE) */
+#opcoes-perfil button.ativo {
+  color: black;
+  font-weight: 600;
+}
+
+/* LINHA DO ATIVO */
+#opcoes-perfil button.ativo::after {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 2px;
+
+  background: black;
+}
+
+.form-endereco {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.form-endereco input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  font-size: 14px;
+}
+
+.form-endereco input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.form-endereco button[type="submit"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
 }

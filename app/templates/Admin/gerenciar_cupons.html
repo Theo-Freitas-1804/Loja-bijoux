@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Gerenciar Cupons | Kordonê Bijoux</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_pesquisa.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cupons.css') }}">
+  </head>
+  <body>
+
+  <a href="{{ url_for('admin.criar_cupom') }}" class="btn-novo">
+    + Novo Cupom
+  </a>
+
+  <table id="tabela-cupons">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Desconto</th>
+        <th>Tipo</th>
+        <th>Quantidade</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for c in cupons %}
+      <tr>
+
+        <td>{{ c.id_cupom }}</td>
+
+        <td>{{ c.nome_cupom }}</td>
+
+        <td>
+          {% if c.tipo == "porcentagem" %}
+            {{ c.valor_desconto }}%
+          {% else %}
+            R$ {{ "%.2f"|format(c.valor_desconto) }}
+          {% endif %}
+        </td>
+
+        <td>
+          <span class="badge tipo">
+            {{ c.tipo }}
+          </span>
+        </td>
+
+        <td>
+          {% if c.qtd_cupons is none %}
+            <span class="badge infinito">Infinito</span>
+          {% else %}
+            {{ c.qtd_cupons }}
+          {% endif %}
+        </td>
+
+        <td>
+          {% if c.ativo %}
+            <span class="badge ativo">Ativo</span>
+          {% else %}
+            <span class="badge inativo">Inativo</span>
+          {% endif %}
+        </td>
+
+        <td class="acoes">
+          <a href="{{ url_for('admin.editar_cupom', id=c.id_cupom) }}" class="btn-editar">
+            Editar
+          </a>
+
+          <form method="POST"
+                action="{{ url_for('admin.deletar_cupom', id=c.id_cupom) }}"
+                style="display:inline;">
+
+            <button type="submit"
+                    class="btn-deletar"
+                    onclick="return confirm('Deletar este cupom?')">
+              Deletar
+            </button>
+
+          </form>
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+</body>
+</html>

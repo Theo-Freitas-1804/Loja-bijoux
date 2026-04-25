@@ -1,0 +1,20 @@
+{% if pedidos %}
+  {% for pedido in pedidos %}
+    <div class="card-pedido">
+      <p>
+        <strong>Pedido #{{ pedido.id }}</strong>
+      </p>
+      <p>
+        Status: {{ pedido.status }}
+      </p>
+      <p>
+        Total: R$ {{ pedido.total }}
+      </p>
+      <p>
+        Data: {{ pedido.data_pedido }}
+      </p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>Você ainda não fez pedidos</p>
+{% endif %}

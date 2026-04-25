@@ -15,3 +15,12 @@ def pagina_produto(id):
     return render_template("produto.html" , produto=produto)
   elif request.method == "POST":
     return render_template("produto.html" , produto=produto)
+    
+@bp_produto.route("/brincos" , methods=["GET" , "POST"])
+def exibir():
+  brincos = Produtos.query.filter_by(categoria="brinco").all()
+  if request.method == "GET":
+    return render_template("brincos.html" , brincos=brincos)
+  elif request.method == "POST":
+    return render_template("brincos.html" , brincos=brincow)
+    

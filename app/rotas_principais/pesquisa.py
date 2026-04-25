@@ -57,7 +57,7 @@ def pesquisa_dinamica():
     resultado.append({
       "nome": p.nome,
       "id": p.id_acessorio,
-      "imagem": url_for("static", filename=f"imagens/UPLOADS_FOTOS_BIJOUX/{p.imagem}")
+      "imagem": url_for("static", filename=f"imagens/UPLOADS_FOTOS_BIJOUX/{p.imagens}")
     })
 
   return jsonify(resultado)

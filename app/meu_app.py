@@ -9,17 +9,22 @@ import os
 from dotenv import load_dotenv
 from .rotas_colecao.colecoes import bp_colecao
 from .rotas_principais.home import bp_principal
-from .rota_perfil.perfil import bp_usuario
+from .Admin import admin_bp
+from .rota_perfil import bp_usuario
+
 from .rota_autenticacao.autenticar import bp_auth
-from .rotas_principais.novo_acessorio import bp_novo_produto
+from .Admin.novo_acessorio import bp_novo_produto
+from .Admin.editar_acessorio import *
 from .rotas_principais.produto import bp_produto
 from .rotas_principais.pesquisa import bp_pesquisa
-from .rotas_principais.admin import admin_bp
+
 from .models import db
 from .rotas_principais.favorito import bp_favoritos
 from .rotas_principais.carrinho import bp_carrinho
 
 from .rota_autenticacao.recuperar_senha import bp_recuperar_senha
+
+from .rotas_principais.pedidos import bp_pedidos
 #app/__init__.py
 
 
@@ -35,7 +40,6 @@ def create_app():
     from .rotas_principais.home import bp_principal # ⬅️ ADICIONE ESTA LINHA!
     app = Flask(__name__)
           # ...
-    
     os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
     db_path = os.path.join(app.root_path, "instance", "info.db")
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
@@ -67,9 +71,10 @@ def create_app():
     app.register_blueprint(bp_novo_produto)
     app.register_blueprint(bp_produto)
     app.register_blueprint(bp_pesquisa)
-    app.register_blueprint(admin_bp)
     app.register_blueprint(bp_favoritos)
     app.register_blueprint(bp_carrinho)
     app.register_blueprint(bp_recuperar_senha)
+    app.register_blueprint(bp_pedidos)
+    app.register_blueprint(admin_bp)
     
     return app

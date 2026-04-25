@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Ajuda | Kordonê Bijoux</title>
+  
+  
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css')}}">
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css')}}">
+  
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/ajuda.css')}}">
+  
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+</head>
+<body>
+  <header>
+    {% include 'components/_header_interno.html'%}
+  </header>
+  
+  <div id="area-ajuda">
+    <div class="introducao">
+      <p>Você ainda não tem solicitações</p>
+      <button type="button" id="nova-chamada">
+      Nova solicitação de ajuda
+      </button>
+    </div>
+    
+    <div id="chat-container">
+
+  <div id="chat-box"></div>
+
+  <form id="form-chat" class="escondido">
+    <div id="input-area">
+      <input type="text" id="input-chat" placeholder="Digite sua mensagem..." />
+      <button type="submit">
+        <i class="ri-send-plane-line"></i>
+      </button>
+    </div>
+  </form>
+
+</div>
+</div>
+  <script src="{{url_for('static' , filename='Js/ajuda.js')}}"></script>
+</body>
+</html>

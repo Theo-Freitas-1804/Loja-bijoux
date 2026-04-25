@@ -15,12 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    const btn = document.getElementById("btn-menu");
     const nav = document.getElementById("nav-menu");
-    btn.addEventListener("click", () => {
-      nav.classList.toggle("ativo");
-      btn.classList.toggle("escondido")
+    const btn = document.getElementById("btn-menu");
+    if (btn && nav) {
+      btn.addEventListener("click", () => {
+        nav.classList.toggle("ativo");
     });
+    }
     
     const elementos = document.querySelectorAll(".card-produto");
     const observer = new IntersectionObserver((entries) => {

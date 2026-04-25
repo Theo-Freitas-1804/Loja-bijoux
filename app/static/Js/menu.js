@@ -1,33 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {
+const btn = document.getElementById("btn-perfil");
+const menu = document.getElementById("menu-dropdown");
 
-  const btn = document.getElementById("btn-perfil");
-  const menu = document.getElementById("menu-dropdown");
-  const busca = document.querySelector(".barra-pesquisa");
-  const fotoInterna = document.querySelector("#menu-dropdown .foto-perfil");
+// ===============================
+// DROPDOWN PERFIL
+// ===============================
+if (btn && menu) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    menu.classList.toggle("escondido");
+  });
 
-  console.log("busca:", busca);
-  console.log("fotoInterna:", fotoInterna);
-
-  // 👉 ABRIR
-  if (btn) {
-    btn.addEventListener("click", () => {
-      console.log("clicou");
-
-      menu.classList.remove("escondido");
-      btn.classList.add("escondido");
-
-      if (busca) busca.classList.add("escondido");
-    });
-  }
-
-  // 👉 FECHAR
-  if (fotoInterna) {
-    fotoInterna.addEventListener("click", () => {
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
       menu.classList.add("escondido");
-      btn.classList.remove("escondido");
+    }
+  });
+}
 
-      if (busca) busca.classList.remove("escondido");
-    });
-  }
+// ===============================
+// ABRIR CARRINHO PELO DROPDOWN
+// ===============================
+const btnVer = document.getElementById("btn-ver-carrinho");
 
-});
+if (btnVer) {
+  btnVer.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    if (menu) {
+      menu.classList.add("escondido"); // fecha dropdown
+    }
+
+    if (window.abrirCarrinho) {
+      window.abrirCarrinho(); // abre carrinho
+    }
+  });
+}

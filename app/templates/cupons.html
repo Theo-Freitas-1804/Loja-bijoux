@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title> Meus cupons | Kordonê Bijoux</title>
+    <meta charset= "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name = "description" content= "Kordonê Bijoux - Site oficial">
+    <meta name = "author" content = "Theodoro Meiel">
+    
+    <link rel="stylesheet" href="{{url_for('static' , filename = 'css/style_header.css')}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename = 'css/style_pesquisa.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% for categoria, msg in mensagens %}
+        <div class="alert {{ categoria }}">
+          {{ msg }}
+        </div>
+      {% endfor %}
+    {% endwith %}
+    <header>
+      {% include 'components/_header_interno.html'%}
+    </header>
+    {% if not cupons%}
+      <div>
+        <strong> Você ainda não resgatou nenhum cupom
+        </strong>
+        <button>
+          <i class="ri-add-box-line"></i>
+          Resgatar cupom
+        </button>
+      </div>
+    {% else %}
+    {% for c in cupons %}
+      <div id="cupom-info">
+        <strong>
+          {{c.nome_cupom}}
+        </strong>
+        <strong>
+          {{c.valor_desconto}}
+        </strong>
+        <strong>
+          Esgota em: {{ c.cupom_expira.strftime("%d/%m/%Y") }}
+        </strong>
+      </div>
+    {% endfor %}
+    {% endif %}
+    
+    <div class="cupons-add">
+      <form method="post" action="{{url_for('usuario.validar_e_adicionar_cupom')}}" class="form-add">
+        <input type="text" name="codigo" placeholder="Digite aqui o código do cupom..." required>
+        <button  type="submit"> Resgatar</button>
+      </form>
+    </div>
+    
+    <div id="info-cupom" style="display: none;">
+      <p id="texto-cupom"></p>
+      <button id="confirmacao">Ok</button>
+    </div>
+    
+    <script src="{{ url_for('static', filename='Js/cupons.js') }}"></script>
+  </body>
+  

@@ -6,7 +6,6 @@
     <meta charset="utf-8"> 
     <meta name="description" content="Kordonê Bijoux | Site Oficial"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kordonê Bijoux - Site oficial"> 
     <meta name="keywords" content=""> 
     <meta name="author" content="Theodoro Meiel"> 
     <!-- BASE -->
@@ -29,45 +28,121 @@
     
     {% include 'components/_header_interno.html'%}
   </header>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div id="sessao-dados">
-    <form id="dados-usuaria" method="POST" enctype="multipart/form-data" action="{{ url_for('usuario.upload_foto') }}">
-      <div class="botao-estilizado">
-        {%if not current_user.foto_perfil%}
-        <label for="imagem_adicionada"> Escolher imagem de Perfil</label>
-        <input type="file" placeholder="Escolher imagem" name="imagem_adicionada" id="imagem_adicionada"> <button type="submit"> Enviar</button>
-        {%else%}
-          <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" id="foto-user">
-        {%endif%}
-        <br>
-        <br>
-        <span id="saudacao">Olá, {{ current_user.nome }}</span>
-        <br>
-        </div>
-        <br>
-      <label> Gerencie seus dados</label>
-      <br>
-      <br>
-      <label> Adicione aqui seu endereço</label>
-      <br>
-      <br>
-      <input type="text" placeholder="Rua" class="Endereco">
-      <input type="text" placeholder="N°" class="Endereco">
-      <br>
-      <br>
-      <input type="text" placeholder="Bairro" class="Endereco">
-      <input type="text" placeholder="Cidade" class="Endereco">
-      <br>
-      <br>
-      <input type="text" placeholder="Estado" class="Endereco">
-      <br>
-      <br>
-      <button type="submit" > Adicionar endereço</button>
-      </form>
+  
+  <div id="user">
+    {% if current_user.foto_perfil%}
+      <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="foto-perfil">
+    {% else %}
+      <i class="ri-user-line icone-perfil"></i>
+    {% endif %}
+    <strong> {{current_user.nome}}</strong>
   </div>
+  
+  <nav id="opcoes-perfil">
+    <ul>
+      <li>
+        <button class="opcao-lista" data-aba="enderecos">
+        Meus Endereços
+      </button>
+    </li>
+    <li>
+      <button class="opcao-lista" data-aba="favoritos">
+        Favoritos
+      </button>
+    </li>
+    <li>
+      <button class="opcao-lista" data-aba="pedidos">
+        Meus pedidos
+      </button>
+    </li>
+  </ul>
+</nav>
+  
+  <div id="enderecos" class="opcao-nav escondido">
 
+  <!-- 🔹 EXIBIÇÃO -->
+  <div class="exibicao">
+    {% if current_user.enderecos %}
+      {% for endereco in current_user.enderecos %}
+        <div class="card-endereco">
+          <strong>
+            {{ endereco.rua }} |
+            {{ endereco.numero }} |
+            {{ endereco.bairro }} | {{ endereco.cidade }} |
+            {{ endereco.estado}} |
+            {{ endereco.cep }}
+        </div>
+      {% endfor %}
+    {% else %}
+    <p>
+      Ainda não há endereços.
+    </p>
+    {% endif %}
+  </div>
+  <!-- 🔹 FORMULÁRIO -->
+  <div class="conteudo">
+    <form method="POST" class="form-endereco" action="{{url_for('usuario.adicionar_endereco')}}">
+      <h3>Cadastrar novo endereço</h3>
+      <!-- 📍 RUA + NÚMERO -->
+      <div class="grupo">
+        <input type="text" name="rua" placeholder="Rua" required>
+        <input type="text" name="numero" placeholder="N°" required>
+      </div>
+        <!-- 📍 BAIRRO -->
+        <div class="grupo">
+          <input type="text" name="bairro" placeholder="Bairro" required>
+        </div>
+        <!-- 📍 CIDADE -->
+        <div class="grupo">
+          <input type="text" name="cidade" placeholder="Cidade" required>
+          </div>
+          <!-- 📍 CEP -->
+          <div class="grupo">
+            <input type="text" name="cep" placeholder="CEP" required>
+          </div>
+          <!-- 🏠 TIPO -->
+          <div class="grupo-radio">
+            <label>
+              <input type="radio" name="tipo" value="casa" required>
+              Casa
+            </label>
+            <label>
+              <input type="radio" name="tipo" value="trabalho">
+              Trabalho
+            </label>
+          </div>
+          <!-- 🔘 BOTÃO -->
+          <button type="submit">Salvar endereço</button>
+    </form>
+  </div>
+  </div>
+  
+  <div id="favoritos" class="opcao-nav escondido">
+    {% if favoritos %}
+      {% for f in favoritos[:5]%}
+        {% include 'components/_card_favorito.html'%}
+      {% endfor %}
+       {% if favoritos|length > 5 %}
+        <button>Ver mais</button>
+      {% endif %}
+    {% else %}
+      <p> Ainda não há favoritos</p>
+    {% endif %}
+  </div>
+  
+  <div id="pedidos" class="opcao-nav escondido">
+    {% if pedidos %}
+      {% for p in pedidos[:5]%}
+        {% include 'components/_card_pedido.html' %}
+      {%endfor%}
+      {% if pedidos|length > 5 %}
+        <button>Ver mais</button>
+      {% endif %}
+      
+    {% else %}
+      <p> Ainda não há pedidos </p>
+    {% endif %}
+  </div>
+  <script src="{{url_for('static' , filename= 'Js/perfil.js')}}"></script>
 </body>
 </html>

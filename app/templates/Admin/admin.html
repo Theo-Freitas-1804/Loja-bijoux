@@ -2,17 +2,33 @@
 <html lang="pt-br">
 <head>
   <title>Admin | Dashboard</title>
+  <link rel="stylesheet" href="{{url_for('static' , filename='css/admin.css')}}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="{{url_for('static' , filename='css/style_header.css')}}">
+  <link rel="stylesheet" href="{{url_for('static' , filename='css/style_pesquisa.css')}}">
+  <link rel="stylesheet" href="{{url_for('static' , filename='css/admin.css')}}">
+  
 </head>
 
 <body>
-
-  <h1>Painel Administrativo</h1>
-
-  <ul>
-    <li><a href="/admin/produtos">Gerenciar Produtos</a></li>
-    <li><a href="#">Pedidos</a></li>
-    <li><a href="#">Usuários</a></li>
-  </ul>
-
+  <div id="painel-admin">
+    <h1>Painel Administrativo</h1>
+    <ul>
+      <li>
+        <a href="{{url_for('admin.listar_produtos')}}">Gerenciar Produtos</a>
+      </li>
+      <li>
+          <a href="#">Pedidos</a>
+      </li>
+      <li>
+          <a href="{{url_for('admin.consultar_clientes')}}">Usuários</a>
+      </li>
+      <li>
+        <a href="{{ url_for('admin.exibir_cupons') }}">Cupons</a>
+      </li>
+    </ul>
+  </div>
 </body>
 </html>

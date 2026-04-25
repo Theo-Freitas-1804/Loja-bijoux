@@ -89,6 +89,14 @@ a {
   font-weight: bold;
 }
 
+#entrar.loading {
+  background-color: #333 ;
+}
+
+#entrar.sucess {
+  background: green;
+}
+
 .campo-senha {
   position: relative;
 }
@@ -104,8 +112,7 @@ a {
   top: 50%;
   transform: translateY(-50%);
   
-  background: black;
-  color: white;
+  color: black;
   
   border-radius: 25%;
   

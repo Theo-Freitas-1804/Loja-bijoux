@@ -1,96 +1,69 @@
-
-
 <div class="perfil">
-  <button id="btn-perfil">
-    {% if current_user.foto_perfil %}
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="foto-perfil">
-{% else %}
-  <i class="ri-user-add-line icone-perfil"></i>
-{% endif %}
-  </button>
-</div>
+  {% if current_user.is_authenticated %}
 
-<div id="menu-dropdown" class="escondido">
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil)}}" class="foto-perfil" alt="A" id="foto-interna">
-  <div class="usuario-info">
-    <p>
-      <strong>
-        Olá , {{current_user.nome}}
-      </strong>
-    </p>
-  </div>
-  <ul class="conteudo-dropdown">
-    {% if current_user.is_admin%}
-    <li>
-      <a href="{{url_for('admin.dashboard')}}" class="btn-icon">
-        <i class="ri-bar-chart-box-line"></i>
-      Painel Admin
-      </a>
-    </li>
-    <li>
-      <a href="#" class="btn-icon">
-        <i class="ri-box-1-line"></i>
-        Ver todos os pedidos
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="ri-store-2-line"></i>
-         Gerenciar Estoque
-      </a>
-    </li>
-    <li>
-      <a href="{{url_for('usuario.sair')}}" class="btn-icon">
-         <i class="ri-door-open-fill"></i>
-        
-         Sair </a>
-    </li>
-    {% else %}
-    <li>
-      <a href="{{url_for('usuario.perfil')}}">
-        <i class="ri-user-line"></i>
-        Meu Perfil
-      </a>
-    </li>
-    
-    <li>
-      <a href="#" class="btn-icon">
-        <i class="ri-home-3-line"></i>
-      Meus endereços
+    <button id="btn-perfil">
+      {% if current_user.foto_perfil %}
+        <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" id="imagem-perfil">
+      {% else %}
+        <i class="ri-user-line icone-perfil"></i>
+      {% endif %}
+    </button>
 
-      </a>
-      
-    </li>
-    <li>
-      <a href="{{url_for('carrinho.ver_carrinho')}}" class="btn-icon">
-        <i class="ri-shopping-cart-line" class="btn-icon"></i>
-        Meu Carrinho
-      </a>
-    </li>
-    <li>
-      <a href="#" class="btn-icon">
-        <i class="ri-file-list-line"></i>
-        Meus pedidos
-      </a>
-    </li>
-    <li>
-      <a href="{{url_for('favoritos.meus_favoritos')}}" class="btn-icon">
-         <i class="ri-heart-fill"></i>
-         Peças favoritas
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="ri-question-fill"></i>
-      
-      Ajuda
-      </a>
-    </li>
-    <li>
-      <a href="{{ url_for('auth.logout') }}">
-        <i class="ri-door-open-fill"></i>
-        Sair</a>
-    </li>
-    {%endif%}
-  </ul>
+    <div id="menu-dropdown" class="escondido">
+
+      {% if current_user.foto_perfil %}  
+        <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil)}}" class="foto-perfil" id="foto-interna">  
+      {% else %}  
+        <i class="ri-user-line icone-perfil"></i>  
+      {% endif %}  
+
+      <div class="usuario-info">
+        <p><strong>Olá, {{ current_user.nome }}</strong></p>
+      </div>
+
+      <ul class="conteudo-dropdown">
+
+        {% if current_user.is_admin %}
+          <li>
+            <a href="{{ url_for('admin.dashboard') }}">Admin</a>
+          </li>
+          <li>
+            <a href="#">Gerenciar Estoque</a>
+          </li>
+          <li>
+            <a href="{{url_for('usuario.sair')}}"> Sair</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ url_for('usuario.perfil') }}"> Você </a>
+          </li>
+          
+          <li>
+            <a href="{{url_for('usuario.exibir_cupons')}}"> Meus cupons</a>
+          </li>
+          
+          <li>
+            <button id="btn-ver-carrinho">Ver Carrinho</button>
+          </li>
+          
+          <li>
+            <a href="{{url_for('principal.ajuda')}}"> Ajuda </a>
+          </li>
+          <li>
+            <a href="{{url_for('usuario.sair')}}"> Sair</a>
+          </li>
+          
+        {% endif %}
+
+      </ul>
+
+    </div>
+
+  {% else %}
+
+    <a href="{{ url_for('auth.entrar') }}" id="btn-perfil">
+      <i class="ri-user-add-line icone-perfil"></i>
+    </a>
+
+  {% endif %}
 </div>

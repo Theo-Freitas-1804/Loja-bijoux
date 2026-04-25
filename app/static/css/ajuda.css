@@ -1,0 +1,115 @@
+.escondido {
+  display: none;
+}
+
+.introducao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#input {
+  position: relative;
+  width: 250px;
+}
+
+#input i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+/* INPUT */
+#input input {
+  padding: 10px 40px 10px 35px; /* 👈 espaço dos DOIS lados */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+
+/* BOTÃO */
+#input button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  max-width: 400px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ÁREA DE MENSAGENS */
+#chat-box {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f5f5f5;
+}
+
+/* BOLHAS */
+.msg {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+/* USUÁRIO */
+.user {
+  align-self: flex-end;
+  background: #DCF8C6;
+}
+
+/* BOT */
+.bot {
+  align-self: flex-start;
+  background: #fff;
+}
+
+/* INPUT FIXO */
+#form-chat {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background: white;
+}
+
+#input-area {
+  display: flex;
+  gap: 8px;
+}
+
+#input-area input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+#input-area button {
+  border: none;
+  background: #25D366;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.introducao.escondido {
+  display: none;
+}

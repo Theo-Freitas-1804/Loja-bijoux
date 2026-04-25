@@ -3,24 +3,6 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
 
-#email = "theofreitas1804@gmail.com"
-#senha = "rjil kegq dasn uygb"
-
-#msg = MIMEText("Teste Gmail 😏🔥")
-#msg["Subject"] = "Teste"
-#msg["From"] = email
-#msg["To"] = "theodoromeiel1804@gmail.com"
-
-#server = smtplib.SMTP("smtp.gmail.com", 587)
-#server.starttls()
-
-#server.login(email, senha)
-
-#server.send_message(msg)
-#server.quit()
-
-#print("Email enviado!")
-
 def enviar_token_senha(destino, codigo):
  email= os.getenv("email_remetente")
  senha_app = os.getenv("senha")

@@ -25,4 +25,4 @@ db.sqlite3
 .vscode/
 
 # Imagens (SE quiser ignorar uploads)
-# app/static/imagens/
+# app/static/imagens/__pycache__/

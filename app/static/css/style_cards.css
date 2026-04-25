@@ -146,3 +146,12 @@
   border-radius: 6px;
 }
 
+/* Cards de pedidos */
+
+.card-pedido {
+  border: 1px dotted black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

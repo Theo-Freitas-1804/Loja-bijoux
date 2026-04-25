@@ -1,0 +1,24 @@
+<div class="card-produto">
+  {% if produto.imagens %}
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}">
+  {% endif %}
+   <div class="info-produto">
+    <strong>
+      {{produto.nome}}
+    </strong>
+    <p>
+      {{produto.preco}}
+    </p>
+    </div>
+    <div id="acoes-produto">
+      <a href="{{url_for('produto.pagina_produto' , id = produto.id_acessorio)}}" class="link">
+        Saiba Mais
+      </a>
+      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}">
+        <i class="ri-heart-fill"></i>
+      </button>
+       <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
+         Adicionar ao carrinho
+        </button>
+    </div>
+</div>

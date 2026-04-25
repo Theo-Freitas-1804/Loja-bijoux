@@ -1,0 +1,77 @@
+body {
+  background: url('/static/imagens/background/admin_bg.png') center/cover no-repeat;
+}
+
+#painel-admin {
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  min-height: 100vh;
+}
+#painel-admin h1 , #painel-admin ul {
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  text-align: center;
+}
+
+#painel-admin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.25);
+  z-index: 1;
+  background: linear-gradient(
+  rgba(255,255,255,0.4),
+  rgba(255,255,255,0.1)
+);
+}
+
+/* LISTA */
+#painel-admin ul {
+  display: flex;
+  justify-content: center; /* 👈 centraliza bonito */
+  gap: 20px;
+
+  padding: 0;
+  margin: 0;
+
+  border-bottom: 1px solid #eee; /* 👈 linha sutil */
+}
+
+/* ITENS */
+#painel-admin li {
+  list-style: none;
+}
+
+#painel-admin a {
+  text-decoration: none;
+  color: black;
+  white-space: nowrap;
+}
+/* BOTÕES */
+#painel-admin button {
+  background: none;
+  border: none;
+  padding: 10px 8px;
+
+  font-size: 14px;
+  color: #666;
+
+  cursor: pointer;
+
+  position: relative;
+}
+
+/* 🔥 ATIVO (O MAIS IMPORTANTE) */
+#painel-admin a.ativo {
+  border-bottom: 1px solid black;
+  font-weight: 600;
+}
+

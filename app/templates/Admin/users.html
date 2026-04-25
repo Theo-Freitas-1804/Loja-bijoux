@@ -1,0 +1,51 @@
+<! DOCTYPE HTML>
+<html>
+  <head>
+    <title> Gerenciar Estoque | Kordonê Bijoux</title>
+    <meta charset= "utf-8">
+    <meta name = "viewport" content="width = device-width, initial-scale = 1.0">
+    <meta name = "description" content= "Kordonê Bijoux - Site oficial">
+    <meta name = "author" content = "Theodoro Meiel">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_table.css') }}">
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th> Id </th>
+          <th> Foto de Perfil </th>
+          <th> Nome </th>
+          <th> Email</th>
+          <th> Data de registro</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in clientes %}
+        <tr>
+          <td>{{ user.id }}</td>
+        <td>
+          {% if user.foto_perfil %}
+            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ user.foto_perfil) }}"
+             class="foto-perfil-tabela">
+          {% else %}
+            <i class="ri-user-line"></i>
+          {% endif %}
+        </td>
+        <td>
+          {{ user.nome }}
+        </td>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {% if user.data_registro %}
+            {{ user.data_registro.strftime("%d/%m/%Y | %H:%M") }}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
