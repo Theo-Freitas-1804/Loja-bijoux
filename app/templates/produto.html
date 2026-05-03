@@ -7,11 +7,16 @@
     <meta name = "description" content= "Kordonê Bijoux - Produtos">
     <meta name = "author" content = "Theodoro Meiel">
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_produtos.css') }}">
+   <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css' )}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css' )}}">
+    
+    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css' )}}">
+    
+    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_produtos.css' )}}">
+    
+    
     
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_pesquisa.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}">
     
     </head>
     <body>
@@ -38,9 +43,9 @@
           <p><strong>Material:</strong> {{ produto.material }}</p>
           <p><strong>Tamanho:</strong> {{ produto.tamanho }}</p>
           {% if produto.colecao %}
-          <p><strong>Coleção:</strong> {{ produto.colecao }}</p>
+          <p><strong>Coleção:</strong> {{ produto.colecao.nome_colecao}}</p>
           {% endif %}
-          <p><strong>Estoque:</strong> {{ produto.em_estoque }}</p>
+          <p><strong> Disponível(is):</strong> {{ produto.em_estoque }}</p>
           <!-- BOTÃO -->
           <form method="POST">
             <button type="submit">Adicionar ao carrinho</button>
@@ -55,5 +60,7 @@
         ];
     </script>
     <script src="{{url_for('static' , filename='Js/produto.js')}}"></script>
+    <script src="{{url_for('static' , filename='Js/menu.js')}}"></script>
+    
     </body>
 </html>

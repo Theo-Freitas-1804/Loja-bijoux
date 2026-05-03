@@ -11,14 +11,14 @@ from werkzeug.utils import secure_filename
 import os
 import uuid
 
-from .novo_acessorio import bp_novo_produto
+from .routes.novo_acessorio import bp_novo_produto
 
 @login_required
 @admin_required
 @bp_novo_produto.route("/admin/imagem/deletar/<int:id>", methods=["POST"])
 def excluir(id):
   imagem = ProdutosImagens.query.get_or_404(id)
-  caminho = os.path.join(current_app.root_path,"static/imagens/UPLOADS_FOTOS_BIJOUX", img.url)
+  caminho = os.path.join(current_app.root_path,"static/imagens/UPLOADS_FOTOS_BIJOUX", imagem.url)
   if os.path.exists(caminho):
     os.remove(caminho)
   db.session.delete(imagem)
@@ -52,4 +52,26 @@ def deletar_produto(id):
 
   return redirect(request.referrer)
   
-  
+@bp_novo_produto.route("/admin/editar-produto/<id>" , methods = ["GET" , "POST"])
+def editar(id):
+  item= Produtos.query.get_or_404(id)
+  colecoes = Colecoes.query.all()
+  if request.method == "POST":
+    print(request.form)
+    item.nome = request.form.get("nome")
+    
+    colecao_id = request.form.get("colecao")
+    colecao = Colecoes.query.get(colecao_id)
+    item.colecao = colecao
+    
+    item.preco = request.form.get("preco")
+    item.tamanho = request.form.get("tamanho")
+    item.material= request.form.get("material")
+    
+    db.session.commit()
+    
+    
+    return redirect(url_for("principal.pagina_principal"))
+  return render_template("Admin/editar_produto.html" ,
+  item=item , 
+  colecoes=colecoes)

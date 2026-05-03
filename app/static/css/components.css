@@ -1,0 +1,64 @@
+/* =========================
+   FORM PADRÃO
+========================= */
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* INPUT */
+.input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* BOTÃO */
+.btn {
+  padding: 12px;
+  border-radius: 8px;
+  background: black;
+  color: white;
+  font-weight: bold;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* CARD BASE */
+.card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  background: white;
+}
+
+/* FLEX UTIL */
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}

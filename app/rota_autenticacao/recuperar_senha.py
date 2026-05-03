@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
 
 from ..models import Usuario, db
-from ..utils.enviar_email import enviar_token_senha
+from ..services.enviar_email import enviar_token_senha
 
 bp_recuperar_senha = Blueprint("senha", __name__)
 

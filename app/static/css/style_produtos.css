@@ -1,23 +1,45 @@
+header {
+  width: 100%;
+}
+
 .pagina-produto {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  gap: 20px;
+  padding: 20px;
+
+  align-items: flex-start; /* 🔥 importante */
+}
+.produto-imagem {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
 }
 
-/*.pagina-produto img {
-  max-width: 100%;
-  max-height: auto;
-}*/
-
-#ant , #prox {
-  background: none;
-  border: 1px dotted black;
+.produto-imagem img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.botoes {
-  display: flex;
-  gap: 200px;
+.produto-info {
+  flex: 1;
+  max-width: 400px;
+}
+
+#ant, #prox {
+  position: absolute;
+  top: 10px;
+
+  background: rgba(255,255,255,0.7);
+  border: none;
+}
+
+#ant {
+  left: 10px;
+}
+
+#prox {
+  right: 10px;
 }
 
 .escondido {
@@ -36,4 +58,15 @@ button:disabled {
 
 #foto {
   transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .pagina-produto {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .produto-info {
+    text-align: center;
+  }
 }

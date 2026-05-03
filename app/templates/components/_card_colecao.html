@@ -1,9 +1,9 @@
 <div class="card-colecao">
-  <img src="{{ url_for('static', filename='imagens/capas/' ~ colecao.capw_colecao)}}" alt="abc1234">
+  <img src="{{ url_for('static', filename='imagens/capas/' ~ colecao.capa_colecao)}}" alt=" Capa da coleção {{colecao.nome_colecao}}">
   <div class="info-produto">
     <p>
       <strong>
-        {{colecao.nome_colecao}}
+        <a href="{{ url_for('colecoes.exibir_itens_colecao', id=colecao.id_colecao) }}"> {{colecao.nome_colecao}}</a>
       </strong>
     </p>
   </div>

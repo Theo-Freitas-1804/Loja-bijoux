@@ -43,7 +43,9 @@
           <td> {{produto.nome}}</td>
           <td>{{ produto.preco}}</td>
           <td>
-            <a href="#"> Editar</a>
+            <a href="{{ url_for('novo_produto.editar', id=produto.id_acessorio) }}">
+              ✏️ Editar
+            </a>
             <form method="POST"
             action="{{ url_for('novo_produto.deletar_produto', id=produto.id_acessorio) }}"
             style="display:inline;">

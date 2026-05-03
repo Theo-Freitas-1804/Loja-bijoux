@@ -104,7 +104,7 @@ class Banners(db.Model):
   data_criacao = db.Column(db.DateTime)
   
   def __repr__(self):
-    return f"<Banner {self.id} {self.arquivo} >"
+    return f"<Banner {self.id_banner} {self.imagem} >"
     
 
 class Favorito(db.Model):

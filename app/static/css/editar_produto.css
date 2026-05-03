@@ -1,0 +1,32 @@
+.imagens-produto {
+  display: flex;
+  justify-content: center;
+  border: 1px dotted black;
+  margin-top: 12px;
+}
+
+.imagens-produto img {
+  width: 120px;
+  height: auto;
+  gap: 20px;
+}
+
+.dados-produto form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.dados-produto button {
+  background: black;
+  border: 2px dotted white;
+  color: white;
+}

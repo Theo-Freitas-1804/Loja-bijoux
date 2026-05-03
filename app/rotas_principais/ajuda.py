@@ -1,57 +1,81 @@
+# rotas_principais/ajuda.py
+
+from flask import request, render_template, session
+from app.chatbot.utils import detectar_intencao
+from app.chatbot.handlers import HANDLERS
+
+from flask_login import current_user
+
 from .home import bp_principal
-from flask import Blueprint, render_template , current_app , flash , request , session
-from ..models import db , Usuario , Cupom , Pedido
-from flask_login import current_user , login_required
 
-import os
-from dotenv import load_dotenv
+from ..services.frete import calcular_frete
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-INTENTS = {
-  "cupom": ["cupons" , "cupom" , "descontos"] ,
-  "pedido": ["status" , "compra" , "pedido"] ,
-  "entrega": ["frete" , "entrega" , "prazo"]
-}
+from app.chatbot.utils import extrair_cep
 
-def detectar_intencao(msg):
-  for intent , palavras in INTENTS.items():
-    if any(p in msg for p in palavras):
-      return intent
-  return None
 @bp_principal.route("/ajuda")
 def ajuda():
     return render_template("ajuda.html")
 
 @bp_principal.route("/chat", methods=["POST"])
 def chatbot():
+
   msg = request.json.get("pergunta", "").lower()
 
+  # 🔍 DEBUG
+  print("MSG:", msg)
+  print("SESSION:", dict(session))
+
+  # 🔥 1. TENTA EXTRAIR CEP DIRETO (PRIORIDADE)
+  cep = extrair_cep(msg)
+  if cep:
+      print("CEP detectado:", cep)
+
+      valor = calcular_frete(cep)
+      return {
+          "mensagem": f"Frete para {cep}: R$ {valor:.2f} 📦"
+      }
+
+  # 🔥 2. CONTEXTO (fluxo guiado)
+  estado = session.get("estado_chat")
+  print("Estado atual:", estado)
+
+  if estado == "esperando_endereco":
+
+      # 👉 tipo (casa, trabalho)
+      endereco = next(
+          (e for e in current_user.enderecos if e.tipo and e.tipo.lower() in msg),
+          None
+      )
+
+      if endereco:
+          session.pop("estado_chat")
+
+          valor = calcular_frete(endereco.cep)
+          return {
+              "mensagem": f"Frete para {endereco.tipo}: R$ {valor:.2f} 📦"
+          }
+
+      return {
+          "mensagem": (
+              "Não encontrei esse endereço 😢\n"
+              "Digite um CEP ou 'casa', 'trabalho'"
+          )
+      }
+
+  # 🔥 3. FLUXO NORMAL (intents)
   intent = detectar_intencao(msg)
+  
+  if not current_user.is_authenticated:
+    return {
+    "mensagem": (
+        "Você precisa estar logada para acessar isso 😊\n"
+        "<a href='/login'>Clique aqui para fazer login</a>"
+    )
+  }
+  
+  if intent in HANDLERS:
+      session["ultima_intencao"] = intent
+      return HANDLERS[intent]()
 
-  if intent == "cupom":
-      session["ultima_intencao"] = "cupons"
-      cupons = current_user.cupons
-
-      if not cupons:
-          return {"mensagem": "Você não tem cupons ainda 😢"}
-
-      lista = ", ".join([c.nome_cupom for c in cupons])
-      return {"mensagem": f"Seus cupons são: {lista}"}
-
-  elif intent == "pedido":
-      session["ultima_intencao"] = "pedidos"
-      pedidos = Pedido.query.filter_by(
-        usuaria=current_user.id_usuaria
-      ).all()
-      if pedidos:
-        lista = ", ".join([f"#{p.id}" for p in pedidos])
-        return {"mensagem": f"Seus pedidos: {lista}"}
-      else:
-        return {
-          "mensagem": "Você ainda não tem pedidos, fique à vontade pra olhar nosso site 😉"
-        }
-  elif intent == "entrega":
-      session["ultima_intencao"] = "entrega"
-      return {"mensagem": "O prazo de entrega varia"}
-
+  # 🔥 4. FALLBACK FINAL
   return {"mensagem": "Não entendi 😅"}

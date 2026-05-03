@@ -5,6 +5,45 @@
   margin-top: 10px;
 }
 
+/* 🔲 CONTAINER DO BANNER */
+.banner-container {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* 📦 CADA BANNER */
+.banner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+/* ⭐ ATIVO */
+.banner.ativo {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* 🖼️ IMAGEM */
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 5s ease;
+}
+
+/* 🎬 EFEITO */
+.banner.ativo img {
+  transform: scale(1.05);
+}
+
 #nav-menu.ativo {
   display: block;
 }
@@ -54,8 +93,10 @@
 /* BUSCA */
 .busca-container {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   padding-right: 12px;
+  margin-bottom: 20px;
 }
 
 /* FORM */
@@ -122,4 +163,16 @@ h3 {
   justify-content: center;
   align-items:center;
   flex-direction: column;
+}
+
+.erro-busca {
+  width: 200px;
+  box-sizing: border-box;
+  background: #ff4d4d;
+  border: 3px dotted #000;
+  color: white;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
 }

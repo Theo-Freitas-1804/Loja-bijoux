@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const botMsg = document.createElement("div");
         botMsg.className = "msg bot";
-        botMsg.textContent = data.mensagem;
+        botMsg.innerHTML = data.mensagem; // ✅
         resposta.appendChild(botMsg);
 
         resposta.scrollTop = resposta.scrollHeight;

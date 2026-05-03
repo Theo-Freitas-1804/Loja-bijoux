@@ -13,7 +13,7 @@ from .Admin import admin_bp
 from .rota_perfil import bp_usuario
 
 from .rota_autenticacao.autenticar import bp_auth
-from .Admin.novo_acessorio import bp_novo_produto
+from app.Admin.routes.novo_acessorio import bp_novo_produto
 from .Admin.editar_acessorio import *
 from .rotas_principais.produto import bp_produto
 from .rotas_principais.pesquisa import bp_pesquisa

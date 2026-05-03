@@ -30,3 +30,15 @@ tr:hover {
 .novo-produto:hover {
   background: #333;
 }
+
+/* Tabela 2 - clientes */
+
+#dados-clientes img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+#dados-clientes tr:nth-child(even) {
+  background: #f9f9f9;
+}

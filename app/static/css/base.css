@@ -1,0 +1,45 @@
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* VARIÁVEIS */
+:root {
+  --cor-fundo: #f5f5f5;
+  --cor-texto: #333;
+}
+
+/* GLOBAL */
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+/* UTILITÁRIOS */
+.escondido {
+  display: none;
+}

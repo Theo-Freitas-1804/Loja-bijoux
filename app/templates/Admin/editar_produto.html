@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Editar Acessório | Kordonê Bijoux</title>
+  
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css' )}}">
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css' )}}">
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css' )}}">
+  
+  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/editar_produto.css' )}}">
+  
+  
+</head>
+<body>
+  <header>
+    {% include 'components/_header_interno.html' %}
+  </header>
+  
+  <div class="imagens-produto">
+    {% for img in item.imagens %}
+      <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url) }}">
+    {% endfor %}
+  </div>
+  
+  <div class="dados-produto">
+    
+  <form method="POST">
+    <input type="text" name="nome" value="{{ item.nome }}">
+    <select name="colecao">
+      {% for c in colecoes %}
+        <option value="{{ c.id_colecao }}"
+        {% if item.colecao_id == c.id_colecao %}selected{% endif %}>
+          {{ c.nome_colecao }}
+        </option>
+      {% endfor %}
+    </select>
+    <input type="number" name="preco" value="{{ item.preco }}">
+    <input type="text" name="tamanho" value="{{ item.tamanho }}">
+    <input type="text" name="material" value="{{ item.material }}">
+  
+    <button>Salvar</button>
+  </form>
+  </div>
+  
+</body>
+</html>

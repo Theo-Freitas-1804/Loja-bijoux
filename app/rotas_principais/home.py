@@ -8,9 +8,9 @@ import os
 # Define o Blueprint, sem prefixo de URL para que ele use a raiz
 bp_principal = Blueprint("principal", __name__)
 
-def pegar_banner_aleatorio():
-    return Banners.query.order_by(db.func.random()).first()
-
+def pegar_banners():
+    return Banners.query.order_by(db.func.random()).limit(3).all()
+  
 def consultar_lancamentos():
     return Produtos.query\
         .order_by(Produtos.data_registro.desc())\
@@ -27,7 +27,8 @@ def carregar_colecoes():
 
 @bp_principal.route("/")
 def pagina_principal():
-  banner = pegar_banner_aleatorio()
+  print("BANNERS:", Banners.query.all())
+  banners = pegar_banners()
   produtos = consultar_lancamentos()
   favoritos_ids = []
   if current_user.is_authenticated:
@@ -38,7 +39,7 @@ def pagina_principal():
   colecoes = carregar_colecoes()
   return render_template(
     "index.html",
-    banner=banner,
+    banners=banners ,
     produtos=produtos,
     favoritos_ids=favoritos_ids ,
     colecoes=colecoes

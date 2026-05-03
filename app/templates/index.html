@@ -28,10 +28,16 @@
     <body>
       <div id="overlay-carrinho"></div>
       {% include "components/_carrinho.html" %}
-      <header id="Titulo">
+      <header class="header-home">
         <h1> Kordonê Bijoux</h1>
-        <img src="{{ url_for('static', filename='imagens/banners/' ~ banner.imagem) }}" id="banner" alt="banner Principal">
-        </header>
+        <div class="banner-container">
+          {% for banner in banners %}
+            <div class="banner">
+              <img src="{{ url_for('static', filename='imagens/banners/' ~ banner.imagem) }}">
+            </div>
+          {% endfor %}
+        </div>
+      </header>
         
         <div class="header-home">
           <div class="topo">
@@ -63,6 +69,9 @@
       <input type="search" placeholder="Pesquisar">
       <button>Pesquisar</button>
     </form>
+    <div class="erro-busca escondido">
+      Digite um termo para pesquisar 🔍
+    </div>
   </div>
 
 </div>

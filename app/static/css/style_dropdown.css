@@ -1,5 +1,5 @@
 .perfil {
-  position: relative
+  position: relative;
   display: flex;
   padding-bottom: 20px;
 }
@@ -40,6 +40,9 @@
   display: none;
 }
 
+.conteudo-dropdown {
+  list-style-type: none;
+}
 .conteudo-dropdown li {
   border: 1px dotted black;
 }
