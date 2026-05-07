@@ -22,5 +22,5 @@ def exibir():
   if request.method == "GET":
     return render_template("brincos.html" , brincos=brincos)
   elif request.method == "POST":
-    return render_template("brincos.html" , brincos=brincow)
+    return render_template("brincos.html" , brincos=brincos)
     

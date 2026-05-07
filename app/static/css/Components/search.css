@@ -1,0 +1,56 @@
+.barra-pesquisa {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* grupo input + botões */
+.barra-pesquisa__grupo {
+  display: flex;
+  align-items: center;
+
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+
+  padding: 8px 12px;
+  gap: 10px;
+}
+
+/* input cresce */
+.barra-pesquisa__grupo input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  padding: 4px;
+}
+
+/* botões */
+.btn-lupa,
+.btn-filtro {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.barra-pesquisa--header {
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+}
+
+.erro-busca {
+  width: 200px;
+  background: #ff4d4d;
+  border: 3px dotted #000;
+  color: white;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+}

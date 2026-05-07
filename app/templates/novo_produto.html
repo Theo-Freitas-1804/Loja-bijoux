@@ -12,13 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css' )}}">
-    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css' )}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/main.css')}}">
     
-    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css' )}}">
-    
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_novo_produto.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   </head>
   <body>
@@ -36,36 +31,73 @@
 {% endwith %}
 
     <div id="produtos">
-      <form method="POST" enctype="multipart/form-data" id="ficha-produtos" onsubmit="return false;">
-        <input type="file" id="foto-acessorio" name="foto-acessorio" multiple>
-        <label> Informações da peça</label>
-        <input type="text" placeholder="Nome" name="nome-bijuteria" id="Nome"> 
-        <input type="text" placeholder="Coleçâo" name="colecao" id="Colecao">
-        <input type="text" placeholder="Tamanho"  name="Tamanho" id="Tamanho">
-        <input type="text" placeholder="Material" name="material" id="Material">
-        <input type="text" placeholder="Preço" name="preco" id="Preco">
-        <input type="text" placeholder="Estoque" name="Estoque" id="qtd">
-        <label> A foto é uma:</label>
-        <div id="opcao">
-          <input type="radio" name="categoria" value="Capa de Coleção" class="opcao" id="capa">
-          <label for="capa"> Capa de coleção</label>
-          <input type="radio" name="categoria" value="Bijuteria" class="opcao" id="acessorio">
-          <label for="acessorio"> Bijuteria</label>
-          <input type="radio" name="categoria" 
-          value="Banner" class="opcao" id="banner">
-          <label for="banner"> Banner para a página principal</label>
-          </div>
-        <button type="button" id="adicionar-a-fila">Adicionar à fila</button>
-        <div id="preview-container">
-          <h3>Itens na fila de envio:</h3>
-          <ul id="lista-preview">
-          </ul>
-          </div>
-        <div>
-          <button type="button" id="btn-enviar">Cadastrar</button>
-        </div>
-        
-      </form>
+      <form method="POST" enctype="multipart/form-data" id="form-produto">
+
+  <h2>Adicionar novo acessório</h2>
+
+  <!-- Upload -->
+  <div class="campo">
+    <label for="foto">Fotos</label>
+    <input type="file" id="foto-acessorio" name="foto-acessorio" multiple>
+  </div>
+
+  <!-- Infos -->
+  <fieldset>
+    <legend>Informações da peça</legend>
+
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome-bijuteria" required>
+    </div>
+
+    <div class="campo">
+      <label for="colecao">Coleção</label>
+      <input type="text" id="colecao" name="colecao">
+    </div>
+
+    <div class="campo">
+      <label for="tamanho">Tamanho</label>
+      <input type="text" id="tamanho" name="tamanho">
+    </div>
+
+    <div class="campo">
+      <label for="material">Material</label>
+      <input type="text" id="material" name="material">
+    </div>
+
+    <div class="campo">
+      <label for="preco">Preço</label>
+      <input type="number" id="preco" name="preco" step="0.01">
+    </div>
+
+    <div class="campo">
+      <label for="estoque">Estoque</label>
+      <input type="number" id="qtd" name="estoque">
+    </div>
+  </fieldset>
+
+  <!-- Categoria -->
+  <fieldset>
+    <legend>Categoria da imagem</legend>
+
+    <label><input type="radio" name="categoria" value="capa"> Capa</label>
+    <label><input type="radio" name="categoria" value="bijuteria"> Bijuteria</label>
+    <label><input type="radio" name="categoria" value="banner"> Banner</label>
+  </fieldset>
+
+  <!-- Preview -->
+  <div id="preview-container">
+    <h3>Itens na fila</h3>
+    <ul id="lista-preview"></ul>
+  </div>
+
+  <!-- Ações -->
+  <div class="acoes">
+    <button type="button" id="adicionar-a-fila">Adicionar à fila</button>
+    <button type="submit" id="btn-enviar">Cadastrar</button>
+  </div>
+
+</form>
     </div>
     
     <script src="{{ url_for('static', filename='Js/novo_produto.js') }}"></script>

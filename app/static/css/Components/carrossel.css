@@ -1,0 +1,20 @@
+.carrossel-produtos {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.carrossel-produtos .card-produto {
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.carrossel-produtos img {
+  width: 100%;
+  display: block;
+}

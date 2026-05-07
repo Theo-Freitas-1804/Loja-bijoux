@@ -1,0 +1,64 @@
+#form-produto {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* campos */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* fieldset */
+fieldset {
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* botões */
+.acoes {
+  display: flex;
+  gap: 10px;
+}
+
+.acoes button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* preview */
+#preview-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.preview-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}

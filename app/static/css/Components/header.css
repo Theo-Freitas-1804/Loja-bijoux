@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+  padding: 10px;
+}
+
+/* lados */
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+/* centro */
+.header-center {
+  flex: 1;
+
+  margin: 0 10px;
+}
+
+/* barra ocupa o espaço disponível */
+.header-center form,
+.header-center .barra-pesquisa {
+  width: 100%;
+}
+
+/* links */
+.header a {
+  color: black;
+  text-decoration: none;
+}
+
+/* foto perfil */
+.foto-perfil,
+.imagem-perfil {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  object-fit: cover;
+}

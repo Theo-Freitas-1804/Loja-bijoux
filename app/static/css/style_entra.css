@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  font-family: Arial, sans-serif;
+}
+
+/* CENTRALIZAÇÃO */
+.wrapper {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  width: 340px;
+  height: 500px;
+}
+
+/* FACES */
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+
+  padding: 24px;
+  border-radius: 16px;
+
+  background: white;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  backface-visibility: hidden;
+}
+
+/* ESTADO INICIAL */
+.front {
+  transform: rotateY(0deg);
+  opacity: 1;
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(-180deg);
+  opacity: 0;
+}
+
+/* QUANDO VIRA */
+.card.virado .front {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.card.virado .back {
+  transform: rotateY(0deg);
+  opacity: 1;
+  z-index: 3;
+}
+
+/* TEXTOS */
+.titulo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.subtitulo {
+  font-size: 14px;
+  color: #777;
+}
+
+/* FORM BOX */
+.form-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 16px;
+  border-radius: 12px;
+
+  background: #fafafa;
+  border: 1px solid #eee;
+}
+
+/* FORM */
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* INPUT */
+.form-login input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.form-login input:focus {
+  outline: none;
+  border-color: black;
+}
+
+/* SENHA */
+.campo-senha {
+  position: relative;
+}
+
+.campo-senha button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* BOTÃO */
+.form-login button[type="submit"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-login button[type="submit"]:hover {
+  background: #333;
+}
+
+/* LINKS */
+.switch {
+  text-align: center;
+  font-size: 13px;
+}
+
+.switch a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}

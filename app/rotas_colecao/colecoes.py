@@ -5,7 +5,7 @@ from ..models import Colecoes , Produtos
 # Todas as rotas definidas neste arquivo serão acessadas via /colecoes/
 bp_colecao = Blueprint('colecoes', __name__, url_prefix='/colecoes')
 
-@bp_colecao.route("/")
+@bp_colecao.route("/colecoes")
 def colecoes():
     lista_colecoes = Colecoes.query.all()
     return render_template("colecoes.html", colecoes = lista_colecoes)
@@ -19,7 +19,7 @@ def exibir_itens_colecao(id):
 
     # 🔥 pega os produtos
     itens_colecao = Produtos.query.filter_by(colecao_id=id).all()
-
+    print(itens_colecao)
     return render_template(
         "colecao.html",
         itens=itens_colecao,

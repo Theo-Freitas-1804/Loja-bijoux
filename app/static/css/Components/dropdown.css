@@ -1,0 +1,109 @@
+/* ===== CONTAINER ===== */
+.perfil {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== BOTÃO PERFIL ===== */
+.btn-perfil {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== IMAGEM PERFIL (HEADER) ===== */
+.imagem-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== IMAGEM INTERNA ===== */
+.foto-perfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 10px;
+}
+
+/* ===== DROPDOWN ===== */
+.menu-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 999;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== ESCONDIDO ===== */
+.escondido {
+  display: none;
+}
+
+/* ===== INFO USUÁRIO ===== */
+.usuario-info {
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ===== LISTA ===== */
+.conteudo-dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  gap: 8px;
+}
+
+/* ===== ITENS ===== */
+
+/* ===== LINKS E BOTÕES ===== */
+.conteudo-dropdown a,
+.conteudo-dropdown button {
+  width: 100%;
+  padding: 8px 10px;
+
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #111;
+
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+/* ===== HOVER ===== */
+.conteudo-dropdown a:hover,
+.conteudo-dropdown button:hover {
+  background: #f2f2f2;
+}
+
+/* Ícone */
+.icone-perfil {
+  font-size: 24px;
+  color: black;
+}

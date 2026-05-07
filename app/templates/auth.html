@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Entrar | Kordonê Bijoux</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="card {% if iniciar_login %}virado{% endif %}">
+  
+        <!-- FRENTE -->
+        <div class="front">
+          <h2 class="titulo">Cadastre-se</h2>
+          <p class="subtitulo">
+            Tenha seu próprio carrinho, salve endereços, peças favoritas e mais!
+          </p>
+  
+          <div class="form-box">
+            <form action="{{ url_for('auth.criar_conta') }}" method="POST" class="form-login form-cadastro">
+              <input type="text" placeholder="Nome" name="Nome_cliente" required>
+              <input type="email" placeholder="E-mail" name="email_cliente" required>
+              <input type="password" placeholder="Senha" name="senha_cliente" required name="senha_cliente">
+  
+              <button type="submit">Criar Conta</button>
+  
+              <p class="switch">
+                Já tem uma conta?
+                <a href="#" id="btn-virar-login">Entrar</a>
+              </p>
+            </form>
+          </div>
+        </div>
+  
+        <!-- VERSO -->
+        <div class="back">
+          <h2 class="titulo">Entrar</h2>
+  
+          <div class="form-box">
+            <form action="{{ url_for('auth.entrar') }}" method="POST" class="form-login form-entrar">
+              <input type="text" placeholder="E-mail ou nome" name="id_cliente" required>
+  
+              <div class="campo-senha">
+                <input type="password" id="senha_cliente" placeholder="Insira sua Senha" name="senha_cliente">
+                <button type="button" id="btn_senha">
+                  <i id="icone_senha" class="ri-eye-line"></i>
+                </button>
+              </div>
+  
+              <button type="submit">Entrar</button>
+  
+              <p class="switch">
+                Não tem conta?
+                <a href="#" id="btn-virar-cadastro">Criar conta</a>
+              </p>
+            </form>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <script src="{{url_for('static' , filename= 'Js/auth.js')}}"></script>
+</body>
+</html>

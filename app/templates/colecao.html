@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title> {{colecao.nome_colecao}} | Kordonê Bijoux </title>
-  
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css' )}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css' )}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css'}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_carrinho.css'}}">
-  
-  
-  
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_cards.css' )}}">
-  
-  
+
+  <title>{{colecao.nome_colecao}} | Kordonê Bijoux</title>
+
+  <!-- 🔥 SÓ UM CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
-<body>
-  <div class="grid-produtos">
-    {% for item in itens %}
-      {% set produto = item %}
-      {% include 'components/_card_produto.html' %}
-  {% endfor %}
-  </div>
+<body class="colecoes">
+  <!-- Header/ Cabeçalho-->
+  {%include 'components/_header_interno.html' %}
+  <main class="main">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero aperiam minus fugit quae error, fuga aut illum facilis repellat molestiae velit ab officiis quas sed voluptatum, saepe quod dolorum repellendus.</p>
+    <section class="colecoes-header">
+      <h2>{{ colecao.nome_colecao }}</h2>
+    </section>
+
+    <section class="colecoes-grid">
+      {% for produto in itens %}
+        {% set produto = produto %}
+        {% include 'components/_card_colecao.html' %}
+      {% endfor %}
+    </section>
+
+  </main>
+
 </body>
 </html>

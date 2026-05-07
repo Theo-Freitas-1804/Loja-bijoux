@@ -1,0 +1,31 @@
+.colecoes .main {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* TÍTULO */
+.colecoes-header h2 {
+  text-align: center;
+}
+
+/* GRID */
+.colecoes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 🔥 ESSENCIAL */
+  gap: 16px;
+}
+
+/* RESPONSIVO */
+@media (min-width: 600px) {
+  .colecoes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .colecoes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

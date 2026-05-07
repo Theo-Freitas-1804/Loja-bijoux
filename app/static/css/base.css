@@ -3,8 +3,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 /* VARIÁVEIS */
@@ -32,11 +30,6 @@ ul {
 img {
   max-width: 100%;
   display: block;
-}
-
-button {
-  cursor: pointer;
-  border: none;
 }
 
 /* UTILITÁRIOS */

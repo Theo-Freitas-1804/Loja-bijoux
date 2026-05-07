@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAdicionar = document.getElementById("adicionar-a-fila");
   const btnEnviar = document.getElementById("btn-enviar");
   const inputFoto = document.getElementById("foto-acessorio");
-  const nome = document.getElementById("Nome");
-  const colecao = document.getElementById("Colecao");
-  const tamanho = document.getElementById("Tamanho");
-  const material = document.getElementById("Material");
-  const preco = document.getElementById("Preco");
+  const nome = document.getElementById("nome");
+  const colecao = document.getElementById("colecao");
+  const tamanho = document.getElementById("tamanho");
+  const material = document.getElementById("material");
+  const preco = document.getElementById("preco");
   const estoque = document.getElementById("qtd");
   const preview = document.getElementById("lista-preview");
   function criarProduto(){

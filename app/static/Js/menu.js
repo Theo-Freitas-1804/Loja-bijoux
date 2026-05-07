@@ -1,5 +1,5 @@
-const btn = document.getElementById("btn-perfil");
-const menu = document.getElementById("menu-dropdown");
+const btn = document.querySelector(".btn-perfil");
+const menu = document.querySelector(".menu-dropdown");
 
 // ===============================
 // DROPDOWN PERFIL

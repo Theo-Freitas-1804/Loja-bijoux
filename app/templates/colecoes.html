@@ -16,17 +16,14 @@
     
   </head>
   <body>
-    <header>
-        {%include "components/_header_interno.html"%}
-    </header>
-    <br>
+    {%include "components/_header_interno.html"%}
     <h2> Seção das principais Coleções</h2>
-    <br>
-        <div>
+    <div>
       <ul id="lista-colecoes">
         {%for colecao in colecoes%}
           {% include 'components/_card_colecao.html' %}
         {%endfor%}
+      </ul>
     </div> 
   </body>
 </html>

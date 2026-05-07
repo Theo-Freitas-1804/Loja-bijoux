@@ -1,0 +1,19 @@
+/* BASE */
+@import url('./base.css');
+
+/* COMPONENTES */
+@import url('./Components/banner.css');
+@import url('./Components/menu.css');
+@import url('./Components/search.css');
+@import url('./Components/carrossel.css');
+@import url('./Components/carrinho.css');
+@import url('./Components/cards.css');
+@import url('./Components/header.css');
+@import url('./Components/dropdown.css');
+
+/* PÁGINAS */
+@import url('./Pages/home.css');
+@import url('./Pages/colecao.css');
+@import url("./Pages/login.css");
+@import url("./Pages/novo_produto.css");
+@import url('./Pages/produto.css');

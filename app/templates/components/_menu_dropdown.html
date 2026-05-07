@@ -1,15 +1,15 @@
 <div class="perfil">
   {% if current_user.is_authenticated %}
 
-    <button id="btn-perfil">
+    <button class="btn-perfil">
       {% if current_user.foto_perfil %}
-        <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" id="imagem-perfil">
+        <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="imagem-perfil">
       {% else %}
         <i class="ri-user-line icone-perfil"></i>
       {% endif %}
     </button>
 
-    <div id="menu-dropdown" class="escondido">
+    <div class="menu-dropdown escondido">
 
       {% if current_user.foto_perfil %}  
         <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil)}}" class="foto-perfil" id="foto-interna">  
@@ -61,7 +61,7 @@
 
   {% else %}
 
-    <a href="{{ url_for('auth.entrar') }}" id="btn-perfil">
+    <a href="{{ url_for('auth.entrar') }}" class="btn-perfil">
       <i class="ri-user-add-line icone-perfil"></i>
     </a>
 

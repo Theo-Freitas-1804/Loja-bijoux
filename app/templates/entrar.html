@@ -32,9 +32,9 @@
       <form action="{{url_for('auth.entrar')}}" method="POST" class="form-login">
         <input type="Text" placeholder="Insira seu nome ou e-mail" name= "id_cliente" required class="login">
         <div class="campo-senha">
-          <input type="password" placeholder="Insira sua Senha" id="senha_cliente" class="login" name="senha_cliente">
+          <input type="password" id="senha_cliente">
           <button type="button" id="btn_senha">
-            <i class="ri-eye-line" id="ver_senha"></i>
+            <i id="icone_senha" class="ri-eye-line"></i>
           </button>
         </div>
         <button type="submit" id="entrar"> Entrar</button>

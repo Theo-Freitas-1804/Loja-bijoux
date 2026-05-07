@@ -12,7 +12,7 @@ bp_auth = Blueprint("auth", __name__)
 @bp_auth.route("/cadastro" , methods = ["GET", "POST"])
 def criar_conta():
     if request.method == "GET":
-        return render_template("criar_conta.html")
+        return render_template("auth.html")
     elif request.method == "POST":
         nome_cliente = request.form.get('Nome_cliente')
         email_cliente = request.form.get('email_cliente')
@@ -25,33 +25,42 @@ def criar_conta():
 
     return redirect(url_for("principal.pagina_principal"))
 
-@bp_auth.route("/login" , methods= ["GET" , "POST"])
+@bp_auth.route("/login", methods=["GET", "POST"])
 def entrar():
+
     if request.method == "GET":
-        return render_template("entrar.html")  
-    elif request.method == "POST":     
-        # 47-49: Coletando dados (Correto)
+        return render_template(
+            "auth.html",
+            iniciar_login=True
+        )
+
+    elif request.method == "POST":
+
         identificador = request.form.get("id_cliente")
         senha_digitada = request.form.get("senha_cliente")
-        # 50-55: A Query OR (Sintaxe Corrigida)
-        # A consulta OR precisa de (())) para fechar as duas funções
+
         usuario_encontrado = Usuario.query.filter(
-                or_(
-                    Usuario.nome == identificador,
-                    Usuario.email == identificador
-                )).first()
-        # 57-64: Bloco de Verificação (Indentação Corrigida)
+            or_(
+                Usuario.nome == identificador,
+                Usuario.email == identificador
+            )
+        ).first()
+
         if usuario_encontrado:
-            # A senha está correta?        
+
             if check_password_hash(usuario_encontrado.senha, senha_digitada):
-                login_user(usuario_encontrado)                      # Login bem-sucedido!
-                return redirect(url_for("principal.pagina_principal"))
+
+                login_user(usuario_encontrado)
+
+                return redirect(
+                    url_for("principal.pagina_principal")
+                )
+
             else:
-                # Senha incorreta
-                return "Nome / Senha incorreto(s)" # Corrigindo o erro d
+                return "Nome / Senha incorreto(s)"
+
         else:
-            # Usuário não encontrado (Nome ou Email inválido)
-            return "Nome/E-mail/ Senha incorretos"
+            return "Nome/E-mail/Senha incorretos"
 
 @bp_auth.route("/logout")
 def logout():

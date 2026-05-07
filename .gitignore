@@ -26,3 +26,5 @@ db.sqlite3
 
 # Imagens (SE quiser ignorar uploads)
 # app/static/imagens/__pycache__/
+__pycache__/
+*.pyc

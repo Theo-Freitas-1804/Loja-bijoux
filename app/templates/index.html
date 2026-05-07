@@ -7,15 +7,7 @@
     <meta name = "description" content= "Kordonê Bijoux - Site oficial">
     <meta name = "author" content = "Theodoro Meiel">
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}">
-    <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_cards.css')}}">
-    <link rel="stylesheet" href="{{url_for('static' , filename='css/style_dropdown.css')}}">
-    
-    <link rel="stylesheet" href="{{url_for('static' , filename='css/style_carrinho.css')}}">
-    
-    
+    <link rel="stylesheet" href= "{{url_for('static' , filename= 'css/main.css')}}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,12 +16,12 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     </head>
-    
-    <body>
+    <body class="home">
       <div id="overlay-carrinho"></div>
       {% include "components/_carrinho.html" %}
-      <header class="header-home">
-        <h1> Kordonê Bijoux</h1>
+      <!-- HERO (banner + título) -->
+      <header class="hero">
+        <h1 class="hero__titulo">Kordonê Bijoux</h1>
         <div class="banner-container">
           {% for banner in banners %}
             <div class="banner">
@@ -38,80 +30,73 @@
           {% endfor %}
         </div>
       </header>
-        
-        <div class="header-home">
-          <div class="topo">
-            <button id="btn-menu">≡</button>
-            <nav id="nav-menu" class="escondido">
-              <ul>
-                <li>
-                  <a href="{{url_for('colecoes.colecoes')}}"> Coleções</a>
-                </li>
-                <li>
-                  <a href="{{url_for('produto.exibir')}}">
-                    Brincos
-                  </a>
-                </li>
-                <li></li>
-              </ul>
-            </nav>
-            <div class="right">
-              {% if current_user.is_authenticated %}
-                {% include "components/_menu_dropdown.html" %}
-              {% else %}
-                <a href="{{url_for('auth.criar_conta')}}" class="login">Login</a>
-              {% endif %}
+      <!-- NAV REAL -->
+      <nav class="nav">
+        <div class="nav__linha">
+          <!-- ESQUERDA -->
+          <button class="menu-btn">≡</button>
+           <div id="nav-menu" class="nav__menu escondido">
+             <ul>
+               <li>
+                 <a href="{{url_for('colecoes.colecoes')}}">Coleções</a>
+               </li>
+               <li>
+                 <a href="{{url_for('produto.exibir')}}">Brincos</a>
+               </li>
+             </ul>
             </div>
+          <!-- DIREITA (login + busca juntos) -->
+          <div class="nav__right">
+            {% if current_user.is_authenticated %}
+              {% include "components/_menu_dropdown.html" %}
+            {% else %}
+              <a href="{{url_for('auth.criar_conta')}}" class="login">Login</a>
+            {% endif %}
+            <form class="barra-pesquisa" action="{{url_for('pesquisa.pesquisa')}}">
+              <input type="search" placeholder="Pesquisar">
+              <button>Pesquisar</button>
+            </form>
+            <div class="erro-busca escondido">
+              Digite um termo para pesquisar 🔍
+            </div>
+          </div>
         </div>
-
-  <div class="busca-container">
-    <form class="barra-pesquisa" action="{{url_for('pesquisa.pesquisa')}}">
-      <input type="search" placeholder="Pesquisar">
-      <button>Pesquisar</button>
-    </form>
-    <div class="erro-busca escondido">
-      Digite um termo para pesquisar 🔍
-    </div>
-  </div>
-
-</div>
-     
-        
-        <section id="novidades">
+      </nav>
+      
+      <!-- CONTEÚDO -->
+      <main class="main">
+        <section class="novidades">
           <h3>Últimos Lançamentos</h3>
           <div class="carrossel-produtos">
             {% for produto in produtos %}
               {% include 'components/_card_produto.html' %}
             {% endfor %}
           </div>
+      </section>
+      
+      <section id="colecoes">
+        <h2 class="titulo-secao">
+          <a href="{{ url_for('colecoes.colecoes') }}">
+            Coleções
+          </a>
+        </h2>
+        <div class="colecoes-grid">
+          {% for colecao in colecoes %}
+            {% include 'components/_card_colecao.html' %}
+          {% endfor %}
+        </div>
+      </section>
+      
+      </main>
+      <footer class="footer">
+        <section class="contato">
+          <h3>Contato:</h3>
+          <a href="https://www.instagram.com/karlafreitas955?igsh=MWY5bjBjbHJ3MW9uOA=="><i class="ri-instagram-line"></i> instagram</a>
+          <a href="https://www.tiktok.com/@kordon.bijoux8?_r=1&_t=ZS-966qdNWJmvo"> <i class="ri-tiktok-line"></i> TikTok</a>
+          <h5><strong>Envio para todo o Brasil</strong></h5>
         </section>
-        
-        <section id="Colecoes">
-          <h3>Coleções</h3>
-          <div class="grid-produtos">
-            {% for colecao in colecoes %}
-              {% include 'components/_card_colecao.html' %}
-            {% endfor %}
-          </div>
-        </section>
-        
+      </footer>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <footer>
-        <section id="Contato">
-            <h3> Contato: </h3>
-            <a href="https://www.instagram.com/karlafreitas955?igsh=MWw0dHcxcXVtY3Q4bA==">
-              <i class="ri-instagram-line"></i>
-               instagram</a>
-            <h5><strong> Envio para todo o Brasil</strong></h5>
-        </section>
-        </footer>
-        
-        
         <script src="{{ url_for('static', filename='Js/main.js') }}"></script>
         <script src="{{ url_for('static', filename='Js/favoritos.js') }}"></script>
         <script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>

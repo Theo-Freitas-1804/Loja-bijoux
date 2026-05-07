@@ -16,11 +16,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     const nav = document.getElementById("nav-menu");
-    const btn = document.getElementById("btn-menu");
+    const btn = document.querySelector(".menu-btn");
     if (btn && nav) {
-      btn.addEventListener("click", () => {
+      // 🔥 abrir/fechar menu
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // 👈 agora sim
         nav.classList.toggle("ativo");
-    });
+        btn.classList.toggle("escondido");
+      });
+      // 🔥 clique fora
+      document.addEventListener("click", (e) => {
+        const clicouDentroMenu = nav.contains(e.target);
+        const clicouNoBotao = btn.contains(e.target);
+        if (!clicouDentroMenu && !clicouNoBotao) {
+          nav.classList.remove("ativo");
+          btn.classList.remove("escondido");
+        }
+      });
     }
     
     const elementos = document.querySelectorAll(".card-produto");
@@ -28,10 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("ativo");
-    }
-  });
-});
-elementos.forEach((el) => observer.observe(el));
+        }
+      });
+    });
+    elementos.forEach((el) => observer.observe(el));
 
 // --- LÓGICA 3: BANNER ROTATIVO ---
 const banners = document.querySelectorAll(".banner");
