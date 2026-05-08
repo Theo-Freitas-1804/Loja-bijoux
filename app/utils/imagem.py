@@ -42,28 +42,79 @@ def processar_imagem(caminho_entrada, caminho_saida):
 
     fundo.save(caminho_saida)
 
-import os
-
 def salvar_imagem_processada(img, pasta_destino):
-    nome_seguro = secure_filename(img.filename)
-    nome_unico = f"{uuid.uuid4()}_{nome_seguro}"
-    caminho_original = os.path.join(current_app.root_path,"static/imagens/UPLOADS_FOTOS_BIJOUX",
-    nome_unico
-    )
-    nome_final = nome_unico.rsplit(".", 1)[0] + ".jpg"
-    caminho_final = os.path.join(
+
+  # nome seguro
+  nome_seguro = secure_filename(img.filename)
+
+  # uuid + nome original
+  nome_unico = f"{uuid.uuid4()}_{nome_seguro}"
+
+  # nome final SEMPRE jpg
+  nome_final = nome_unico.rsplit(".", 1)[0] + ".jpg"
+
+  # =========================
+  # PASTA TEMPORÁRIA
+  # =========================
+  pasta_temp = os.path.join(
+      current_app.root_path,
+      "static/temp"
+  )
+
+  os.makedirs(pasta_temp, exist_ok=True)
+
+  caminho_original = os.path.join(
+      pasta_temp,
+      nome_unico
+  )
+
+  # =========================
+  # DESTINO FINAL
+  # =========================
+  caminho_final = os.path.join(
       current_app.root_path,
       pasta_destino,
       nome_final
+  )
+
+  # garante pasta final
+  os.makedirs(
+      os.path.dirname(caminho_final),
+      exist_ok=True
+  )
+
+  try:
+
+      # salva original temporário
+      img.save(caminho_original)
+
+      print("ORIGINAL SALVO:", caminho_original)
+
+      # processa imagem
+      processar_imagem(
+          caminho_original,
+          caminho_final
       )
-    # 💥 GARANTE QUE AS PASTAS EXISTEM
-    os.makedirs(os.path.dirname(caminho_original), exist_ok=True)
-    os.makedirs(os.path.dirname(caminho_final), exist_ok=True)
-    # salva original
-    img.save(caminho_original)
-    # processa e salva final
-    processar_imagem(caminho_original, caminho_final)
-    # remove temporário
-    if os.path.exists(caminho_original):
-      os.remove(caminho_original)
-    return nome_final
+
+      print("FINAL SALVO:", caminho_final)
+
+      # remove temporário SOMENTE se final existir
+      if os.path.exists(caminho_final):
+
+          os.remove(caminho_original)
+
+          print("TEMP REMOVIDO")
+
+      else:
+
+          print("ERRO: imagem final não criada")
+
+          return None
+
+      return nome_final
+
+  except Exception as erro:
+
+      print("ERRO AO SALVAR IMAGEM:", erro)
+
+      return None

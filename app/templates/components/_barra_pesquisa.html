@@ -1,9 +1,12 @@
-<form class="barra-pesquisa barra-pesquisa--header"
-      action="{{ url_for('pesquisa.pesquisa_dinamica') }}"
-      method="GET">
+<form
+  class="barra-pesquisa barra-pesquisa--header"
+  action="{{ url_for('pesquisa.pesquisa') }}"
+  method="GET"
+>
 
   <div class="barra-pesquisa__grupo">
-    <input 
+
+    <input
       type="search"
       name="item"
       id="busca-input"
@@ -11,16 +14,24 @@
       required
     >
 
-    <button type="submit" class="btn-lupa">
+    <button
+      type="submit"
+      class="btn-lupa"
+    >
       <i class="ri-search-line"></i>
     </button>
 
-    <button type="button" class="btn-filtro">
+    <button
+      type="button"
+      class="btn-filtro"
+    >
       <i class="ri-equalizer-line"></i>
     </button>
-  </div>
 
-  <div id="resultado-busca"></div>
+    <!-- AUTOCOMPLETE -->
+    <div id="autocomplete-lista"></div>
+
+  </div>
 
   {% include 'components/_painel_filtros.html' %}
 

@@ -1,4 +1,29 @@
 <div class="card-pesquisa">
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens) }}" alt="a">
-  <a href="{{url_for('produto.pagina_produto'}}"> <strong> {{produto.nome}}</strong></a>
+
+  {% if produto.imagens and produto.imagens|length > 0 %}
+  
+    <img
+      src="{{ url_for(
+        'static',
+        filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url
+      ) }}"
+      alt="{{ produto.nome }}"
+    >
+
+  {% else %}
+
+    <img
+      src="{{ url_for(
+        'static',
+        filename='imagens/placeholder.jpg'
+      ) }}"
+      alt="Sem imagem"
+    >
+
+  {% endif %}
+
+  <a href="{{ url_for('produto.pagina_produto', id=produto.id_acessorio) }}">
+    <strong>{{ produto.imagens[0].url }}</strong>
+  </a>
+
 </div>

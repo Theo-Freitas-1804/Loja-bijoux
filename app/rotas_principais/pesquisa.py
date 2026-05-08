@@ -38,6 +38,7 @@ def pesquisa():
 @bp_pesquisa.route("/api/pesquisa")
 def pesquisa_dinamica():
   termo = request.args.get("item", "").strip()
+  print("TERMO:", termo)
   query = Produtos.query
   if not termo:
     return jsonify([])
@@ -57,7 +58,7 @@ def pesquisa_dinamica():
     resultado.append({
       "nome": p.nome,
       "id": p.id_acessorio,
-      "imagem": url_for("static", filename=f"imagens/UPLOADS_FOTOS_BIJOUX/{p.imagens}")
+      "imagem": url_for("static",filename=f"imagens/UPLOADS_FOTOS_BIJOUX/{p.imagens[0].url}")
     })
 
   return jsonify(resultado)

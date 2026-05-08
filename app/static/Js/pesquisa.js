@@ -32,31 +32,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!input) return; // evita erro em páginas sem busca
 
-  const container = document.getElementById("resultado-busca");
+  const container = document.getElementById("autocomplete-lista");
 
   // =========================
   // RENDER DOS RESULTADOS
   // =========================
   function mostrarResultados(lista) {
-    container.innerHTML = "";
 
-    if (!lista.length) {
-      container.innerHTML = "<p>Nenhum resultado</p>";
-      return;
-    }
+  container.innerHTML = "";
 
-    lista.forEach(produto => {
-      container.innerHTML += `
-        <div class="item-busca">
-          <img src="${produto.imagem || ''}" width="40">
-          <a href="/produto/${produto.id}">
-            ${produto.nome}
-          </a>
-        </div>
-      `;
-    });
+  if (!lista.length) {
+
+    container.style.display = "block";
+
+    container.innerHTML = `
+      <div class="item-autocomplete">
+        Nenhum resultado
+      </div>
+    `;
+
+    return;
   }
 
+  container.style.display = "block";
+
+  lista.forEach(produto => {
+
+    container.innerHTML += `
+      <div class="item-autocomplete">
+
+        <img
+          src="${produto.imagem || ''}"
+          width="40"
+        >
+
+        <a href="/produto/${produto.id}">
+          ${produto.nome}
+        </a>
+
+      </div>
+    `;
+  });
+}
   // =========================
   // DEBOUNCE + FETCH
   // =========================

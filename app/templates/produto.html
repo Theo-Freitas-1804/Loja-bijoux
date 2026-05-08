@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <title> {{ produto.nome }} | Kordonê Bijoux </title>
     <meta charset= "utf-8">
     <meta name = "viewport" content="width = device-width, initial-scale = 1.0">
@@ -12,72 +12,111 @@
     
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
-    </head>
-    <body>
-      <header>
-        {% include 'components/_header_interno.html' %}
-      </header>
-      <div class="pagina-produto">
-        <!-- LADO ESQUERDO -->
-        <div class="produto-imagem">
-          <div class="botoes">
-            <button id="ant" class="desativado">
-              <i class="ri-arrow-left-s-line"></i>
-            </button>
-            <button id="prox">
-              <i class="ri-arrow-right-s-line"></i>
-            </button>
-          </div>
-          <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}" id="foto">
+  </head>
+  
+  <body>
+    <div id="overlay-carrinho"></div>
+      {% include "components/_carrinho.html" %}
+    <header>
+      {% include 'components/_header_interno.html' %}
+    </header>
+  
+    <div class="pagina-produto">
+  
+      <!-- ESQUERDA -->
+      <div class="produto-imagem">
+  
+        <div class="botoes">
+  
+          <button id="ant" class="desativado">
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
+  
+          <button id="prox">
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+  
         </div>
-        <!-- LADO DIREITO -->
-        <div class="produto-info">
+  
+        <img
+          src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}"
+          id="foto"
+        >
+  
+      </div>
+  
+      <!-- DIREITA -->
+      <div class="produto-info">
+  
+        <div class="produto-topo">
+  
           <h1>{{ produto.nome }}</h1>
+  
           <p class="preco">
-            <strong>
-              Preço: 
-            </strong>
             R$ {{ produto.preco }}
           </p>
+  
+        </div>
+  
+        {% if produto.descricao %}
+        <div class="produto-descricao">
+  
+          <p>
+            {{ produto.descricao }}
+          </p>
+  
+        </div>
+        {% endif %}
+  
+        <div class="produto-detalhes">
+  
           {% if produto.material %}
             <p>
-              <strong>Material:</strong>
-              {{ produto.material }}
+              <strong>Material</strong>
+              <span>{{ produto.material }}</span>
             </p>
           {% endif %}
+  
           {% if produto.tamanho %}
             <p>
-              <strong>Tamanho:</strong>
-              {{ produto.tamanho }}
+              <strong>Tamanho</strong>
+              <span>{{ produto.tamanho }}</span>
             </p>
           {% endif %}
+  
           {% if produto.colecao %}
             <p>
-              <strong>Coleção:</strong>
-              {{ produto.colecao.nome_colecao }}
+              <strong>Coleção</strong>
+              <span>{{ produto.colecao.nome_colecao }}</span>
             </p>
           {% endif %}
-          {% if produto.em_estoque %}
-          <p>
-            <strong>Disponível(is):</strong>
-            {{ produto.em_estoque }}
-          </p>
-          {% endif %}
-          <!-- BOTÃO -->
-          <form method="POST">
-            <button type="submit">Adicionar ao carrinho</button>
-            </form>
+  
         </div>
+  
+        <div class="form-carrinho">
+  
+          <button
+            type="button"
+            class="btn-carrinho"
+            data-id="{{ produto.id_acessorio }}"
+          >
+            <i class="ri-shopping-bag-line"></i>
+            Adicionar ao carrinho
+          </button>
+        </div>
+      </div>
     </div>
     <script>
       const imagens = [
         {% for img in produto.imagens %}
           "{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url) }}",
         {% endfor %}
-        ];
+      ];
     </script>
-    <script src="{{url_for('static' , filename='Js/produto.js')}}"></script>
-    <script src="{{url_for('static' , filename='Js/menu.js')}}"></script>
+  
+    <script src="{{ url_for('static', filename='Js/produto.js') }}"></script>
+    <script src="{{ url_for('static', filename='Js/menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>
     
-    </body>
+  </body>
 </html>

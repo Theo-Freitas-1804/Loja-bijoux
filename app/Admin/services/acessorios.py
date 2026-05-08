@@ -4,9 +4,9 @@ from app.models import db, Banners, Colecoes, Produtos, ProdutosImagens
 from app.utils.imagem import salvar_imagem_processada
 
 
-TIPO_PRODUTO = "Bijuteria"
-TIPO_COLECAO = "Capa de Coleção"
-TIPO_BANNER = "Banner"
+TIPO_PRODUTO = "bijuteria"
+TIPO_COLECAO = "colecao"
+TIPO_BANNER = "banner"
 
 
 def tratar_dados(produto):
@@ -14,10 +14,11 @@ def tratar_dados(produto):
 
   if categoria == TIPO_PRODUTO:
       try:
-          produto["tamanho"] = int(str(produto["tamanho"]).replace("cm", "").strip())
-          produto["preco"] = float(str(produto["preco"]).replace("R$", "").replace(",", ".").strip())
-      except:
-          return None
+        produto["tamanho"] = str(produto["tamanho"]).strip()
+        produto["preco"] = float(str(produto["preco"]).replace("R$", "").replace(",", ".").strip())
+      except Exception as erro:
+        print("ERRO:", erro)
+        return None
   else:
       produto["tamanho"] = None
       produto["preco"] = None
@@ -68,17 +69,23 @@ def criar_colecao(dados, fotos, pasta):
       capa_colecao=nome_img
   ))
 
-
 def processar_acessorios(request):
+
   nomes = request.form.getlist("nome-bijuteria")
   imagens = request.files.getlist("foto-acessorio")
   qtds = request.form.getlist("qtd-fotos")
   colecoes = request.form.getlist("colecao")
-  tamanhos = request.form.getlist("Tamanho")
+  tamanhos = request.form.getlist("tamanho")
   materiais = request.form.getlist("material")
   precos = request.form.getlist("preco")
   quantidades = request.form.getlist("qtd")
   categorias = request.form.getlist("categoria")
+
+  print("=== DEBUG FORM ===")
+  print("NOMES:", nomes)
+  print("CATEGORIAS:", categorias)
+  print("QTD FOTOS:", qtds)
+  print("IMAGENS:", imagens)
 
   indice = 0
 
@@ -92,6 +99,8 @@ def processar_acessorios(request):
       zip(nomes, colecoes, tamanhos, materiais, precos, quantidades, categorias)
   ):
 
+      print("\n=== LOOP ITEM ===")
+
       produto = {
           "nome": nome,
           "colecao": colecao,
@@ -102,27 +111,45 @@ def processar_acessorios(request):
           "tipo_foto": categoria
       }
 
+      print("PRODUTO:", produto)
+
       qtd_fotos = int(qtds[i]) if i < len(qtds) else 0
+
       fotos_produto = imagens[indice:indice + qtd_fotos]
+
       indice += qtd_fotos
 
       produto = tratar_dados(produto)
+
       if not produto:
+          print("PRODUTO INVÁLIDO")
           continue
 
       tipo = produto["tipo_foto"]
+
       pasta = savepaths.get(tipo)
 
+      print("TIPO:", tipo)
+      print("PASTA:", pasta)
+
       if not pasta:
+          print("SEM PASTA -> IGNORADO")
           continue
 
       if tipo == TIPO_PRODUTO:
+          print("CRIANDO PRODUTO")
           criar_produto(produto, fotos_produto, pasta)
 
       elif tipo == TIPO_BANNER:
+          print("CRIANDO BANNER")
           criar_banner(fotos_produto, pasta)
 
       elif tipo == TIPO_COLECAO:
+          print("CRIANDO COLEÇÃO")
           criar_colecao(produto, fotos_produto, pasta)
 
+  print("COMMITANDO...")
+
   db.session.commit()
+
+  print("COMMIT OK")

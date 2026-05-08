@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  alert("JS carregado");
   let fila = [];
-  const form = document.getElementById("ficha-produtos");
+  const form = document.getElementById("ficha-produto");
   const btnAdicionar = document.getElementById("adicionar-a-fila");
   const btnEnviar = document.getElementById("btn-enviar");
   const inputFoto = document.getElementById("foto-acessorio");
@@ -37,7 +36,7 @@ function validarProduto(produto){
     alert("Selecione uma foto");
     return false;
   }
-  if(produto.tipo === "Bijuteria"){
+  if(produto.tipo === "bijuteria"){
     if(!produto.nome){
       alert("Nome obrigatório");
       return false;
@@ -62,8 +61,6 @@ function atualizarPreview(){
 
   fila.forEach((item) => {
     const li = document.createElement("li");
-    const containerImgs = document.createElement("div");
-    containerImgs.classList.add("preview-container");
     li.innerHTML = `
     <strong>${item.nome || "Item sem nome"}</strong>
     | Tipo: ${item.tipo}
@@ -78,9 +75,6 @@ function atualizarPreview(){
     });
 
     preview.appendChild(li); // ✔ dentro do loop
-    
-    
-    
   });
 }
 
@@ -119,7 +113,7 @@ function enviarFila(){
     dados.append("qtd-fotos", item.fotos.length);
     dados.append("nome-bijuteria", item.nome);
     dados.append("colecao", item.colecao);
-    dados.append("Tamanho", item.tamanho);
+    dados.append("tamanho", item.tamanho);
     dados.append("material", item.material);
     dados.append("preco", item.preco);
     dados.append("qtd", item.qtd);
@@ -128,16 +122,23 @@ function enviarFila(){
   });
 
   console.log([...dados.entries()]); // 👈 MELHOR QUE ALERT
-
-  fetch("/admin/adicionar-novo-acessorio",{
-    method:"POST",
-    body:dados
+  
+  fetch("/admin/adicionar-novo-acessorio", {
+  method: "POST",
+  body: dados
+    
   })
-  .then(res=>res.text())
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Erro no envio");
+    }
+    return res.text();
+  })
   .then(resposta=>{
     console.log(resposta);
     alert("Produtos enviados!");
     fila=[];
+    form.reset();
     atualizarPreview();
   })
   .catch(erro=>{

@@ -1,17 +1,22 @@
 .carrossel-produtos {
+  width: 100%;
+
   display: flex;
   gap: 16px;
+
   overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 10px 16px;
+
   scroll-behavior: smooth;
-  padding: 10px;
   scroll-snap-type: x mandatory;
+
+  box-sizing: border-box;
 }
 
 .carrossel-produtos .card-produto {
-  min-width: 200px;
-  max-width: 200px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
+  flex: 0 0 auto;
 }
 
 .carrossel-produtos img {

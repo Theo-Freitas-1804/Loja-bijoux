@@ -53,7 +53,7 @@
               <a href="{{url_for('auth.criar_conta')}}" class="login">Login</a>
             {% endif %}
             <form class="barra-pesquisa" action="{{url_for('pesquisa.pesquisa')}}">
-              <input type="search" placeholder="Pesquisar">
+              <input type="search" placeholder="Pesquisar" name="item">
               <button>Pesquisar</button>
             </form>
             <div class="erro-busca escondido">
@@ -80,7 +80,7 @@
             Coleções
           </a>
         </h2>
-        <div class="colecoes-grid">
+        <div class="carrossel-produtos">
           {% for colecao in colecoes %}
             {% include 'components/_card_colecao.html' %}
           {% endfor %}

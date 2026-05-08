@@ -1,6 +1,6 @@
 # Admin/routes/acessorios.py
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request , jsonify
 from flask_login import login_required
 from ...decorators import admin_required
 
@@ -17,4 +17,6 @@ def adicionar_novo_acessorio():
 
     processar_acessorios(request)
 
-    return render_template("novo_produto.html")
+    return jsonify({
+    "status": "ok"
+    })

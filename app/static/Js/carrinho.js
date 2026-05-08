@@ -50,20 +50,46 @@ function atualizarCarrinho() {
 // ADICIONAR AO CARRINHO
 // ===============================
 document.querySelectorAll(".btn-carrinho").forEach(btn => {
+
   btn.addEventListener("click", () => {
+
     const id = btn.dataset.id;
 
     fetch(`/adicionar-carrinho/${id}`, {
       method: "POST"
     })
+
     .then(res => res.json())
+
     .then(() => {
+
+      // feedback visual
+      btn.classList.add("adicionado");
+
+      btn.innerHTML = `
+        <i class="ri-check-line"></i>
+        Adicionado!
+      `;
+
       atualizarCarrinho();
       abrirCarrinho();
-    });
-  });
-});
 
+      setTimeout(() => {
+
+        btn.classList.remove("adicionado");
+
+        btn.innerHTML = `
+          <i class="ri-shopping-bag-line"></i>
+          Adicionar ao carrinho
+        `;
+
+      }, 1500);
+
+    });
+
+  });
+
+});
 // ===============================
 // BOTÃO FECHAR
 // ===============================

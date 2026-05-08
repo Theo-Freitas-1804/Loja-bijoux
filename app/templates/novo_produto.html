@@ -31,7 +31,7 @@
 {% endwith %}
 
     <div id="produtos">
-      <form method="POST" enctype="multipart/form-data" id="form-produto">
+      <form method="POST" enctype="multipart/form-data" id="ficha-produto">
 
   <h2>Adicionar novo acessório</h2>
 
@@ -72,7 +72,7 @@
 
     <div class="campo">
       <label for="estoque">Estoque</label>
-      <input type="number" id="qtd" name="estoque">
+      <input type="number" id="qtd" name="qtd">
     </div>
   </fieldset>
 
@@ -80,7 +80,7 @@
   <fieldset>
     <legend>Categoria da imagem</legend>
 
-    <label><input type="radio" name="categoria" value="capa"> Capa</label>
+    <label><input type="radio" name="categoria" value="colecao"> Capa</label>
     <label><input type="radio" name="categoria" value="bijuteria"> Bijuteria</label>
     <label><input type="radio" name="categoria" value="banner"> Banner</label>
   </fieldset>
@@ -94,7 +94,7 @@
   <!-- Ações -->
   <div class="acoes">
     <button type="button" id="adicionar-a-fila">Adicionar à fila</button>
-    <button type="submit" id="btn-enviar">Cadastrar</button>
+    <button type="button" id="btn-enviar">Cadastrar</button>
   </div>
 
 </form>
