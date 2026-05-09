@@ -10,6 +10,7 @@
 @import url('./Components/cards.css');
 @import url('./Components/header.css');
 @import url('./Components/dropdown.css');
+@import url('./Components/toast.css');
 
 /* PÁGINAS */
 @import url('./Pages/home.css');

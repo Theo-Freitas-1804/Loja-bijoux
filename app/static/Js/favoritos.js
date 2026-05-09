@@ -6,6 +6,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     btn.addEventListener("click", async () => {
 
+      // 🔥 verifica login
+      const logado =
+        btn.dataset.logado === "true";
+
+      if (!logado) {
+
+        mostrarToast(
+          "❤️ Faça login para salvar favoritos"
+        );
+
+        return;
+      }
+
+      // continua normal
       const id = btn.dataset.id;
 
       const res = await fetch(`/favoritar/${id}`, {
@@ -22,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setTimeout(() => {
         icone.classList.remove("animando");
+        abrirCarrinho()
       }, 600);
 
       // troca apenas a classe

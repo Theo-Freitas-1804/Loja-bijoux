@@ -70,7 +70,7 @@ body {
   color: #222;
 }
 
-.form-carrinho button {
+.btn-carrinho {
   width: 100%;
 
   padding: 16px 20px;
@@ -94,21 +94,95 @@ body {
   gap: 10px;
 }
 
-.form-carrinho button i {
+.btn-carrinho i {
+  color: #C2A14D;
   font-size: 1.1rem;
   transition: transform 0.2s ease;
 }
 
-.form-carrinho button:hover i {
+.btn-carrinho :hover i {
   transform: translateX(2px);
 }
 
-.form-carrinho button:hover {
+.btn-carrinho :hover {
   transform: translateY(-2px);
 
   background: #2b2b2b;
 
   box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+/* =========================
+   BOTÃO ANIMADO
+========================= */
+
+.btn-carrinho.animado {
+  position: relative;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    background 0.3s ease;
+
+  isolation: isolate;
+}
+
+/* TEXTO */
+.btn-texto {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* ÍCONE CARRINHO */
+.btn-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.45s ease;
+}
+
+/* CHECK */
+.btn-check {
+  position: absolute;
+
+  right: 20px;
+
+  opacity: 0;
+
+  transform: scale(0.4);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* =========================
+   ESTADO SUCESSO
+========================= */
+
+.btn-carrinho.sucesso {
+  background: #1f7a36;
+}
+
+/* texto some */
+.btn-carrinho.sucesso .btn-texto {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* carrinho anda */
+.btn-carrinho.sucesso .btn-icone {
+  transform: scale(0);
+}
+
+/* check aparece */
+.btn-carrinho.sucesso .btn-check {
+  opacity: 1;
+  transform: scale(1);
 }
 
 #ant,
@@ -152,6 +226,11 @@ button:disabled {
 
 #foto {
   transition: opacity 0.3s ease;
+}
+
+#icone-carrinho {
+  color: white;
+  
 }
 
 @media (max-width: 768px) {

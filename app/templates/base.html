@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Minha Loja{% endblock %}</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Kordonê Bijoux"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/main.css') }}"
+  >
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+
+  <title>
+    {% block titulo %}
+      Kordonê Bijoux
+    {% endblock %}
+  </title>
+
 </head>
 
 <body>
 
-  <header>
+  {% block header %}
     {% include 'components/_header_interno.html' %}
-    {% include 'components/_menu_dropdown.html' %}
-  </header>
+  {% endblock %}
 
-  <main class="container">
-    {% block content %}
-    <!-- conteúdo das páginas entra aqui -->
-    {% endblock %}
-  </main>
+  {% block conteudo %}
+  {% endblock %}
 
-  <footer>
-    <p>© Minha Loja</p>
-  </footer>
+  <div id="toast"></div>
+
+  <script src="{{ url_for('static', filename='Js/menu.js') }}"></script>
+
+  {% block scripts %}
+  {% endblock %}
 
 </body>
+
 </html>
