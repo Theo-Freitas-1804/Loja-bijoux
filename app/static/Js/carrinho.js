@@ -1,117 +1,224 @@
 // ===============================
 // ELEMENTOS
 // ===============================
-const carrinho = document.getElementById("carrinho-pip");
-const container = document.getElementById("conteudo-carrinho");
+const carrinho =
+  document.getElementById("carrinho-pip");
+
+const container =
+  document.getElementById("conteudo-carrinho");
 
 // ===============================
 // ABRIR / FECHAR CARRINHO
 // ===============================
 function abrirCarrinho() {
+
   if (carrinho) {
     carrinho.classList.add("ativo");
   }
+
 }
 
 function fecharCarrinho() {
+
   if (carrinho) {
     carrinho.classList.remove("ativo");
   }
+
 }
 
 // ===============================
 // BUSCAR DADOS DO CARRINHO
 // ===============================
 function atualizarCarrinho() {
+
   fetch("/carrinho/dados")
+
     .then(res => res.json())
+
     .then(data => {
+
       if (!container) return;
 
       container.innerHTML = "";
 
+      // carrinho vazio
+      if (!data.itens.length) {
+
+        container.innerHTML = `
+          <p class="carrinho-vazio">
+            Seu carrinho está vazio 🛒
+          </p>
+        `;
+
+        return;
+      }
+
+      // render itens
       data.itens.forEach(item => {
+
         const html = `
           <div class="item-carrinho">
-            <img src="/static/imagens/UPLOADS_FOTOS_BIJOUX/${item.imagem}">
+
+            <img
+              src="/static/imagens/UPLOADS_FOTOS_BIJOUX/${item.imagem}"
+            >
+
             <div>
               <p>${item.nome}</p>
-              <p>R$ ${item.preco}</p>
-              <p>Qtd: ${item.quantidade}</p>
+
+              <p>
+                R$ ${item.preco}
+              </p>
+
+              <p>
+                Qtd: ${item.quantidade}
+              </p>
             </div>
+
           </div>
         `;
+
         container.innerHTML += html;
+
       });
+
+    })
+
+    .catch(err => {
+
+      console.error(
+        "Erro ao atualizar carrinho:",
+        err
+      );
+
     });
+
 }
 
 // ===============================
 // ADICIONAR AO CARRINHO
 // ===============================
-document.querySelectorAll(".btn-carrinho").forEach(btn => {
+document
+  .querySelectorAll(".btn-carrinho")
 
-  btn.addEventListener("click", () => {
+  .forEach(btn => {
 
-    const id = btn.dataset.id;
+    btn.addEventListener("click", () => {
 
-    fetch(`/adicionar-carrinho/${id}`, {
-      method: "POST"
-    })
+      // ===============================
+      // VERIFICA LOGIN
+      // ===============================
+      const logado =
+        btn.dataset.logado === "true";
 
-    .then(res => res.json())
+      if (!logado) {
 
-    .then(() => {
+        mostrarToast(
+          "🔒 Faça login para usar o carrinho"
+        );
 
-      // feedback visual
-      btn.classList.add("adicionado");
+        return;
+      }
 
-      btn.innerHTML = `
-        <i class="ri-check-line"></i>
-        Adicionado!
-      `;
+      // ===============================
+      // ID PRODUTO
+      // ===============================
+      const id = btn.dataset.id;
 
-      atualizarCarrinho();
-      abrirCarrinho();
+      // ===============================
+      // FETCH
+      // ===============================
+      fetch(`/adicionar-carrinho/${id}`, {
+        method: "POST"
+      })
 
-      setTimeout(() => {
+      .then(res => res.json())
 
-        btn.classList.remove("adicionado");
+      .then(() => {
 
-        btn.innerHTML = `
-          <i class="ri-shopping-bag-line"></i>
-          Adicionar ao carrinho
-        `;
+        // anima botão
+        btn.classList.add("adicionado");
 
-      }, 1500);
+        // atualiza dados
+        atualizarCarrinho();
+
+        // abre depois
+        setTimeout(() => {
+
+          abrirCarrinho();
+
+        }, 1200);
+
+        // remove animação
+        setTimeout(() => {
+
+          btn.classList.remove("adicionado");
+
+        }, 1500);
+
+      })
+
+      .catch(err => {
+
+        console.error(
+          "Erro no carrinho:",
+          err
+        );
+
+      });
 
     });
 
   });
 
-});
 // ===============================
-// BOTÃO FECHAR
+// FECHAR CARRINHO
 // ===============================
-const btnFechar = document.getElementById("fechar-carrinho");
+const btnFechar =
+  document.getElementById("fechar-carrinho");
 
 if (btnFechar) {
-  btnFechar.addEventListener("click", fecharCarrinho);
+
+  btnFechar.addEventListener(
+    "click",
+    fecharCarrinho
+  );
+
 }
 
 // ===============================
 // LIMPAR CARRINHO
 // ===============================
-const btnLimpar = document.getElementById("btn-limpar");
+const btnLimpar =
+  document.getElementById("btn-limpar");
 
 if (btnLimpar) {
+
   btnLimpar.addEventListener("click", () => {
-    fetch("/carrinho/limpar", { method: "POST" })
-      .then(() => atualizarCarrinho());
+
+    fetch("/carrinho/limpar", {
+      method: "POST"
+    })
+
+    .then(() => {
+
+      atualizarCarrinho();
+
+    });
+
   });
+
 }
 
 // ===============================
-// EXPORT GLOBAL (IMPORTANTE)
+// CARREGA AO ABRIR A PÁGINA
+// ===============================
+document.addEventListener(
+  "DOMContentLoaded",
+  atualizarCarrinho
+);
+
+// ===============================
+// EXPORT GLOBAL
 // ===============================
 window.abrirCarrinho = abrirCarrinho;

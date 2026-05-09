@@ -51,6 +51,10 @@ def adicionar_carrinho(id):
 @bp_carrinho.route("/carrinho/dados")
 @login_required
 def dados_carrinho():
+  
+  print(current_user.is_authenticated)
+  print(current_user.id_usuaria)
+  
   itens = Carrinho.query.filter_by(
     usuario_id=current_user.id_usuaria
     ).all()

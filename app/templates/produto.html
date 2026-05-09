@@ -94,18 +94,30 @@
         </div>
   
         <div class="form-carrinho">
-  
           <button
-            type="button"
-            class="btn-carrinho"
-            data-id="{{ produto.id_acessorio }}"
+          type="button"
+          class="btn-carrinho animado"
+          data-id="{{ produto.id_acessorio }}"
           >
-            <i class="ri-shopping-bag-line"></i>
-            Adicionar ao carrinho
+            <span class="btn-texto">
+              Adicionar ao carrinho
+            </span>
+            <span class="btn-icone">
+              <i class="ri-shopping-cart-line"></i>
+            </span>
+            <span class="btn-check">
+              <i class="ri-check-line"></i>
+            </span>
           </button>
         </div>
       </div>
     </div>
+    <script src="{{url_for('static' , filename= 'Js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script>
+          eruda.init();
+    </script>
+    
     <script>
       const imagens = [
         {% for img in produto.imagens %}
