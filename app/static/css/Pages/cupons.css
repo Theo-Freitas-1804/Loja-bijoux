@@ -1,0 +1,258 @@
+/* =========================
+   PÁGINA CUPONS
+========================= */
+
+#pagina-cupons {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 32px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 28px;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topo-cupons {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.topo-cupons h1 {
+  font-size: 2rem;
+  font-weight: 700;
+
+  color: #1f1f1f;
+}
+
+.topo-cupons p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.cupons-add {
+  width: 100%;
+}
+
+.form-add {
+  display: flex;
+  gap: 12px;
+
+  width: 100%;
+}
+
+.form-add input {
+  flex: 1;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  border: 1px solid #ddd;
+
+  background: white;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-add input:focus {
+  border-color: #C2A14D;
+
+  box-shadow:
+    0 0 0 4px rgba(194,161,77,0.15);
+}
+
+.form-add button {
+  border: none;
+
+  padding: 14px 20px;
+
+  border-radius: 14px;
+
+  background: #1f1f1f;
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-add button:hover {
+  background: #2d2d2d;
+
+  transform: translateY(-2px);
+}
+
+/* =========================
+   SEM CUPONS
+========================= */
+
+.sem-cupons {
+  width: 100%;
+
+  padding: 40px 20px;
+
+  border-radius: 18px;
+
+  background: #fafafa;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 14px;
+
+  text-align: center;
+}
+
+.sem-cupons i {
+  font-size: 2.6rem;
+  color: #C2A14D;
+}
+
+.sem-cupons strong {
+  font-size: 1.1rem;
+  color: #1f1f1f;
+}
+
+.sem-cupons p {
+  color: #666;
+}
+
+/* =========================
+   LISTA CUPONS
+========================= */
+
+.lista-cupons {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =========================
+   CARD CUPOM
+========================= */
+
+.card-cupom {
+  padding: 20px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  border: 1px solid #ececec;
+
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card-cupom:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   TOPO CARD
+========================= */
+
+.cupom-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.nome-cupom {
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  color: #1f1f1f;
+}
+
+.valor-cupom {
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  background: #f5f1e4;
+
+  color: #8b6d1f;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* =========================
+   INFO CUPOM
+========================= */
+
+.cupom-info p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 640px) {
+
+  #pagina-cupons {
+    padding: 24px 16px;
+  }
+
+  .form-add {
+    flex-direction: column;
+  }
+
+  .form-add button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cupom-topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+.usado{
+  opacity: 0.2;
+}

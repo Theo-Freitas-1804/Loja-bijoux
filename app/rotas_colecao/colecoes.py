@@ -1,17 +1,16 @@
 from flask import Blueprint , render_template
 from ..models import Colecoes , Produtos
-
+from .bp import bp_colecao
 # Cria o objeto Blueprint. 
 # Todas as rotas definidas neste arquivo serão acessadas via /colecoes/
-bp_colecao = Blueprint('colecoes', __name__, url_prefix='/colecoes')
 
-@bp_colecao.route("/colecoes")
-def colecoes():
+@bp_colecao.route("/")
+def listar_colecoes():
     lista_colecoes = Colecoes.query.all()
     return render_template("colecoes.html", colecoes = lista_colecoes)
   
   
-@bp_colecao.route("/colecoes/<int:id>")
+@bp_colecao.route("/<int:id>")
 def exibir_itens_colecao(id):
 
     # 🔥 pega a coleção

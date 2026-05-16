@@ -12,6 +12,7 @@
 @import url('./Components/dropdown.css');
 @import url('./Components/toast.css');
 
+
 /* PÁGINAS */
 @import url('./Pages/home.css');
 @import url('./Pages/colecao.css');
@@ -21,3 +22,6 @@
 @import url('./Pages/colecoes.css');
 @import url('./Pages/perfil.css');
 @import url('./Pages/pesquisa.css');
+@import url('./Pages/checkout.css');
+@import url('./Pages/cupons.css');
+@import url('./Pages/editar_produto.css');
