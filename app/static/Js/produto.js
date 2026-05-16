@@ -56,23 +56,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   atualizarBotoes();
   
-  // 2 - animar botão do carrinho //
-  
-  const botoesCarrinho =
-  document.querySelectorAll(".btn-carrinho.animado");
-  botoesCarrinho.forEach(botao => {
-    botao.addEventListener("click", () => {
-      botao.classList.add("sucesso");
-      // muda texto
-      const texto =
-      botao.querySelector(".btn-texto");
-      texto.textContent = "Adicionado";
-      // volta ao normal
-      setTimeout(() => {
-        botao.classList.remove("sucesso");
-        texto.textContent = "Adicionar ao carrinho";
-      }, 2000);
-    });
-  });
-  
 });

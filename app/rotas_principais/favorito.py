@@ -7,23 +7,46 @@ bp_favoritos = Blueprint("favoritos", __name__)
 @bp_favoritos.route("/favoritar/<int:id>", methods=["POST"])
 @login_required
 def favoritar(id):
-  print("bateu na rota")
+
+  produto = Produtos.query.get(id)
+
   favorito = Favorito.query.filter_by(
-    usuario_id=current_user.id_usuaria,
-    produto_id=id
-    ).first()
+      usuario_id=current_user.id_usuaria,
+      produto_id=id
+  ).first()
+
+  # REMOVE
   if favorito:
-    db.session.delete(favorito)
-    db.session.commit()
-    return jsonify({"status": "removido"})
+
+      db.session.delete(favorito)
+
+      if produto.curtidas > 0:
+          produto.curtidas -= 1
+
+      db.session.commit()
+
+      return jsonify({
+          "status": "removido",
+          "curtidas": produto.curtidas
+      })
+
+  # ADICIONA
   novo = Favorito(
-    usuario_id=current_user.id_usuaria,
-    produto_id=id
-    )
+      usuario_id=current_user.id_usuaria,
+      produto_id=id
+  )
+
   db.session.add(novo)
+
+  produto.curtidas += 1
+
   db.session.commit()
-  return jsonify({"status": "adicionado"})
-  
+
+  return jsonify({
+      "status": "adicionado",
+      "curtidas": produto.curtidas
+  })
+
 @bp_favoritos.route("/meus-favoritos")
 @login_required
 def meus_favoritos():

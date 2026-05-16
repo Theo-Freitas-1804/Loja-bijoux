@@ -85,6 +85,7 @@ class Produtos(db.Model):
     em_estoque = db.Column(db.Integer , nullable=False , unique=False , default=0)
     ativo = db.Column(db.Boolean, default=True)
     categoria = db.Column(db.String(50))
+    curtidas = db.Column(db.Integer , nullable= False , default=0)
     def __repr__(self):
         return f"<Acessório: {self.nome} | {self.status.value}>"
         

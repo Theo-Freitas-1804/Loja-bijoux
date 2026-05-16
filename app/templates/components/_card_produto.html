@@ -14,17 +14,20 @@
     </a>
 
     {% if contexto is not defined or contexto != "favoritos" %}
-      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}">
+      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}" data-logado="{{ current_user.is_authenticated|lower }}">
         {% if produto.id_acessorio in favoritos_ids %}
           <i class="ri-heart-fill"></i>
         {% else %}
           <i class="ri-heart-line"></i>
         {% endif %}
+        <span class="numero-curtidas"> {{ produto.curtidas }}</span>
       </button>
     {% endif %}
 
-    <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
-      Adicionar
+    <button
+    class="btn-carrinho"
+    data-id="{{ produto.id_acessorio }}"
+    data-logado="{{ current_user.is_authenticated|lower }}"> Adicionar
     </button>
   </div>
 </div>
