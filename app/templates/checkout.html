@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block titulo %}
+Checkout | Kordonê Bijoux
+{%endblock%}
+{% block conteudo%}
+<div class="checkout-wrapper">
+  <div class="checkout-card">
+    <div id="resumo" class="checkout-front">
+      <h2>Resumo da compra</h2>
+      <ul>
+        {% for item in produtos_checkout %}
+          <li>
+            {% include 'components/_card_checkout.html' %}
+          </li>
+        {% endfor %}
+      </ul>
+      <!-- SUBTOTAL -->
+      <div id="valor" class="card-checkout">
+        <strong>Subtotal:</strong>
+        <p>
+          R$ {{ subtotal }}
+        </p>
+        <p>Desconto: R$ {{ desconto }}</p>
+        <p>Total: R$ {{ valor_com_desconto }}</p>
+      </div>
+      <!-- CUPONS -->
+      <div id="cupom-box">
+        <div class="cupom-topo">
+          <h3>Cupons</h3>
+          {% if cupom_aplicado %}
+            <span>
+              1/1 em uso
+            </span>
+          {% else %}
+            <span>
+              0/1 em uso
+            </span>
+          {% endif %}
+        </div>
+        <!-- CUPONS DISPONÍVEIS -->
+        <div class="lista-cupons">
+          {% for cupom in cupons %}
+            <button
+              type="button"
+              class="cupom-item"
+            >
+              <strong>
+                {{ cupom.nome_cupom }}
+              </strong>
+              <span>
+                {%if cupom.tipo == "porcentagem" %}
+                  {{cupom.valor_desconto | int}}%
+                {%else%}
+                  {{ cupom.valor_desconto }}
+                {% endif %}
+              </span>
+            </button>
+          {% endfor %}
+        </div>
+        <!-- FORM -->
+        <form
+          action="{{ url_for('usuario.aplicar_cupom') }}"
+          method="POST"
+          class="form-cupom"
+        >
+          <input
+            type="text"
+            name="codigo"
+            placeholder="Adicionar cupom"
+          >
+          <button type="submit">
+            Aplicar
+          </button>
+        </form>
+        <button type="button" id="btn-continuar" class="btn-continuar">
+          Continuar
+        </button>
+      </div>
+    </div>
+    <div id="checkout" class="checkout-back">
+      <a href="#" id="btn-voltar">
+        Voltar
+      </a>
+      <!-- ETAPA 1 -->
+      <div class="etapa">
+        <div class="etapa-topo">
+          <div class="num">
+            <h3>1</h3>
+          </div>
+          <h2>Onde quer receber seu pedido?</h2>
+        </div>
+        <label for="enderecos">
+          Escolha um endereço
+        </label>
+        <select name="enderecos" id="enderecos">
+          {% for endereco in enderecos %}
+            <option value="{{ endereco.id }}">
+              {{ endereco.nome }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- Sub etapa frete -->
+      
+      <div class="subetapa-topo inativo">
+        <div class="subnum">
+          <h4>1.1</h4>
+        </div>
+        <h3>Escolha o frete</h3>
+        <select name="frete" id="frete">
+          <option value="PAC"> </option>
+          <option value="SEDEX"></option>
+        </select>
+      </div>
+      
+      <!-- ETAPA 2 -->
+      <div class="etapa inativo">
+        <div class="etapa-topo">
+          <div class="num">
+            <h3>2</h3>
+          </div>
+          <h2>Quando quer receber seu pedido?</h2>
+        </div>
+        <select name="horario" id="horario">
+          <option value="proximo">
+            No próximo correio
+          </option>
+          <option value="agendado">
+            Agendar
+          </option>
+        </select>
+      </div>
+      <!-- ETAPA 3 -->
+      <div class="etapa inativo">
+        <div class="etapa-topo">
+          <div class="num">
+            <h3>3</h3>
+          </div>
+          <h2>Selecione forma de pagamento</h2>
+        </div>
+        
+        <div class="pagamentos">
+          <button type="button" class="pagamento-item ativo">
+            <div>
+              <strong>Cartão de crédito</strong>
+              <span>Contém encargos do cartão</span>
+            </div>
+            <div class="radio"></div>
+          </button>
+          <button type="button" class="pagamento-item">
+            <div>
+              <strong>Cartão de débito</strong>
+            </div>
+            <div class="radio"></div>
+          </button>
+          <button type="button" class="pagamento-item">
+            <div>
+              <strong>Pix</strong>
+              <span>Aprovação imediata</span>
+            </div>
+            <div class="radio"></div>
+          </button>
+        </div> 
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('static' , filename= 'Js/checkout.js')}}"></script>
+{% endblock %}
+

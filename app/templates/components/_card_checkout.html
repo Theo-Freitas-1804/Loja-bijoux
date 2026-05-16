@@ -1,0 +1,30 @@
+<div class="card-checkout">
+
+  {% if item.produto.imagens %}
+
+    <img
+      src="{{ url_for(
+        'static',
+        filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ item.produto.imagens[0].url
+      ) }}"
+    >
+
+  {% endif %}
+
+  <div class="info-produto">
+
+    <strong>
+      {{ item.produto.nome }}
+    </strong>
+
+    <p>
+      Qtd: {{ item.quantidade }}
+    </p>
+
+    <p>
+      R$ {{ item.subtotal }}
+    </p>
+
+  </div>
+
+</div>
