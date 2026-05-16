@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for
 from flask_login import login_user , logout_user , login_required , current_user
 from ..rotas_principais.home import bp_principal
+
+from ..models import Favorito , Usuario , Produtos
+
 import os
 import secrets
 # Exemplo, assumindo que db está em 'app.meu_app' ou similar:
@@ -10,10 +13,30 @@ from ..meu_app import db
 bp_usuario = Blueprint("usuario", __name__)
 extensoes_imagens = ["png" , "jpg" , "gif"]
 
-@bp_usuario.route("/minha-conta")
+@bp_usuario.route("/perfil")
+@login_required
 def perfil():
-    # A variável caminho_icone não está sendo usada, mas a função está correta
-    return render_template("perfil.html" , name= current_user.nome)
+
+    favoritos_db = Favorito.query.filter_by(
+        usuario_id=current_user.id_usuaria
+    ).all()
+
+    favoritos = []
+
+    for f in favoritos_db:
+
+        produto = Produtos.query.get(
+            f.produto_id
+        )
+
+        if produto:
+            favoritos.append(produto)
+
+    return render_template(
+        "perfil.html",
+        name=current_user.nome,
+        favoritos=favoritos
+    )
 
 def arquivo_permitido(filename):
     # 1. Checa se o nome tem ponto (necessário para os.path.sp    litext)
