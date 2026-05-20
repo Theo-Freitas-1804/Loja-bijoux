@@ -31,3 +31,6 @@ db.sqlite3
 # app/static/imagens/__pycache__/
 __pycache__/
 *.pyc
+
+app/static/imagens/UPLOADS_FOTOS_BIJOUX/
+upgrade_log.txt
