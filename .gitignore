@@ -25,4 +25,8 @@ db.sqlite3
 .vscode/
 
 # Imagens (SE quiser ignorar uploads)
+
+app/static/imagens/UPLOADS_FOTOS_BIJOUX/
+upgrade_log.txt
+
 # app/static/imagens/__pycache__/
