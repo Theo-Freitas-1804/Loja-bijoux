@@ -9,10 +9,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 👉 botão abrir chat
   if (btn && form && intro) {
+
     btn.addEventListener("click", () => {
+
       form.classList.remove("escondido");
       intro.classList.add("escondido");
+
+      // evita duplicar mensagem inicial
+      if (document.querySelector(".mensagem-boasvindas")) {
+        return;
+      }
+
+      // =========================
+      // 🤖 SAUDAÇÃO INICIAL
+      // =========================
+
+      const botContainer = document.createElement("div");
+      botContainer.className = "mensagem-bot mensagem-boasvindas";
+
+      const botTopo = document.createElement("div");
+      botTopo.className = "topo-msg";
+
+      const botNome = document.createElement("small");
+      botNome.textContent = nomeAtendente;
+
+      const botHora = document.createElement("small");
+
+      const agora = new Date();
+
+      botHora.textContent =
+        agora.getHours().toString().padStart(2, "0") +
+        ":" +
+        agora.getMinutes().toString().padStart(2, "0");
+
+      botTopo.appendChild(botNome);
+      botTopo.appendChild(botHora);
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "msg bot";
+      botMsg.textContent = saudacaoInicial;
+
+      botContainer.appendChild(botTopo);
+      botContainer.appendChild(botMsg);
+
+      resposta.appendChild(botContainer);
+
+      resposta.scrollTop = resposta.scrollHeight;
+
     });
+
   }
 
   // 👉 envio de mensagem
@@ -44,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       userNome.textContent = nomeCliente;
 
       const agora = new Date();
+
       const horaUsuario =
         agora.getHours().toString().padStart(2, "0") +
         ":" +
@@ -64,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resposta.appendChild(userContainer);
 
+      resposta.scrollTop = resposta.scrollHeight;
+
       input.value = "";
 
       // =========================
@@ -76,18 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resposta.appendChild(loading);
 
+      resposta.scrollTop = resposta.scrollHeight;
+
       // =========================
       // 🤖 FETCH BOT
       // =========================
 
       fetch("/chat", {
+
         method: "POST",
+
         headers: {
           "Content-Type": "application/json"
         },
+
         body: JSON.stringify({
           pergunta: mensagem
         })
+
       })
 
       .then(res => res.json())
@@ -107,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         botTopo.className = "topo-msg";
 
         const botNome = document.createElement("small");
-        botNome.textContent = "Flávia";
+        botNome.textContent = data.atendente;
 
         const botHora = document.createElement("small");
         botHora.textContent = data.hora;

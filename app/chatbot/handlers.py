@@ -7,6 +7,7 @@ from app.services.frete import calcular_frete
 
 from app.models import Pedido
 
+import datetime as dt
 
 def responder_cupons():
     cupons = current_user.cupons
@@ -37,9 +38,31 @@ def responder_frete():
   session["estado_chat"] = "esperando_endereco"
   return {"mensagem":"Digite um endereço ou tag (Ex. 'Casa' , ou 'Trabalho')"}
 
+def gerar_saudacao(nome):
+    hora = int(dt.datetime.now().strftime("%H"))
+    if 6 <= hora < 12:
+        cumprimento = "Bom dia"
+    elif 12 <= hora < 18:
+        cumprimento = "Boa tarde"
+    else:
+        cumprimento = "Boa noite"
+    return f"{cumprimento}! Eu sou {nome} e vou te atender agora. 😊"
+    
+  # chatbot/handlers.py
+
+
+def responder_saudacao():
+
+    atendente = session.get("atendente", "Flávia")
+
+    return {
+        "mensagem": gerar_saudacao(atendente)
+    }
+  
 HANDLERS = {
     "cupom": responder_cupons,
     "pedido": responder_pedidos,
     "entrega": responder_entrega,
-    "frete": responder_frete
+    "frete": responder_frete , 
+    "saudacao": gerar_saudacao
 }

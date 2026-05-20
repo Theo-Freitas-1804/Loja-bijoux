@@ -47,8 +47,13 @@ Ajuda | Kordonê Bijoux
 {% endblock %}
 
 {% block scripts %}
+
   <script>
-   const nomeCliente = "{{ nome_usuaria }}";
-</script>
+    
+  const saudacaoInicial = "{{ saudacao }}";
+  const nomeAtendente = "{{ atendente }}";
+  const nomeCliente = "{{ nome_usuaria }}";
+  
+  </script>
   <script src="{{ url_for('static', filename='Js/ajuda.js') }}"></script>
 {% endblock %}

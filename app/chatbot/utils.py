@@ -1,5 +1,9 @@
 from .intents import INTENTS
 import re
+import random
+import datetime as dt
+
+from .dados import atendentes
 
 def detectar_intencao(msg):
   for intent , palavras in INTENTS.items():
@@ -13,3 +17,6 @@ def extrair_cep(msg):
     if match:
         return match.group().replace("-", "")
     return None
+    
+def escolher_atendente():
+  return random.choice(atendentes)

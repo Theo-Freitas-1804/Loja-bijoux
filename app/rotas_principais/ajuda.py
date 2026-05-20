@@ -12,13 +12,32 @@ from ..services.frete import calcular_frete
 
 from app.chatbot.utils import extrair_cep
 
+from app.chatbot.handlers import gerar_saudacao
+from app.chatbot.utils import escolher_atendente
+
+from app.chatbot.dados import atendentes
+
 import datetime as dt
 
 @bp_principal.route("/ajuda")
 def ajuda():
+
   if not current_user.is_authenticated:
-    abort(401 , "Faça login para usar o chat.")
-  return render_template("ajuda.html" , nome_usuaria = current_user.nome)
+      abort(401, "Faça login para usar o chat.")
+
+  if "atendente" not in session:
+      session["atendente"] = escolher_atendente()
+
+  atendente = session["atendente"]
+
+  saudacao = gerar_saudacao(atendente)
+
+  return render_template(
+      "ajuda.html",
+      nome_usuaria=current_user.nome,
+      atendente=atendente,
+      saudacao=saudacao
+  )
 
 @bp_principal.route("/chat", methods=["POST"])
 def chatbot():
@@ -27,6 +46,11 @@ def chatbot():
   fuso_brasilia = dt.timezone(dt.timedelta(hours=-3))
   agora = dt.datetime.now(fuso_brasilia)
   hora = agora.strftime("%H:%M")
+  
+  
+  if "atendente" not in session:
+    session["atendente"] = escolher_atendente()
+  atendente = session["atendente"]
   
   msg = request.json.get("pergunta", "").lower()
 
@@ -42,8 +66,8 @@ def chatbot():
       valor = calcular_frete(cep)
       return {
           "mensagem": f"Frete para {cep}: R$ {valor:.2f} 📦" ,
-          "hora": hora
-          
+          "hora": hora , 
+          "atendente": atendente
       }
 
   # 🔥 2. CONTEXTO (fluxo guiado)
@@ -64,7 +88,9 @@ def chatbot():
           valor = calcular_frete(endereco.cep)
           return {
               "mensagem": f"Frete para {endereco.tipo}: R$ {valor:.2f} 📦" ,
-              "hora": hora
+              "hora": hora , 
+              "atendente": atendente
+              
           }
 
       return {
@@ -72,24 +98,22 @@ def chatbot():
               "Não encontrei esse endereço 😢\n"
               "Digite um CEP ou 'casa', 'trabalho'"
           ) , 
-          "hora": hora
+          "hora": hora ,
+          "atendente": atendente
+          
       }
 
   # 🔥 3. FLUXO NORMAL (intents)
   intent = detectar_intencao(msg)
   
-  if not current_user.is_authenticated:
-    return {
-    "mensagem": (
-        "Você precisa estar logada para acessar isso 😊\n"
-        "<a href='/login'>Clique aqui para fazer login</a>"
-    ) ,
-    "hora": hora
-  }
-  
   if intent in HANDLERS:
-      session["ultima_intencao"] = intent
-      return HANDLERS[intent]()
+    session["ultima_intencao"] = intent
+    resposta = HANDLERS[intent]()
+
+    resposta["hora"] = hora
+    resposta["atendente"] = atendente
+
+    return resposta
 
   # 🔥 4. FALLBACK FINAL
-  return {"mensagem": "Não entendi 😅" , "hora": hora}
+  return {"mensagem": "Não entendi 😅" , "hora": hora , "atendente": atendente}
