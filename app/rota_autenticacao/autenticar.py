@@ -1,6 +1,6 @@
 #app/rotas_auth/auth.py
 
-from flask import Blueprint, render_template , request , redirect , url_for
+from flask import Blueprint, render_template , request , redirect , url_for , flash
 from flask_login import login_user , logout_user
 
 from werkzeug.security import check_password_hash , generate_password_hash
@@ -57,10 +57,17 @@ def entrar():
                 )
 
             else:
-                return "Nome / Senha incorreto(s)"
+              flash(
+                "Nome ou senha incorretos",
+                "erro"
+                )
+              return redirect(url_for("auth.entrar"))
 
         else:
-            return "Nome/E-mail/Senha incorretos"
+          flash("Usuário não encontrado", "erro")
+          return redirect(
+            url_for("auth.entrar")
+          )
 
 @bp_auth.route("/logout")
 def logout():

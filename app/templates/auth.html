@@ -50,7 +50,7 @@
                   <i id="icone_senha" class="ri-eye-line"></i>
                 </button>
               </div>
-  
+              <p> Esqueceu a senha? <a href="{{url_for('senha.gerar_codigo_senha')}}">Recupere aqui</a></p>
               <button type="submit">Entrar</button>
   
               <p class="switch">
@@ -63,6 +63,37 @@
   
       </div>
     </div>
-    <script src="{{url_for('static' , filename= 'Js/auth.js')}}"></script>
+    
+    <div id="toast"></div>
+
+<script src="{{ url_for(
+  'static',
+  filename='Js/home.js'
+) }}"></script>
+
+<script src="{{ url_for(
+  'static',
+  filename='Js/auth.js'
+) }}"></script>
+    
+    {% with mensagens = get_flashed_messages(with_categories=true)%}
+      {% if mensagens %}
+
+    <script>
+
+      {% for categoria, mensagem in mensagens %}
+
+        window.mostrarToast(
+          "{{ mensagem }}"
+        );
+
+      {% endfor %}
+
+    </script>
+
+  {% endif %}
+
+{% endwith %}
+    
 </body>
 </html>
