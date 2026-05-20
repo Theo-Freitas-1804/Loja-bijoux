@@ -1,6 +1,6 @@
 # rotas_principais/ajuda.py
 
-from flask import request, render_template, session
+from flask import request, render_template, session , abort
 from app.chatbot.utils import detectar_intencao
 from app.chatbot.handlers import HANDLERS
 
@@ -12,13 +12,22 @@ from ..services.frete import calcular_frete
 
 from app.chatbot.utils import extrair_cep
 
+import datetime as dt
+
 @bp_principal.route("/ajuda")
 def ajuda():
-    return render_template("ajuda.html")
+  if not current_user.is_authenticated:
+    abort(401 , "Faça login para usar o chat.")
+  return render_template("ajuda.html" , nome_usuaria = current_user.nome)
 
 @bp_principal.route("/chat", methods=["POST"])
 def chatbot():
-
+  if not current_user.is_authenticated:
+    abort(401 ,"Faça login para usar o chat.")
+  fuso_brasilia = dt.timezone(dt.timedelta(hours=-3))
+  agora = dt.datetime.now(fuso_brasilia)
+  hora = agora.strftime("%H:%M")
+  
   msg = request.json.get("pergunta", "").lower()
 
   # 🔍 DEBUG
@@ -32,7 +41,9 @@ def chatbot():
 
       valor = calcular_frete(cep)
       return {
-          "mensagem": f"Frete para {cep}: R$ {valor:.2f} 📦"
+          "mensagem": f"Frete para {cep}: R$ {valor:.2f} 📦" ,
+          "hora": hora
+          
       }
 
   # 🔥 2. CONTEXTO (fluxo guiado)
@@ -52,14 +63,16 @@ def chatbot():
 
           valor = calcular_frete(endereco.cep)
           return {
-              "mensagem": f"Frete para {endereco.tipo}: R$ {valor:.2f} 📦"
+              "mensagem": f"Frete para {endereco.tipo}: R$ {valor:.2f} 📦" ,
+              "hora": hora
           }
 
       return {
           "mensagem": (
               "Não encontrei esse endereço 😢\n"
               "Digite um CEP ou 'casa', 'trabalho'"
-          )
+          ) , 
+          "hora": hora
       }
 
   # 🔥 3. FLUXO NORMAL (intents)
@@ -70,7 +83,8 @@ def chatbot():
     "mensagem": (
         "Você precisa estar logada para acessar isso 😊\n"
         "<a href='/login'>Clique aqui para fazer login</a>"
-    )
+    ) ,
+    "hora": hora
   }
   
   if intent in HANDLERS:
@@ -78,4 +92,4 @@ def chatbot():
       return HANDLERS[intent]()
 
   # 🔥 4. FALLBACK FINAL
-  return {"mensagem": "Não entendi 😅"}
+  return {"mensagem": "Não entendi 😅" , "hora": hora}

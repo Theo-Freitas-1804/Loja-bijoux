@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector("#nova-chamada");
   const intro = document.querySelector(".introducao");
 
-  console.log("btn:", btn);
-  console.log("form:", form);
-  console.log("intro:", intro);
-
   // 👉 botão abrir chat
   if (btn && form && intro) {
     btn.addEventListener("click", () => {
@@ -21,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 👉 envio de mensagem
   if (form) {
+
     form.addEventListener("submit", function(e) {
+
       e.preventDefault();
 
       if (intro) {
@@ -30,48 +28,120 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const mensagem = input.value.trim();
 
-      if (!mensagem) return; // evita envio vazio
+      if (!mensagem) return;
 
-      // 👤 usuário
+      // =========================
+      // 👤 MENSAGEM USUÁRIA
+      // =========================
+
+      const userContainer = document.createElement("div");
+      userContainer.className = "user-container";
+
+      const userTopo = document.createElement("div");
+      userTopo.className = "topo-msg";
+
+      const userNome = document.createElement("small");
+      userNome.textContent = nomeCliente;
+
+      const agora = new Date();
+      const horaUsuario =
+        agora.getHours().toString().padStart(2, "0") +
+        ":" +
+        agora.getMinutes().toString().padStart(2, "0");
+
+      const userHora = document.createElement("small");
+      userHora.textContent = horaUsuario;
+
+      userTopo.appendChild(userNome);
+      userTopo.appendChild(userHora);
+
       const userMsg = document.createElement("div");
       userMsg.className = "msg user";
       userMsg.textContent = mensagem;
-      resposta.appendChild(userMsg);
+
+      userContainer.appendChild(userTopo);
+      userContainer.appendChild(userMsg);
+
+      resposta.appendChild(userContainer);
 
       input.value = "";
 
-      // 🤖 loading
+      // =========================
+      // 🤖 LOADING
+      // =========================
+
       const loading = document.createElement("div");
       loading.className = "msg bot";
       loading.textContent = "Digitando...";
+
       resposta.appendChild(loading);
+
+      // =========================
+      // 🤖 FETCH BOT
+      // =========================
 
       fetch("/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pergunta: mensagem })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          pergunta: mensagem
+        })
       })
+
       .then(res => res.json())
+
       .then(data => {
+
         loading.remove();
+
+        // =========================
+        // 🤖 MENSAGEM BOT
+        // =========================
+
+        const botContainer = document.createElement("div");
+        botContainer.className = "mensagem-bot";
+
+        const botTopo = document.createElement("div");
+        botTopo.className = "topo-msg";
+
+        const botNome = document.createElement("small");
+        botNome.textContent = "Flávia";
+
+        const botHora = document.createElement("small");
+        botHora.textContent = data.hora;
+
+        botTopo.appendChild(botNome);
+        botTopo.appendChild(botHora);
 
         const botMsg = document.createElement("div");
         botMsg.className = "msg bot";
-        botMsg.innerHTML = data.mensagem; // ✅
-        resposta.appendChild(botMsg);
+        botMsg.innerHTML = data.mensagem;
+
+        botContainer.appendChild(botTopo);
+        botContainer.appendChild(botMsg);
+
+        resposta.appendChild(botContainer);
 
         resposta.scrollTop = resposta.scrollHeight;
+
       })
+
       .catch(() => {
+
         loading.remove();
 
         const erro = document.createElement("div");
         erro.className = "msg bot";
         erro.textContent = "Erro ao buscar resposta 😢";
+
         resposta.appendChild(erro);
+
       });
 
     });
+
   }
 
 });
