@@ -36,6 +36,12 @@ class Usuario(UserMixin , db.Model):
       backref="usuarios",
       lazy=True
       )
+    chamados = db.relationship(
+    "Chamado",
+    backref="cliente",
+    lazy=True
+    )
+    
     
     def __repr__(self):
         return f"<Usuario {self.nome}>"
@@ -201,4 +207,88 @@ class Cupom(db.Model):
   criado_em = db.Column(
       db.DateTime,
       default=lambda: dt.datetime.now(fuso_brasilia)
+  )
+  
+class Chamado(db.Model):
+
+  __tablename__ = "chamados"
+
+  id_chamado = db.Column(
+      db.Integer,
+      primary_key=True
+  )
+
+  titulo = db.Column(
+      db.String(120),
+      nullable=False
+  )
+
+  cliente_id = db.Column(
+      db.Integer,
+      db.ForeignKey("Clientes.id_usuaria"),
+      nullable=False
+  )
+
+  status = db.Column(
+      db.String(20),
+      default="aberto"
+  )
+
+  data_abertura = db.Column(
+      db.DateTime,
+      default=dt.datetime.utcnow
+  )
+  mensagens = db.relationship(
+    "Mensagem",
+    backref="chamado",
+    lazy=True,
+    cascade="all, delete-orphan"
+  )
+  
+  mensagens = db.relationship(
+    "Mensagem",
+    backref="chamado",
+    lazy=True,
+    cascade="all, delete-orphan"
+  )
+  
+  atendente = db.Column(
+    db.String(80),
+    nullable=False
+  )
+  
+class Mensagem(db.Model):
+
+  __tablename__ = "Mensagens"
+
+  id_mensagem = db.Column(
+      db.Integer,
+      primary_key=True
+  )
+
+  cliente_id = db.Column(
+      db.Integer,
+      db.ForeignKey("Clientes.id_usuaria"),
+      nullable=False
+  )
+
+  chamado_id = db.Column(
+      db.Integer,
+      db.ForeignKey("chamados.id_chamado"),
+      nullable=False
+  )
+
+  mensagem = db.Column(
+      db.Text,
+      nullable=False
+  )
+
+  remetente = db.Column(
+      db.String(20),
+      nullable=False
+  )
+
+  data_envio = db.Column(
+      db.DateTime,
+      default=dt.datetime.utcnow
   )

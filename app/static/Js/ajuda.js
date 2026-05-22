@@ -1,3 +1,33 @@
+function CriarRespostaBot(nome, hora, mensagem, classeExtra = "") {
+
+  const botContainer = document.createElement("div");
+
+  botContainer.className =
+    `mensagem-bot ${classeExtra}`;
+
+  const botTopo = document.createElement("div");
+  botTopo.className = "topo-msg";
+
+  const botNome = document.createElement("small");
+  botNome.textContent = nome;
+
+  const botHora = document.createElement("small");
+  botHora.textContent = hora;
+
+  botTopo.appendChild(botNome);
+  botTopo.appendChild(botHora);
+
+  const botMsg = document.createElement("div");
+  botMsg.className = "msg bot";
+
+  botMsg.innerHTML = mensagem;
+
+  botContainer.appendChild(botTopo);
+  botContainer.appendChild(botMsg);
+
+  return botContainer;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("form-chat");
@@ -20,39 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // =========================
-      // 🤖 SAUDAÇÃO INICIAL
-      // =========================
-
-      const botContainer = document.createElement("div");
-      botContainer.className = "mensagem-bot mensagem-boasvindas";
-
-      const botTopo = document.createElement("div");
-      botTopo.className = "topo-msg";
-
-      const botNome = document.createElement("small");
-      botNome.textContent = nomeAtendente;
-
-      const botHora = document.createElement("small");
-
       const agora = new Date();
 
-      botHora.textContent =
+      const hora =
         agora.getHours().toString().padStart(2, "0") +
         ":" +
         agora.getMinutes().toString().padStart(2, "0");
 
-      botTopo.appendChild(botNome);
-      botTopo.appendChild(botHora);
+      const mensagemBoasVindas = CriarRespostaBot(
+        nomeAtendente,
+        hora,
+        saudacaoInicial,
+        "mensagem-boasvindas"
+      );
 
-      const botMsg = document.createElement("div");
-      botMsg.className = "msg bot";
-      botMsg.textContent = saudacaoInicial;
-
-      botContainer.appendChild(botTopo);
-      botContainer.appendChild(botMsg);
-
-      resposta.appendChild(botContainer);
+      resposta.appendChild(mensagemBoasVindas);
 
       resposta.scrollTop = resposta.scrollHeight;
 
@@ -150,33 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         loading.remove();
 
-        // =========================
-        // 🤖 MENSAGEM BOT
-        // =========================
+        const respostaBot = CriarRespostaBot(
+          data.atendente,
+          data.hora,
+          data.mensagem
+        );
 
-        const botContainer = document.createElement("div");
-        botContainer.className = "mensagem-bot";
-
-        const botTopo = document.createElement("div");
-        botTopo.className = "topo-msg";
-
-        const botNome = document.createElement("small");
-        botNome.textContent = data.atendente;
-
-        const botHora = document.createElement("small");
-        botHora.textContent = data.hora;
-
-        botTopo.appendChild(botNome);
-        botTopo.appendChild(botHora);
-
-        const botMsg = document.createElement("div");
-        botMsg.className = "msg bot";
-        botMsg.innerHTML = data.mensagem;
-
-        botContainer.appendChild(botTopo);
-        botContainer.appendChild(botMsg);
-
-        resposta.appendChild(botContainer);
+        resposta.appendChild(respostaBot);
 
         resposta.scrollTop = resposta.scrollHeight;
 

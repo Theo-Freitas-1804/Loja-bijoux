@@ -17,6 +17,8 @@ from app.chatbot.utils import escolher_atendente
 
 from app.chatbot.dados import atendentes
 
+from app.models import db ,Chamado , Mensagem
+
 import datetime as dt
 
 @bp_principal.route("/ajuda")
@@ -31,12 +33,16 @@ def ajuda():
   atendente = session["atendente"]
 
   saudacao = gerar_saudacao(atendente)
-
+  
+  chamados = Chamado.query.filter_by(
+    cliente_id=current_user.id_usuaria , status="aberto"
+    ).limit(6).all()
   return render_template(
       "ajuda.html",
       nome_usuaria=current_user.nome,
       atendente=atendente,
-      saudacao=saudacao
+      saudacao=saudacao ,
+      chamados = chamados
   )
 
 @bp_principal.route("/chat", methods=["POST"])
@@ -105,15 +111,87 @@ def chatbot():
 
   # 🔥 3. FLUXO NORMAL (intents)
   intent = detectar_intencao(msg)
-  
+
+  titulos_conversa = {
+      "pedido": "Dúvida sobre pedido",
+      "frete": "Consulta de frete",
+      "cupom": "Consultando cupons",
+      "entrega": "Consulta sobre entregas"
+  }
+
+  titulo = titulos_conversa.get(intent)
+
+  if not titulo:
+    titulo = msg[:40]
+
+  # =========================
+  # 🎫 BUSCA CHAMADO ABERTO
+  # =========================
+
+  chamado = Chamado.query.filter_by(
+      cliente_id=current_user.id_usuaria,
+      status="aberto"
+  ).first()
+
+  # =========================
+  # 🆕 CRIA CHAMADO
+  # =========================
+
+  if not chamado:
+    chamado = Chamado(
+      titulo=titulo,
+      cliente_id=current_user.id_usuaria,
+      atendente=atendente
+    )
+    db.session.add(chamado)
+    db.session.commit()
+  # =========================
+  # 💬 SALVA MSG CLIENTE
+  # =========================
+
+  mensagem_cliente = Mensagem(
+    cliente_id=current_user.id_usuaria,
+    chamado_id=chamado.id_chamado,
+    mensagem=msg,
+    remetente="cliente"
+    )
+  db.session.add(mensagem_cliente)
+  db.session.commit()
+
+  # =========================
+  # 🤖 HANDLERS
+  # =========================
+
   if intent in HANDLERS:
     session["ultima_intencao"] = intent
     resposta = HANDLERS[intent]()
-
     resposta["hora"] = hora
     resposta["atendente"] = atendente
+
+    # =========================
+    # 💾 SALVA RESPOSTA BOT
+    # =========================
+
+    mensagem_bot = Mensagem(
+        cliente_id=current_user.id_usuaria,
+        chamado_id=chamado.id_chamado,
+        mensagem=resposta["mensagem"],
+        remetente="bot"
+    )
+
+    db.session.add(mensagem_bot)
+    db.session.commit()
 
     return resposta
 
   # 🔥 4. FALLBACK FINAL
   return {"mensagem": "Não entendi 😅" , "hora": hora , "atendente": atendente}
+  
+@bp_principal.route("/ajuda/<int:id_chamado>")
+def abrir_chamado(chsmado_id):
+  # if not current_user.is_authenticated:
+  #   abort(401)
+  # else:
+  #   mensagens_anteriores = Mensagem.query.filter_by(chamado_id= chamado_id).all()A
+  #   chamado = Chamado.query.filter_by()
+  pass

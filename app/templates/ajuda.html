@@ -18,7 +18,23 @@ Ajuda | Kordonê Bijoux
       <button type="button" id="nova-chamada">
         Nova solicitação de ajuda
       </button>
+    {% else %}
+      {% for chamado in chamados %}
+        <div class="card-chamado">
+          <h2> {{chamado.titulo}}</h2>
+          <p> Atendente: {{chamado.atendente}}</p>
+          <p>
+            <strong>Status:</strong>
+            <span class="status {{ chamado.status }}">
+    {{ chamado.status }}
+  </span>
+          </p>
+        </div>
+      {% endfor %}
     {% endif %}
+    <button type="button" id="nova-chamada">
+      Nova solicitação de ajuda
+    </button>
   </div>
 
   <div id="chat-container">
@@ -49,11 +65,10 @@ Ajuda | Kordonê Bijoux
 {% block scripts %}
 
   <script>
-    
-  const saudacaoInicial = "{{ saudacao }}";
-  const nomeAtendente = "{{ atendente }}";
-  const nomeCliente = "{{ nome_usuaria }}";
-  
+    const saudacaoInicial = {{ saudacao|tojson }};
+    const nomeAtendente = {{ atendente|tojson }};
+    const nomeCliente = {{ nome_usuaria|tojson }};
   </script>
+  
   <script src="{{ url_for('static', filename='Js/ajuda.js') }}"></script>
 {% endblock %}
