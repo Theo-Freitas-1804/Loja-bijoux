@@ -46,13 +46,20 @@ def gerar_saudacao(nome):
         cumprimento = "Boa tarde"
     else:
         cumprimento = "Boa noite"
-    return f"{cumprimento}! Eu sou {nome} e vou te atender agora. 😊"
+    
+    return f"""
+    {cumprimento}! Eu sou {nome} e vou te atender agora 😊
+    Como posso ajudar?
+    1️⃣ Cupons
+    2️⃣ Pedidos
+    3️⃣ Entrega
+    4️⃣ Frete
+    """.strip()
     
   # chatbot/handlers.py
 
 
 def responder_saudacao():
-
     atendente = session.get("atendente", "Flávia")
 
     return {

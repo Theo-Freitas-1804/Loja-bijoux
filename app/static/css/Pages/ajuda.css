@@ -1,12 +1,16 @@
 .escondido {
   display: none;
 }
-
+ 
 .introducao {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
+  overflow-x: auto;
+  gap: 12px;
+  padding: 10px;
 }
 
 #input {
@@ -69,6 +73,7 @@
   padding: 10px 14px;
   border-radius: 16px;
   font-size: 14px;
+  white-space: pre-line;
 }
 
 /* USUÁRIO */
@@ -127,4 +132,39 @@
 
 .mensagem-bot {
   align-self: flex-start;
+}
+
+.card-chamado {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 220px;
+
+  padding: 16px;
+
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+  align-items: center;
+  
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.aberto {
+  color: #1FA855;
+}
+
+.status.aguardando {
+  color: #E6A700;
+}
+
+.status.encerrado {
+  color: #999;
 }
