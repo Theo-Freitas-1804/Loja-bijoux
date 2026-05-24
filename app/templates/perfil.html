@@ -29,6 +29,14 @@
       <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="foto-perfil">
     {% else %}
       <i class="ri-user-line icone-perfil"></i>
+      <input
+      type="file"
+      id="foto"
+      class="input-file"/>
+
+    <label for="foto" class="btn-upload">
+  Escolher imagem
+</label>
     {% endif %}
     <strong> {{current_user.nome}}</strong>
   </div>

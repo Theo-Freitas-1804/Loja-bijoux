@@ -1,4 +1,4 @@
-alert("JS dos favoritos carregado");
+console.log("JS dos favoritos carregado");
 
 document.addEventListener("DOMContentLoaded", function () {
 

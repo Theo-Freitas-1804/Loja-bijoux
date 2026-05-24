@@ -1,23 +1,23 @@
 <div class="card-produto">
-  {% if produto.imagens %}
-  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}">
+  {% if f.imagens %}
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ f.imagens[0].url) }}">
   {% endif %}
    <div class="info-produto">
     <strong>
-      {{produto.nome}}
+      {{ f.nome }}
     </strong>
     <p>
-      {{produto.preco}}
+      {{ f.preco }}
     </p>
     </div>
     <div id="acoes-produto">
-      <a href="{{url_for('produto.pagina_produto' , id = produto.id_acessorio)}}" class="link">
+      <a href="{{url_for('produto.pagina_produto' , id = f.id_acessorio)}}" class="link">
         Saiba Mais
       </a>
-      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}">
+      <button class="btn-favorito" data-id="{{ f.id_acessorio }}">
         <i class="ri-heart-fill"></i>
       </button>
-       <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
+       <button class="btn-carrinho" data-id="{{ f.id_acessorio }}">
          Adicionar ao carrinho
         </button>
     </div>

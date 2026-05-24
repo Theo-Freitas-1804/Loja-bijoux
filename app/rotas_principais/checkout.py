@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template , current_app , flash , request , session
 from ..models import db , Produtos , Carrinho , Usuario , Cupom
 from flask_login import current_user , login_required
-from ..rota_perfil.cupons import validar_cupom_checkout
+
 # rota do checkout
 
 bp_checkout = Blueprint("checkout" , __name__)

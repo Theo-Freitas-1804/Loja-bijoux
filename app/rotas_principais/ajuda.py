@@ -187,11 +187,25 @@ def chatbot():
   # 🔥 4. FALLBACK FINAL
   return {"mensagem": "Não entendi 😅" , "hora": hora , "atendente": atendente}
   
-@bp_principal.route("/ajuda/<int:id_chamado>")
-def abrir_chamado(chsmado_id):
-  # if not current_user.is_authenticated:
-  #   abort(401)
-  # else:
-  #   mensagens_anteriores = Mensagem.query.filter_by(chamado_id= chamado_id).all()A
-  #   chamado = Chamado.query.filter_by()
-  pass
+@bp_principal.route("/ajuda/<int:chamado_id>")
+def abrir_chamado(chamado_id):
+
+  if not current_user.is_authenticated:
+      abort(401)
+
+  chamado = Chamado.query.filter_by(
+      id_chamado=chamado_id,
+      cliente_id=current_user.id_usuaria
+  ).first_or_404()
+  atendente=chamado.atendente
+  mensagens_anteriores = Mensagem.query.filter_by(
+      chamado_id=chamado_id
+  ).all()
+
+  return render_template(
+    "ajuda.html",
+    chamado=chamado,
+    mensagens=mensagens_anteriores ,
+    atendente=atendente ,
+    nome_usuaria= current_user.nome
+  )

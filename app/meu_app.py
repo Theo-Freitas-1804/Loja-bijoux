@@ -22,6 +22,8 @@ from .models import db
 from .rotas_principais.favorito import bp_favoritos
 from .rotas_principais.carrinho import bp_carrinho
 
+from .rotas_principais.checkout import bp_checkout
+
 from .rota_autenticacao.recuperar_senha import bp_recuperar_senha
 
 from .rotas_principais.pedidos import bp_pedidos
@@ -76,5 +78,6 @@ def create_app():
     app.register_blueprint(bp_recuperar_senha)
     app.register_blueprint(bp_pedidos)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(bp_checkout)
     
     return app

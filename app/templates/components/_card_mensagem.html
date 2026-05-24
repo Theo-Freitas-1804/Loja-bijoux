@@ -1,0 +1,59 @@
+{% if msg.remetente == "cliente" %}
+
+  <div class="user-container">
+
+    <div class="msg user">
+
+      <div class="topo-msg">
+        <div class="info-user">
+          
+          {% if current_user.foto_perfil %}
+            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="imagem-perfil">
+          {% else %}
+            <i class="ri-user-line icone-perfil"></i>
+          {% endif %}
+          
+          <p>
+            {{ current_user.nome }}
+          </p>
+        </div>
+
+        <p>
+          {{ msg.data_envio.strftime("%H:%M") }}
+        </p>
+
+      </div>
+
+      <p>
+        {{ msg.mensagem }}
+      </p>
+
+    </div>
+
+  </div>
+
+{% else %}
+
+  <div class="mensagem-bot">
+
+    <div class="msg bot">
+
+      <div class="topo-msg">
+
+        <p>
+          {{ chamado.atendente }}
+        </p>
+        <p>
+          {{ msg.data_envio.strftime("%H:%M") }}
+        </p>
+      </div>
+
+      <p>
+        {{ msg.mensagem }}
+      </p>
+
+    </div>
+
+  </div>
+
+{% endif %}

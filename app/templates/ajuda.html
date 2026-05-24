@@ -29,19 +29,36 @@ Ajuda | Kordonê Bijoux
     {{ chamado.status }}
   </span>
           </p>
+          <a href="{{ url_for('principal.abrir_chamado', chamado_id=chamado.id_chamado) }}">
+            Abrir conversa
+          </a>
         </div>
       {% endfor %}
     {% endif %}
+    {% if not mensagens %}
     <button type="button" id="nova-chamada">
       Nova solicitação de ajuda
     </button>
+    {% endif %}
   </div>
 
   <div id="chat-container">
+    
+    <div id="chat-box">
 
-    <div id="chat-box"></div>
+  {% if mensagens %}
 
-    <form id="form-chat" class="escondido">
+    {% for msg in mensagens %}
+
+      {% include 'components/_card_mensagem.html' %}
+
+    {% endfor %}
+
+  {% endif %}
+
+    </div>
+
+    <form id="form-chat" class="{% if not mensagens %}escondido{% endif %}">
 
       <div id="input-area">
         <input
@@ -63,12 +80,15 @@ Ajuda | Kordonê Bijoux
 {% endblock %}
 
 {% block scripts %}
-
+  {% if not mensagens %}
   <script>
     const saudacaoInicial = {{ saudacao|tojson }};
+  </script>
+  {% else %}
+  <script>
     const nomeAtendente = {{ atendente|tojson }};
     const nomeCliente = {{ nome_usuaria|tojson }};
   </script>
-  
+  {% endif %}
   <script src="{{ url_for('static', filename='Js/ajuda.js') }}"></script>
 {% endblock %}
