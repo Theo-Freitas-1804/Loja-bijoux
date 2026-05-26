@@ -1,3 +1,7 @@
+/* =========================
+   BASE
+========================= */
+
 .escondido {
   display: none;
 }
@@ -7,15 +11,20 @@
 ========================= */
 
 .introducao {
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
   overflow-x: auto;
 
   gap: 12px;
+
   padding: 10px;
+
 }
 
 .introducao.escondido {
@@ -27,18 +36,19 @@
 ========================= */
 
 #chat-container {
+
   display: flex;
+
   flex-direction: column;
 
   height: 100dvh;
-  max-width: 400px;
 
   margin: auto;
 
-  border: 1px solid #ddd;
-  border-radius: 12px;
-
   overflow: hidden;
+
+  background: white;
+
 }
 
 /* =========================
@@ -46,9 +56,11 @@
 ========================= */
 
 #chat-box {
+
   flex: 1;
 
   display: flex;
+
   flex-direction: column;
 
   gap: 10px;
@@ -58,13 +70,18 @@
   overflow-y: auto;
 
   background: #f5f5f5;
+
 }
 
 .user-container,
 .mensagem-bot {
+
   display: flex;
+
   flex-direction: column;
-  max-width: 75%;
+
+  max-width: 80%;
+
 }
 
 /* =========================
@@ -72,7 +89,9 @@
 ========================= */
 
 .msg {
+
   display: flex;
+
   flex-direction: column;
 
   gap: 6px;
@@ -84,6 +103,7 @@
   font-size: 14px;
 
   white-space: pre-line;
+
 }
 
 /* =========================
@@ -91,51 +111,68 @@
 ========================= */
 
 .topo-msg {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   width: 100%;
+
 }
 
 .info-user {
+
   display: flex;
+
   align-items: center;
 
   gap: 6px;
+
 }
 
 .foto-user {
+
   width: 22px;
   height: 22px;
 
   border-radius: 50%;
 
   object-fit: cover;
+
 }
 
 .topo-msg p {
-  line-height: 1;
-  font-weight: bold;
-}
 
+  line-height: 1;
+
+  font-weight: bold;
+
+}
 
 /* =========================
    USUÁRIA
 ========================= */
 
 .user {
+
   align-self: flex-end;
 
   background: #DCF8C6;
+
 }
 
 .user-container {
+
   align-self: flex-end;
+
 }
 
 .mensagem-bot {
+
   align-self: flex-start;
+
 }
 
 /* =========================
@@ -143,9 +180,11 @@
 ========================= */
 
 .bot {
+
   align-self: flex-start;
 
   background: white;
+
 }
 
 /* =========================
@@ -153,29 +192,37 @@
 ========================= */
 
 #form-chat {
+
   padding: 10px;
 
   border-top: 1px solid #ddd;
 
   background: white;
+
 }
 
 #input-area {
+
   display: flex;
 
   gap: 8px;
+
 }
 
 #input-area input {
+
   flex: 1;
 
   padding: 10px;
 
   border: 1px solid #ccc;
+
   border-radius: 20px;
+
 }
 
 #input-area button {
+
   border: none;
 
   padding: 10px;
@@ -183,7 +230,9 @@
   border-radius: 50%;
 
   background: #25D366;
+
   color: white;
+
 }
 
 /* =========================
@@ -191,7 +240,9 @@
 ========================= */
 
 .card-chamado {
+
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
@@ -203,11 +254,13 @@
   padding: 16px;
 
   border: 1px solid #ddd;
+
   border-radius: 12px;
 
   background: white;
 
   flex-shrink: 0;
+
 }
 
 /* =========================
@@ -215,37 +268,130 @@
 ========================= */
 
 .status {
+
   font-weight: bold;
+
 }
 
 .status.aberto {
+
   color: #1FA855;
+
 }
 
 .status.aguardando {
+
   color: #E6A700;
+
 }
 
 .status.encerrado {
+
   color: #999;
+
 }
 
 p {
+
   font-weight: bold;
+
 }
 
 .img-perfil-chat {
+
   width: 48px;
   height: 48px;
+
   border-radius: 50%;
+
   object-fit: cover;
+
   flex-shrink: 0;
+
 }
 
 .avatar-atendente {
+
   width: 36px;
   height: 36px;
+
   border-radius: 50%;
+
   object-fit: cover;
+
   flex-shrink: 0;
+
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 1024px) {
+
+  .ajuda-page {
+
+    display: flex;
+
+    gap: 24px;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 24px;
+
+    align-items: flex-start;
+
+  }
+
+  /* INTRODUÇÃO / SIDEBAR */
+
+  .introducao {
+
+    width: 320px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    padding: 0;
+
+  }
+
+  /* CHAT */
+
+  #chat-container {
+
+    flex: 1;
+
+    height: 85vh;
+
+    border: 1px solid #ddd;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+  }
+
+  /* CHAT BOX */
+
+  #chat-box {
+
+    padding: 20px;
+
+    gap: 16px;
+
+  }
+
+  /* MENSAGENS */
+
+  .user-container,
+  .mensagem-bot {
+
+    max-width: 70%;
+
+  }
+
 }

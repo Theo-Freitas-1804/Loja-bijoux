@@ -124,6 +124,8 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items:center ;
+  margin-top: 100px ;
+  padding-bottom: 40px ;
 }
 footer h3 {
   text-align: center;
@@ -134,4 +136,22 @@ footer h3 {
   flex-direction: column;
   gap: 12px;
   align-items: center;
+}
+
+.bloco-home {
+  margin-top: 80px;
+}
+
+.bloco-home h2 {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 1024px) {
+  .menu-btn {
+    display: none;
+  }
+  .menu-desktop {
+    display: flex;
+    gap: 24px;
+  }
 }

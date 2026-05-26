@@ -19,8 +19,15 @@
 /* centro */
 .header-center {
   flex: 1;
-
+  display: flex;
+  justify-content: center;
   margin: 0 10px;
+}
+
+.header-center .barra-pesquisa {
+
+  max-width: 420px;
+
 }
 
 /* barra ocupa o espaço disponível */

@@ -1,60 +1,139 @@
-#user {
+/* =========================
+   CONTAINER GERAL
+========================= */
+
+.perfil-page {
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 40px 24px 80px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  gap: 48px;
+
 }
 
+/* =========================
+   HEADER PERFIL
+========================= */
+
+.perfil-header {
+
+  display: flex;
+
+  justify-content: center;
+
+}
+
+/* USER */
+
+#user {
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+/* FOTO */
+
+.foto-perfil,
+.icone-perfil {
+
+  width: 120px;
+  height: 120px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
 #opcoes-perfil {
+
   width: 100%;
-  margin-top: 20px;
+
 }
 
 /* LISTA */
+
 #opcoes-perfil ul {
+
   display: flex;
+
   justify-content: center;
 
-  gap: 20px;
+  gap: 32px;
 
   padding: 0;
   margin: 0;
 
   border-bottom: 1px solid #eee;
+
 }
 
 /* ITENS */
+
 #opcoes-perfil li {
+
   list-style: none;
+
 }
 
 /* BOTÕES */
+
 #opcoes-perfil button {
+
   background: none;
   border: none;
 
-  padding: 10px 8px;
+  padding: 14px 8px;
 
   font-size: 14px;
+
   color: #666;
 
   cursor: pointer;
 
   position: relative;
+
+  transition: 0.2s;
+
 }
 
 /* HOVER */
+
 #opcoes-perfil button:hover {
+
   color: black;
+
 }
 
 /* ATIVO */
+
 #opcoes-perfil button.ativo {
+
   color: black;
+
   font-weight: 600;
+
 }
 
 /* LINHA */
+
 #opcoes-perfil button.ativo::after {
+
   content: "";
 
   position: absolute;
@@ -66,71 +145,136 @@
   height: 2px;
 
   background: black;
+
 }
 
-/* FORM */
+/* =========================
+   SEÇÕES
+========================= */
+
+.opcao-nav {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 48px;
+
+}
+
+/* =========================
+   EXIBIÇÃO
+========================= */
+
+.exibicao {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 24px;
+
+}
+
+/* AVISO */
+
+.exibicao p {
+
+  text-align: center;
+
+}
+
+.aviso {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+/* =========================
+   FORM
+========================= */
+
 .form-endereco {
+
   display: flex;
   flex-direction: column;
 
   gap: 24px;
 
-  max-width: 320px;
+  max-width: 420px;
 
-  margin: 60px auto;
-  padding: 24px;
+  margin: 0 auto;
+
+  padding: 32px;
 
   background: #fff;
 
-  border-radius: 12px;
+  border-radius: 16px;
 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.08);
+
 }
 
 /* INPUTS */
+
 .form-endereco input {
+
+  width: 100%;
+
   padding: 12px;
 
   border-radius: 8px;
+
   border: 1px solid #ccc;
 
   font-size: 14px;
+
 }
 
 .form-endereco input:focus {
+
   outline: none;
+
   border-color: #000;
+
 }
 
 /* BOTÃO */
+
 .form-endereco button[type="submit"] {
-  padding: 12px;
+
+  padding: 14px;
 
   border-radius: 8px;
+
   border: none;
 
   background: black;
+
   color: white;
 
   font-weight: bold;
+
+  cursor: pointer;
+
 }
 
-/* DESCRIÇÃO */
+/* =========================
+   DESCRIÇÃO
+========================= */
+
 .descricao {
+
   text-align: center;
-}
 
-/* AVISO */
-.exibicao p {
-  text-align: center;
-}
-
-.aviso {
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: flex-end;
 }
 
 /* =========================
@@ -138,25 +282,31 @@
 ========================= */
 
 .grupo-radio {
+
   display: flex;
   flex-direction: column;
 
   align-items: center;
 
   gap: 14px;
+
 }
 
 .opcoes-radio {
+
   display: flex;
 
   justify-content: center;
   align-items: center;
 
   gap: 24px;
+
 }
 
 .opcoes-radio label {
+
   display: flex;
+
   align-items: center;
 
   gap: 6px;
@@ -164,13 +314,21 @@
   cursor: pointer;
 
   font-size: 16px;
+
 }
 
+/* =========================
+   INPUT FILE
+========================= */
+
 .input-file {
+
   display: none;
+
 }
 
 .btn-upload {
+
   display: inline-block;
 
   padding: 10px 16px;
@@ -178,21 +336,27 @@
   border-radius: 8px;
 
   background: #C2A14D;
+
   color: white;
 
   cursor: pointer;
+
 }
+
+/* =========================
+   CARD ENDEREÇO
+========================= */
 
 .card-endereco {
 
   display: flex;
   flex-direction: column;
 
-  gap: 6px;
+  gap: 8px;
 
-  padding: 16px;
+  padding: 20px;
 
-  border-radius: 16px;
+  border-radius: 20px;
 
   background: white;
 
@@ -202,6 +366,8 @@
     0 4px 12px rgba(0,0,0,0.04);
 
 }
+
+/* TAG */
 
 .tag-endereco {
 
@@ -221,6 +387,8 @@
 
 }
 
+/* RUA */
+
 .rua-endereco {
 
   font-size: 18px;
@@ -228,6 +396,8 @@
   color: #111;
 
 }
+
+/* CIDADE */
 
 .cidade-endereco {
 
@@ -237,10 +407,48 @@
 
 }
 
+/* CEP */
+
 .cep-endereco {
 
   font-size: 14px;
 
   color: #888;
+
+}
+
+.btn-mais {
+  background: black;
+  color: white;
+  border: black;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .perfil-page {
+
+    padding: 24px 16px 60px;
+
+    gap: 32px;
+
+  }
+
+  #opcoes-perfil ul {
+
+    gap: 16px;
+
+    overflow-x: auto;
+
+  }
+
+  .form-endereco {
+
+    padding: 24px;
+
+  }
 
 }
