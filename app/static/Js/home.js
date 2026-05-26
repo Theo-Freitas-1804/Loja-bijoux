@@ -54,44 +54,40 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
   // MENU MOBILE
   // =========================
+  
   const nav =
-    document.getElementById("nav-menu");
-
+  document.getElementById("nav-menu");
   const btnMenu =
-    document.querySelector(".menu-btn");
-
+  document.querySelector(".menu-btn");
   if (btnMenu && nav) {
 
-    // abrir/fechar menu
-    btnMenu.addEventListener("click", (e) => {
+  // abrir/fechar menu
+  btnMenu.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-      e.stopPropagation();
+    nav.classList.toggle("ativo");
 
-      nav.classList.toggle("ativo");
-      btnMenu.classList.toggle("escondido");
+  });
 
-    });
+  // clique fora
+  document.addEventListener("click", (e) => {
 
-    // clique fora
-    document.addEventListener("click", (e) => {
+    const clicouDentroMenu =
+      nav.contains(e.target);
 
-      const clicouDentroMenu =
-        nav.contains(e.target);
+    const clicouNoBotao =
+      btnMenu.contains(e.target);
 
-      const clicouNoBotao =
-        btnMenu.contains(e.target);
+    if (!clicouDentroMenu && !clicouNoBotao) {
 
-      if (!clicouDentroMenu && !clicouNoBotao) {
+      nav.classList.remove("ativo");
 
-        nav.classList.remove("ativo");
-        btnMenu.classList.remove("escondido");
+    }
 
-      }
+  });
 
-    });
-
-  }
-
+}
+  
   // =========================
   // ANIMAÇÃO DOS CARDS
   // =========================

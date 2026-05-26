@@ -3,9 +3,9 @@
 from flask import session
 
 from flask_login import current_user
-from app.services.frete import calcular_frete
+from app.services.frete import calcular_frete , salvar_endereco
 
-from app.models import Pedido
+from app.models import Pedido , Endereco
 
 import datetime as dt
 
@@ -35,9 +35,17 @@ def responder_entrega():
     return {"mensagem": "O prazo de entrega varia 📦"}
 
 def responder_frete():
-  session["estado_chat"] = "esperando_endereco"
-  return {"mensagem":"Digite um endereço ou tag (Ex. 'Casa' , ou 'Trabalho')"}
 
+  session["estado_chat"] = (
+      "esperando_endereco_frete"
+  )
+
+  return {
+      "mensagem":
+      "Digite um CEP ou uma tag "
+      "como 'Casa' ou 'Trabalho' 📦"
+  }
+    
 def gerar_saudacao(nome):
     hora = int(dt.datetime.now().strftime("%H"))
     if 6 <= hora < 12:
@@ -65,11 +73,26 @@ def responder_saudacao():
     return {
         "mensagem": gerar_saudacao(atendente)
     }
-  
+
+def responder_endereco():
+  session["estado_chat"] = "esperando_novo_endereco"
+  return {
+    "mensagem":
+    'Perfeito 😊\n\n'
+    'Me envie:\n'
+    '- Rua\n'
+    '- Número\n'
+    '- Bairro\n'
+    '- Cidade\n'
+    '- CEP\n\n'
+    'Você também pode adicionar uma tag, '
+    'como "Casa" ou "Trabalho".'
+}
 HANDLERS = {
     "cupom": responder_cupons,
     "pedido": responder_pedidos,
     "entrega": responder_entrega,
     "frete": responder_frete , 
-    "saudacao": gerar_saudacao
+    "saudacao": gerar_saudacao ,
+    "endereco": responder_endereco
 }

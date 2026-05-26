@@ -293,3 +293,9 @@ class Mensagem(db.Model):
       db.DateTime,
       default=dt.datetime.utcnow
   )
+  
+class UsosCupons(db.Model):
+  id = db.Column(db.Integer , primary_key=True)
+  cliente = db.Column(db.Integer , db.ForeignKey("Clientes.id_usuaria"))
+  usado_em = db.Column(db.DateTime , default=dt.datetime.utcnow)
+  cupom_id = db.Column(db.Integer , db.ForeignKey("cupons.id_cupom"))

@@ -1,21 +1,101 @@
 import requests
 from flask_login import current_user
 from app.models import db ,Endereco
+from flask import request
 
+from datetime import datetime, timedelta
 
-def calcular_frete(cep):
-    if cep.startswith("01"):
-        return 12.90
-    elif cep.startswith("20"):
-        return 18.50
-    else:
-        return 25.00
-        
+def calcular_frete(cep_ou_endereco):
 
-from app.models import db, Endereco
+  # =========================
+  # ACEITA CEP OU OBJETO
+  # =========================
 
-import requests
+  if hasattr(cep_ou_endereco, "cep"):
 
+      cep = cep_ou_endereco.cep
+
+  else:
+
+      cep = cep_ou_endereco
+
+  # =========================
+  # LIMPEZA
+  # =========================
+
+  cep = str(cep).replace("-", "").strip()
+
+  # =========================
+  # BASE MOCK
+  # =========================
+
+  if cep.startswith("01"):
+
+      pac = 12.90
+      sedex = 21.90
+
+      dias_pac = 5
+      dias_sedex = 2
+
+  elif cep.startswith("20"):
+
+      pac = 18.50
+      sedex = 29.90
+
+      dias_pac = 8
+      dias_sedex = 3
+
+  else:
+
+      pac = 25.00
+      sedex = 39.90
+
+      dias_pac = 15
+      dias_sedex = 7
+
+  # =========================
+  # DATAS
+  # =========================
+
+  hoje = datetime.now()
+
+  entrega_pac = (
+      hoje + timedelta(days=dias_pac)
+  ).strftime("%d/%m")
+
+  entrega_sedex = (
+      hoje + timedelta(days=dias_sedex)
+  ).strftime("%d/%m")
+
+  # =========================
+  # RETORNO
+  # =========================
+
+  fretes = {
+
+      "pac": {
+
+          "valor": pac,
+
+          "prazo": dias_pac,
+
+          "entrega": entrega_pac
+
+      },
+
+      "sedex": {
+
+          "valor": sedex,
+
+          "prazo": dias_sedex,
+
+          "entrega": entrega_sedex
+
+      }
+
+  }
+
+  return fretes
 
 def salvar_endereco(
     usuario,

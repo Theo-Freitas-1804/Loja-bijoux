@@ -450,3 +450,28 @@
 .inativo {
   opacity: 0.5;
 }
+
+.concluida {
+  opacity: 0.45;
+
+  transform: scale(0.98);
+
+  transition: 0.25s;
+}
+
+.concluida .num,
+.concluida .subnum {
+
+  background: #32c766;
+
+  border-color: #32c766;
+
+  color: white;
+}
+
+.concluida h2,
+.concluida h3,
+.concluida label {
+
+  color: #888;
+}

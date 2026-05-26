@@ -182,3 +182,65 @@
 
   cursor: pointer;
 }
+
+.card-endereco {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 16px;
+
+  border-radius: 16px;
+
+  background: white;
+
+  border: 1px solid #ececec;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.04);
+
+}
+
+.tag-endereco {
+
+  width: fit-content;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  background: #111;
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+.rua-endereco {
+
+  font-size: 18px;
+
+  color: #111;
+
+}
+
+.cidade-endereco {
+
+  color: #555;
+
+  line-height: 1.4;
+
+}
+
+.cep-endereco {
+
+  font-size: 14px;
+
+  color: #888;
+
+}

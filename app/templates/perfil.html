@@ -29,14 +29,23 @@
       <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="foto-perfil">
     {% else %}
       <i class="ri-user-line icone-perfil"></i>
-      <input
-      type="file"
-      id="foto"
-      class="input-file"/>
-
-    <label for="foto" class="btn-upload">
-  Escolher imagem
-</label>
+      <form action="{{ url_for('usuario.upload_foto') }}" method="POST" enctype="multipart/form-data">
+        <input
+          type="file"
+          id="foto"
+          name="imagem_adicionada"
+          class="input-file"
+        >
+        <label
+          for="foto"
+          class="btn-upload"
+        >
+          Escolher imagem
+        </label>
+        <button type="submit">
+          Salvar foto
+        </button>
+      </form>
     {% endif %}
     <strong> {{current_user.nome}}</strong>
   </div>
@@ -68,12 +77,21 @@
     {% if current_user.enderecos %}
       {% for endereco in current_user.enderecos %}
         <div class="card-endereco">
-          <strong>
-            {{ endereco.rua }} |
-            {{ endereco.numero }} |
-            {{ endereco.bairro }} | {{ endereco.cidade }} |
-            {{ endereco.estado}} |
+          <div class="tag-endereco">
+            {{ endereco.tipo or "Endereço" }}
+          </div>
+          <strong class="rua-endereco">
+            {{ endereco.rua }},
+            {{ endereco.numero }}
+          </strong>
+          <span class="cidade-endereco">
+            {{ endereco.bairro }} —
+            {{ endereco.cidade }}/{{ endereco.estado }}
+          </span>
+          <span class="cep-endereco">
+            CEP:
             {{ endereco.cep }}
+          </span>
         </div>
       {% endfor %}
     {% else %}

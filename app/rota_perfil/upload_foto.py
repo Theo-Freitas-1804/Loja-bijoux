@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for
 from flask_login import login_user , logout_user , login_required , current_user
 from ..rotas_principais.home import bp_principal
-
+from ..models import db
 from .perfil import bp_usuario , arquivo_permitido
 import os
 import secrets
@@ -43,7 +43,7 @@ def upload_foto():
               # VERIFICAÇÃO FINAL: Imprime o que FOI SALVO no banco
                # 2. Persiste a mudança no banco de dados
               db.session.commit()
-              flash("Envio bem-sucedido" , "sucess")
+              flash("Envio bem-sucedido" , "success")
               return redirect(url_for('principal.pagina_principal'))
             except Exception as e:
                 print(f"Erro ao enviar a foto {e}")

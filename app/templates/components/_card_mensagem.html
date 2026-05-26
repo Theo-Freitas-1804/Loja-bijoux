@@ -8,7 +8,7 @@
         <div class="info-user">
           
           {% if current_user.foto_perfil %}
-            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="imagem-perfil">
+            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="img-perfil-chat">
           {% else %}
             <i class="ri-user-line icone-perfil"></i>
           {% endif %}
@@ -39,7 +39,12 @@
     <div class="msg bot">
 
       <div class="topo-msg">
-
+        <img
+  src="{{ url_for(
+    'static',
+    filename='imagens/attendants/' ~ foto_atendente
+  ) }}" class="avatar-atendente"
+>
         <p>
           {{ chamado.atendente }}
         </p>
@@ -53,7 +58,6 @@
       </p>
 
     </div>
-
   </div>
 
 {% endif %}
