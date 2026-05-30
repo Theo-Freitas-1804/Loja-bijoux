@@ -36,5 +36,5 @@ img {
 
 /* UTILITÁRIOS */
 .escondido {
-  display: none;
+  display: none !important;
 }

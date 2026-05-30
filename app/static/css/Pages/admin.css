@@ -6,7 +6,8 @@ body {
 }
 
 .wrapper-scroll{
-  overflow-x: auto;
+  overflow:visible;
+
   scrollbar-width: none;
 }
 
@@ -14,9 +15,11 @@ body {
   display: none;
 }
 
-#nav-admin {
-  background: yellow;
-  overflow: visible;
+#nav-admin{
+    background:white;
+    border-radius:12px;
+    padding:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 #nav-admin ul {
@@ -50,8 +53,10 @@ body {
   position: absolute;
 
   top: 100%;
-  left: 0;
-
+  
+  left: auto;
+  right: 0;
+  
   min-width: 180px;
 
   background: white;
@@ -61,6 +66,7 @@ body {
   padding: 8px;
 
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  z-index: 9999;
 }
 
 .dropdown-menu a {
@@ -238,4 +244,60 @@ body {
   text-align: center;
 
   padding: 8px 0;
+}
+
+.btn-mais {
+
+  background: none;
+  border: none;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  cursor: pointer;
+}
+
+#painel-mais {
+
+  margin: 12px 0;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 12px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#painel-mais a,
+#painel-mais button {
+
+  text-decoration: none;
+  color: black;
+
+  background: #F5F5F5;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  text-align: left;
+}
+
+#submenu-marketing {
+
+  padding-left: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

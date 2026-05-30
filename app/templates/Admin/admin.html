@@ -13,40 +13,56 @@
 <div class="admin">
   <!-- ÁREA QUE SCROLLA -->
   <div class="wrapper-scroll">
-    <nav id="nav-admin">
-      <ul>
+  <nav id="nav-admin">
+    <ul>
 
-  <li><a href="#">Resumo</a></li>
+      <li><a href="#">Resumo</a></li>
 
-  <li><a href="#">Pedidos</a></li>
+      <li><a href="#">Pedidos</a></li>
 
-  <li><a href="#">Analytics</a></li>
+      <li><a href="#">Analytics</a></li>
 
-  <li class="dropdown">
+      <li>
+        <button id="btn-mais" class="btn-mais">
+          Mais
+          <i class="ri-arrow-down-s-line"></i>
+        </button>
+      </li>
 
-    <a href="#">Mais</a>
+    </ul>
+  </nav>
+</div>
 
-    <div class="dropdown-menu">
+<!-- PAINEL MAIS -->
 
-      <a href="#">Bijoux</a>
+<div id="painel-mais" class="escondido">
 
-      <a href="#">Clientes</a>
+  <a href="{{ url_for('admin.listar_produtos') }}">
+    Bijoux
+  </a>
 
-      <span>Marketing</span>
+  <a href="{{ url_for('admin.consultar_clientes') }}">
+    Clientes
+  </a>
 
-      <a href="#">Promoção</a>
+  <button id="btn-marketing">
+    Marketing
+    <i class="ri-arrow-down-s-line"></i>
+  </button>
 
-      <a href="#">Sorteio</a>
+  <div id="submenu-marketing" class="escondido">
 
-      <a href="#">Atendimento</a>
+    <a href="#">Promoção</a>
 
-    </div>
+    <a href="#">Sorteio</a>
 
-  </li>
-
-</ul>
-    </nav>
   </div>
+
+  <a href="#">
+    Atendimento
+  </a>
+
+</div>
   
   <!-- CONTEÚDO -->
 
