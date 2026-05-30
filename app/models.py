@@ -299,3 +299,12 @@ class UsosCupons(db.Model):
   cliente = db.Column(db.Integer , db.ForeignKey("Clientes.id_usuaria"))
   usado_em = db.Column(db.DateTime , default=dt.datetime.utcnow)
   cupom_id = db.Column(db.Integer , db.ForeignKey("cupons.id_cupom"))
+  
+class visualizacao(db.Model):
+  __tablename__= "views_produto"
+  id = db.Column(db.Integer , primary_key=True)
+  produto_id = db.Column(db.Integer , db.ForeignKey("Produtos.id_acessorio") , nullable=False)
+  ip = db.Column(db.String(100) , nullable=False)
+  user_agent = db.Column(db.Text)
+  data_visualizacao = db.Column(db.DateTime,default=lambda: dt.datetime.now(fuso_brasilia))
+  cliente = db.Column(db.Integer ,db.ForeignKey("Clientes.id_usuaria") , nullable=True)

@@ -1,34 +1,155 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <title>Admin | Dashboard</title>
-  <link rel="stylesheet" href="{{url_for('static' , filename='css/admin.css')}}">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="stylesheet" href="{{url_for('static' , filename='css/style_header.css')}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename='css/style_pesquisa.css')}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename='css/admin.css')}}">
-  
-</head>
+{% extends "base.html" %}
 
-<body>
-  <div id="painel-admin">
-    <h1>Painel Administrativo</h1>
-    <ul>
-      <li>
-        <a href="{{url_for('admin.listar_produtos')}}">Gerenciar Produtos</a>
-      </li>
-      <li>
-          <a href="#">Pedidos</a>
-      </li>
-      <li>
-          <a href="{{url_for('admin.consultar_clientes')}}">Usuários</a>
-      </li>
-      <li>
-        <a href="{{ url_for('admin.exibir_cupons') }}">Cupons</a>
-      </li>
-    </ul>
+{% block titulo %}
+  Painel Admin | Kordonê Bijoux
+{% endblock %}
+
+{% block header %}
+  {% include 'components/_header_interno.html' %}
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="admin">
+  <!-- ÁREA QUE SCROLLA -->
+  <div class="wrapper-scroll">
+    <nav id="nav-admin">
+      <ul>
+
+  <li><a href="#">Resumo</a></li>
+
+  <li><a href="#">Pedidos</a></li>
+
+  <li><a href="#">Analytics</a></li>
+
+  <li class="dropdown">
+
+    <a href="#">Mais</a>
+
+    <div class="dropdown-menu">
+
+      <a href="#">Bijoux</a>
+
+      <a href="#">Clientes</a>
+
+      <span>Marketing</span>
+
+      <a href="#">Promoção</a>
+
+      <a href="#">Sorteio</a>
+
+      <a href="#">Atendimento</a>
+
+    </div>
+
+  </li>
+
+</ul>
+    </nav>
   </div>
-</body>
-</html>
+  
+  <!-- CONTEÚDO -->
+
+  <main class="conteudo">
+
+    <section class="topo">
+
+      <h1>Visão Geral</h1>
+
+    </section>
+
+    <section class="admin-content">
+
+      <div class="card-metrica">
+
+        <i class="ri-shopping-bag-line"></i>
+
+        <strong>5</strong>
+
+        <span>Pedidos hoje</span>
+
+      </div>
+
+      <div class="card-metrica">
+
+        <i class="ri-medal-line"></i>
+
+        <strong>Coleção mais popular</strong>
+
+        <span>Coleção Safari</span>
+
+      </div>
+
+      <div class="card-metrica">
+
+        <i class="ri-home-line"></i>
+
+        <strong>Ticket médio</strong>
+
+        <span>R$ 180,00</span>
+
+      </div>
+
+      <div class="card-metrica">
+
+        <i class="ri-eye-2-line"></i>
+
+        <strong>Visualizações</strong>
+
+        <i class="ri-information-line info"></i>
+
+        <span>{{ views }}</span>
+
+      </div>
+
+      <!-- RANK -->
+
+      <div class="card-metrica rank">
+
+        <i class="ri-bar-chart-fill"></i>
+
+        <h2>Os mais vistos</h2>
+
+        <ol>
+
+          {% for item in rank %}
+
+            <li>
+
+              {{ item.produto.nome }}
+
+              -
+
+              {{ item.total }}
+
+              {% if item.total == 1 %}
+
+                visualização
+
+              {% else %}
+
+                visualizações
+
+              {% endif %}
+
+            </li>
+
+          {% endfor %}
+
+        </ol>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='Js/admin.js') }}"></script>
+
+{% endblock %}

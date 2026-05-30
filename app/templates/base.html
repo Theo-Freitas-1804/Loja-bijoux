@@ -19,11 +19,10 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='css/main.css') }}"
   >
-
+  
   <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-    rel="stylesheet"
-  >
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+  rel="stylesheet"/>
 
   <title>
     {% block titulo %}
@@ -52,7 +51,17 @@
   <script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>
 
   <script src="{{ url_for('static', filename='Js/favoritos.js') }}"></script>
+  
+  {% if config.DEBUG %}
 
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
+<script>
+  eruda.init();
+</script>
+
+{% endif %}
+  
   {% block scripts %}
   {% endblock %}
 

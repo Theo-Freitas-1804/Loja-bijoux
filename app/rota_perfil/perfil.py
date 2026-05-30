@@ -2,7 +2,7 @@ from flask import Blueprint, render_template , request , current_app , flash , r
 from flask_login import login_user , logout_user , login_required , current_user
 from ..rotas_principais.home import bp_principal
 
-from ..models import Favorito , Usuario , Produtos
+from ..models import Favorito , Usuario , Produtos , Pedido , Itens
 
 import os
 import secrets
@@ -20,7 +20,7 @@ def perfil():
     favoritos_db = Favorito.query.filter_by(
         usuario_id=current_user.id_usuaria
     ).all()
-
+    
     favoritos = []
 
     for f in favoritos_db:

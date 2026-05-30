@@ -1,44 +1,109 @@
-from .. models import db , Produtos
-from flask import current_app , Blueprint , render_template , request
+from ..models import db, Produtos , visualizacao
+from flask import Blueprint, render_template
+from flask import request
+from flask_login import current_user
 
-bp_produto = Blueprint("produto" , __name__)
+bp_produto = Blueprint(
+    "produto",
+    __name__
+)
 
-def consultar_produto(id):
-  produto = Produtos.query.filter_by(id_acessorio=id).first()
+# =========================
+# CONSULTAR PRODUTO
+# =========================
+def buscar_produto(id):
+
+  produto = Produtos.query.get_or_404(id)
+
   return produto
-  
 
-def recomendar(produto):
-  produtos_parecidos = Produtos.query.filter(
-    Produtos.colecao_id == produto.colecao_id,
-    Produtos.id_acessorio != produto.id_acessorio).order_by(
-      Produtos.curtidas.desc()
-      ).limit(6).all()
-  return produtos_parecidos
-  
-def consultar_mais_curtidos(produto):
-  mais_curtidos = Produtos.query.filter(
-    Produtos.id_acessorio != produto.id_acessorio
-    ).order_by(
-      Produtos.curtidas.desc()).limit(6).all()
-  return mais_curtidos
 
-@bp_produto.route("/produto/<int:id>" , methods = ["GET" , "POST"])
+# =========================
+# PRODUTOS RELACIONADOS
+# =========================
+def buscar_relacionados(produto):
+
+  relacionados = (
+      Produtos.query.filter(
+          Produtos.colecao_id == produto.colecao_id,
+
+          Produtos.id_acessorio != produto.id_acessorio
+      )
+      .order_by(
+          Produtos.curtidas.desc()
+      )
+      .limit(6)
+      .all()
+  )
+
+  return relacionados
+
+
+# =========================
+# MAIS CURTIDOS
+# =========================
+def buscar_mais_curtidos(produto):
+
+  curtidos = (
+      Produtos.query.filter(
+          Produtos.id_acessorio != produto.id_acessorio
+      )
+      .order_by(
+          Produtos.curtidas.desc()
+      )
+      .limit(6)
+      .all()
+  )
+
+  return curtidos
+
+
+# =========================
+# PÁGINA PRODUTO
+# =========================
+@bp_produto.route("/produto/<int:id>")
 def pagina_produto(id):
-  produto = consultar_produto(id)
+
+  produto = buscar_produto(id)
   
-  parecidos = recomendar(produto)
-  curtidos = consultar_mais_curtidos(produto)
-  if request.method == "GET":
-    return render_template("produto.html" , produto=produto , parecidos= parecidos , curtidos= curtidos)
-  elif request.method == "POST":
-    return render_template("produto.html" , produto=produto , parecidos= parecidos , curtidos=curtidos)
-    
-@bp_produto.route("/brincos" , methods=["GET" , "POST"])
-def exibir():
-  brincos = Produtos.query.filter_by(categoria="brinco").all()
-  if request.method == "GET":
-    return render_template("brincos.html" , brincos=brincos)
-  elif request.method == "POST":
-    return render_template("brincos.html" , brincos=brincos)
-    
+  view = visualizacao(
+    produto_id=produto.id_acessorio,
+    ip = request.remote_addr ,
+    user_agent = request.headers.get("User-Agent") ,
+    cliente = ( current_user.id_usuaria if current_user.is_authenticated else None)
+    )
+  print("ANTES DO ADD")
+  db.session.add(view)
+  print("ANTES DO COMMIT")
+  db.session.commit()
+  print("DEPOIS DO COMMIT")
+  print(view.id)
+  relacionados = buscar_relacionados(produto)
+  curtidos = buscar_mais_curtidos(produto)
+
+  return render_template(
+      "produto.html",
+
+      produto=produto,
+
+      parecidos=relacionados,
+
+      curtidos=curtidos
+  )
+
+
+# =========================
+# BRINCOS
+# =========================
+@bp_produto.route("/brincos")
+def exibir_brincos():
+
+  brincos = Produtos.query.filter_by(
+      categoria="brinco"
+  ).all()
+
+  return render_template(
+      "brincos.html",
+
+      brincos=brincos
+  )

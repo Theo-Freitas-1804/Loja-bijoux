@@ -136,7 +136,7 @@ function enviarFila(){
   })
   .then(resposta=>{
     console.log(resposta);
-    alert("Produtos enviados!");
+    mostrarToast("Produtos Enviados!");
     fila=[];
     form.reset();
     atualizarPreview();
