@@ -174,16 +174,13 @@ body {
   border: 1px solid #E5E5E5;
 
   display: flex;
-
   flex-direction: column;
 
   align-items: center;
 
-  justify-content: center;
-
   gap: 12px;
 
-  padding: 18px;
+  padding: 20px 12px;
 
   border-radius: 12px;
 
@@ -191,9 +188,13 @@ body {
 
   color: black;
 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
 
-  transition: 0.2s ease;
+  position: relative;
+}
+
+.card-metrica span {
+  text-align: center;
 }
 
 .card-metrica:hover {
@@ -208,23 +209,111 @@ body {
 }
 
 .card-metrica strong {
-  white-space: nowrap;
-  font-size: 2rem;
+  text-align: center;
+  white-space: normal;
+  font-size: 1.5rem;
 }
 
 /* ÍCONES */
 
-.card-metrica i {
+.info {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 18px;
+  cursor: pointer;
+  background: white;
+  padding: 0;
+}
 
-  font-size: 28px;
+.mais {
+  position:absolute;
+  top: 24px;
+  right: 14px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
 
-  color: black;
+
+  
+
+/* Filtros de datas.*/
+
+.titulo-filtro {
+
+  display: block;
+  
+  text-align: center;
+  
+  margin-bottom: 12px;
+
+  font-weight: 600;
+
+  color: #374151;
+  
+  margin-top: 8px;
+}
+
+.filtro-periodo {
+
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.filtro-periodo button {
 
   background: #F3F4F6;
 
-  padding: 12px;
+  border: none;
 
-  border-radius: 50%;
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.filtro-periodo button.ativo {
+
+  background: black;
+
+  color: white;
+}
+
+.datas-person form {
+
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.datas-person input {
+
+  padding: 10px;
+
+  border: 1px solid #D1D5DB;
+
+  border-radius: 10px;
+}
+
+.datas-person button {
+
+  background: black;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
 }
 
 /* RANK */
@@ -257,6 +346,33 @@ body {
   gap: 4px;
 
   cursor: pointer;
+}
+
+.btn-opcao {
+
+  background: none;
+  border: none;
+
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  cursor: pointer;
+
+  border-radius: 8px;
+
+  transition: .2s;
+}
+
+.btn-opcao:hover {
+  background: #F3F4F6;
+}
+
+.btn-opcao.ativo {
+  background: black;
+  color: white;
 }
 
 #painel-mais {
@@ -300,4 +416,32 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.topo h1 {
+  margin: 0;
+}
+
+.btn-opcao.ativo {
+  color: white;
+  background: black;
+}
+
+
+
+@media (max-width: 600px){
+  
+  .admin-content {
+    grid-template-columns: 1fr;
+  }
+  .rank {
+    grid-column: span 1;
+  }
+  
+  .card-metrica strong {
+    font-size: 1.5rem;
+  }
+  .topo h1 {
+    font-size: 1.8rem;
+  }
 }

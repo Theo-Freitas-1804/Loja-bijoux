@@ -16,14 +16,22 @@
   <nav id="nav-admin">
     <ul>
 
-      <li><a href="#">Resumo</a></li>
+      <li> <button id="btn-resumo" class="btn-opcao ativo" data-menu="resumo"> Resumo</button></li>
 
-      <li><a href="#">Pedidos</a></li>
+      <li> 
+      <button id="btn-pedidos" class="btn-opcao">
+        Pedidos 
+      </button>
+      </li>
 
-      <li><a href="#">Analytics</a></li>
+      <li> <button id="btn-analise" class="btn-opcao" data-menu="analise">
+        Analytics
+      </button> 
+      </li>
 
       <li>
-        <button id="btn-mais" class="btn-mais">
+        <button id="btn-mais" class="btn-mais" data-menu 
+        = "mais">
           Mais
           <i class="ri-arrow-down-s-line"></i>
         </button>
@@ -31,6 +39,47 @@
 
     </ul>
   </nav>
+  
+  <div class="painel-filtros">
+
+  <span class="titulo-filtro">
+    Período da análise
+  </span>
+
+  <div class="filtro-periodo">
+
+    <button>7 dias</button>
+
+    <button>15 dias</button>
+
+    <button>30 dias</button>
+
+    <button id="custom">
+      Personalizado
+    </button>
+
+  </div>
+
+  <div class="datas-person escondido">
+
+    <form method="GET">
+
+      <input type="date" name="inicio">
+
+      <input type="date" name="fim">
+
+      <button type="submit">
+        Aplicar
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+  
+</div>
+  
 </div>
 
 <!-- PAINEL MAIS -->
@@ -81,8 +130,10 @@
         <i class="ri-shopping-bag-line"></i>
 
         <strong>5</strong>
-
-        <span>Pedidos hoje</span>
+        
+        <i class="ri-information-line info"></i>
+        
+        <span>Pedidos</span>
 
       </div>
 
@@ -91,7 +142,9 @@
         <i class="ri-medal-line"></i>
 
         <strong>Coleção mais popular</strong>
-
+        
+        <i class="ri-information-line info"></i>
+        
         <span>Coleção Safari</span>
 
       </div>
@@ -102,6 +155,8 @@
 
         <strong>Ticket médio</strong>
 
+        <i class="ri-information-line info"></i>
+        
         <span>R$ 180,00</span>
 
       </div>
@@ -155,7 +210,31 @@
         </ol>
 
       </div>
-
+      <div class="card-metrica">
+        <h2> Novas Clientes </h2>
+        <i class="ri-arrow-down-s-line mais"></i>
+        <p>
+          {% if intervalo %}
+          Total nos ùltimos {{intervalo}} dias : {{total}}
+          {% else %}
+          Total: {{total}}
+          {% endif %}
+        </p>
+        <div class="clientes-recentes escondido">
+          <ol>
+            {% for cliente in clientes %}
+            <li>
+              <strong>
+                {{ cliente.nome }}
+              </strong>
+              <span>
+                {{ cliente.data_registro.strftime("%d/%m/%y %H:%M") }}
+              </span>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
     </section>
 
   </main>

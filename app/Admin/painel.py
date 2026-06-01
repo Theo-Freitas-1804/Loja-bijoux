@@ -1,37 +1,35 @@
-from flask import render_template
+from flask import render_template , request , abort
 from .bp import admin_bp  # 👈 NÃO usa mais ". import"
 from flask_login import current_user , login_required
-from ..models import db , Usuario , visualizacao , Produtos
+from ..models import db , Usuario , visualizacao , Produtos , Pedido , Itens
 from ..decorators import admin_required
 
-from sqlalchemy import func
+from.services.helpers import obter_intervalo , obter_views , obter_rank_produtos , consultar_novos_clientes
 
-@admin_bp.route("/")
-@login_required
+from sqlalchemy import func
+import datetime
+
+
+@admin_bp.route("/dashboard")
 @admin_required
 def dashboard():
   
-  views = visualizacao.query.count()
+  print(current_user)
+  print(current_user.is_authenticated)
+  print(current_user.is_admin)
   
-  mais_vistos = (
-  db.session.query(visualizacao.produto_id, func.count().label("views"))
-  .group_by(
-    visualizacao.produto_id
-    )
-  .order_by(
-    func.count().desc()
-    )
-  .limit(10)
-  .all()
+  inicio , fim , intervalo = obter_intervalo()
+  views = obter_views(inicio , fim)
+  rank = obter_rank_produtos(inicio , fim)
+  total , clientes = consultar_novos_clientes(inicio , fim)
+  
+  print(total)
+  print(f" Valor de clientes: {clientes}")
+  return render_template(
+      "Admin/admin.html",
+      views=views,
+      intervalo=intervalo,
+      rank=rank ,
+      total=total ,
+      clientes= clientes
   )
-  
-  rank = []
-  
-  for produto_id , total in mais_vistos:
-    produto = Produtos.query.filter_by(
-    id_acessorio=produto_id
-).first()
-    print("Item:", produto)
-    rank.append({"produto":produto , "total":total})
-  
-  return render_template("Admin/admin.html" , views=views , rank=rank)

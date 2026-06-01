@@ -61,6 +61,8 @@ def create_app():
     migrate.init_app(app , db)
 
     lm = LoginManager(app) # Inicializa o Login Manager
+    lm.login_view = "auth.entrar"
+    
     @lm.user_loader
     def load_user(user_id):
         # 2. Define como o Flask-Login deve buscar o usuário por ID
