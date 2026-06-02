@@ -222,3 +222,4 @@ document.addEventListener(
 // EXPORT GLOBAL
 // ===============================
 window.abrirCarrinho = abrirCarrinho;
+window.atualizarCarrinho =atualizarCarrinho

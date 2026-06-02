@@ -155,12 +155,66 @@ class ProdutosImagens(db.Model):
   
 class Pedido(db.Model):
   __tablename__ = "pedidos"
-  id = db.Column(db.Integer , primary_key= True)
-  usuaria = db.Column(db.Integer ,(db.ForeignKey("Clientes.id_usuaria")))
-  status = db.Column(db.String(50) , default= "Pendente")
-  total = db.Column(db.Numeric)
-  data_pedido = db.Column(db.DateTime,default=lambda: dt.datetime.now(fuso_brasilia))
-  
+
+  id = db.Column(
+      db.Integer,
+      primary_key=True
+  )
+
+  usuaria = db.Column(
+      db.Integer,
+      db.ForeignKey(
+          "Clientes.id_usuaria"
+      )
+  )
+
+  cliente = db.relationship(
+      "Usuario",
+      backref="pedidos",
+      lazy=True
+  )
+
+  status = db.Column(
+      db.String(50),
+      default="Pendente"
+  )
+
+  total = db.Column(
+      db.Numeric
+  )
+
+  data_pedido = db.Column(
+      db.DateTime,
+      default=lambda:
+      dt.datetime.now(
+          fuso_brasilia
+      )
+  )
+
+  itens = db.relationship(
+      "Itens",
+      backref="pedido",
+      lazy=True
+  )
+
+  envio = db.Column(
+      db.String(30),
+      nullable=True
+  )
+
+  data_entrega = db.Column(
+      db.Date,
+      nullable=True
+  )
+
+  forma_pagamento = db.Column(
+      db.String(30)
+  )
+
+  codigo_rastreio = db.Column(
+      db.String(100)
+  )
+
 class Itens(db.Model):
   __tablename__="pedido_itens"
   id = db.Column(db.Integer , primary_key= True)
@@ -175,6 +229,11 @@ class Itens(db.Model):
   )
   quantidade = db.Column(db.Integer , nullable= False)
   preco_unit = db.Column(db.Numeric, nullable= False)
+  produto = db.relationship(
+    "Produtos",
+    backref="itens_pedido",
+    lazy=True
+    )
   
 class Endereco(db.Model):
   __tablename__ = "enderecos"

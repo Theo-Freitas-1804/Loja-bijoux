@@ -19,7 +19,7 @@
       <li> <button id="btn-resumo" class="btn-opcao ativo" data-menu="resumo"> Resumo</button></li>
 
       <li> 
-      <button id="btn-pedidos" class="btn-opcao">
+      <button id="btn-pedidos" class="btn-opcao" data-menu="pedidos">
         Pedidos 
       </button>
       </li>
@@ -114,132 +114,129 @@
 </div>
   
   <!-- CONTEÚDO -->
-
+  
   <main class="conteudo">
 
+  <!-- RESUMO -->
+  <section id="painel-resumo" class="painel-admin">
+
     <section class="topo">
-
       <h1>Visão Geral</h1>
-
     </section>
 
     <section class="admin-content">
 
       <div class="card-metrica">
-
         <i class="ri-shopping-bag-line"></i>
-
         <strong>5</strong>
-        
         <i class="ri-information-line info"></i>
-        
         <span>Pedidos</span>
-
       </div>
 
       <div class="card-metrica">
-
         <i class="ri-medal-line"></i>
-
         <strong>Coleção mais popular</strong>
-        
         <i class="ri-information-line info"></i>
-        
         <span>Coleção Safari</span>
-
       </div>
 
       <div class="card-metrica">
-
         <i class="ri-home-line"></i>
-
         <strong>Ticket médio</strong>
-
         <i class="ri-information-line info"></i>
-        
         <span>R$ 180,00</span>
-
       </div>
 
       <div class="card-metrica">
-
         <i class="ri-eye-2-line"></i>
-
         <strong>Visualizações</strong>
-
         <i class="ri-information-line info"></i>
-
         <span>{{ views }}</span>
-
       </div>
-
-      <!-- RANK -->
 
       <div class="card-metrica rank">
-
         <i class="ri-bar-chart-fill"></i>
 
         <h2>Os mais vistos</h2>
 
         <ol>
-
           {% for item in rank %}
+          <li>
+            {{ item.produto.nome }}
+            -
+            {{ item.total }}
 
-            <li>
-
-              {{ item.produto.nome }}
-
-              -
-
-              {{ item.total }}
-
-              {% if item.total == 1 %}
-
-                visualização
-
-              {% else %}
-
-                visualizações
-
-              {% endif %}
-
-            </li>
-
+            {% if item.total == 1 %}
+              visualização
+            {% else %}
+              visualizações
+            {% endif %}
+          </li>
           {% endfor %}
-
         </ol>
 
       </div>
+
       <div class="card-metrica">
-        <h2> Novas Clientes </h2>
+
+        <h2>Novas Clientes</h2>
+
         <i class="ri-arrow-down-s-line mais"></i>
+
         <p>
           {% if intervalo %}
-          Total nos ùltimos {{intervalo}} dias : {{total}}
+            Total nos últimos {{ intervalo }} dias : {{ total }}
           {% else %}
-          Total: {{total}}
+            Total: {{ total }}
           {% endif %}
         </p>
+
         <div class="clientes-recentes escondido">
+
           <ol>
             {% for cliente in clientes %}
             <li>
-              <strong>
-                {{ cliente.nome }}
-              </strong>
+              <strong>{{ cliente.nome }}</strong>
+
               <span>
                 {{ cliente.data_registro.strftime("%d/%m/%y %H:%M") }}
               </span>
             </li>
             {% endfor %}
           </ol>
+
         </div>
+
       </div>
+
     </section>
 
-  </main>
+  </section>
 
-</div>
+  <!-- PEDIDOS -->
+  <section
+      id="painel-pedidos"
+      class="painel-admin escondido"
+  >
+
+      <section class="topo">
+          <h2>Pedidos</h2>
+      </section>
+
+      <section class="admin-content">
+
+          <div class="card-metrica">
+            <strong> {% if inicio and fim %}Pedidos nos ùltimos {{intervalo}} dias , de {{inicio}} até {{fim}} {%else%} Últimos Pedidos {%endif%} </strong>
+            
+          </div>
+
+      </section>
+
+  </section>
+
+</main>
+
+
 
 {% endblock %}
 

@@ -1,7 +1,7 @@
 from flask import request
 from sqlalchemy import func
 
-from ...models import visualizacao , db , Produtos , Usuario
+from ...models import visualizacao , db , Produtos , Usuario , Pedido , Itens
 
 def obter_intervalo():
   inicio = request.args.get("inicio")
@@ -99,3 +99,25 @@ def consultar_novos_clientes(
   )
 
   return total, clientes
+  
+def consultar_pedidos(inicio=None, fim=None):
+
+  query = Pedido.query
+
+  if inicio and fim:
+
+      query = query.filter(
+          Pedido.data_pedido.between(
+              inicio,
+              fim
+          )
+      )
+
+  pedidos = (
+      query
+      .order_by(
+          Pedido.data_pedido.desc()
+      )
+      .all()
+  )
+  return pedidos

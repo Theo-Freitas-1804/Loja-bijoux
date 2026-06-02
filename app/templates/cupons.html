@@ -43,7 +43,11 @@
           {{c.valor_desconto}}
         </strong>
         <strong>
+          {% if c.cupom_expira %}
           Esgota em: {{ c.cupom_expira.strftime("%d/%m/%Y") }}
+          {% else %}
+          Não expira
+          {% endif %}
         </strong>
       </div>
     {% endfor %}

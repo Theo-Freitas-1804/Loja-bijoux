@@ -13,6 +13,8 @@ from ..meu_app import db
 bp_usuario = Blueprint("usuario", __name__)
 extensoes_imagens = ["png" , "jpg" , "gif"]
 
+
+
 @bp_usuario.route("/perfil")
 @login_required
 def perfil():
@@ -31,11 +33,18 @@ def perfil():
 
         if produto:
             favoritos.append(produto)
-
+    
+    pedidos = Pedido.query.filter_by(
+    usuaria=current_user.id_usuaria
+).order_by(
+    Pedido.data_pedido.desc()
+).all()
+    
     return render_template(
         "perfil.html",
         name=current_user.nome,
-        favoritos=favoritos
+        favoritos=favoritos , 
+        pedidos = pedidos
     )
 
 def arquivo_permitido(filename):

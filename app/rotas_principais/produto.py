@@ -57,6 +57,26 @@ def buscar_mais_curtidos(produto):
 
   return curtidos
 
+from sqlalchemy import func
+
+def buscar_mais_vistos(limite=6):
+  return (
+      Produtos.query
+      .join(
+          visualizacao,
+          visualizacao.produto_id == Produtos.id_acessorio
+      )
+      .group_by(
+          Produtos.id_acessorio
+      )
+      .order_by(
+          func.count(
+              visualizacao.id
+          ).desc()
+      )
+      .limit(limite)
+      .all()
+  )
 
 # =========================
 # PÁGINA PRODUTO
@@ -80,7 +100,7 @@ def pagina_produto(id):
   print(view.id)
   relacionados = buscar_relacionados(produto)
   curtidos = buscar_mais_curtidos(produto)
-
+  mais_vistos = buscar_mais_vistos(limite=6)
   return render_template(
       "produto.html",
 
@@ -88,7 +108,8 @@ def pagina_produto(id):
 
       parecidos=relacionados,
 
-      curtidos=curtidos
+      curtidos=curtidos ,
+      mais_vistos=mais_vistos
   )
 
 

@@ -4,7 +4,7 @@ from flask_login import current_user , login_required
 from ..models import db , Usuario , visualizacao , Produtos , Pedido , Itens
 from ..decorators import admin_required
 
-from.services.helpers import obter_intervalo , obter_views , obter_rank_produtos , consultar_novos_clientes
+from.services.helpers import obter_intervalo , obter_views , obter_rank_produtos , consultar_novos_clientes , consultar_pedidos
 
 from sqlalchemy import func
 import datetime
@@ -22,14 +22,14 @@ def dashboard():
   views = obter_views(inicio , fim)
   rank = obter_rank_produtos(inicio , fim)
   total , clientes = consultar_novos_clientes(inicio , fim)
+  pedidos = consultar_pedidos(inicio , fim)
   
-  print(total)
-  print(f" Valor de clientes: {clientes}")
   return render_template(
       "Admin/admin.html",
       views=views,
       intervalo=intervalo,
       rank=rank ,
       total=total ,
-      clientes= clientes
+      clientes= clientes ,
+      pedidos = pedidos
   )

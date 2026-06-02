@@ -12,22 +12,42 @@ document.addEventListener("DOMContentLoaded", () => {
     submenuMarketing.classList.toggle("escondido");
   });
   
-  const botoes =
-  document.querySelectorAll(".btn-opcao");
-  botoes.forEach(botao => {
+  const botoes = document.querySelectorAll(".btn-opcao");
 
-  botao.addEventListener("click", () => {
+botoes.forEach(botao => {
 
-    botoes.forEach(b => {
-      b.classList.remove("ativo");
+    botao.addEventListener("click", () => {
+
+        botoes.forEach(b => {
+            b.classList.remove("ativo");
+        });
+
+        botao.classList.add("ativo");
+
+        document
+            .querySelectorAll(".painel-admin")
+            .forEach(p => {
+                p.classList.add("escondido");
+            });
+
+        const menu = botao.dataset.menu;
+        console.log(menu)
+        console.log(document.querySelector(
+        `#painel-${menu}`))
+        
+        const painelSelecionado =
+            document.querySelector(
+                `#painel-${menu}`
+            );
+
+        painelSelecionado.classList.remove(
+            "escondido"
+        );
+
     });
 
-    botao.classList.add("ativo");
-
-  });
-  
 });
-  
+    
   const filtros = document.querySelectorAll(".filtro-periodo button")
   const custom = document.querySelector("#custom")
   const datas = document.querySelector(".datas-person")

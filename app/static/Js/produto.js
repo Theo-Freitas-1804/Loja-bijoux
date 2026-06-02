@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const foto = document.querySelector("#foto");
   const btnAnt = document.querySelector("#ant");
   const btnProx = document.querySelector("#prox");
-
+  const btncarrinho = document.querySelector(".btn-carrinho")
   let indice = 0;
 
   foto.src = imagens[indice];
@@ -53,7 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔥 LISTENERS (o que faltava)
   btnProx.addEventListener("click", () => trocarFoto("prox"));
   btnAnt.addEventListener("click", () => trocarFoto("ant"));
-
   atualizarBotoes();
   
+btncarrinho.addEventListener(
+    "click",
+    async () => {
+
+        const id =
+            btncarrinho.dataset.id;
+
+        const resposta =
+            await fetch(
+                `/adicionar-carrinho/${id}`,
+                {
+                    method: "POST"
+                }
+            );
+
+        const dados =
+            await resposta.json();
+
+        console.log(dados);
+
+        if(resposta.ok) {
+          btncarrinho.classList.add("sucesso")
+          abrirCarrinho();
+          setTimeout(() => {
+            btncarrinho.classList.remove("sucesso")
+          } , 1800)
+        }
+      
+     });
 });

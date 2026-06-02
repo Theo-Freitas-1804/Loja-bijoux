@@ -26,7 +26,6 @@ from .rotas_principais.checkout import bp_checkout
 
 from .rota_autenticacao.recuperar_senha import bp_recuperar_senha
 
-from .rotas_principais.pedidos import bp_pedidos
 #app/__init__.py
 
 
@@ -42,6 +41,16 @@ def create_app():
     from .rotas_principais.home import bp_principal # ⬅️ ADICIONE ESTA LINHA!
     app = Flask(__name__)
           # ...
+    
+    @app.template_filter("moeda")
+    def moeda(valor):
+      if valor is None:
+        return "R$ 0,00"
+      return (
+        f"R$ {float(valor):.2f}"
+        .replace(".", ",")
+      )
+    
     os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
     db_path = os.path.join(app.root_path, "instance", "info.db")
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
@@ -78,8 +87,8 @@ def create_app():
     app.register_blueprint(bp_favoritos)
     app.register_blueprint(bp_carrinho)
     app.register_blueprint(bp_recuperar_senha)
-    app.register_blueprint(bp_pedidos)
     app.register_blueprint(admin_bp)
     app.register_blueprint(bp_checkout)
     
     return app
+

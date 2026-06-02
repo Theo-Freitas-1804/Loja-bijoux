@@ -8,12 +8,19 @@
         Status: {{ pedido.status }}
       </p>
       <p>
-        Total: R$ {{ pedido.total }}
+        Total: R$ {{ pedido.total|moeda }}
       </p>
       <p>
-        Data: {{ pedido.data_pedido }}
-      </p>
+  Data:
+  {{ pedido.data_pedido.strftime("%d/%m/%Y às %H:%M") }}
+</p>
     </div>
+    <a href="{{ url_for(
+    'usuario.consultar_pedido',
+    id=pedido.id
+) }}">
+    Ver pedido
+</a>
   {% endfor %}
 {% else %}
   <p>Você ainda não fez pedidos</p>
