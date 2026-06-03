@@ -1,13 +1,15 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
-  gap: 10px;
+  gap: 12px;
   padding: 10px;
+
+  width: 100%;
+
 }
 
-/* lados */
+/* ESQUERDA E DIREITA */
 .header-left,
 .header-right {
   display: flex;
@@ -16,33 +18,49 @@
   flex-shrink: 0;
 }
 
-/* centro */
+.header-left a {
+  color: black;
+  text-decoration: none;
+  font-size: 28px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  
+}
+
+
+
+/* CENTRO */
+
 .header-center {
   flex: 1;
+
+  min-width: 0;
+
   display: flex;
   justify-content: center;
-  margin: 0 10px;
 }
 
 .header-center .barra-pesquisa {
-
+  width: 100%;
   max-width: 420px;
-
 }
 
-/* barra ocupa o espaço disponível */
-.header-center form,
+/* BARRA */
 .header-center .barra-pesquisa {
   width: 100%;
 }
 
-/* links */
+/* LINKS */
 .header a {
   color: black;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-/* foto perfil */
+/* PERFIL */
 .foto-perfil,
 .imagem-perfil {
   width: 40px;

@@ -1,7 +1,9 @@
 
 <header class="header">
   <div class="header-left">
-    <a href="{{url_for('principal.pagina_principal')}}">← Voltar</a>
+    <a href="{{url_for('principal.pagina_principal')}}">
+      <i class="ri-arrow-go-back-line"></i>
+    </a>
   </div>
   <div class="header-center">
     {% include 'components/_barra_pesquisa.html' %}
