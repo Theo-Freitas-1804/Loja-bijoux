@@ -27,12 +27,7 @@
 }
 
 /* BOTÃO */
-.menu-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: black;
-}
+
 
 /* DIREITA */
 .nav__right {
@@ -63,6 +58,12 @@
 
 /* MENU */
 
+.menu-btn {
+  background: none;
+  font-size: 18px;
+  border: none;
+}
+
 .nav__menu {
   display: none;
 
@@ -87,7 +88,7 @@
 
 /* MENU ABERTO */
 
-.nav__menu.ativo {
+.ativo {
   display: block;
 }
 
@@ -150,8 +151,8 @@ footer h3 {
   .menu-btn {
     display: none;
   }
-  .menu-desktop {
-    display: flex;
+  #nav-menu {
+    display: block;
     gap: 24px;
   }
 }

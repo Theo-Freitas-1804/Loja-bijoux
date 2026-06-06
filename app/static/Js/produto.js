@@ -2,13 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("JS carregado");
 
-  const foto = document.querySelector("#foto");
+  const fotos = document.querySelector("#foto");
   const btnAnt = document.querySelector("#ant");
   const btnProx = document.querySelector("#prox");
-  const btncarrinho = document.querySelector(".btn-carrinho")
+  const addcart = document.querySelector(".btn-carrinho")
+  const carrinhoi = addcart.querySelector("i")
+  
+  console.log("foto:", fotos);
+  console.log("btnAnt:", btnAnt);
+  console.log("btnProx:", btnProx);
+  
   let indice = 0;
 
-  foto.src = imagens[indice];
+  fotos.src = imagens[indice];
 
   function atualizarBotoes() {
     if (indice === 0) {
@@ -36,18 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (indice < 0) indice = 0;
-    if (indice >= imagens.length) indice = imagens.length - 1;
+    if (indice >= imagens.length) indice = fotos.length - 1;
 
-    foto.src = imagens[indice];
+    fotos.src = imagens[indice];
 
     atualizarBotoes();
     
-    foto.style.opacity = 0;
+    fotos.style.opacity = 0;
     setTimeout(() => {
-  foto.src = imagens[indice];
-  foto.style.opacity = 1;
-
-  }, 200);
+      fotos.src = imagens[indice];
+      fotos.style.opacity = 1;
+    }, 200);
   }
 
   // 🔥 LISTENERS (o que faltava)
@@ -55,12 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAnt.addEventListener("click", () => trocarFoto("ant"));
   atualizarBotoes();
   
-btncarrinho.addEventListener(
+addcart.addEventListener(
     "click",
     async () => {
 
-        const id =
-            btncarrinho.dataset.id;
+        const id = addcart.dataset.id;
 
         const resposta =
             await fetch(
@@ -76,10 +80,11 @@ btncarrinho.addEventListener(
         console.log(dados);
 
         if(resposta.ok) {
-          btncarrinho.classList.add("sucesso")
-          abrirCarrinho();
           setTimeout(() => {
-            btncarrinho.classList.remove("sucesso")
+            carrinhoi.classList.remove("ri-shopping-cart-2-line")
+            carrinhoi.classList.add("ri-shopping-cart-2-fill")
+            abrirCarrinho();
+            
           } , 1800)
         }
       

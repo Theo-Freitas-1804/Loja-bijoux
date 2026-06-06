@@ -95,3 +95,8 @@
   border-radius: 8px;
   background: #eee;
 }
+
+#fechar-carrinho {
+  background: none;
+  border: none;
+}

@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // abrir/fechar menu
   btnMenu.addEventListener("click", (e) => {
     e.stopPropagation();
-
+    console.log("clique")
+    nav.classList.toggle("escondido");
     nav.classList.toggle("ativo");
 
   });

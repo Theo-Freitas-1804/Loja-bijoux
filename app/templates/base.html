@@ -42,15 +42,18 @@
   {% endblock %}
 
   <div id="toast"></div>
-
+  
+  <div id="overlay-carrinho"></div>
+  
+  {% include 'components/_carrinho.html'%}
+  
   <!-- SCRIPTS GLOBAIS -->
-  <script src="{{ url_for('static', filename='Js/home.js') }}"></script>
-
   <script src="{{ url_for('static', filename='Js/menu.js') }}"></script>
 
   <script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>
 
   <script src="{{ url_for('static', filename='Js/favoritos.js') }}"></script>
+  <script src="{{ url_for('static', filename='Js/pesquisa.js') }}"></script>
   
   {% if config.DEBUG %}
 

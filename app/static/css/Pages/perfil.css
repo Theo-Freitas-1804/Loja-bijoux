@@ -44,8 +44,7 @@
 
 /* FOTO */
 
-.foto-perfil,
-.icone-perfil {
+.foto-perfil, .perfil-default {
 
   width: 120px;
   height: 120px;
@@ -423,10 +422,13 @@
   border: black;
 }
 
+.icone-endereco {
+  color: white;
+}
+
 /* =========================
    MOBILE
 ========================= */
-
 @media (max-width: 768px) {
 
   .perfil-page {

@@ -50,7 +50,13 @@ def create_app():
         f"R$ {float(valor):.2f}"
         .replace(".", ",")
       )
-    
+      
+    @app.template_filter("porcentagem")
+    def porcentagem(valor):
+      if valor is None:
+        return "0%"
+      return f"{float(valor):.0f}%"
+      
     os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
     db_path = os.path.join(app.root_path, "instance", "info.db")
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"

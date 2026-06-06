@@ -85,7 +85,7 @@ def buscar_mais_vistos(limite=6):
 def pagina_produto(id):
 
   produto = buscar_produto(id)
-  
+  print(produto)
   view = visualizacao(
     produto_id=produto.id_acessorio,
     ip = request.remote_addr ,
@@ -101,6 +101,19 @@ def pagina_produto(id):
   relacionados = buscar_relacionados(produto)
   curtidos = buscar_mais_curtidos(produto)
   mais_vistos = buscar_mais_vistos(limite=6)
+  
+  print("RELACIONADOS")
+  for p in relacionados:
+    print(p.id_acessorio, p.nome)
+
+  print("\nCURTIDOS")
+  for p in curtidos:
+    print(p.id_acessorio, p.nome)
+
+  print("\nMAIS VISTOS")
+  for p in mais_vistos:
+    print(p.id_acessorio, p.nome)
+  
   return render_template(
       "produto.html",
 

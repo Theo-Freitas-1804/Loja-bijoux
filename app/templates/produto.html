@@ -4,7 +4,102 @@
 {% endblock %}
 
 {% block conteudo %}
-  {% include 'components/header_interno.html '%}
+  <div class="pagina-produto">
+      <div class="btns">
+        <button type="button" id="ant">
+          <i class="ri-arrow-left-s-line"></i>
+        </button>
+        <button type="button" id="prox">
+          <i class="ri-arrow-right-s-line"></i>
+        </button>
+      </div>
+    <div class="galeria">
+      <div class="produto-imagens">
+        
+        {% if produto.imagens %}
+    <img
+      src="{{ url_for(
+        'static',
+        filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url
+      ) }}"
+      alt="{{ produto.nome }}"
+      id="foto"
+    >
+  {% endif %}
+      </div>
+    </div>
+    <div class="produto-info">
+      <h1> {{produto.nome}}</h1>
+      <h2>Preço: {{produto.preco | moeda }} </h2>
+      <h2> Restam apeas {{produto.em_estoque}} unidades </h2>
+      <h2> Material: {{produto.material}}</h2>
+    </div>
+    <div id="item"> ● </div>
+      <button type="button" class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
+        <i class="ri-shopping-cart-2-line"></i>
+        Adicionar ao Carrinho
+      </button>
+  </div>
+  
+  <div class="borda"></div>
+  
+  <section class="recomendados">
+
+  <h2>Você também pode gostar</h2>
+
+  <div class="carrossel-produtos">
+    {% for produto in parecidos %}
+      {% include 'components/_card_produto.html' %}
+    {% endfor %}
+  </div>
+
+</section>
+
+<div class="borda"></div>
+
+<section class="recomendados">
+
+  <h2>Mais curtidos</h2>
+
+  <div class="carrossel-produtos">
+    {% for produto in curtidos %}
+      {% include 'components/_card_produto.html' %}
+    {% endfor %}
+  </div>
+
+</section>
+
+<div class="borda"></div>
+
+<section class="recomendados">
+  <h2>Em alta</h2>
+  <div class="carrossel-produtos">
+    {% for produto in mais_vistos %}
+      {% include 'components/_card_produto.html' %}
+    {% endfor %}
+  </div>
+</section>
+
+  
 {% endblock %}
 {% block scripts %}
+
+<script>
+
+const imagens = [
+
+{% for img in produto.imagens %}
+
+"{{ url_for(
+  'static',
+  filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url
+) }}",
+
+{% endfor %}
+
+];
+
+</script>
+
+<script src="{{ url_for('static' , filename='Js/produto.js') }}"></script>
 {% endblock %}

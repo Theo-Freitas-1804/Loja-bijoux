@@ -44,25 +44,14 @@
       </button>
 
       <div id="nav-menu" class="nav__menu escondido">
-
         <ul>
-
           <li>
-            <a href="{{ url_for('colecoes.listar_colecoes') }}">
-              Coleções
-            </a>
+            <a href="{{url_for('produto.exibir_brincos')}}"> Brincos</a>
           </li>
-
-          <li>
-            <a href="{{ url_for('produto.exibir_brincos') }}">
-              Brincos
-            </a>
-          </li>
-
+          <li><a href="#"> Colares</a></li>
+          <li><a href="#"> Outros </a></li>
         </ul>
-
       </div>
-
       <!-- DIREITA -->
       <div class="nav__right">
 
@@ -197,14 +186,7 @@
 
 {{ super() }}
 
-<script src="{{ url_for('static', filename='Js/favoritos.js') }}"></script>
-
-<script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>
-
-<script src="{{ url_for('static', filename='Js/menu.js') }}"></script>
-
-<script src="{{ url_for('static', filename='Js/pesquisa.js') }}"></script>
-
+<script src="{{ url_for('static', filename='Js/home.js') }}"></script>
 {% endblock %}
 
   

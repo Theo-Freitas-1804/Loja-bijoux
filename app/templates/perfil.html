@@ -24,7 +24,7 @@ Meu Perfil | Kordonê Bijoux
 
       {% else %}
 
-        <i class="ri-user-line icone-perfil"></i>
+        <i class="ri-user-line perfil-default"></i>
 
         <form
           action="{{ url_for('usuario.upload_foto') }}"
@@ -114,6 +114,11 @@ Meu Perfil | Kordonê Bijoux
 
             <div class="tag-endereco">
               {{ endereco.tipo or "Endereço" }}
+              {% if endereco.tipo == "Casa" %}
+                <i class="ri-home-fill icone-endereco"></i>
+              {% elif endereco.tipo == "trabalho" %}
+                <i class="ri-building-4-line icone-endereco"></i>
+              {% endif %}
             </div>
 
             <strong class="rua-endereco">
