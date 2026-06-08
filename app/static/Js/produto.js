@@ -63,9 +63,26 @@ document.addEventListener("DOMContentLoaded", () => {
 addcart.addEventListener(
     "click",
     async () => {
+      
+      console.log("PRODUTO.JS DISPAROU");
 
         const id = addcart.dataset.id;
-
+        
+        const logado = addcart.dataset.logado === "true";
+        
+        if (!logado) {
+          abrirModal({
+            titulo: "Login Necessário!" , 
+            mensagem: "Faça login para adicionar bijoux ao carrinho",
+            confirmarMsg: "Entrar",
+            cancelarMsg: "Agora Não." ,
+            onConfirmar() {
+              window.location.href = "/login";
+            }
+          });
+          return;
+        }
+        
         const resposta =
             await fetch(
                 `/adicionar-carrinho/${id}`,
@@ -79,14 +96,25 @@ addcart.addEventListener(
 
         console.log(dados);
 
-        if(resposta.ok) {
+        if (resposta.ok) {
           setTimeout(() => {
-            carrinhoi.classList.remove("ri-shopping-cart-2-line")
-            carrinhoi.classList.add("ri-shopping-cart-2-fill")
-            abrirCarrinho();
-            
-          } , 1800)
+            carrinhoi.classList.remove(
+              "ri-shopping-cart-2-line"
+            );
+            carrinhoi.classList.add(
+              "ri-shopping-cart-2-fill"
+            );
+            abrirModal({
+              titulo: "🛒 Produto adicionado",
+              mensagem: "Seu item foi adicionado ao carrinho.",
+              confirmarMsg: "Ver carrinho",
+              cancelarMsg:
+              "Continuar comprando",
+              onConfirmar() {
+                abrirCarrinho();
+              }
+            });
+          }, 1800);
         }
-      
-     });
+    });
 });

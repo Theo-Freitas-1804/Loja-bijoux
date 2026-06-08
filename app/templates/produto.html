@@ -35,7 +35,7 @@
       <h2> Material: {{produto.material}}</h2>
     </div>
     <div id="item"> ● </div>
-      <button type="button" class="btn-carrinho" data-id="{{ produto.id_acessorio }}">
+      <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}" data-logado="{{ current_user.is_authenticated|lower }}">
         <i class="ri-shopping-cart-2-line"></i>
         Adicionar ao Carrinho
       </button>
@@ -72,7 +72,8 @@
 <div class="borda"></div>
 
 <section class="recomendados">
-  <h2>Em alta</h2>
+  <h2>🔥 Em Alta</h2>
+  <p>Os queridinhos do momento.</p>
   <div class="carrossel-produtos">
     {% for produto in mais_vistos %}
       {% include 'components/_card_produto.html' %}
@@ -80,7 +81,8 @@
   </div>
 </section>
 
-  
+{% if current_user.is_authenticated %}
+{% endif %} 
 {% endblock %}
 {% block scripts %}
 

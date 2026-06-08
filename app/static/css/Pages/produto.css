@@ -28,13 +28,14 @@ body {
 }
 
 #foto {
-  padding: 12px;
+  padding: 20px;
 }
 
 .produto-info {
   display: flex;
   flex-direction: column;
   gap:16px;
+  padding: 16px;
 }
 
 .btn-carrinho {
@@ -87,4 +88,9 @@ body {
 
 .recomendados {
   margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.recomendados h2 , .recomendados p {
+  text-align: center;
 }

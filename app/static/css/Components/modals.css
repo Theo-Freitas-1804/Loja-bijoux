@@ -1,0 +1,39 @@
+.overlay-modal {
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.modal {
+
+  background: white;
+
+  width: 90%;
+  max-width: 350px;
+
+  padding: 20px;
+
+  border-radius: 16px;
+}
+
+.modal-acoes {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.modal-acoes button {
+
+  flex: 1;
+}

@@ -47,13 +47,23 @@
   
   {% include 'components/_carrinho.html'%}
   
+  {% include 'components/_modals.html'%}
+  
+  
+  
   <!-- SCRIPTS GLOBAIS -->
+  <script src="{{ url_for( 'static', filename='Js/Components/toast.js') }}"></script>
+  
+  <script src="{{ url_for( 'static', filename='Js/Components/carrinho.js') }}"></script>
+  
+  
+  
   <script src="{{ url_for('static', filename='Js/menu.js') }}"></script>
-
-  <script src="{{ url_for('static', filename='Js/carrinho.js') }}"></script>
 
   <script src="{{ url_for('static', filename='Js/favoritos.js') }}"></script>
   <script src="{{ url_for('static', filename='Js/pesquisa.js') }}"></script>
+  
+  <script src="{{ url_for('static' , filename= 'Js/Components/modals.js')}}"></script>
   
   {% if config.DEBUG %}
 

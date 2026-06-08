@@ -1,4 +1,4 @@
-from ..models import db, Produtos , visualizacao
+from ..models import db, Produtos , visualizacao , Favorito
 from flask import Blueprint, render_template
 from flask import request
 from flask_login import current_user
@@ -17,7 +17,15 @@ def buscar_produto(id):
 
   return produto
 
+# =========================
+#FAVORITOS
+# =========================
 
+cliente = current_user
+
+def buscar_favoritoa():
+  favoritas = Favoritos.query.filter(cliente=usuaria_id)
+  return favoritas
 # =========================
 # PRODUTOS RELACIONADOS
 # =========================
