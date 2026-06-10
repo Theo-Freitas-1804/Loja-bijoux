@@ -27,8 +27,14 @@ function abrirModal({
 }
 
 function fecharModal() {
-  
+  overlay.classList.add("escondido")
 }
 
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    fecharModal();
+  }
+});
 
 window.abrirModal = abrirModal;
+window.fecharModal= fecharModal;

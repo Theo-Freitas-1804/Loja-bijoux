@@ -22,8 +22,10 @@ def criar_conta():
         db.session.add(nova_usuaria)
         db.session.commit() 
         login_user(nova_usuaria)
-
-    return redirect(url_for("principal.pagina_principal"))
+        next_page = request.form.get("next")
+        if next_page:
+          return redirect(next_page)
+        return redirect(url_for("principal.pagina_principal"))
 
 @bp_auth.route("/login", methods=["GET", "POST"])
 def entrar():
@@ -49,12 +51,11 @@ def entrar():
         if usuario_encontrado:
 
             if check_password_hash(usuario_encontrado.senha, senha_digitada):
-
-                login_user(usuario_encontrado)
-
-                return redirect(
-                    url_for("principal.pagina_principal")
-                )
+              login_user(usuario_encontrado)
+              next_page = request.form.get("next")
+              if next_page:
+                return redirect(next_page)
+              return redirect(url_for("principal.pagina_principal"))
 
             else:
               flash(

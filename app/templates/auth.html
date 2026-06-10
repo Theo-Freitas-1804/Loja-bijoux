@@ -22,6 +22,9 @@
   
           <div class="form-box">
             <form action="{{ url_for('auth.criar_conta') }}" method="POST" class="form-login form-cadastro">
+              
+                <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+              
               <input type="text" placeholder="Nome" name="Nome_cliente" required>
               <input type="email" placeholder="E-mail" name="email_cliente" required>
               <input type="password" placeholder="Senha" name="senha_cliente" required name="senha_cliente">
@@ -42,6 +45,9 @@
   
           <div class="form-box">
             <form action="{{ url_for('auth.entrar') }}" method="POST" class="form-login form-entrar">
+              
+                <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+              
               <input type="text" placeholder="E-mail ou nome" name="id_cliente" required>
   
               <div class="campo-senha">
