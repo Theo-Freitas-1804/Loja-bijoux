@@ -265,9 +265,8 @@ class Cupom(db.Model):
   uso_ilimitado = db.Column(db.Boolean, default=False)
   uso_por_usuario = db.Column(db.Boolean, default=True)
   criado_em = db.Column(
-      db.DateTime,
-      default=lambda: dt.datetime.now(fuso_brasilia)
-  )
+    db.DateTime,
+    default=dt.datetime.now)
   
 class Chamado(db.Model):
 

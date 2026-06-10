@@ -16,32 +16,29 @@ def exibir_cupons():
 #Criar
 @admin_required
 @login_required
-@admin_bp.route("/cupoms/novo" , methods = ["GET" , "POST"])
+@admin_bp.route("/cupons/novo" , methods = ["GET" , "POST"])
 def criar_cupom():
   if request.method == "POST":
     nome = request.form.get("nome")
     valor = request.form.get("valor")
     tipo = request.form.get("tipo")
-    qtd = request.form.get("quantidade")
-    expira = request.form.get("expira")
+    qtd = int(request.form.get("quantidade"))
+    
+    if request.form.get("sem_expiracao"):
+      expira = None
+    else:
+      expira = dt.datetime.strptime(
+        request.form.get("expira"),"%Y-%m-%d"
+      )
     
     valor_porcentagem = request.form.get("valor_porcentagem")
     valor_fixo = request.form.get("valor_fixo")
     valor = valor_porcentagem or valor_fixo
     
-    if cupom.qtd_cupons is not None and cupom.qtd_cupons <= 0:
-      return {"status": "erro", "mensagem": "Cupom esgotado"}
-    
     if not valor:
       flash("Informe o valor do cupom", "erro")
       return redirect(url_for("admin.criar_cupom"))
     valor = float(valor)
-    
-    if expira:
-      expira = dt.datetime.strptime(expira , "%Y - %m - %d" )
-    else:
-      expira = None
-      
     
     novo = Cupom(
       nome_cupom = nome ,

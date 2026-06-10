@@ -24,8 +24,9 @@
 @import url('./Pages/perfil.css');
 @import url('./Pages/pesquisa.css');
 @import url('./Pages/checkout.css');
-@import url('./Pages/cupons.css');
+
 @import url('./Pages/editar_produto.css');
 @import url('./Pages/ajuda.css');
 @import url('./Pages/admin.css');
 @import url('./Pages/pedido_detalhe.css');
+@import url('./Pages/cupons.css');

@@ -77,7 +77,8 @@ addcart.addEventListener(
             confirmarMsg: "Entrar",
             cancelarMsg: "Agora Não." ,
             onConfirmar() {
-              window.location.href = "/login";
+              window.location.href =
+  `/login?next=${window.location.pathname}`;
             }
           });
           return;

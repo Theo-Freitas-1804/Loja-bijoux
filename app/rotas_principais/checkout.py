@@ -27,7 +27,7 @@ from ..models import (
     status_acessorio
 )
 
-from ..rota_perfil.cupons import aplicar_cupom
+from ..rota_perfil.cupons import validar_cupom_checkout
 from ..services.frete import calcular_frete
 
 

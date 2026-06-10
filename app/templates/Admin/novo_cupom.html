@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,10 @@
   
   <form action="{{ url_for('admin.criar_cupom') }}" method="post" id="form-cupom">
     <input type="text" name="nome" placeholder="Nome do cupom">
+    <input type="number" name="quantidade" placeholder="Quantos cupons?">
+    
     <label>
-      <input type="checkbox" id="sem-expiracao">
+      <input type="checkbox" id="sem-expiracao" name="sem_expiracao">
       Sem expiração
     </label>
     <input type="date" name="expira" id="campo-data">
