@@ -18,10 +18,10 @@ Checkout | Kordonê Bijoux
       <div id="valor" class="card-checkout">
         <strong>Subtotal:</strong>
         <p>
-          R$ {{ subtotal }}
+          {{ subtotal | moeda }}
         </p>
-        <p>Desconto: R$ {{ desconto }}</p>
-        <p>Total (Peças): R$ {{ valor_com_desconto }}</p>
+        <p>Desconto: {{ desconto | moeda }}</p>
+        <p>Total (Peças): {{ valor_com_desconto | moeda }}</p>
       </div>
       <!-- CUPONS -->
       <div id="cupom-box">
@@ -78,134 +78,119 @@ Checkout | Kordonê Bijoux
       </div>
     </div>
     <div id="checkout" class="checkout-back">
+      
       <a href="#" id="btn-voltar">
         Voltar
       </a>
-      <!-- ETAPA 1 -->
-      <div class="etapa">
-        <div class="etapa-topo">
-          <div class="num">
-            <h3>1</h3>
-          </div>
-          <h2>Onde quer receber seu pedido?</h2>
-        </div>
-        <label for="enderecos">
-          Escolha um endereço
-        </label>
-        <select name="enderecos" id="enderecos">
-
-  <option value="" selected disabled>
-    Selecione um endereço
-  </option>
-
-  {% for endereco in enderecos %}
-
-    <option value="{{ endereco.id }}" name="endereco">
-      {{ endereco.rua }}, {{ endereco.numero }}
-    </option>
-
-  {% endfor %}
-
-</select>
-      </div>
-      <!-- Sub etapa frete -->
       
-      <div class="subetapa-topo inativo">
-        <div class="subnum">
-          <h4>1.1</h4>
-        </div>
-        <h3>Escolha o frete</h3>
-        <select name="frete" id="frete">
-
-  <option value="" selected disabled>
-    Escolha um frete
-  </option>
-
-  <option value="pac">
-
-    PAC —
-    R$ {{ fretes["pac"]["valor"] }}
-    —
-    {{ fretes["pac"]["prazo"] }} dias
-
-  </option>
-
-  <option value="sedex">
-
-    Sedex —
-    R$ {{ fretes["sedex"]["valor"] }}
-    —
-    {{ fretes["sedex"]["prazo"] }} dias
-
-  </option>
-
-</select>
-      </div>
-      
-      <!-- ETAPA 2 -->
-      <div class="etapa inativo">
-        <div class="etapa-topo">
-          <div class="num">
-            <h3>2</h3>
+      <!-- Abro o fotm -->
+      <form action="{{ url_for('checkout.finalizar_compra') }}" method="POST">
+        <!-- ETAPA 1 -->
+        <div class="etapa">
+          <div class="etapa-topo">
+            <div class="num">
+              <h3>1</h3>
+            </div>
+            <h2>Onde quer receber seu pedido?</h2>
           </div>
-          <h2>Quando quer receber seu pedido?</h2>
-        </div>
-        <select name="horario" id="horario">
-          <option value="" selected disabled>
-            Escolha a postagem
-          </option>
-
-          <option value="proxima_sexta">
-            📦 Próxima postagem — Sexta-feira
-          </option>
-          <option value="sexta_seguinte">
-            📦 Sexta seguinte
-          </option>
-          <option value="agendado">
-            🗓️ Quero agendar
-          </option>
-        </select>
-        <div id="agendamento-box" class="inativo" style="display: none;">
-          <label for="data-agendada">
-            Escolha uma sexta-feira
+          <label for="enderecos">
+            Escolha um endereço
           </label>
-          <input type="date" id="data-agendada" name="data_agendada">
+          <select name="enderecos" id="enderecos">
+              <option value="" selected disabled>
+                Selecione um endereço
+              </option>
+              {% for endereco in enderecos %}
+                <option value="{{ endereco.id }}">
+                  {{ endereco.rua }}, {{ endereco.numero }}
+                </option>
+              {% endfor %}
+            </select>
         </div>
-      </div>
-      <!-- ETAPA 3 -->
-      <div class="etapa inativo">
-        <div class="etapa-topo">
-          <div class="num">
-            <h3>3</h3>
+        <!-- Sub etapa frete -->
+        <div class="subetapa-topo inativo">
+          <div class="subnum">
+            <h4>1.1</h4>
           </div>
-          <h2>Selecione forma de pagamento</h2>
+          <h3>Escolha o frete</h3>
+          <select name="frete" id="frete">
+            <option value="" selected disabled>
+              Escolha um frete
+            </option>
+            <option value="pac">
+              PAC — {{ fretes["pac"]["valor"] | moeda }}
+              —
+              {{ fretes["pac"]["prazo"] }} dias
+            </option>
+            <option value="sedex">
+              Sedex — {{ fretes["sedex"]["valor"] | moeda }}
+              —
+              {{ fretes["sedex"]["prazo"] }} dias
+            </option>
+          </select>
         </div>
-        
-        <div class="pagamentos">
-          <button type="button" class="pagamento-item">
-            <div>
-              <strong>Cartão de crédito</strong>
-              <span>Contém encargos do cartão</span>
+        <!-- ETAPA 2 -->
+        <div class="etapa inativo">
+          <div class="etapa-topo">
+            <div class="num">
+              <h3>2</h3>
             </div>
-            <div class="radio"></div>
+            <h2>Quando quer receber seu pedido?</h2>
+          </div>
+          <select name="horario" id="horario">
+            <option value="" selected disabled>
+              Escolha a postagem
+            </option>
+            <option value="proxima_sexta">
+              📦 Próxima postagem — Sexta-feira
+            </option>
+            <option value="sexta_seguinte">
+              📦 Sexta seguinte
+            </option>
+            <option value="agendado">
+              🗓️ Quero agendar
+            </option>
+          </select>
+          <div id="agendamento-box" class="inativo" style="display: none;">
+            <label for="data-agendada">
+              Escolha uma sexta-feira
+            </label>
+            <input type="date" id="data-agendada" name="data_agendada">
+          </div>
+        </div>
+        <!-- ETAPA 3 -->
+        <div class="etapa inativo">
+          <div class="etapa-topo">
+            <div class="num">
+              <h3>3</h3>
+            </div>
+            <h2>Selecione forma de pagamento</h2>
+          </div>
+          <div class="pagamentos">
+            <input type="hidden" name="forma_pagamento" id="forma_pagamento">
+            <button type="button" class="pagamento-item">
+          <div>
+            <strong>Cartão de crédito</strong>
+            <span>Contém encargos do cartão</span>
+          </div>
+          <div class="radio"></div>
           </button>
           <button type="button" class="pagamento-item">
-            <div>
-              <strong>Cartão de débito</strong>
-            </div>
-            <div class="radio"></div>
-          </button>
-          <button type="button" class="pagamento-item">
-            <div>
-              <strong>Pix</strong>
-              <span>Aprovação imediata</span>
-            </div>
-            <div class="radio"></div>
-          </button>
+          <div>
+            <strong>Cartão de débito</strong>
+          </div>
+          <div class="radio"></div>
+        </button>
+        <button type="button" class="pagamento-item">
+          <div>
+            <strong>Pix</strong>
+            <span>Aprovação imediata</span>
+          </div>
+          <div class="radio"></div>
+        </button>
         </div> 
       </div>
-      <form action="{{ url_for('checkout.finalizar_compra') }}" method="POST">
-        <button type="submit"> Finalizar Compra</button>
+      <button type="submit"> Finalizar Compra</button>
       </form>
     </div>
   </div>

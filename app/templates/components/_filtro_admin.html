@@ -1,0 +1,33 @@
+<div class="overlay escondido"></div>
+
+<div class="escondido" id="filtro-admin">
+  <h3> Filtros </h3>
+  <form action="" method="GET">
+    <div class="filtro-grupo">
+      <label>Ticket Médio</label>
+      <div class="valor">
+        <input type="number" name="ticket_min" placeholder="De">
+        <input type="number" name="ticket_max" placeholder="Até">
+      </div>
+    </div>
+    <div class="filtro-grupo">
+      <label></label>
+      <select name="qtd_pedidos" id="pedidos">
+        <option value=""> Qualquer </option>
+        <option value="0"> Nenhum </option>
+        <option value="1"> 1 Pedido</option>
+        <option value="5"> 5 pedidos </option>
+        <option value="mais"> 6 ou mais</option>
+      </select>
+    </div>
+    
+    <div class="filtro-grupo">
+      <select name="atividade">
+        <option value="todos"> Todas</option>
+        <option value="ativas"> Ativas</option>
+        <option value="inativas"> Inativas</option>
+      </select>
+    </div>
+  </form>
+</div>
+

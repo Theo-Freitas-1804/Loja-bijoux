@@ -54,3 +54,12 @@
 .card-cupom {
   border-left: 4px dashed #f06;
 }
+
+.card-cupom.usado {
+    opacity: .65;
+    filter: grayscale(100%);
+}
+
+.card-cupom.usado::after {
+    content: "✓ UTILIZADO";
+}

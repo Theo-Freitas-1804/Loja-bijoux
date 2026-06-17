@@ -279,3 +279,113 @@ transform: scale(1.4);
 transform: scale(1);
 }
 }
+
+/* Cards de pedidos - Admin e cl8ente */
+
+/* Cl8ente */
+
+.card-pedido-cliente {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  background: #f5f5f5;
+  
+  border-radius: 16px;
+  
+  margin-bottom: 16px;
+  
+  box-shadow: 0 2px 8px rgba(0,0,0 , .08) ;
+}
+
+.status {
+  display: inline-block;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: .85rem;
+}
+
+/* Card detalhado , da página de resumo */
+
+.card-item-pedido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.item-info {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+/* Card da admin */
+
+.card-admin {
+  width: 85%;
+  max-width: 320px;
+  flex-shrink: 0;
+  border-right: 1px solid #f59e0b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-admin:hover {
+  
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 25px rgba(245 , 159 , 11 , 0.1);
+  
+}
+
+.img-peca-admin {
+  max-width: 60px;
+  max-height: 120px;
+
+  width: auto;
+  height: auto;
+
+  display: block;
+  
+  border-radius: 8px;
+}
+
+.status {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  
+  padding: 6px 12px;
+  
+  border-radius: 999px;
+  
+}
+.status-pendente { background: #f59e0b;
+}
+.status-em-producao { background: #eab308;}
+.status-postado { background: #22c55e;}
+.status-recusado { background: #ef4444;}
+
+.topo-pedido {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

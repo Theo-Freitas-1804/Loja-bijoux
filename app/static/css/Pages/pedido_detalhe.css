@@ -2,10 +2,77 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 12px;
+  border: 1px solid black;
+  border-radius: 12px;
+  margin: 12px;
 }
 .img-peca {
   width: 120px;
-  height: 120px;
+  height: auto;
+}
+
+.pedido-topo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pedido-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pedido-info h1 {
+  font-size: 2rem;
+}
+
+.status-pedido {
+  font-weight: 600;
+}
+
+.pedido-resumo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Admin */
+#detalhe-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:12px;
+}
+
+.id {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pedido-rastreio {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.codigo {
+  display: flex;
+  gap: 8px ;
+}
+.codigo button {
+  background: none;
+  border: none;
 }

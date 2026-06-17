@@ -1,0 +1,25 @@
+<div class="card-item-pedido">
+        <div class="item-imagem">
+          {% if item.produto.imagens %}
+            <img
+              src="{{ url_for(
+                'static',
+                filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ item.produto.imagens[0].url
+              ) }}"
+              alt="{{ item.produto.nome }}"
+            class="img-peca">
+          {% endif %}
+        </div>
+        <div class="item-info">
+          <h3>
+            {{ item.produto.nome }}
+          </h3>
+          <p>
+            Quantidade: {{ item.quantidade }}
+          </p>
+          <p>
+            Valor unitário:
+            {{ item.preco_unit | moeda }}
+          </p>
+        </div>
+      </div>

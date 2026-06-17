@@ -24,12 +24,15 @@ from ..models import (
     Cupom,
     Pedido,
     Itens,
-    status_acessorio
+    status_acessorio ,
+    UsosCupons
 )
 
-from ..rota_perfil.cupons import validar_cupom_checkout
 from ..services.frete import calcular_frete
 
+from ..utils.datas import calcular_data_entrega
+
+from ..rota_perfil.cupons import validar_cupom_checkout
 
 bp_checkout = Blueprint(
     "checkout",
@@ -42,21 +45,27 @@ def criar_pedido(
     subtotal,
     total_final,
     envio,
-    data_entrega
+    data_entrega ,
+    forma_pagamento
 ):
+  
+  print("=== CHECKOUT ===")
+  print(request.form)
+  print("===============")
+  
+  pedido = Pedido(
+      usuaria=usuario.id_usuaria,
+      total=total_final,
+      status="Pendente",
+      envio=envio,
+      data_entrega=data_entrega , 
+      forma_pagamento= forma_pagamento
+  )
 
-    pedido = Pedido(
-        usuaria=usuario.id_usuaria,
-        total=total_final,
-        status="Pendente",
-        envio=envio,
-        data_entrega=data_entrega
-    )
+  db.session.add(pedido)
+  db.session.flush()
 
-    db.session.add(pedido)
-    db.session.flush()
-
-    return pedido
+  return pedido
 
 def criar_itens_pedido(
     pedido,
@@ -81,18 +90,11 @@ def criar_itens_pedido(
       db.session.add(novo_item)
 
       # ESTOQUE
-
-      produto.em_estoque -= (
-          item.quantidade
-      )
+      produto.em_estoque -= item.quantidade
 
       if produto.em_estoque <= 0:
-
-          produto.em_estoque = 0
-
-          produto.status = (
-              status_acessorio.VENDIDO
-          )
+        produto.em_estoque = 0
+        produto.status = status_acessorio.VENDIDO
 
 def limpar_carrinho(usuario_id):
 
@@ -142,8 +144,7 @@ def checkout():
         cupom = Cupom.query.filter_by(
             id_cupom=cupom_id
         ).first()
-
-        cupom_valido = aplicar_cupom()
+        cupom_valido = validar_cupom_checkout(cupom)
 
         if cupom_valido:
 
@@ -167,7 +168,6 @@ def checkout():
                 float(subtotal)
                 - desconto
             )
-
     end = current_user.enderecos[0]
 
     fretes = calcular_frete(end)
@@ -183,7 +183,6 @@ def checkout():
         cupons=current_user.cupons,
         fretes=fretes
     )
-
 
 @bp_checkout.route(
     "/finalizar-compra",
@@ -238,12 +237,22 @@ def finalizar_compra():
   # TEMPORÁRIO
   total_final = subtotal
   
+  data_entrega = calcular_data_entrega()
+
+  envio = request.form.get("horario")
+
+  forma_pagamento = request.form.get("forma_pagamento")
+
+  endereco_id = request.form.get("endereco")
+  frete = request.form.get("frete")
+  
   pedido = criar_pedido(
-      usuario=current_user,
-      subtotal=subtotal,
-      total_final=total_final,
-      envio="sexta",
-      data_entrega=date.today()
+    usuario=current_user,
+    subtotal=subtotal,
+    total_final=total_final,
+    envio=envio,
+    data_entrega=data_entrega ,
+    forma_pagamento=forma_pagamento
   )
   
   criar_itens_pedido(
@@ -255,9 +264,16 @@ def finalizar_compra():
       current_user.id_usuaria
   )
   
-  produto.em_estoque -= item.quantidade
-  if produto.em_estoque <= 0:
-    produto.status = status_acessorio.VENDIDO
+  cupom_id= session.get("cupom_id")
+  
+  if cupom_id:
+    uso = UsosCupons(
+      cliente = current_user.id_usuaria ,
+      cupom_id = cupom_id ,
+    )
+    db.session.add(uso)
+    session.pop("cupom_id" , None)
+  
   
   db.session.commit()
   

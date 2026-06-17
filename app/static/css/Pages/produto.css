@@ -58,6 +58,7 @@ body {
   color:white;
   border-radius: 50%;
   animation: cair 3s ease forwards;
+  display: none;
 }
 
 @keyframes cair {

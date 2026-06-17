@@ -15,25 +15,42 @@
       </div>
     <div class="galeria">
       <div class="produto-imagens">
-        
         {% if produto.imagens %}
-    <img
-      src="{{ url_for(
-        'static',
-        filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url
-      ) }}"
-      alt="{{ produto.nome }}"
-      id="foto"
-    >
-  {% endif %}
+          <img
+            src="{{ url_for(
+              'static',
+              filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url
+            ) }}"
+            alt="{{ produto.nome }}"
+            id="foto"
+          >
+        {% endif %}
       </div>
     </div>
+    
     <div class="produto-info">
-      <h1> {{produto.nome}}</h1>
-      <h2>Preço: {{produto.preco | moeda }} </h2>
-      <h2> Restam apeas {{produto.em_estoque}} unidades </h2>
-      <h2> Material: {{produto.material}}</h2>
+      <h1>{{ produto.nome }}</h1>
+      <h2>
+        Preço: {{ produto.preco | moeda }}
+      </h2>
+
+      {% if produto.em_estoque <= 4 %}
+
+        <h2>
+          Restam apenas {{ produto.em_estoque }} unidades
+        </h2>
+
+      {% else %}
+        <h2>
+          Disponíveis: {{ produto.em_estoque }} unidades
+        </h2>
+      {% endif %}
+
+        <h2>
+          Material: {{ produto.material }}
+        </h2>
     </div>
+    
     <div id="item"> ● </div>
       <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}" data-logado="{{ current_user.is_authenticated|lower }}">
         <i class="ri-shopping-cart-2-line"></i>
@@ -75,14 +92,29 @@
   <h2>🔥 Em Alta</h2>
   <p>Os queridinhos do momento.</p>
   <div class="carrossel-produtos">
-    {% for produto in mais_vistos %}
+    {% for item_view in mais_vistos %}
+      {% set produto=item_view %}
       {% include 'components/_card_produto.html' %}
     {% endfor %}
   </div>
 </section>
 
 {% if current_user.is_authenticated %}
+<section class="recomendados">
+  <h2>💖 Seus Favoritos</h2>
+  <p>
+    As peças que você salvou para não perder de vista.
+  </p>
+  <div class="carrossel-produtos">
+    {% for produto in favoritos %}
+      {% include "components/_card_produto.html" %}
+    {% endfor %}
+  </div>
+</section>
 {% endif %} 
+
+
+
 {% endblock %}
 {% block scripts %}
 

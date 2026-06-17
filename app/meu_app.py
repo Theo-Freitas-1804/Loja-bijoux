@@ -7,6 +7,8 @@ from flask_migrate import Migrate
 
 import os
 from dotenv import load_dotenv
+import datetime
+
 from .rotas_colecao.colecoes import bp_colecao
 from .rotas_principais.home import bp_principal
 from .Admin import admin_bp
@@ -56,6 +58,15 @@ def create_app():
       if valor is None:
         return "0%"
       return f"{float(valor):.0f}%"
+    
+    @app.template_filter("data")
+    def formatar_data(data):
+      return data.strftime("%H:%M de %d/%m/%Y")
+
+
+    @app.template_filter("data_curta")
+    def formatar_data_curta(data):
+      return data.strftime("%d/%m/%Y")
       
     os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
     db_path = os.path.join(app.root_path, "instance", "info.db")

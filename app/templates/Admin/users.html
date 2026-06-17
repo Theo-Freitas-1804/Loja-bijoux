@@ -42,7 +42,7 @@
         </td>
         <td>
           {% if user.data_registro %}
-            {{ user.data_registro.strftime("%d/%m/%Y | %H:%M") }}
+            {{ user.data_registro| data}}
           {% else %}
             -
           {% endif %}

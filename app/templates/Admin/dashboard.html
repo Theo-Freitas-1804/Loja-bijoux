@@ -1,0 +1,182 @@
+{% extends "Admin/base_admin.html" %}
+
+{% block titulo %}
+Painel Admin | Kordonê Bijoux
+{% endblock %}
+
+{% block admin_content %}
+
+  
+  <!-- CONTEÚDO -->
+  
+  <main class="conteudo">
+
+  <!-- RESUMO -->
+  <section id="painel-resumo" class="painel-admin">
+
+    <section class="topo">
+      <h1>Visão Geral</h1>
+      {% if intervalo %}
+      <h3> Últimos {{intervalo}} dias </h3>
+      {% endif %}
+    </section>
+
+    <section class="admin-content">
+
+      <div class="card-metrica">
+        <i class="ri-shopping-bag-line"></i>
+        <div class="tooltip-metrica escondido">
+          {% if tendencia == "Alta" %}
+
+            <p>
+              <i class="ri-arrow-up-s-line alta"></i>
+              +{{ variacao }}%
+            </p>
+          {% elif tendencia == "Queda" %}
+            <p>
+              <i class="ri-arrow-down-s-line queda"></i>
+              {{ variacao }}%
+            </p>
+
+          {% else %}
+
+            <p>
+              <i class="ri-equal-line estavel"></i>
+              0%
+            </p>
+
+          {% endif %}
+
+  <small>
+    Variação: {{tendencia}} de {{variacao}}% Comparado ao período anterior
+  </small>
+
+</div>
+        <strong> {{total_pedidos}}</strong>
+        <i class="ri-information-line info"></i>
+        <span>Pedidos</span>
+      </div>
+
+      <div class="card-metrica">
+        <i class="ri-medal-line"></i>
+        <strong>Coleção mais popular</strong>
+        <i class="ri-information-line info"></i>
+        <span>{{ mais_popular}}</span>
+        <small>{{ total_vendido }} peças vendidas</small>
+      </div>
+
+      <div class="card-metrica">
+        <i class="ri-home-line"></i>
+        <strong>Ticket médio</strong>
+        <i class="ri-information-line info"></i>
+        <span> {{ticket_medio | moeda}}</span>
+      </div>
+
+      <div class="card-metrica">
+        <i class="ri-eye-2-line"></i>
+        <strong>Visualizações</strong>
+        <i class="ri-information-line info"></i>
+        <span>{{ views }}</span>
+      </div>
+
+      <div class="card-metrica rank">
+        <i class="ri-bar-chart-fill"></i>
+
+        <h2>Os mais vistos</h2>
+
+        <ol>
+          {% for item in rank %}
+            <li>
+              <span class="nome-produto">
+                {{ item.produto.nome }}
+              </span>
+
+              <span class="total-views">
+                {{ item.total }}
+            
+                {% if item.total == 1 %}
+                  visualização
+                {% else %}
+                  visualizações
+                {% endif %}
+              </span>
+            </li>
+          {% endfor %}
+        </ol>
+
+      </div>
+
+      <div class="card-metrica">
+
+        <h2>Novas Clientes</h2>
+
+        <i class="ri-arrow-down-s-line mais"></i>
+
+        <p>
+          {% if intervalo %}
+            Total nos últimos {{ intervalo }} dias : {{ total }}
+          {% else %}
+            Total: {{ total }}
+          {% endif %}
+        </p>
+
+        <div class="clientes-recentes escondido">
+
+          <ol>
+            {% for cliente in clientes %}
+            <li>
+              <strong>{{ cliente.nome }}</strong>
+
+              <span>
+                {{ cliente.data_registro.strftime("%d/%m/%y %H:%M") }}
+              </span>
+            </li>
+            {% endfor %}
+          </ol>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+
+  <!-- PEDIDOS -->
+  <section
+      id="painel-pedidos"
+      class="painel-admin escondido"
+  >
+
+      <section class="topo">
+          <h2>Pedidos</h2>
+      </section>
+
+      <section class="admin-content">
+        <div class="card-metrica">
+
+  <p class="titulo-periodo">
+    {% if inicio and fim %}
+      Pedidos nos últimos {{intervalo}} dias,
+      de {{inicio | data}} até {{fim | data}}
+    {% else %}
+      Últimos pedidos
+    {% endif %}
+  </p>
+
+  <div id="lista-pedidos">
+
+    {% for pedido in pedidos %}
+      {% include 'components/_card_pedido_admin.html' %}
+    {% endfor %}
+
+  </div>
+
+</div>
+      </section>
+  </section>
+</main>
+
+
+
+{% endblock %}

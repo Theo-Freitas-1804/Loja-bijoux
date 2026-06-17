@@ -1,7 +1,38 @@
-<div class="card-pedido borda">
-  <span> {{pedido_id}}</span>
+<div class="card-admin">
+  <div class="topo-pedido">
+    <h2>#{{pedido.id}} {{pedido.cliente.nome}}</h2>
+    
+    <span> Data Pedido: {{ pedido.data_pedido | data}}</span>
+    <span> Data do envio: {{pedido.data_entrega | data_curta}} </span>
+    
+    <span class="status status-{{ pedido.status|lower|replace(' ', '-') }}">
+      {{ pedido.status }}
+    </span>
+    
+    <p>
+        Valor Total:
+        {{pedido.total | moeda }}
+    </p>
+    
+    <p>
+      Compra:
+    </p>
+    <ul class="lista-itens-pedido">
+      {% for item in pedido.itens[:2] %}
+        <li>{{ item.produto.nome }}</li>
+      {% endfor %}
+      {% if pedido.itens|length > 2 %}
+        <li>+{{ pedido.itens|length - 2 }} itens</li>
+      {% endif %}
+    </ul>
+  </div>
   
-  <strong> Data: {{pedido.data_pedido}}</strong>
-  <strong> {{pedido.status}}</strong>
-  <strong> Envio solicitado: {{pedido.envio}} </strong>
+  <div class="carrossel-produtos">
+      {% for item in pedido.itens %}
+      <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ item.produto.imagens[0].url) }}" alt="{{ item.produto.nome }}" class="img-peca-admin">
+      {% endfor %}
+  </div>
+  <a href="{{ url_for('admin.editar_pedido', id=pedido.id) }}">
+    Editar Pedido
+</a>
 </div>

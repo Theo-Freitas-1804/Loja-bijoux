@@ -327,12 +327,16 @@ body {
 }
 
 .rank li {
-
   border-bottom: 1px solid #D1D5DB;
 
-  text-align: center;
+  padding: 12px 0;
 
-  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
 }
 
 .btn-mais {
@@ -427,7 +431,75 @@ body {
   background: black;
 }
 
+#lista-pedidos {
+  display: flex;
 
+  gap: 16px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 10px 0;
+
+  scrollbar-width: none;
+  margin-top: 8px;
+}
+
+#lista-pedidos::-webkit-scrollbar {
+  display: none;
+}
+
+.lista-itens-pedido {
+  margin: 4px 0 0;
+  padding-left: 16px;
+}
+
+.lista-itens-pedido li {
+  font-size: .9rem;
+}
+
+#pedidos {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.tooltip-metrica {
+  position: absolute;
+
+  top: 40px;
+  right: 10px;
+
+  width: 220px;
+
+  padding: 12px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  text-align: center;
+  gap: 4px;
+}
+
+
+.alta {
+  color: green;
+}
+
+.queda {
+  color: red;
+}
 
 @media (max-width: 600px){
   

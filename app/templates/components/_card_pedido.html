@@ -1,26 +1,30 @@
 {% if pedidos %}
   {% for pedido in pedidos %}
-    <div class="card-pedido">
-      <p>
-        <strong>Pedido #{{ pedido.id }}</strong>
+  
+    <div class="card-pedido-cliente">
+      <h3>Pedido #{{ pedido.id }}</h3>
+      <p class="status status-{{ pedido.status|lower|replace(' ', '-') }}">
+        {{ pedido.status }}
       </p>
-      <p>
-        Status: {{ pedido.status }}
+
+      <p class="valor">
+        {{ pedido.total | moeda }}
       </p>
-      <p>
-        Total: R$ {{ pedido.total|moeda }}
-      </p>
-      <p>
-  Data:
-  {{ pedido.data_pedido.strftime("%d/%m/%Y às %H:%M") }}
-</p>
-    </div>
-    <a href="{{ url_for(
-    'usuario.consultar_pedido',
-    id=pedido.id
-) }}">
-    Ver pedido
-</a>
+      <small class="data-pedido">
+        {{ pedido.data_pedido | data }}
+      </small>
+
+      <a
+        href="{{ url_for(
+          'usuario.consultar_pedido',
+          id=pedido.id
+        ) }}"
+      >
+        Ver detalhes
+      </a>
+
+</div>
+    
   {% endfor %}
 {% else %}
   <p>Você ainda não fez pedidos</p>

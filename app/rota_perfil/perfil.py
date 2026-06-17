@@ -2,7 +2,7 @@ from flask import Blueprint, render_template , request , current_app , flash , r
 from flask_login import login_user , logout_user , login_required , current_user
 from ..rotas_principais.home import bp_principal
 
-from ..models import Favorito , Usuario , Produtos , Pedido , Itens
+from ..models import Favorito , Usuario , Produtos , Pedido , Itens , UsosCupons
 
 import os
 import secrets
@@ -19,33 +19,32 @@ extensoes_imagens = ["png" , "jpg" , "gif"]
 @login_required
 def perfil():
 
-    favoritos_db = Favorito.query.filter_by(
-        usuario_id=current_user.id_usuaria
-    ).all()
-    
-    favoritos = []
+  favoritos_db = Favorito.query.filter_by(
+      usuario_id=current_user.id_usuaria
+  ).all()
+  
+  favoritos = []
 
-    for f in favoritos_db:
+  for f in favoritos_db:
 
-        produto = Produtos.query.get(
-            f.produto_id
-        )
+      produto = Produtos.query.get(
+          f.produto_id
+      )
 
-        if produto:
-            favoritos.append(produto)
-    
-    pedidos = Pedido.query.filter_by(
-    usuaria=current_user.id_usuaria
+      if produto:
+          favoritos.append(produto)
+  
+  pedidos = Pedido.query.filter_by(
+  usuaria=current_user.id_usuaria
 ).order_by(
-    Pedido.data_pedido.desc()
-).all()
-    
-    return render_template(
-        "perfil.html",
-        name=current_user.nome,
-        favoritos=favoritos , 
-        pedidos = pedidos
-    )
+  Pedido.data_pedido.desc()).all()
+  
+  return render_template(
+      "perfil.html",
+      name=current_user.nome,
+      favoritos=favoritos , 
+      pedidos = pedidos ,
+  )
 
 def arquivo_permitido(filename):
     # 1. Checa se o nome tem ponto (necessário para os.path.sp    litext)

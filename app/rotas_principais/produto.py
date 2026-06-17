@@ -1,7 +1,7 @@
 from ..models import db, Produtos , visualizacao , Favorito
 from flask import Blueprint, render_template
 from flask import request
-from flask_login import current_user
+from flask_login import current_user , AnonymousUserMixin
 
 bp_produto = Blueprint(
     "produto",
@@ -23,9 +23,32 @@ def buscar_produto(id):
 
 cliente = current_user
 
-def buscar_favoritoa():
-  favoritas = Favoritos.query.filter(cliente=usuaria_id)
-  return favoritas
+def buscar_favoritos(produto_atual_id=None):
+
+    if not current_user.is_authenticated:
+        return []
+
+    favoritos = (
+        Favorito.query
+        .filter_by(usuario_id=current_user.id_usuaria)
+        .all()
+    )
+
+    produtos = []
+
+    for favorito in favoritos:
+
+        if favorito.produto_id == produto_atual_id:
+            continue
+
+        produto = Produtos.query.get(
+            favorito.produto_id
+        )
+
+        if produto:
+            produtos.append(produto)
+
+    return produtos
 # =========================
 # PRODUTOS RELACIONADOS
 # =========================
@@ -109,7 +132,6 @@ def pagina_produto(id):
   relacionados = buscar_relacionados(produto)
   curtidos = buscar_mais_curtidos(produto)
   mais_vistos = buscar_mais_vistos(limite=6)
-  
   print("RELACIONADOS")
   for p in relacionados:
     print(p.id_acessorio, p.nome)
@@ -122,6 +144,8 @@ def pagina_produto(id):
   for p in mais_vistos:
     print(p.id_acessorio, p.nome)
   
+  favoritos = buscar_favoritos(produto.id_acessorio)
+  
   return render_template(
       "produto.html",
 
@@ -130,7 +154,8 @@ def pagina_produto(id):
       parecidos=relacionados,
 
       curtidos=curtidos ,
-      mais_vistos=mais_vistos
+      mais_vistos=mais_vistos,
+      favoritos=favoritos
   )
 
 
@@ -143,7 +168,7 @@ def exibir_brincos():
   brincos = Produtos.query.filter_by(
       categoria="brinco"
   ).all()
-
+  print(brincos)
   return render_template(
       "brincos.html",
 

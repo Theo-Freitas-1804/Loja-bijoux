@@ -14,37 +14,106 @@ Meus Cupons | Kordonê Bijoux
 </section>
 
 <div class="lista-cupons">
-  {% if not current_user.cupons %}
-  <div class="aviso">
-    <h3> Você não possui cupons </h3>
-    <p> Encontrou um código? resgate abaixo.</p>
-  </div>
+
+  {% if not cupons %}
+
+    <div class="aviso">
+      <h3>Você não possui cupons</h3>
+      <p>Encontrou um código? Resgate abaixo.</p>
+    </div>
+
   {% else %}
-  
-  <section class="area-cupons">
-    {% for cupom in current_user.cupons %}
-      <article class="card-cupom">
-        {% if cupom.tipo == "porcentagem"%}
-        <p class="valor"> {{cupom.valor_desconto | porcentagem }} OFF </p>
-        {% elif cupom.tipo == "fixo" %}
-        <p class="valor"> {{cupom.valor_desconto | moeda }} </p>
-        {% endif %}
-        <h3> {{cupom.nome_cupom}} </h3>
-        
+
+    <!-- DISPONÍVEIS -->
+
+    <section class="area-cupons">
+
+      <h2>🎁 Disponíveis</h2>
+
+      {% for cupom in cupons %}
+
+        {% if cupom.id_cupom not in usados %}
+
+          <article class="card-cupom">
+
+            {% if cupom.tipo == "porcentagem" %}
+              <p class="valor">
+                {{ cupom.valor_desconto | porcentagem }} OFF
+              </p>
+            {% elif cupom.tipo == "fixo" %}
+              <p class="valor">
+                {{ cupom.valor_desconto | moeda }}
+              </p>
+            {% endif %}
+
+            <h3>{{ cupom.nome_cupom }}</h3>
+
             <p class="validade">
               {% if cupom.cupom_expira %}
                 Expira em {{ cupom.cupom_expira.strftime("%d/%m/%Y") }}
               {% else %}
                 Sem expiração
               {% endif %}
-
             </p>
-        
-      </article>
-    {% endfor %}
-  </section>
+
+          </article>
+
+        {% endif %}
+
+      {% endfor %}
+
+    </section>
+
+    <div class="borda"></div>
+
+    <!-- UTILIZADOS -->
+
+    <section class="area-cupons">
+
+      <h2>🕒 Utilizados</h2>
+
+      {% for cupom in cupons %}
+
+        {% if cupom.id_cupom in usados %}
+
+          <article class="card-cupom usado">
+
+            {% if cupom.tipo == "porcentagem" %}
+              <p class="valor">
+                {{ cupom.valor_desconto | porcentagem }} OFF
+              </p>
+            {% elif cupom.tipo == "fixo" %}
+              <p class="valor">
+                {{ cupom.valor_desconto | moeda }}
+              </p>
+            {% endif %}
+
+            <h3>{{ cupom.nome_cupom }}</h3>
+
+            <p class="cupom-usado">
+              Utilizado em compra
+            </p>
+
+          </article>
+
+        {% endif %}
+
+      {% endfor %}
+
+    </section>
+
   {% endif %}
+
 </div>
+
+<div class="resgate-cupom" class="escondido">
+  <form action="{{url_for('usuario.validar_cupom_resgate')}}" method="POST">
+    <label for="codigo"> Encontrou um código de cupom? Resgate aqui</label>
+    <input type="text" placeholder="Digite o código do cupom" name="codigo" id="codigo">
+    <button type="submit"> Resgatar Cupom</butron>
+  </form>
+</div>
+
   
 {% endblock %}
 

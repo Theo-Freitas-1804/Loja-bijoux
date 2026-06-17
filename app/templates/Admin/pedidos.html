@@ -1,0 +1,22 @@
+{% extends "Admin/base_admin.html" %}
+
+{% block admin_content %}
+
+<div id="pedidos">
+  <h1>Pedidos</h1>
+  {% if intervalo %}
+  <h3> Pedidos nos últimos {{ intervalo }} dias</h3>
+  {% else %}
+  <h3> Últimos Pedidos </h3>
+  {% endif %}
+</div>
+
+<div id="lista-pedidos">
+
+  {% for pedido in pedidos %}
+    {% include 'components/_card_pedido_admin.html' %}
+  {% endfor %}
+
+</div>
+
+{% endblock %}

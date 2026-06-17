@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {% include 'components/_header_interno.html' %}
+{% endblock %}
+
+{% block conteudo %}
+
+<nav id="nav-admin">
+  <ul>
+
+    <li>
+      <a href="{{ url_for('admin.dashboard') }}"   class="btn-opcao {% if pagina == 'dashboard' %}ativo{% endif %}">
+        Resumo
+      </a>
+    </li>
+    <li>
+      <a href="{{ url_for('admin.pedidos') }}" class="btn-opcao {% if pagina == 'pedidos' %}ativo{% endif %}">
+        Pedidos
+      </a>
+    </li>
+    
+    <li>
+      <button
+        id="btn-analise"
+        class="btn-opcao"
+        data-menu="analise"
+      >
+        Analytics
+      </button>
+    </li>
+
+    <li>
+      <button
+        id="btn-mais"
+        class="btn-mais"
+      >
+        Mais
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    </li>
+
+  </ul>
+</nav>
+
+<div class="wrapper-scroll">
+
+  <div class="painel-filtros">
+
+    <span class="titulo-filtro">
+      Período da análise
+    </span>
+
+    <div class="filtro-periodo">
+
+      <button
+        data-dias="7"
+        class="{% if intervalo == 7 %}ativo{% endif %}"
+      >
+        7 dias
+      </button>
+
+      <button
+        data-dias="15"
+        class="{% if intervalo == 15 %}ativo{% endif %}"
+      >
+        15 dias
+      </button>
+
+      <button
+        data-dias="30"
+        class="{% if intervalo == 30 %}ativo{% endif %}"
+      >
+        30 dias
+      </button>
+
+      <button id="custom">
+        Personalizado
+      </button>
+
+    </div>
+
+    <div class="datas-person escondido">
+
+      <form method="GET">
+
+        <input type="date" name="inicio">
+
+        <input type="date" name="fim">
+
+        <button type="submit">
+          Aplicar
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="painel-mais" class="escondido">
+
+  <a href="{{ url_for('admin.listar_produtos') }}">
+    Bijoux
+  </a>
+
+  <a href="{{ url_for('admin.consultar_clientes') }}">
+    Clientes
+  </a>
+
+  <button id="btn-marketing">
+    Marketing
+    <i class="ri-arrow-down-s-line"></i>
+  </button>
+
+  <div id="submenu-marketing" class="escondido">
+
+    <a href="#">Promoção</a>
+
+    <a href="#">Sorteio</a>
+
+    <a href="{{ url_for('admin.exibir_cupons') }}">
+      Cupons
+    </a>
+
+  </div>
+
+  <a href="#">
+    Atendimento
+  </a>
+
+</div>
+
+{% block admin_content %}
+{% endblock %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='Js/admin.js') }}"></script>
+
+{% endblock %}

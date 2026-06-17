@@ -128,8 +128,7 @@ class Favorito(db.Model):
         db.ForeignKey("Clientes.id_usuaria"),
         nullable=False
         )
-        
-
+    Produro = db.relationship("Produtos" , lazy=True)
 class Carrinho(db.Model):
   __tablename__ = "carrinho"
   id = db.Column(db.Integer, primary_key=True)
@@ -214,7 +213,21 @@ class Pedido(db.Model):
   codigo_rastreio = db.Column(
       db.String(100)
   )
-
+  
+  @property
+  def todos_prontos(self):
+    return all(item.status_producao == "Pronto"
+      for item in self.itens
+    )
+  
+  @property
+  def envio_formatado(self):
+    return {
+        "sexta_seguinte": "Sexta-feira seguinte",
+        "proxima_sexta": "Próxima Sexta-feira",
+        "agendado": "Agendado"
+    }.get(self.envio, self.envio)
+  
 class Itens(db.Model):
   __tablename__="pedido_itens"
   id = db.Column(db.Integer , primary_key= True)
@@ -234,6 +247,12 @@ class Itens(db.Model):
     backref="itens_pedido",
     lazy=True
     )
+
+  status_producao = db.Column(
+      db.String(30),
+      default="Em produção"
+  )
+  pronto = db.Column(db.Boolean , default=False)
   
 class Endereco(db.Model):
   __tablename__ = "enderecos"
