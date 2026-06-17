@@ -1,54 +1,59 @@
-<! DOCTYPE HTML>
-<html>
-  <head>
-    <title> Gerenciar Estoque | Kordonê Bijoux</title>
-    <meta charset= "utf-8">
-    <meta name = "viewport" content="width = device-width, initial-scale = 1.0">
-    <meta name = "description" content= "Kordonê Bijoux - Site oficial">
-    <meta name = "author" content = "Theodoro Meiel">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_table.css') }}">
+{% extends "base.html" %}
+
+{% block titulo %}
+  Gerenciar Estoque | Kordonê Bijoux
+{% endblock %}
+
+{% block conteudo %}
+    <div id="conteudo-filtro">
+      <button type="button" id="btn-overlay"> Filtrar</button>
+    </div>
+    <div id="overlay" class="escondido"></div>
+    {% include "components/_filtro_admin.html"%}
+    <div class="tabela-admin-wrapper">
+      <table id="dados-clientes">
+        <thead>
+          <tr>
+            <th> Id </th>
+            <th> Foto de Perfil </th>
+            <th> Nome </th>
+            <th> Email</th>
+            <th> Data de registro</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in clientes %}
+          <tr>
+            <td>{{ user.id_usuaria }}</td>
+          <td>
+            {% if user.foto_perfil %}
+              <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ user.foto_perfil) }}"
+               class="imagem-perfil">
+            {% else %}
+              <i class="ri-user-line"></i>
+            {% endif %}
+          </td>
+          <td>
+            {{ user.nome }}
+          </td>
+          <td>
+            {{ user.email }}
+          </td>
+          <td>
+            {% if user.data_registro %}
+              {{ user.data_registro| data}}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    
-  </head>
-  <body>
-    <table id="dados-clientes">
-      <thead>
-        <tr>
-          <th> Id </th>
-          <th> Foto de Perfil </th>
-          <th> Nome </th>
-          <th> Email</th>
-          <th> Data de registro</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in clientes %}
-        <tr>
-          <td>{{ user.id_usuaria }}</td>
-        <td>
-          {% if user.foto_perfil %}
-            <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ user.foto_perfil) }}"
-             class="foto-perfil-tabela">
-          {% else %}
-            <i class="ri-user-line"></i>
-          {% endif %}
-        </td>
-        <td>
-          {{ user.nome }}
-        </td>
-        <td>
-          {{ user.email }}
-        </td>
-        <td>
-          {% if user.data_registro %}
-            {{ user.data_registro| data}}
-          {% else %}
-            -
-          {% endif %}
-        </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </body>
+{% endblock %}
+
+{% block scripts%}
+  <script src="{{url_for('static' , filename='Js/users.js')}}"></script>
+{% endblock %}

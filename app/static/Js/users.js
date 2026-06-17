@@ -1,12 +1,13 @@
-const overlay = document.querySelector(".overlay")
+const btnFiltro = document.querySelector("#btn-overlay")
+const overlayFiltro = document.querySelector("#overlay")
 const painel = document.querySelector("#filtro-admin")
 
 btnFiltro.addEventListener("click", () => {
-  overlay.classList.remove("escondido")
-  painel.classList.remove("escondido")
+  overlayFiltro.classList.toggle("escondido")
+  painel.classList.toggle("escondido")
 })
 
-overlay.addEventListener("click", () => {
-  overlay.classList.add("escondido")
-  painel.classList.add("escondido")
+overlayFiltro.addEventListener("click", () => {
+  overlayFiltro.classList.toggle("escondido")
+  painel.classList.toggle("escondido")
 })

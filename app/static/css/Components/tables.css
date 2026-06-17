@@ -1,0 +1,95 @@
+/* WRAPPER */
+
+.tabela-admin-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* TABELA */
+
+table {
+  width: 100%;
+  min-width: 900px;
+
+  border-collapse: collapse;
+  background: white;
+}
+
+/* CÉLULAS */
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+/* CABEÇALHO */
+
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+/* LINHAS */
+
+tr:hover {
+  background: #fafafa;
+}
+
+#dados-clientes tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* IMAGENS */
+
+#dados-clientes img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#conteudo-filtro {
+  display: flex;
+}
+
+#conteudo-filtro button {
+  position: relative;
+  cursor: pointer;
+  left: 28px;
+}
+
+#filtro-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  top: 50%;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  
+}
+
+/* BOTÃO */
+
+.novo-produto {
+  display: inline-block;
+
+  margin-bottom: 16px;
+  padding: 10px 16px;
+
+  background: black;
+  color: white;
+
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.novo-produto:hover {
+  background: #333;
+}
