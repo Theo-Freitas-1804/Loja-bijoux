@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for , session
+from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for , session , jsonify
 from ..models import db , Usuario , Cupom , UsosCupons
 from .perfil import bp_usuario
+
+from ..decorators import login_required
 
 from flask_login import current_user
 import datetime as dt
@@ -11,7 +13,8 @@ fuso_brasilia = dt.timezone(dt.timedelta(hours=-3))
 @bp_usuario.route("/meus-cupons")
 def exibir_cupons():
   cupons = current_user.cupons
-  
+  for cupom in cupons:
+    print(cupom.nome_cupom)
   usados = {
     uso.cupom_id
     for uso in UsosCupons.query.filter_by(
@@ -19,81 +22,79 @@ def exibir_cupons():
     ).all()
   }
   
+  print("USADOS:", usados)
+
+  for cupom in cupons:
+    print(
+        cupom.id_cupom,
+        cupom.nome_cupom
+    )
+  
   return render_template("cupons.html" , cupons= cupons , usados=usados)
  
+from flask import jsonify
+
 @bp_usuario.route(
     "/meus-cupons/resgatar",
     methods=["POST"]
 )
+@login_required
 def validar_cupom_resgate():
 
-  codigo = request.form.get("codigo")
+  codigo = request.form.get("codigo", "").strip()
+  print("Código recebido:", repr(codigo))
+  
+  todos = Cupom.query.all()
 
-  print("======== RESGATE ========")
-  print("Código recebido:", codigo)
-
+  for c in todos:
+    print("Banco:", repr(c.nome_cupom))
+  
   agora = dt.datetime.now(fuso_brasilia)
 
   cupom = Cupom.query.filter_by(
       nome_cupom=codigo
   ).first()
-
-  print("Cupom encontrado:", cupom)
-
+  # Cupom inexistente
   if not cupom:
-      print("Cupom inexistente")
-      flash("Cupom não existe")
-      return redirect(
-          url_for("usuario.exibir_cupons")
-      )
-
+    return jsonify({
+      "sucesso": False,
+      "mensagem": "Cupom não existe"
+    })
+  # Cupom expirado
   if cupom.cupom_expira:
 
-      expira = cupom.cupom_expira.replace(
-          tzinfo=fuso_brasilia
-      )
+    expira = cupom.cupom_expira.replace(
+      tzinfo=fuso_brasilia)
 
-      print("Expira em:", expira)
-
-      if agora >= expira:
-          print("Cupom expirado")
-          flash("Cupom expirado")
-          return redirect(
-              url_for("usuario.exibir_cupons")
-          )
-
+    if agora >= expira:
+      return jsonify({
+        "sucesso": False,
+        "mensagem": "Cupom expirado"
+      })
+  # Cupom esgotado
   if (
       cupom.qtd_cupons is not None
       and cupom.qtd_cupons <= 0
   ):
-      print("Cupom esgotado")
-      flash("Cupom esgotado")
-      return redirect(
-          url_for("usuario.exibir_cupons")
-      )
-
+    return jsonify({
+      "sucesso": False,
+      "mensagem": "Cupom esgotado"
+    })
+  # Usuário já possui
   if cupom in current_user.cupons:
-      print("Usuária já possui cupom")
-      flash(
-          f"O cupom {codigo} já está na sua conta"
-      )
-      return redirect(
-          url_for("usuario.exibir_cupons")
-      )
-
-  print("Associando cupom à usuária")
-
+    return jsonify({
+      "sucesso": False,
+      "mensagem": f"O cupom {codigo} já está na sua conta"
+     })
+  # Resgate
   current_user.cupons.append(cupom)
-
+  if cupom.qtd_cupons is not None:
+      cupom.qtd_cupons -= 1
   db.session.commit()
-
-  print("Cupom salvo")
-
-  flash("Cupom resgatado com sucesso")
-
-  return redirect(
-      url_for("usuario.exibir_cupons")
-  )
+  return jsonify({
+    "sucesso": True,
+    "mensagem": "Cupom resgatado com sucesso"
+  })
  
 def validar_cupom_checkout(cupom):
 

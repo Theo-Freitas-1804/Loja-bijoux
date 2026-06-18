@@ -71,7 +71,7 @@ def dashboard():
 def pedidos():
   inicio , fim , intervalo= obter_intervalo()
   pedidos=consultar_pedidos(inicio , fim)
-  
+  print("dashboard")
   return render_template("Admin/pedidos.html", pagina="pedidos", inicio=inicio , fim=fim , intervalo=intervalo , pedidos=pedidos)
 
 @admin_bp.route(

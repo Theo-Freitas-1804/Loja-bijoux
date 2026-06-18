@@ -25,17 +25,11 @@ Meus Cupons | Kordonê Bijoux
   {% else %}
 
     <!-- DISPONÍVEIS -->
-
     <section class="area-cupons">
-
       <h2>🎁 Disponíveis</h2>
-
       {% for cupom in cupons %}
-
         {% if cupom.id_cupom not in usados %}
-
           <article class="card-cupom">
-
             {% if cupom.tipo == "porcentagem" %}
               <p class="valor">
                 {{ cupom.valor_desconto | porcentagem }} OFF
@@ -45,25 +39,21 @@ Meus Cupons | Kordonê Bijoux
                 {{ cupom.valor_desconto | moeda }}
               </p>
             {% endif %}
-
-            <h3>{{ cupom.nome_cupom }}</h3>
-
-            <p class="validade">
-              {% if cupom.cupom_expira %}
-                Expira em {{ cupom.cupom_expira.strftime("%d/%m/%Y") }}
-              {% else %}
-                Sem expiração
-              {% endif %}
-            </p>
-
-          </article>
-
-        {% endif %}
-
-      {% endfor %}
-
-    </section>
-
+        <h3>{{ cupom.nome_cupom }}</h3>
+        <p
+          class="validade"
+          data-expira="{{ cupom.cupom_expira.isoformat() if cupom.cupom_expira else '' }}"
+        >
+          {% if cupom.cupom_expira %}
+            Carregando...
+          {% else %}
+            Sem expiração
+          {% endif %}
+        </p>
+      </article>
+    {% endif %}
+  {% endfor %}
+</section>
     <div class="borda"></div>
 
     <!-- UTILIZADOS -->
@@ -107,15 +97,17 @@ Meus Cupons | Kordonê Bijoux
 </div>
 
 <div class="resgate-cupom" class="escondido">
-  <form action="{{url_for('usuario.validar_cupom_resgate')}}" method="POST">
+  <form action="{{url_for('usuario.validar_cupom_resgate')}}" method="POST" class="form-add">
     <label for="codigo"> Encontrou um código de cupom? Resgate aqui</label>
     <input type="text" placeholder="Digite o código do cupom" name="codigo" id="codigo">
     <button type="submit"> Resgatar Cupom</butron>
   </form>
 </div>
 
+<div class="overlay-modal escondido"></div>
   
 {% endblock %}
 
 {% block scripts %}
+  <script src="{{url_for('static' , filename='Js/cupons.js')}}"></script>
 {% endblock %}

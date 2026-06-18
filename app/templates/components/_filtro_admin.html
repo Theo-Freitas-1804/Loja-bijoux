@@ -3,15 +3,15 @@
 <div class="escondido" id="filtro-admin">
   <h3> Filtros </h3>
   <form action="" method="GET">
-    <div class="filtro-grupo">
+    <div class="filtro-grupo-admin">
       <label>Ticket Médio</label>
       <div class="valor">
         <input type="number" name="ticket_min" placeholder="De">
         <input type="number" name="ticket_max" placeholder="Até">
       </div>
     </div>
-    <div class="filtro-grupo">
-      <label></label>
+    <div class="filtro-grupo-admin">
+      <label> Mais Pedidos</label>
       <select name="qtd_pedidos" id="pedidos">
         <option value=""> Qualquer </option>
         <option value="0"> Nenhum </option>
@@ -21,7 +21,8 @@
       </select>
     </div>
     
-    <div class="filtro-grupo">
+    <div class="filtro-grupo-admin">
+      <label> Atividade </label>
       <select name="atividade">
         <option value="todos"> Todas</option>
         <option value="ativas"> Ativas</option>
