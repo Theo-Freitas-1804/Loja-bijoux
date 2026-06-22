@@ -153,65 +153,53 @@ class ProdutosImagens(db.Model):
   tipo_foto = db.Column(db.String(50), nullable=False, default='Produto')
   
 class Pedido(db.Model):
-  __tablename__ = "pedidos"
-
-  id = db.Column(
-      db.Integer,
-      primary_key=True
-  )
-
+  __tablename__= "pedidos"
+  id= db.Column(db.Integer , primary_key = True)
   usuaria = db.Column(
       db.Integer,
-      db.ForeignKey(
-          "Clientes.id_usuaria"
-      )
-  )
-
-  cliente = db.relationship(
-      "Usuario",
-      backref="pedidos",
-      lazy=True
+      db.ForeignKey("Clientes.id_usuaria"),
+      nullable=False
   )
 
   status = db.Column(
       db.String(50),
-      default="Pendente"
+      default="Pendente",
+      nullable=False
   )
 
   total = db.Column(
-      db.Numeric
-  )
-
-  data_pedido = db.Column(
-      db.DateTime,
-      default=lambda:
-      dt.datetime.now(
-          fuso_brasilia
-      )
-  )
-
-  itens = db.relationship(
-      "Itens",
-      backref="pedido",
-      lazy=True
+      db.Numeric,
+      nullable=False
   )
 
   envio = db.Column(
       db.String(30),
-      nullable=True
+      nullable=False
   )
-
+  
+  data_pedido = db.Column(
+    db.DateTime,
+    default=lambda: dt.datetime.now(fuso_brasilia),
+    nullable=False
+  )
+  
   data_entrega = db.Column(
       db.Date,
-      nullable=True
+      nullable=False
   )
 
   forma_pagamento = db.Column(
-      db.String(30)
+      db.String(30),
+      nullable=False
+  )
+  codigo_rastreio = db.Column(
+  db.String(100),
+  nullable=True
   )
 
-  codigo_rastreio = db.Column(
-      db.String(100)
+  cupom_usado = db.Column(
+  db.String(60),
+  nullable=True
   )
   
   @property
@@ -227,7 +215,7 @@ class Pedido(db.Model):
         "proxima_sexta": "Próxima Sexta-feira",
         "agendado": "Agendado"
     }.get(self.envio, self.envio)
-  
+
 class Itens(db.Model):
   __tablename__="pedido_itens"
   id = db.Column(db.Integer , primary_key= True)

@@ -46,12 +46,14 @@ def criar_pedido(
     total_final,
     envio,
     data_entrega ,
-    forma_pagamento
+    forma_pagamento , 
+    cupom_usado=None
 ):
   
   print("=== CHECKOUT ===")
   print(request.form)
   print("===============")
+  
   
   pedido = Pedido(
       usuaria=usuario.id_usuaria,
@@ -59,12 +61,20 @@ def criar_pedido(
       status="Pendente",
       envio=envio,
       data_entrega=data_entrega , 
-      forma_pagamento= forma_pagamento
+      forma_pagamento= forma_pagamento , 
+      cupom_usado=cupom_usado
   )
+  
+  print("Usuária:", usuario.id_usuaria)
+  print("Total:", total_final)
+  print("Envio:", envio)
+  print("Pagamento:", forma_pagamento)
+  print("Cupom:", cupom_usado)
 
+  print("ANTES DO COMMIT")
   db.session.add(pedido)
   db.session.flush()
-
+  print("DEPOIS DO COMMIT")
   return pedido
 
 def criar_itens_pedido(
@@ -140,34 +150,26 @@ def checkout():
     valor_com_desconto = subtotal
 
     if cupom_id:
-
-        cupom = Cupom.query.filter_by(
-            id_cupom=cupom_id
-        ).first()
-        cupom_valido = validar_cupom_checkout(cupom)
-
-        if cupom_valido:
-
-            if cupom.tipo == "fixo":
-
-                desconto = (
-                    cupom.valor_desconto
-                )
-
-            elif cupom.tipo == "porcentagem":
-
-                desconto = (
-                    float(subtotal) *
-                    (
-                        cupom.valor_desconto
-                        / 100
-                    )
-                )
-
-            valor_com_desconto = (
-                float(subtotal)
-                - desconto
+      cupom = Cupom.query.filter_by(
+        id_cupom=cupom_id
+      ).first()
+      cupom_valido = validar_cupom_checkout(
+        cupom)
+    if cupom_valido:
+      if cupom.tipo == "fixo":
+        desconto = (
+          cupom.valor_desconto
+        )
+      elif cupom.tipo == "porcentagem":
+        desconto = (
+          float(subtotal) *
+          (
+            cupom.valor_desconto/ 100
             )
+        )
+      valor_com_desconto = (
+        float(subtotal) -desconto)
+    
     end = current_user.enderecos[0]
 
     fretes = calcular_frete(end)
@@ -190,6 +192,8 @@ def checkout():
 )
 @login_required
 def finalizar_compra():
+  print("Entrou no final da compra")
+  print(request.form)
   itens_carrinho = Carrinho.query.filter_by(
     usuario_id=current_user.id_usuaria
     ).all()
@@ -237,14 +241,44 @@ def finalizar_compra():
   # TEMPORÁRIO
   total_final = subtotal
   
+  cupom_id = session.get("cupom_id")
+
+  cupom_nome = None
+  
+  if cupom_id:
+    cupom = Cupom.query.filter_by(
+        id_cupom=cupom_id
+    ).first()
+    cupom = validar_cupom_checkout(
+        cupom
+    )
+    if cupom:
+      cupom_nome = cupom.nome_cupom
+      if cupom.tipo == "fixo":
+        total_final -= float(
+          cupom.valor_desconto
+        )
+      elif cupom.tipo == "porcentagem":
+        total_final -= (
+          float(subtotal)* (cupom.valor_desconto/ 100)
+        )
+  
+  if total_final < 0:
+    total_final = 0
+  
   data_entrega = calcular_data_entrega()
 
   envio = request.form.get("horario")
 
   forma_pagamento = request.form.get("forma_pagamento")
 
-  endereco_id = request.form.get("endereco")
+  endereco_id = request.form.get("enderecos")
   frete = request.form.get("frete")
+  
+  print("FORMA PAGAMENTO:", forma_pagamento)
+  print("ENVIO:", envio)
+  print("ENDERECO:", endereco_id)
+  print("FRETE:", frete)
   
   pedido = criar_pedido(
     usuario=current_user,
@@ -252,18 +286,18 @@ def finalizar_compra():
     total_final=total_final,
     envio=envio,
     data_entrega=data_entrega ,
-    forma_pagamento=forma_pagamento
+    forma_pagamento=forma_pagamento,
+    cupom_usado=cupom_nome
   )
-  
+
   criar_itens_pedido(
-      pedido,
-      itens_carrinho
+    pedido,
+    itens_carrinho
   )
-  
   limpar_carrinho(
-      current_user.id_usuaria
+    current_user.id_usuaria
   )
-  
+
   cupom_id= session.get("cupom_id")
   
   if cupom_id:
