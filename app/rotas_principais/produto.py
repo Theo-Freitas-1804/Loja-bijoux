@@ -12,8 +12,11 @@ bp_produto = Blueprint(
 # CONSULTAR PRODUTO
 # =========================
 def buscar_produto(id):
-
-  produto = Produtos.query.get_or_404(id)
+  
+  produto = Produtos.query.filter(
+    Produtos.id_acessorio == id,
+    Produtos.em_estoque > 0
+  ).first_or_404()
 
   return produto
 

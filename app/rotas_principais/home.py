@@ -12,11 +12,13 @@ def pegar_banners():
     return Banners.query.order_by(db.func.random()).limit(3).all()
   
 def consultar_lancamentos():
-    return Produtos.query\
-        .order_by(Produtos.data_registro.desc())\
-        .limit(6)\
-        .all()
-
+  return (
+      Produtos.query
+      .filter(Produtos.em_estoque >= 1)
+      .order_by(Produtos.data_registro.desc())
+      .limit(6)
+      .all()
+  )
 def carregar_colecoes():
     return (
       Colecoes.query

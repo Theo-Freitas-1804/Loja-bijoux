@@ -52,10 +52,24 @@
     </div>
     
     <div id="item"> ● </div>
-      <button class="btn-carrinho" data-id="{{ produto.id_acessorio }}" data-logado="{{ current_user.is_authenticated|lower }}">
+
+    {% if produto.em_estoque <= 0 %}
+
+      <p class="produto-esgotado">
+        Produto esgotado
+      </p>
+
+    {% else %}
+      <button
+        class="btn-carrinho"
+        data-id="{{ produto.id_acessorio }}"
+        data-logado="{{ current_user.is_authenticated|lower }}"
+      >
         <i class="ri-shopping-cart-2-line"></i>
         Adicionar ao Carrinho
       </button>
+    
+    {% endif %}
   </div>
   
   <div class="borda"></div>
