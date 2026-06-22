@@ -25,43 +25,67 @@ def ver_carrinho():
 
   return render_template("components/_carrinho.html", produtos=produtos, total=total)
     
-@bp_carrinho.route("/adicionar-carrinho/<int:id>", methods=["POST"])
+@bp_carrinho.route(
+    "/adicionar-carrinho/<int:id>",
+    methods=["POST"]
+)
 @login_required
-def adicionar_carrinho(id):
-  print("ADICIONANDO AO CARRINHO:", id)
-  
+def adicionar_carrinho():
+
+  produto = Produtos.query.get_or_404(id)
+
+  # Produto esgotado
+  if produto.em_estoque <= 0:
+      return {
+          "status": "erro",
+          "mensagem": "Produto esgotado"
+      }, 400
+
   item = Carrinho.query.filter_by(
-    usuario_id=current_user.id_usuaria,
-    produto_id=id
-  ).first()
-  # DEBUG sem quebrar a lógica
-  print("CARRINHO:", Carrinho.query.all())
-  if item:
-    item.quantidade += 1
-  else:
-    novo = Carrinho(
       usuario_id=current_user.id_usuaria,
-      produto_id=id,
-      quantidade=1
+      produto_id=id
+  ).first()
+
+  # Já existe no carrinho
+  if item:
+
+      if item.quantidade >= produto.em_estoque:
+          return {
+              "status": "erro",
+              "mensagem": (
+                  f"Apenas "
+                  f"{produto.em_estoque} "
+                  f"unidade(s) disponível(is)"
+              )
+          }, 400
+
+      item.quantidade += 1
+
+  else:
+
+      novo = Carrinho(
+          usuario_id=current_user.id_usuaria,
+          produto_id=id,
+          quantidade=1
       )
-    db.session.add(novo)
+
+      db.session.add(novo)
+
   db.session.commit()
-  return {"status": "ok"}
-  
+
+  return {
+      "status": "ok"
+  }
+
 @bp_carrinho.route("/carrinho/dados")
 @login_required
 def dados_carrinho():
-  
-  print(current_user.is_authenticated)
-  print(current_user.id_usuaria)
-  
   itens = Carrinho.query.filter_by(
     usuario_id=current_user.id_usuaria
     ).all()
   resultado = []
   for item in itens:
     produto = Produtos.query.get(item.produto_id)
-    print(produto)
     resultado.append({
       "nome": produto.nome,
       "preco": produto.preco,

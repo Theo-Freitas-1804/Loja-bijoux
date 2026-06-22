@@ -84,7 +84,11 @@ Checkout | Kordonê Bijoux
       </a>
       
       <!-- Abro o fotm -->
-      <form action="{{ url_for('checkout.finalizar_compra') }}" method="POST">
+      <form
+  action="{{ url_for('checkout.finalizar_compra') }}"
+  method="POST"
+  onsubmit="console.log('SUBMIT DISPARADO')"
+>
         <!-- ETAPA 1 -->
         <div class="etapa">
           <div class="etapa-topo">
@@ -190,7 +194,9 @@ Checkout | Kordonê Bijoux
         </button>
         </div> 
       </div>
-      <button type="submit"> Finalizar Compra</button>
+      <input
+  type="submit"
+  value="Finalizar Compra">
       </form>
     </div>
   </div>
