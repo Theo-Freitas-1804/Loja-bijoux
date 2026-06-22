@@ -12,27 +12,50 @@ fuso_brasilia = dt.timezone(dt.timedelta(hours=-3))
 #Exibir cupons para a cliente
 @bp_usuario.route("/meus-cupons")
 def exibir_cupons():
+  print("Rota iniciada")
+  
   cupons = current_user.cupons
-  for cupom in cupons:
-    print(cupom.nome_cupom)
-  usados = {
+  
+  usados= []
+  disponiveis= []
+  
+  agora = dt.datetime.now(fuso_brasilia)
+  
+  usados_ids = {
     uso.cupom_id
-    for uso in UsosCupons.query.filter_by(
-        cliente=current_user.id_usuaria
+    for uso in UsosCupons.query.filter_by(cliente=current_user.id_usuaria
     ).all()
   }
   
-  print("USADOS:", usados)
-
   for cupom in cupons:
-    print(
-        cupom.id_cupom,
-        cupom.nome_cupom
-    )
-  
-  return render_template("cupons.html" , cupons= cupons , usados=usados)
- 
-from flask import jsonify
+    usado= ( cupom.id_cupom in usados_ids)
+    expirado = False
+    
+    if cupom.cupom_expira:
+      expira = cupom.cupom_expira.replace(tzinfo=fuso_brasilia)
+      expirado = agora >= expira
+    print(f"Cupons: {cupom.nome_cupom} , {usado} , {expirado}")
+    
+    if usado:
+      usados.append((cupom, "usado"))
+
+    elif expirado:
+      usados.append((cupom, "expirado"))
+
+    else:
+      disponiveis.append(
+          cupom
+      )
+    
+    print("\n Disponíveis \n")
+    for c in disponiveis:
+      print(c.nome_cupom)
+    print("\n Usados \n")
+    for c , status in usados:
+      print(c.nome_cupom)
+    
+    
+  return render_template("cupons.html" , disponiveis=disponiveis , usados=usados)
 
 @bp_usuario.route(
     "/meus-cupons/resgatar",
@@ -62,10 +85,8 @@ def validar_cupom_resgate():
     })
   # Cupom expirado
   if cupom.cupom_expira:
-
     expira = cupom.cupom_expira.replace(
       tzinfo=fuso_brasilia)
-
     if agora >= expira:
       return jsonify({
         "sucesso": False,
@@ -93,7 +114,18 @@ def validar_cupom_resgate():
   db.session.commit()
   return jsonify({
     "sucesso": True,
-    "mensagem": "Cupom resgatado com sucesso"
+    "mensagem": "Cupom resgatado com sucesso" ,
+    "cupom": {
+      "nome": cupom.nome_cupom ,
+      "tipo": cupom.tipo ,
+      "valor": cupom.valor_desconto,
+      "expira": (
+        cupom.cupom_expira.isoformat()
+        if cupom.cupom_expira
+        else ""
+        )
+      }
+      
   })
  
 def validar_cupom_checkout(cupom):

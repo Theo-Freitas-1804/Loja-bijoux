@@ -12,7 +12,14 @@ function abrirModal({
   const btncancel = document.querySelector("#modal-cancel")
   
   btnconfirm.textContent= confirmarMsg;
-  btncancel.textContent= cancelarMsg;
+
+  if (cancelarMsg) {
+    btncancel.textContent = cancelarMsg;
+    btncancel.style.display = "block";
+  } else {
+    btncancel.style.display = "none";
+  }
+
   
   overlay.classList.remove("escondido");
   
