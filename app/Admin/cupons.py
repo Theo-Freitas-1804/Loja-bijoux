@@ -22,14 +22,30 @@ def criar_cupom():
     nome = request.form.get("nome")
     valor = request.form.get("valor")
     tipo = request.form.get("tipo")
-    qtd = int(request.form.get("quantidade"))
+    
+    if request.form.get("infinito"):
+      qtd = None
+    else:
+      qtd_str = request.form.get(
+        "quantidade",
+        ""
+    ).strip()
+    if not qtd_str:
+        flash("Informe a quantidade")
+        return redirect(
+            url_for("admin.criar_cupom")
+        )
+
+    qtd = int(qtd_str)
     
     if request.form.get("sem_expiracao"):
       expira = None
     else:
       expira = dt.datetime.strptime(
-        request.form.get("expira"),"%Y-%m-%d"
-      )
+    request.form.get("expira"),
+    "%Y-%m-%dT%H:%M"
+)
+      
     
     valor_porcentagem = request.form.get("valor_porcentagem")
     valor_fixo = request.form.get("valor_fixo")

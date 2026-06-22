@@ -15,19 +15,18 @@ Meus Cupons | Kordonê Bijoux
 
 <div class="lista-cupons">
 
-  {% if not cupons %}
+  {% if not disponiveis and not usados %}
 
     <div class="aviso">
       <h3>Você não possui cupons</h3>
       <p>Encontrou um código? Resgate abaixo.</p>
     </div>
-
   {% else %}
-
     <!-- DISPONÍVEIS -->
-    <section class="area-cupons">
+    {% if disponiveis %}
+    <section id="cupons-disponiveis" class="area-cupons">
       <h2>🎁 Disponíveis</h2>
-      {% for cupom in cupons %}
+      {% for cupom in disponiveis %}
         {% if cupom.id_cupom not in usados %}
           <article class="card-cupom">
             {% if cupom.tipo == "porcentagem" %}
@@ -54,20 +53,16 @@ Meus Cupons | Kordonê Bijoux
     {% endif %}
   {% endfor %}
 </section>
+{% endif %}
     <div class="borda"></div>
-
     <!-- UTILIZADOS -->
-
+    
+    {% if usados %}
     <section class="area-cupons">
-
-      <h2>🕒 Utilizados</h2>
-
-      {% for cupom in cupons %}
-
-        {% if cupom.id_cupom in usados %}
-
+      <h2>🕒 Histórico </h2>
+      <h4> Cupons expirados ou usados em compras</h4>
+      {% for cupom , status in usados %}
           <article class="card-cupom usado">
-
             {% if cupom.tipo == "porcentagem" %}
               <p class="valor">
                 {{ cupom.valor_desconto | porcentagem }} OFF
@@ -77,24 +72,19 @@ Meus Cupons | Kordonê Bijoux
                 {{ cupom.valor_desconto | moeda }}
               </p>
             {% endif %}
-
             <h3>{{ cupom.nome_cupom }}</h3>
-
             <p class="cupom-usado">
               Utilizado em compra
             </p>
-
+            <p>
+              Uso: 
+            </p>
           </article>
-
-        {% endif %}
-
       {% endfor %}
-
     </section>
-
+    {% endif %}
   {% endif %}
-
-</div>
+  </div>
 
 <div class="resgate-cupom" class="escondido">
   <form action="{{url_for('usuario.validar_cupom_resgate')}}" method="POST" class="form-add">
@@ -103,9 +93,6 @@ Meus Cupons | Kordonê Bijoux
     <button type="submit"> Resgatar Cupom</butron>
   </form>
 </div>
-
-<div class="overlay-modal escondido"></div>
-  
 {% endblock %}
 
 {% block scripts %}

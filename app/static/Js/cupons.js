@@ -1,5 +1,89 @@
-document.addEventListener("DOMContentLoaded", function () {
+function iniciarTimer(card) {
 
+  const el = card.querySelector(".validade");
+
+  const dataExpira = el.dataset.expira;
+
+  if (!dataExpira) return;
+
+  function atualizar() {
+
+    const agora = new Date();
+    const expira = new Date(dataExpira);
+
+    const diff = expira - agora;
+
+    if (diff <= 0) {
+      el.textContent = "Expirado";
+      return;
+    }
+
+    const dias = Math.floor(
+      diff / (1000 * 60 * 60 * 24)
+    );
+
+    const horas = Math.floor(
+      (diff % (1000 * 60 * 60 * 24))
+      / (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+      (diff % (1000 * 60 * 60))
+      / (1000 * 60)
+    );
+
+    if (dias > 0) {
+      el.textContent =
+        `Expira em ${dias} dia${dias > 1 ? "s" : ""}`;
+    } else if (horas > 0) {
+      el.textContent =
+        `Expira em ${horas} hora${horas > 1 ? "s" : ""}`;
+    } else {
+      el.textContent =
+        `Expira em ${minutos} minuto${minutos > 1 ? "s" : ""}`;
+    }
+  }
+
+  atualizar();
+
+  setInterval(atualizar, 60000);
+}
+
+function adicionarCupomNaTela(cupom) {
+
+  const area = document.querySelector("#cupons-disponiveis");
+
+  const card =
+    document.createElement("article");
+
+  card.className = "card-cupom";
+
+  card.innerHTML = `
+    <p class="valor">
+      ${
+        cupom.tipo === "porcentagem"
+          ? `${cupom.valor}% OFF`
+          : `R$ ${cupom.valor}`
+      }
+    </p>
+
+    <h3>${cupom.nome}</h3>
+
+    <p
+      class="validade"
+      data-expira="${cupom.expira}"
+    >
+      Carregando...
+    </p>
+  `;
+  
+  area.prepend(card);
+
+  iniciarTimer(card);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  
   const form = document.querySelector(".form-add");
 
   form.addEventListener("submit", function (e) {
@@ -26,15 +110,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         onConfirmar: () => {
           if (data.sucesso) {
-            location.reload();
+            adicionarCupomNaTela(
+              data.cupom
+            );
+            form.reset();
           }
         }
       });
-
     });
-
   });
-
   document.querySelectorAll(".validade").forEach(el => {
 
     const dataExpira = el.dataset.expira;
