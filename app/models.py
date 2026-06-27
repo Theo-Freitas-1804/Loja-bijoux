@@ -37,17 +37,35 @@ class Usuario(UserMixin , db.Model):
       lazy=True
       )
     chamados = db.relationship(
-    "Chamado",
-    backref="cliente",
-    lazy=True
+      "Chamado",
+      backref="cliente",
+      lazy=True
     )
     
+    pedidos = db.relationship(
+      "Pedido",
+      backref="cliente",
+      lazy=True
+    )
+    
+    ultima_atividade = db.Column(
+    db.DateTime,
+    nullable=True
+    )
     
     def __repr__(self):
         return f"<Usuario {self.nome}>"
     def get_id(self):
         return str(self.id_usuaria)
-
+    
+    @property
+    def online(self):
+      if not self.ultima_atividade:
+        return False
+      agora = dt.datetime.now(fuso_brasilia)
+      return (agora - self.ultima_atividade).total_seconds() <= 120
+    
+    
 class UsuarioCupom(db.Model):
     __tablename__ = "usuario_cupom"
 
@@ -201,6 +219,13 @@ class Pedido(db.Model):
   db.String(60),
   nullable=True
   )
+  
+  itens = db.relationship(
+    "Itens",
+    backref="pedido",
+    lazy=True,
+    cascade="all, delete-orphan"
+)
   
   @property
   def todos_prontos(self):

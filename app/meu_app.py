@@ -2,12 +2,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .models import db , Usuario , Produtos , Colecoes , Banners# ⬅️ Importe seu objeto db do seu arquivo models.py
-from flask_login import LoginManager # ⬅️ Importe o LoginManager
+from flask_login import LoginManager , current_user # ⬅️ Importe o LoginManager
 from flask_migrate import Migrate
 
 import os
 from dotenv import load_dotenv
-import datetime
+import datetime as dt
 
 from .rotas_colecao.colecoes import bp_colecao
 from .rotas_principais.home import bp_principal
@@ -67,7 +67,20 @@ def create_app():
     @app.template_filter("data_curta")
     def formatar_data_curta(data):
       return data.strftime("%d/%m/%Y")
+    
       
+    fuso_brasilia = dt.timezone(dt.timedelta(hours=-3))
+
+    @app.before_request
+    def atualizar_ultima_atividade():
+      if current_user.is_authenticated:
+        current_user.ultima_atividade = dt.datetime.now(
+            fuso_brasilia
+        )
+
+        db.session.commit()
+    
+        
     os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
     db_path = os.path.join(app.root_path, "instance", "info.db")
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"

@@ -30,7 +30,7 @@ def ver_carrinho():
     methods=["POST"]
 )
 @login_required
-def adicionar_carrinho():
+def adicionar_carrinho(id):
 
   produto = Produtos.query.get_or_404(id)
 

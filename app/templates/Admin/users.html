@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "Admin/base_admin.html" %}
 
 {% block titulo %}
   Gerenciar Estoque | Kordonê Bijoux
@@ -6,30 +6,48 @@
 
 {% block conteudo %}
     <div id="conteudo-filtro">
-      <button type="button" id="btn-overlay"> Filtrar</button>
-      <p>
-        Filtro selecionado:
-        <span></span>
-      </p>
+      <button type="button" id="btn-overlay">
+        Filtrar
+      </button>
+  
+      <button type="button" id="btn-colunas">
+        Colunas
+      </button>
     </div>
+    
     <div id="overlay" class="escondido"></div>
     {% include "components/_filtro_admin.html"%}
+    {% include "components/_painel_colunas.html"%}
+    
     <div class="tabela-admin-wrapper">
       <table id="dados-clientes">
         <thead>
           <tr>
-            <th> Id </th>
-            <th> Foto de Perfil </th>
-            <th> Nome </th>
-            <th> Email</th>
-            <th> Data de registro</th>
+            <th data-coluna="id">
+              Id
+            </th>
+            <th data-coluna="foto">
+              Foto de Perfil
+            </th>
+            <th data-coluna="nome">
+              Nome
+            </th>
+            <th data-coluna="email">
+              Email
+            </th>
+            <th data-coluna="data">
+              Data de registro
+            </th>
+            <th id="coluna-filtro">
+              <!-- Inserir dados via javascript -->
+            </th>
           </tr>
         </thead>
         <tbody>
           {% for user in clientes %}
           <tr>
-            <td>{{ user.id_usuaria }}</td>
-          <td>
+            <td data-coluna="id">{{ user.id_usuaria }}</td>
+          <td data-coluna="foto">
             {% if user.foto_perfil %}
               <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ user.foto_perfil) }}"
                class="imagem-perfil">
@@ -37,18 +55,21 @@
               <i class="ri-user-line"></i>
             {% endif %}
           </td>
-          <td>
+          <td data-coluna="nome">
             {{ user.nome }}
           </td>
-          <td>
+          <td data-coluna="email">
             {{ user.email }}
           </td>
-          <td>
+          <td data-coluna="data" >
             {% if user.data_registro %}
               {{ user.data_registro| data}}
             {% else %}
               -
             {% endif %}
+          </td>
+          <td>
+            <!-- Inserir dados via Js-->
           </td>
           </tr>
           {% endfor %}

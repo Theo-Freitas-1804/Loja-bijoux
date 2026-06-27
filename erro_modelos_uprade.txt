@@ -1,0 +1,13 @@
+<function admin_required at 0x7ad860fd80>
+No onnxruntime backend found.
+Please install rembg with CPU or GPU support:
+
+    pip install "rembg[cpu]"  # for CPU
+    pip install "rembg[gpu]"  # for NVIDIA/CUDA GPU
+
+For more information, see: https://github.com/danielgatis/rembg#installation
+ * Serving Flask app 'app.meu_app:create_app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m

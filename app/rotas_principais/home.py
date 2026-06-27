@@ -19,6 +19,9 @@ def consultar_lancamentos():
       .limit(6)
       .all()
   )
+  
+  
+  
 def carregar_colecoes():
     return (
       Colecoes.query
@@ -31,7 +34,11 @@ def carregar_colecoes():
 def pagina_principal():
   print("BANNERS:", Banners.query.all())
   banners = pegar_banners()
+  
   produtos = consultar_lancamentos()
+  print("Quantidade:", len(produtos))
+  print(produtos)
+  
   favoritos_ids = []
   if current_user.is_authenticated:
     favoritos = Favorito.query.filter_by(
@@ -39,6 +46,11 @@ def pagina_principal():
     ).all()
     favoritos_ids = [f.produto_id for f in favoritos]
   colecoes = carregar_colecoes()
+  
+  for p in Produtos.query.all():
+    print(
+        f"{p.id_acessorio} | {p.nome} | estoque={p.em_estoque}"
+    )
   return render_template(
     "index.html",
     banners=banners ,

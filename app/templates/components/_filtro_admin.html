@@ -1,42 +1,101 @@
 <div class="overlay escondido"></div>
 
-<div class="escondido" id="filtro-admin">
-  <h3> Filtros </h3>
-  <form action="" method="GET">
-    <div class="filtro-grupo-admin">
+  
+  <h3 id="titulo-filtro"> Filtros </h3>
+  
+  
+  <form id= "admin-form" class="escondido">
+    
+    <div class="escondido" id="filtro-admin">
+      <div id="escolher-opcao">
+          <label for="opcao"> Escolha a métrica (tipo de filtro)</label>
+        <select name="opcao">
+          <option value="" selected disabled> Tipo de filtro</option>
+          <option value="ticket_medio">Ticket Médio</option>
+          <option value="pedidos">Pedidos</option>
+          <option value="atividade">Atividade</option>
+          <option value="compra">Última Compra</option>
+        </select>
+      </div>
+    
+    
+    <div id="ticket" class="filtro-grupo-admin escondido">
       <label>Ticket Médio</label>
       <div class="valor">
         <input type="number" name="ticket_min" placeholder="De">
         <input type="number" name="ticket_max" placeholder="Até">
       </div>
     </div>
-    <div class="filtro-grupo-admin">
+    <div id="pedidos" class="filtro-grupo-admin escondido">
       <label> Mais Pedidos</label>
-      <select name="qtd_pedidos" id="pedidos">
-        <option value=""> Qualquer </option>
-        <option value="0"> Nenhum </option>
-        <option value="1"> 1 Pedido</option>
-        <option value="5"> 5 pedidos </option>
-        <option value="mais"> 6 ou mais</option>
+      <select name="qtd_pedidos" id="grupo-pedidos">
+        <option value="">Qualquer </option>
+        <option value="0">Nenhum </option>
+        <option value="1">1 Pedido</option>
+        <option value="5">5 pedidos </option>
+        <option value="mais">6 ou mais</option>
       </select>
     </div>
     
-    <div class="filtro-grupo-admin">
+    <div id="atividade" class="filtro-grupo-admin escondido">
       <label> Atividade </label>
-      <select name="atividade">
-        <option value="todos"> Todas</option>
-        <option value="ativas"> Ativas</option>
-        <option value="inativas"> Inativas</option>
+      <select name="atividade" id="grupo-atividade">
+        <option value="todos">Todas</option>
+        <option value="ativas">Ativas</option>
+        <option value="inativas">Inativas</option>
       </select>
     </div>
     
-    <div class="filtro-grupo-admin"><select name="ultima_compra" id="">
-        <option value="15 dias"></option>
-        <option value=" 30 dias"></option>
-        <option value=" Mais de 6 meses"></option>
-        <option value="Nunca Comprou"></option>
-      </select></div>
+    <div id="ultimo-pedido" class="filtro-grupo-admin escondido">
+      <label> Última compra </label>
+
+      <select name="ultima_compra" id="ultima-compra">
+        <option value="None" selected>Qualquer</option>
+        <option value="15 dias"> Há 15 dias</option>
+        <option value=" 30 dias">Há 30 dias</option>
+        <option value=" Mais de 6 meses">Há mais de 6 meses</option>
+        <option value="Nunca Comprou">Nunca comprou</option>
+      </select>
+    </div>
     
+    <div class="ordem">
+      <p>Ordem:</p>
+      <div class="inputs">
+    
+      <label>
+        <input
+          type="radio"
+          name="ordem"
+          value="asc"
+          checked
+        >
+        <i class="ri-arrow-up-circle-fill"></i>
+        Crescente
+      </label>
+    
+      <label>
+        <input
+          type="radio"
+          name="ordem"
+          value="desc"
+        >
+        <i class="ri-arrow-down-circle-fill"></i>
+        Decrescente
+      </label>
+      </div>
+    </div>
+    
+    <div id="acoes-btns">
+      
+      <button type="button" id="limpar-filtro">
+        <i class="ri-delete-bin-7-line"></i>
+        Limpar Filtros
+      </button>
+      <button type="submit" id="aplicar">
+        <i class="ri-check-line confirm"></i>
+        Aplicar Filtros
+      </button>
+    </div>
   </form>
 </div>
 
