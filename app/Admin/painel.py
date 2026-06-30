@@ -6,8 +6,10 @@ from ..decorators import admin_required
 
 from.services.helpers import obter_intervalo , obter_views , obter_rank_produtos , consultar_novos_clientes , consultar_pedidos , contar_pedidos , calcular_ticket_medio , consultar_colecao_popular , calcular_variacao
 
+from .services.filtros import filtrar_pedidos_periodo
+
 from sqlalchemy import func
-from datetime import timedelta
+from datetime import timedelta 
 
 @admin_bp.route("/dashboard")
 @admin_required
@@ -135,3 +137,8 @@ def editar_pedido(id):
       "pedido_detalhe.html",
       pedido=pedido
   )
+  
+@admin_bp.route("/analytics")
+def analytics():
+  pedidos = filtrar_pedidos_periodo()
+  print(pedidos)

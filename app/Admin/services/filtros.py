@@ -1,8 +1,12 @@
 from flask import render_template , request , redirect , url_for
 
-from ...models import db, Produtos , visualizacao , Favorito , Usuario
+from ...models import db, Produtos , visualizacao , Favorito , Usuario , Pedido
 
 from ...utils.tempo import tempo_desde
+
+from .helpers import obter_intervalo
+
+import locale
 
 def filtrar_ticket_medio():
 
@@ -82,3 +86,20 @@ def filtrar_ultimo_acesso():
       "coluna": "Último acesso",
       "dados": resultados
   }
+  
+def filtrar_pedidos_periodo(inicio=None , fim=None):
+  if inicio and fim == None:
+    inicio , fim , intervalo = obter_intervalo()
+  pedidos = Pedidos.query.filter(Pedidos.data_pedido.between(inicio , fim)).order_by(Pedidos.data_pedido)
+  
+  dados = {}
+  
+  
+  for pedido in pedidos:
+    data = pedido.data_pedido.date()
+    
+    if data not in dados:
+      dados[data]=1
+    else:
+      dados[data]+=1
+  return dados
