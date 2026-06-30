@@ -7,10 +7,6 @@ def admin_required(f):
   @wraps(f)
   @login_required
   def decorated_function(*args, **kwargs):
-    print("DECORATOR EXECUTOU")
-    
-    print(current_user)
-    print(current_user.is_admin)
     
     if not current_user.is_admin:
       abort(403)
