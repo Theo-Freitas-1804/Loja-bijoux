@@ -28,17 +28,29 @@
   <div class="dados-produto">
     
   <form method="POST">
+    <label> Nome:</label>
     <input type="text" name="nome" value="{{ item.nome }}">
+    <label> Coleção: </label>
     <select name="colecao">
+      <option value=""
+        {% if item.colecao_id is none %}selected{% endif %}>
+        Sem coleção
+      </option>
+
       {% for c in colecoes %}
-        <option value="{{ c.id_colecao }}"
-        {% if item.colecao_id == c.id_colecao %}selected{% endif %}>
+        <option
+          value="{{ c.id_colecao }}"
+          {% if c.id_colecao == item.colecao_id %}selected{% endif %}>
           {{ c.nome_colecao }}
         </option>
       {% endfor %}
+    
     </select>
+    <label> Preço: </label>
     <input type="number" name="preco" value="{{ item.preco }}">
+    <label>Tamanho: </label>
     <input type="text" name="tamanho" value="{{ item.tamanho }}">
+    <label> Material: </label>
     <input type="text" name="material" value="{{ item.material }}">
   
     <button>Salvar</button>

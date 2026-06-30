@@ -11,6 +11,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const preco = document.getElementById("preco");
   const estoque = document.getElementById("qtd");
   const preview = document.getElementById("lista-preview");
+  const campoCategoria =document.getElementById("campo-categoria")
+  const radios =
+  document.querySelectorAll(
+    'input[name="categoria"]'
+  )
+  const categoriaProduto = document.querySelector('select[name="categoria_produto"]')
+
+  function atualizarCategoria() {
+    const selecionado = document.querySelector('input[name="categoria"]:checked')
+    if (selecionado && selecionado.value === "bijuteria") {
+      campoCategoria.classList.remove("escondido")
+    } else {
+      campoCategoria.classList.add("escondido")
+    }
+  }
+  
+  radios.forEach(radio => {
+    radio.addEventListener("change", atualizarCategoria)
+  })
+  
+  atualizarCategoria()
+  
   function criarProduto(){
     const tipoSelecionado =
     document.querySelector('input[name="categoria"]:checked');
@@ -23,7 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
       preco: parseFloat(preco.value.replace(",", ".")) || 0,
       qtd: parseInt(estoque.value) || 0,
       fotos: listafotos,
-      tipo: tipoSelecionado ? tipoSelecionado.value : null
+      tipo: tipoSelecionado ? tipoSelecionado.value : null ,
+      categoria: categoriaProduto.value
     };
 }
 
@@ -118,7 +141,7 @@ function enviarFila(){
     dados.append("preco", item.preco);
     dados.append("qtd", item.qtd);
     dados.append("categoria", item.tipo);
-
+    dados.append("categoria_produto",item.categoria)
   });
 
   console.log([...dados.entries()]); // 👈 MELHOR QUE ALERT
