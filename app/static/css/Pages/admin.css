@@ -461,9 +461,21 @@ body {
   font-size: .9rem;
 }
 
-#pedidos {
+.pagina-pedidos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}  
+
+#pedidos{
   text-align: center;
   margin-top: 8px;
+}
+
+#lista-pedidos{
+    width: 100%;
+    max-width: 900px;
 }
 
 .tooltip-metrica {

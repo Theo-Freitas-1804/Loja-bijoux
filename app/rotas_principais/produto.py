@@ -163,17 +163,42 @@ def pagina_produto(id):
 
 
 # =========================
-# BRINCOS
+# PÁGINAS DE ACESSÓRIOS ESPECÍFIVOS
 # =========================
 @bp_produto.route("/brincos")
 def exibir_brincos():
-
-  brincos = Produtos.query.filter_by(
-      categoria="brinco"
+  
+  produtos= Produtos.query.filter(
+    Produtos.categoria.ilike("%brinco%")
   ).all()
-  print(brincos)
+  
   return render_template(
-      "brincos.html",
+      "categoria.html",
+      produtos=produtos,
+      titulo="Brincos"
+  )
+  
+@bp_produto.route("/colares")
+def exibir_colares():
+  
+  produtos = Produtos.query.filter(
+    Produtos.categoria.ilike("%colar%")
+  ).all()
 
-      brincos=brincos
+  return render_template(
+      "categoria.html",
+      produtos=produtos,
+      titulo="Colares"
+  )
+
+@bp_produto.route("/broches")
+def exibir_broches():
+  produtos= Produtos.query.filter(
+    Produtos.categoria.ilike("%broche%")
+  ).all()
+  
+  return render_template(
+      "categoria.html",
+      produtos=produtos,
+      titulo="Broches"
   )

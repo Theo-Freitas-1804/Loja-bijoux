@@ -46,10 +46,21 @@
       <div id="nav-menu" class="nav__menu escondido">
         <ul>
           <li>
-            <a href="{{url_for('produto.exibir_brincos')}}"> Brincos</a>
+            <a href="{{ url_for('produto.exibir_brincos') }}">
+              Brincos
+            </a>
           </li>
-          <li><a href="#"> Colares</a></li>
-          <li><a href="#"> Outros </a></li>
+          <li>
+            <a href="{{ url_for('produto.exibir_colares') }}">
+                Colares
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('produto.exibir_broches') }}">
+                Broches
+            </a>
+          </li>
+
         </ul>
       </div>
       <!-- DIREITA -->

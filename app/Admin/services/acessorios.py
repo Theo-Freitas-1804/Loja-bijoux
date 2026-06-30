@@ -10,9 +10,9 @@ TIPO_BANNER = "banner"
 
 
 def tratar_dados(produto):
-  categoria = produto.get("tipo_foto")
+  tipo = produto.get("tipo_registro")
 
-  if categoria == TIPO_PRODUTO:
+  if tipo == TIPO_PRODUTO:
       try:
         produto["tamanho"] = str(produto["tamanho"]).strip()
         produto["preco"] = float(str(produto["preco"]).replace("R$", "").replace(",", ".").strip())
@@ -22,18 +22,26 @@ def tratar_dados(produto):
   else:
       produto["tamanho"] = None
       produto["preco"] = None
-
+ 
   return produto
 
-
 def criar_produto(dados, fotos, pasta):
-  novo = Produtos(
-      nome=dados["nome"],
-      tamanho=dados["tamanho"],
-      material=dados["material"],
-      preco=dados["preco"],
-      em_estoque=dados["qtd"]
-  )
+  
+  print(dados["categoria"], type(dados["categoria"]))
+  
+  print(Produtos.categoria)
+  print(type(Produtos.categoria))
+  
+  novo = Produtos()
+
+  novo.nome = dados["nome"]
+  novo.tamanho = dados["tamanho"]
+  novo.material = dados["material"]
+  novo.preco = dados["preco"]
+  novo.em_estoque = dados["qtd"]
+  
+  print("categoria:", dados["categoria"], type(dados["categoria"]))
+  novo.categoria = dados["categoria"]
 
   db.session.add(novo)
   db.session.flush()
@@ -79,8 +87,8 @@ def processar_acessorios(request):
   materiais = request.form.getlist("material")
   precos = request.form.getlist("preco")
   quantidades = request.form.getlist("qtd")
-  categorias = request.form.getlist("categoria")
-
+  tipos= request.form.getlist("categoria")
+  categorias= request.form.getlist("categoria_produto")
   print("=== DEBUG FORM ===")
   print("NOMES:", nomes)
   print("CATEGORIAS:", categorias)
@@ -95,12 +103,8 @@ def processar_acessorios(request):
       TIPO_BANNER: "static/imagens/banners"
   }
 
-  for i, (nome, colecao, tamanho, material, preco, qtd, categoria) in enumerate(
-      zip(nomes, colecoes, tamanhos, materiais, precos, quantidades, categorias)
-  ):
-
+  for i, (nome,colecao,tamanho,material,preco,qtd,tipo,categoria) in enumerate(zip(nomes,colecoes,tamanhos, materiais, precos,quantidades, tipos,categorias)):
       print("\n=== LOOP ITEM ===")
-
       produto = {
           "nome": nome,
           "colecao": colecao,
@@ -108,7 +112,8 @@ def processar_acessorios(request):
           "material": material,
           "preco": preco,
           "qtd": qtd,
-          "tipo_foto": categoria
+          "tipo_registro": tipo ,
+          "categoria":categoria
       }
 
       print("PRODUTO:", produto)
@@ -125,7 +130,7 @@ def processar_acessorios(request):
           print("PRODUTO INVÁLIDO")
           continue
 
-      tipo = produto["tipo_foto"]
+      tipo = produto["tipo_registro"]
 
       pasta = savepaths.get(tipo)
 
@@ -153,3 +158,4 @@ def processar_acessorios(request):
   db.session.commit()
 
   print("COMMIT OK")
+
