@@ -1,8 +1,11 @@
 # rotas_principais/ajuda.py
 
 from flask import request, render_template, session , abort
-from app.chatbot.utils import detectar_intencao
+from app.chatbot.utils import detectar_intencao_chat , transferir_conversa , detectar_foco
 from app.chatbot.handlers import HANDLERS
+from app.chatbot.admin_handlers import ADMIN_HANDLERS
+from app.chatbot.contextos import montar_contexto_chat , escolher_atendente , buscar_atendente
+from ..decorators import login_required
 
 from flask_login import current_user
 
@@ -16,21 +19,25 @@ from app.chatbot.handlers import gerar_saudacao
 from app.chatbot.utils import escolher_atendente
 
 from app.chatbot.dados import atendentes
+from app.chatbot.intents import INTENTS , INTENTS_ADMIN
 
 from app.models import db ,Chamado , Mensagem
 
 import datetime as dt
 
+import time
+
+
 @bp_principal.route("/ajuda")
+@login_required
 def ajuda():
-
-  if not current_user.is_authenticated:
-      abort(401, "Faça login para usar o chat.")
-
-  if "atendente" not in session:
+  if current_user.is_admin:
+    atendente= buscar_atendente("Amanda")
+  else:
+    
+    if "atendente" not in session:
       session["atendente"] = escolher_atendente()
-
-  atendente = session["atendente"]
+    atendente = session["atendente"]
 
   saudacao = gerar_saudacao(atendente)
   
@@ -48,50 +55,20 @@ def ajuda():
 @bp_principal.route("/chat", methods=["POST"])
 def chatbot():
 
+    inicio = time.perf_counter()
     if not current_user.is_authenticated:
         abort(401, "Faça login para usar o chat.")
-
-    # =========================
-    # DATA/HORA
-    # =========================
-
-    fuso_brasilia = dt.timezone(
-        dt.timedelta(hours=-3)
-    )
-
-    agora = dt.datetime.now(fuso_brasilia)
-
-    hora = agora.strftime("%H:%M")
-
-    # =========================
-    # ATENDENTE
-    # =========================
-
-    if "atendente" not in session:
-        session["atendente"] = escolher_atendente()
-
-    atendente = session["atendente"]
-
-    # =========================
-    # MSG
-    # =========================
-
-    msg = request.json.get(
-        "pergunta",
-        ""
-    ).lower()
-
-    print("MSG:", msg)
-    print("SESSION:", dict(session))
-
-    # =========================
-    # CONTEXTO
-    # =========================
-
-    estado = session.get("estado_chat")
-
-    print("Estado atual:", estado)
-
+    
+    contexto = montar_contexto_chat()
+    
+    hora = contexto["hora"]
+    msg = contexto["msg"]
+    estado = contexto["estado"]
+    atendente = contexto["atendente"]
+    intent = contexto["intent"]
+    foco = contexto["foco"]
+    usuaria = contexto["usuaria"]
+    
     # =====================================================
     # NOVO ENDEREÇO
     # =====================================================
@@ -263,37 +240,57 @@ def chatbot():
             "atendente": atendente
 
         }
-
+        
     # =====================================================
     # INTENT
     # =====================================================
 
-    intent = detectar_intencao(msg)
-
+    mensagens = []
+    
+    atendente_atual = session["atendente"]
+    
+    if not current_user.is_admin:
+      
+        nova_atendente = transferir_conversa(
+            intent,
+            atendente_atual
+        )
+    
+        if nova_atendente != atendente_atual:
+    
+            session["atendente"] = nova_atendente
+            atendente = session["atendente"]
+    
+            mensagens.append({
+                "mensagem": (
+                    f"Olha, {current_user.nome}, "
+                    f"vou encaminhar você para {nova_atendente['nome']}, "
+                    f"nossa {nova_atendente['cargo']}. "
+                    "Um instante, por favor. 😊"
+                ),
+                "hora": hora,
+                "atendente": atendente_atual
+            })
+    
     print("Intent:", intent)
-
     # =====================================================
     # TÍTULOS
     # =====================================================
 
     titulos_conversa = {
 
-        "pedido":
-        "Dúvida sobre pedido",
-
-        "frete":
-        "Consulta de frete",
-
-        "cupom":
-        "Consultando cupons",
-
-        "entrega":
-        "Consulta sobre entregas",
-
-        "endereco":
-        "Cadastro de endereço"
-
-    }
+      "pedido": "Dúvida sobre pedido",
+      "frete": "Consulta de frete",
+      "cupom": "Consultando cupons",
+      "entrega": "Consulta sobre entregas",
+      "endereco": "Cadastro de endereço",
+  
+      "resumir": "Resumo da loja",
+      "clientes": "Análise de clientes",
+      "vendas": "Análise de vendas",
+      "estoque": "Consulta de estoque"
+  
+  }
 
     titulo = titulos_conversa.get(intent)
 
@@ -319,7 +316,7 @@ def chatbot():
 
             cliente_id=current_user.id_usuaria,
 
-            atendente=atendente
+            atendente=session["atendente"]["nome"]
 
         )
 
@@ -350,7 +347,36 @@ def chatbot():
     # =====================================================
     # HANDLERS
     # =====================================================
+    
+    if current_user.is_admin and intent in ADMIN_HANDLERS:
 
+      resposta = ADMIN_HANDLERS[intent](foco)
+    
+      resposta["hora"] = hora
+      resposta["atendente"] = session["atendente"]
+    
+      mensagens.append({
+          "mensagem": resposta["mensagem"],
+          "hora": hora,
+          "atendente": session["atendente"]
+      })
+      
+      mensagem_bot = Mensagem(
+        cliente_id=current_user.id_usuaria,
+        chamado_id=chamado.id_chamado,
+        mensagem=resposta["mensagem"],
+        remetente="bot"
+      )
+
+      db.session.add(mensagem_bot)
+      db.session.commit()
+      
+      return {"mensagens": mensagens}
+    
+    print("Intent:", intent)
+    print("Handlers:", HANDLERS.keys())
+    print("Existe?", intent in HANDLERS)
+    
     if intent in HANDLERS:
 
         session["ultima_intencao"] = intent
@@ -359,7 +385,7 @@ def chatbot():
 
         resposta["hora"] = hora
 
-        resposta["atendente"] = atendente
+        resposta["atendente"] = session["atendente"]
 
         mensagem_bot = Mensagem(
 
@@ -377,22 +403,23 @@ def chatbot():
 
         db.session.commit()
 
-        return resposta
+        mensagens.append(resposta)
+        return {"mensagens": mensagens}
 
     # =====================================================
     # FALLBACK
     # =====================================================
-
-    return {
-
-        "mensagem":
-        "Não entendi 😅",
-
-        "hora": hora,
-
-        "atendente": atendente
-
-    }
+    
+    mensagens.append({
+    "mensagem": "Não entendi 😅",
+    "hora": hora,
+    "atendente": session["atendente"]
+    })
+    
+    print(f"Tempo total: {time.perf_counter() - inicio:.3f}s")
+    
+    return {"mensagens": mensagens}
+    
 @bp_principal.route("/ajuda/<int:chamado_id>")
 def abrir_chamado(chamado_id):
 
@@ -403,17 +430,16 @@ def abrir_chamado(chamado_id):
     id_chamado=chamado_id,
     cliente_id=current_user.id_usuaria
   ).first_or_404()
-  atendente=chamado.atendente
-  FOTOS_ATENDENTES = {
-
-    "Amanda": "Amanda.jpg",
-    "Flávia": None,
-    "Mariana": None
-  }
   
-  foto_atendente = (
-    FOTOS_ATENDENTES.get(atendente)
-  )
+  nome_atendente = chamado.atendente
+  
+  if current_user.is_admin:
+    atendente = buscar_atendente("Amanda")
+  else:
+    atendente = buscar_atendente(nome_atendente)
+  
+  saudacao = gerar_saudacao(atendente)
+  
   mensagens_anteriores = Mensagem.query.filter_by(
       chamado_id=chamado_id
   ).all()
@@ -423,6 +449,6 @@ def abrir_chamado(chamado_id):
     chamado=chamado,
     mensagens=mensagens_anteriores,
     atendente=atendente,
-    foto_atendente=foto_atendente,
-    nome_usuaria=current_user.nome
+    nome_usuaria=current_user.nome , 
+    saudacao=saudacao
 )

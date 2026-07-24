@@ -5,7 +5,7 @@ from datetime import datetime , timedelta
 
 from ...models import visualizacao , db , Produtos , Usuario , Pedido , Itens , Colecoes
 
-def obter_intervalo():
+def obter_intervalo(padrao=None):
   
   dias = request.args.get("dias" , type=int)
   
@@ -37,6 +37,15 @@ def obter_intervalo():
       print(
           f"Intervalo selecionado: {intervalo} dias"
       )
+  
+  else:
+    if padrao == "historico":
+      return None, None, None
+
+    fim = datetime.now()
+    inicio = fim - timedelta(days=30)
+    intervalo = 30
+  
   return inicio , fim , intervalo
 
 def obter_views(inicio=None , fim=None):
@@ -203,3 +212,8 @@ def calcular_variacao(atual, anterior):
   else:
       tendencia = "Estavel"
   return round(variacao, 1), tendencia
+  
+def calcular_participacao(parte , total):
+  if total == 0:
+    return 0
+  return round((parte / total) * 100 , 1)

@@ -133,7 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // PAGAMENTO
   // =========================
-
+  
+  const inputPagamento =
+  document.querySelector("#forma_pagamento")
+  
   pagamentos.forEach((botao) => {
 
     botao.addEventListener("click", () => {
@@ -145,11 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
       })
 
       botao.classList.add("ativo")
-
+      
+      inputPagamento.value = botao.dataset.pagamento
+      
       concluir(etapa3)
 
     })
 
   })
-
+  
+  
+  
 })

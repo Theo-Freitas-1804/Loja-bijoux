@@ -54,16 +54,16 @@ def criar_produto(dados, fotos, pasta):
               produto_id=novo.id_acessorio
           ))
 
-
-def criar_banner(fotos, pasta):
-  if not fotos:
+def criar_banner(arquivo, pasta, nome_arquivo):
+  if not arquivo:
       return
-
-  img = fotos[0]
-  nome_img = salvar_imagem_processada(img, pasta)
+  nome_img = salvar_imagem_processada(
+    arquivo,
+    pasta,
+    nome_arquivo
+  )
 
   db.session.add(Banners(imagem=nome_img))
-
 
 def criar_colecao(dados, fotos, pasta):
   if not fotos:

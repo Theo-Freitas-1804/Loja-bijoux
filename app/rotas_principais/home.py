@@ -32,7 +32,6 @@ def carregar_colecoes():
 
 @bp_principal.route("/")
 def pagina_principal():
-  print("BANNERS:", Banners.query.all())
   banners = pegar_banners()
   
   produtos = consultar_lancamentos()

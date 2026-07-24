@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+
+
 {% block header %}
   {% include 'components/_header_interno.html' %}
 {% endblock %}
@@ -21,13 +23,9 @@
     </li>
     
     <li>
-      <button
-        id="btn-analise"
-        class="btn-opcao"
-        data-menu="analise"
-      >
+      <a href="{{ url_for('admin.analytics')}}" class="btn-opcao {% if pagina== 'analise'%} ativo {% endif %}">
         Analytics
-      </button>
+      </a>
     </li>
 
     <li>
@@ -140,5 +138,4 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='Js/admin.js') }}"></script>
-
 {% endblock %}

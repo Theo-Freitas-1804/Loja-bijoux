@@ -1,33 +1,61 @@
 <div class="card-produto">
+
   {% if produto.imagens %}
     <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ produto.imagens[0].url) }}">
   {% endif %}
 
   <div class="info-produto">
     <strong>{{ produto.nome }}</strong>
-    <p>{{ produto.preco }}</p>
+    <p>R$ {{ produto.preco }}</p>
   </div>
 
   <div class="acoes-produto">
-    <a href="{{ url_for('produto.pagina_produto', id=produto.id_acessorio) }}" class="link">
-      Saiba Mais
-    </a>
 
-    {% if contexto is not defined or contexto != "favoritos" %}
-      <button class="btn-favorito" data-id="{{ produto.id_acessorio }}" data-logado="{{ current_user.is_authenticated|lower }}">
-        {% if produto.id_acessorio in favoritos_ids %}
-          <i class="ri-heart-fill"></i>
-        {% else %}
-          <i class="ri-heart-line"></i>
-        {% endif %}
-        <span class="numero-curtidas"> {{ produto.curtidas }}</span>
+    {% if contexto == "admin-selecao" %}
+
+      <label class="selecionar-produto">
+        <input
+          type="checkbox"
+          name="produto_destaque"
+          value="{{ produto.id_acessorio }}">
+        Selecionar
+      </label>
+
+    {% else %}
+
+      <a href="{{ url_for('produto.pagina_produto', id=produto.id_acessorio) }}"
+         class="link">
+        Saiba Mais
+      </a>
+
+      {% if contexto is not defined or contexto != "favoritos" %}
+        <button
+          class="btn-favorito"
+          data-id="{{ produto.id_acessorio }}"
+          data-logado="{{ current_user.is_authenticated|lower }}">
+
+          {% if produto.id_acessorio in favoritos_ids %}
+            <i class="ri-heart-fill"></i>
+          {% else %}
+            <i class="ri-heart-line"></i>
+          {% endif %}
+
+          <span class="numero-curtidas">
+            {{ produto.curtidas }}
+          </span>
+
+        </button>
+      {% endif %}
+
+      <button
+        class="btn-carrinho"
+        data-id="{{ produto.id_acessorio }}"
+        data-logado="{{ current_user.is_authenticated|lower }}">
+        Adicionar
       </button>
+
     {% endif %}
 
-    <button
-    class="btn-carrinho"
-    data-id="{{ produto.id_acessorio }}"
-    data-logado="{{ current_user.is_authenticated|lower }}"> Adicionar
-    </button>
   </div>
+
 </div>

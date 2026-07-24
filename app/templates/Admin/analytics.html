@@ -1,0 +1,62 @@
+{% extends "Admin/base_admin.html" %}
+
+{% block titulo %}
+Analytics | Painel Administrativo | Kordonê Bijoux
+{% endblock %}
+
+{% block admin_content %}
+
+<div class="pagina-analise">
+  <div class="graficos">
+    <button type="button"id="anterior" class="toggle-grafico" data-direcao="anterior"> <i class="ri-arrow-left-s-line"></i></button>
+    <canvas id="grafico"></canvas>
+    <button type="button" id="proximo" class="toggle-grafico"data-direcao="proximo">
+      <i class="ri-arrow-right-s-line" ></i>
+    </button>
+  </div>
+</div>
+<div class="indice">
+  
+</div>
+
+<div class="card-resumo-atendente">
+  <img
+    src="{{ url_for('static', filename='imagens/attendants/Amanda.jpg')}}"
+    alt="{{ admin.nome }}" id="foto-gerente">
+    <div class="info-admin">
+      <span>
+        Deixe a Amanda analisar os dados para você. Receba um resumo claro em segundos.
+      </span>
+      <a href="{{ url_for('principal.ajuda') }}">Gerar resumo</a>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+
+{{ super() }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  <!-- Pedidos por dia->>
+  const dados = {{pedidos_filtrados | tojson }};
+  const pedidosClientes = {{qtd_pedidos| tojson}}
+  
+  <!-- Pedidos × tixket médio -->
+  const comparativo = {{ comparativo|tojson }}
+  
+  <!-- Pedidos por hora-->
+  const PedidosHora = {{ pedidos_por_hora | tojson }}
+  console.log(PedidosHora)
+</script>
+
+<script src="{{url_for('static' , filename= 'Js/Admin/grafico_dias_semana.js')}}"></script>
+
+<script src="{{url_for('static' , filename='Js/Admin/grafico_pedidos_cliente.js')}}"></script>
+
+<script src="{{url_for('static' , filename='Js/Admin/grafico_pedidos_hora.js')}}"></script>
+
+<script src="{{url_for('static' , filename='Js/Pages/analytics.js')}}"></script>
+
+{% endblock %}

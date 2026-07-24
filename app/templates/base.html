@@ -29,7 +29,8 @@
       Kordonê Bijoux
     {% endblock %}
   </title>
-
+ 
+  
 </head>
 
 <body>
@@ -50,9 +51,23 @@
   
   {% include 'components/_modals.html'%}
 
-  
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
   
   <!-- SCRIPTS GLOBAIS -->
+  
+  <script>
+    const flashes = {{ get_flashed_messages(with_categories=true)|tojson }};
+  </script>
+  
   <script src="{{ url_for( 'static', filename='Js/Components/toast.js') }}"></script>
   
   <script src="{{ url_for( 'static', filename='Js/Components/carrinho.js') }}"></script>

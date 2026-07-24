@@ -1,0 +1,328 @@
+.lista-atendentes {
+  display: flex;
+  gap: 12px;
+
+  justify-content: flex-start;
+  align-items: stretch;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 12px;
+}
+
+.atendente {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #f542ce;
+  gap: 24px;
+
+  flex: 0 0 280px;
+
+}
+
+.atendente-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 16px;
+  gap: 8px;
+}
+
+.foto-atendente {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  flex-shrink: 0;
+  border-right: 1px solid #121212;
+}
+
+.foto-atendente img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+#cargo:hover{
+  color: green;
+  transform: scale(1.0);
+}
+
+.btn-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#overlay-atendentes {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 10;
+}
+
+.forms-atendente{
+    position: fixed;
+
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 85%;
+    max-width: 900px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #f7f7f7;
+    border: 1px solid #121212;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.cabecalho-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+.aba {
+  width: 100%;
+  background: none;
+  border: 1px solid #121212;
+}
+
+#aba-editar , #aba-novo {
+  width: 100%;
+  border: none;
+}
+
+#aba-editar {
+  border-top-left-radius: 12px;
+}
+#aba-novo {
+  border-top-right-radius: 12px;
+}
+
+.aba.ativa {
+  background: #121212;
+  border: 1px solid #f5f5f5;
+  color: #fff;
+}
+
+.enviar {
+  background: #f0f0f0;
+  border: 1px solid #E6E6E6;
+}
+
+.escondido {
+  display: none;
+}
+
+#painel-editar form {
+
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  max-width:500px;
+
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+#painel-editar form label{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+#painel-editar input[type="text"]{
+    width:100%;
+    box-sizing:border-box;
+}
+
+#painel-editar{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    padding:16px;
+    position:relative;
+}
+
+#painel-novo form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.lista-radio-atendentes{
+    width:100%;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(90px,1fr));
+    gap:12px;
+}
+
+.item-atendente{
+    border:1px solid red;
+    padding:10px 6px;
+}
+
+.item-atendente label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    text-align:center;
+    cursor:pointer;
+}
+
+.radio-atendente{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.pip-editar-atendente{
+    width:100%;
+
+    border:1px solid #121212;
+    border-radius:12px;
+    background:#f5f5f5;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:16px;
+
+    position:static;
+    
+    max-width: 520px ;
+    margin: 0 auto;
+}
+
+#pip-editar-atendente fotm {
+  gap: 16px;
+}
+
+#painel-editar input[type="text"]{
+    width:100%;
+}
+
+#foto-atendente,
+#icone-atendente{
+    margin-bottom:16px;
+}
+
+.enviar{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+}
+
+.promover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 8px 16px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adicionar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+  margin-top: 20px;
+  gap: 12px;
+}
+.adicionar:hover {
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 25px rgba(245 , 159 , 11 , 0.1);
+}
+#form-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1f2423;
+  border-radius: 12px;
+  gap: 16px;
+}
+
+#radios-tipo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.salvar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#form-promover {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+#overlay-bijoux{
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,.5);
+    z-index: 1000;
+}
+
+.form-bijoux {
+    width: 90%;
+    max-width: 1000px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    margin: 40px auto;
+
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 20px;
+}

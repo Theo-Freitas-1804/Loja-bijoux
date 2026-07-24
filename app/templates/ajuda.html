@@ -61,34 +61,59 @@ Ajuda | Kordonê Bijoux
     <form id="form-chat" class="{% if not mensagens %}escondido{% endif %}">
 
       <div id="input-area">
-        <input
-          type="text"
-          id="input-chat"
-          placeholder="Digite sua mensagem..."
-        />
+        <div class="wrapper-popup">
+          <button type="button" id="btn-popup-mais"><i class="ri-add-line"></i></button>
+          <div class="popup-mais escondido">
+            <button type="button" id="btn-limpar">
+              <i class="ri-delete-bin-7-line"></i>
+              Limpar Conversa
+            </button>
+            <button type="button" id="btn-novo">
+              <i class="ri-add-line"></i>
+              Nova Conversa
+            </button>
+            
+              
+            <input type="file" id="input-midia" hidden accept="image/*,.pdf" multiple>
+            <button type="button" id="btn-arquivo">
+              <i class="ri-file-add-line"></i>
+              Adicionar arquivo
+            </button>
+          </div>
+        </div>
+        
+        <!-- Div dinâmica , preencher via javascript -->
+        
+        <div class="anexos-pendentes"></div>
+        <div class="linha-composer">
+          
+          <input type="text" placeholder=" Digite aqui sua mensagem...." id="input-chat" name="msg">
+  
+          <button type="submit">
+            <i class="ri-send-plane-line"></i>
+          </button>
+        </div>
 
-        <button type="submit">
-          <i class="ri-send-plane-line"></i>
-        </button>
       </div>
 
     </form>
 
   </div>
-
+  
+  
 </div>
 {% endblock %}
 
 {% block scripts %}
-  {% if not mensagens %}
+
   <script>
     const saudacaoInicial = {{ saudacao|tojson }};
   </script>
-  {% else %}
+  
   <script>
-    const nomeAtendente = {{ atendente|tojson }};
+    const atendente = {{ atendente|tojson }};
     const nomeCliente = {{ nome_usuaria|tojson }};
   </script>
-  {% endif %}
+
   <script src="{{ url_for('static', filename='Js/ajuda.js') }}"></script>
 {% endblock %}

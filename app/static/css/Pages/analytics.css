@@ -1,0 +1,62 @@
+.pagina-analise {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.graficos {
+  display: flex;
+}
+
+.toggle-grafico {
+  background: none;
+  border: none;
+}
+
+.toggle-grafico i:hover {
+  font-size: 24px;
+}
+
+.indice {
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:15px;
+}
+
+.bolinha {
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#777;
+    transition:.25s;
+}
+
+.bolinha.ativa{
+    background:#121212;
+    transform:scale(1.25);
+}
+
+.card-resumo-atendente {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 8px 16px 8px;
+  border: 1px solid black;
+  border-radius: 12px;
+  gap: 16px;
+}
+
+#foto-gerente {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.info-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -116,50 +116,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
 
   }
-
+  
   // =========================
   // VALIDAÇÃO DA PESQUISA
   // =========================
-  const formBusca =
-    document.querySelector(".barra-pesquisa");
+  const formBusca = document.querySelector(".barra-pesquisa");
 
   if (formBusca) {
-
-    const inputBusca =
-      formBusca.querySelector("input");
-
-    const erro =
-      document.querySelector(".erro-busca");
+    const inputBusca = formBusca.querySelector("input");
 
     formBusca.addEventListener("submit", (e) => {
-
       if (!inputBusca.value.trim()) {
-
         e.preventDefault();
-
-        if (erro) {
-
-          erro.classList.remove("escondido");
-
-          setTimeout(() => {
-
-            erro.classList.add("escondido");
-
-          }, 2000);
-
-        }
-
-      } else {
-
-        if (erro) {
-          erro.classList.add("escondido");
-        }
-
+        mostrarToast("Digite algo para pesquisar.");
       }
-
     });
-
   }
 
-
+  
 });

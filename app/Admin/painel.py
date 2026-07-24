@@ -6,8 +6,9 @@ from ..decorators import admin_required
 
 from.services.helpers import obter_intervalo , obter_views , obter_rank_produtos , consultar_novos_clientes , consultar_pedidos , contar_pedidos , calcular_ticket_medio , consultar_colecao_popular , calcular_variacao
 
-from .services.filtros import filtrar_pedidos_periodo
-
+from .services.filtros import filtrar_pedidos_periodo , filtrar_pedidos_cliente , filtrar_ticket_medio , comparar_pedidos , filtrar_pedidos_horario
+ 
+from ..chatbot.dados import atendentes 
 from sqlalchemy import func
 from datetime import timedelta 
 
@@ -71,7 +72,7 @@ def dashboard():
 @admin_bp.route("/pedidos")
 @admin_required
 def pedidos():
-  inicio , fim , intervalo= obter_intervalo()
+  inicio , fim , intervalo= obter_intervalo(padrao=None)
   pedidos=consultar_pedidos(inicio , fim)
   print("dashboard")
   return render_template("Admin/pedidos.html", pagina="pedidos", inicio=inicio , fim=fim , intervalo=intervalo , pedidos=pedidos)
@@ -139,6 +140,17 @@ def editar_pedido(id):
   )
   
 @admin_bp.route("/analytics")
+@admin_required
+@login_required
 def analytics():
-  pedidos = filtrar_pedidos_periodo()
-  print(pedidos)
+  pedidos_filtrados = filtrar_pedidos_periodo()
+  qtd_pedidos = filtrar_pedidos_cliente()
+  comparativo = comparar_pedidos()
+  pedidos_por_hora = filtrar_pedidos_horario()
+  
+  gerente = next(
+    a for a in atendentes
+    if a["cargo"] == "Gerente"
+  )
+  admin = Usuario.query.filter_by(is_admin=True).first()
+  return render_template("Admin/analytics.html" , pagina = "analise" , pedidos_filtrados=pedidos_filtrados , qtd_pedidos=qtd_pedidos , comparativo=comparativo , pedidos_por_hora=pedidos_por_hora , admin=admin , gerente=gerente)

@@ -1,9 +1,9 @@
-function CriarRespostaBot(nome, hora, mensagem, classeExtra = "") {
+let anexosPendentes = []
+
+function CriarRespostaBot(nome, hora, mensagem, classeExtra = "", imagens = []) {
 
   const botContainer = document.createElement("div");
-
-  botContainer.className =
-    `mensagem-bot ${classeExtra}`;
+  botContainer.className = `mensagem-bot ${classeExtra}`;
 
   const botTopo = document.createElement("div");
   botTopo.className = "topo-msg";
@@ -22,21 +22,87 @@ function CriarRespostaBot(nome, hora, mensagem, classeExtra = "") {
 
   botMsg.innerHTML = mensagem;
 
+  // ==========================
+  // Imagens da resposta
+  // ==========================
+
+  if (imagens) {
+
+    // Aceita tanto uma string quanto uma lista
+    const lista = Array.isArray(imagens) ? imagens : [imagens];
+
+    for (const caminho of lista) {
+
+      const imagem = document.createElement("img");
+
+      imagem.src = caminho;
+      imagem.classList.add("imagem-chat");
+
+      botMsg.appendChild(imagem);
+
+    }
+
+  }
+
   botContainer.appendChild(botTopo);
   botContainer.appendChild(botMsg);
 
   return botContainer;
+
+}
+
+function adicionarMidia(arquivo , areapreview) {
+  if (!arquivo) return;
+
+  const img = document.createElement("img");
+  const item = document.createElement("div")
+  
+  
+  item.className = "preview-item"
+  img.src = URL.createObjectURL(arquivo);
+  
+  const btnexcluir = document.createElement("button")
+  btnexcluir.className= "remover-btn"
+  btnexcluir.innerHTML = "<i class='ri-close-line'></i>"
+  btnexcluir.addEventListener("click" , ()=>{
+    item.remove()
+  })
+  item.appendChild(img)
+  item.appendChild(btnexcluir)
+  areapreview.appendChild(item)
+}
+
+function abrirSeletorMidia(input) {
+  input.click();
+}
+
+function selecionarMidia(input , areapreview) {
+  const arquivo = input.files[0]
+  if(!arquivo) return;
+  anexosPendentes.push(arquivo)
+  console.log(anexosPendentes);
+  adicionarMidia(arquivo , areapreview)
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
+  
   const form = document.getElementById("form-chat");
   const input = document.getElementById("input-chat");
   const resposta = document.getElementById("chat-box");
 
   const btn = document.querySelector("#nova-chamada");
   const intro = document.querySelector(".introducao");
+  
+  // Menu select de imagens //
+  
+  const btnmidia = document.querySelector("#btn-arquivo")
+  const inputmidia = document.querySelector("#input-midia")
+  
+  const areapreview = document.querySelector(".anexos-pendentes")
+  
+  
 
+  
   // 👉 botão abrir chat
   if (btn && form && intro) {
 
@@ -58,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         agora.getMinutes().toString().padStart(2, "0");
 
       const mensagemBoasVindas = CriarRespostaBot(
-        nomeAtendente,
+        atendente.nome,
         hora,
         saudacaoInicial,
         "mensagem-boasvindas"
@@ -141,19 +207,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // =========================
       // 🤖 FETCH BOT
       // =========================
-
+      
+      const formData = new FormData();
+      formData.append("pergunta", mensagem);
+      for (const arquivo of anexosPendentes) {
+        formData.append("arquivos", arquivo);
+      }
+      
       fetch("/chat", {
 
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          pergunta: mensagem
-        })
-
+        body: formData
       })
 
       .then(res => res.json())
@@ -161,14 +225,19 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
 
         loading.remove();
+        
+        for (const msg of data.mensagens) {
+          const respostaBot = CriarRespostaBot(
+            msg.atendente.nome,
+            msg.hora,
+            msg.mensagem,
+            "",
+            msg.imagens
+          );
+          resposta.appendChild(respostaBot);
+        }
+        
 
-        const respostaBot = CriarRespostaBot(
-          data.atendente,
-          data.hora,
-          data.mensagem
-        );
-
-        resposta.appendChild(respostaBot);
 
         resposta.scrollTop = resposta.scrollHeight;
 
@@ -189,5 +258,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   }
-
+  
+  const btnextra = document.querySelector("#btn-popup-mais")
+  
+  const painelopcoes = document.querySelector(".popup-mais")
+  
+  btnextra.addEventListener("click" , () =>{
+    painelopcoes.classList.toggle("escondido")
+  })
+  
+  const btnlimpar = document.querySelector("#btn-limpar")
+  const btnnovo = document.querySelector("#btn-novo")
+  btnlimpar.addEventListener("click" , () =>{
+    resposta.innerHTML = ""
+    mostrarToast("A conversa foi limpa , mas está salva no seu histórico.")
+    intro.classList.remove("escondido")
+    painelopcoes.classList.add("escondido")
+  })
+  btnnovo.addEventListener("click" , ()=>{
+    abrirModal({
+      titulo: "Nova conversa",
+      mensagem: "Deseja abrir uma nova conversa? A atual continuará disponível no histórico.",
+      confirmarMsg: "Sim, abrir",
+      cancelarMsg: "Não, continuar",
+      onConfirmar: () => {
+        resposta.innerHTML = "";
+        mostrarToast("Nova conversa iniciada!");
+      }
+    });
+  })
+  
+  // Ligando o input de mídia //
+  
+  btnmidia.addEventListener("click", () => abrirSeletorMidia(inputmidia));
+  
+  inputmidia.addEventListener("change", () => {
+    selecionarMidia(inputmidia, areapreview);
+  });
+  
+  for (const arquivo of inputmidia.files) {
+    adicionarMidia(arquivo , areapreview);
+  }
+  
 });

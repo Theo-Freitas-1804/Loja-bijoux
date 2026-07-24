@@ -1,21 +1,45 @@
-.imagens-produto {
-  display: flex;
-  justify-content: center;
-  border: 1px dotted black;
-  margin-top: 12px;
+
+.imagens-produto{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    width:100%;
+
+    padding:20px;
+
+    border:1px solid #dcdcdc;
+    border-radius:16px;
+
+    background:#fafafa;
 }
 
-.imagens-produto img {
-  width: 120px;
-  height: auto;
-  gap: 20px;
+.lista-imagens img{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.lista-imagens img{
+    transition:.2s;
+    cursor:pointer;
+}
+
+.lista-imagens img:hover{
+    transform:scale(1.04);
 }
 
 .dados-produto form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
   gap: 24px;
-  max-width: 320px;
+    
+  width:min(900px,95%);
+
   margin: 60px auto;
   padding: 24px;
 
@@ -25,8 +49,79 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
+.dados-produto input,
+.dados-produto select{
+    width:320px;
+}
+
 .dados-produto button {
-  background: black;
-  border: 2px dotted white;
-  color: white;
+    background: #16a34a;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.dados-produto button:hover {
+    background: #15803d;
+    transform: translateY(-1px);
+}
+
+.descricao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*.lista-imagens{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}*/
+
+/*.lista-imagens{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  border:2px solid red;
+}*/
+.imagens-produto{
+    border:2px solid blue;
+}
+
+.lista-imagens button{
+    margin:0;
+    width:60px;
+    height:60px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    flex:0 0 auto;
+
+    background:red;
+}
+
+.teste{
+    width:60px;
+    height:60px;
+    background:red;
+}
+.lista-imagens{
+    display:flex;
+    gap:20px;
+    align-items:center;
+
+    overflow:auto;
+}
+.lista-imagens > *{
+    position:static !important;
+    float:none !important;
+    margin:0 !important;
+    transform:none !important;
 }

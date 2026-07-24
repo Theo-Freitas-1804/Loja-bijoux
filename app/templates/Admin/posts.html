@@ -1,0 +1,162 @@
+{% extends "Admin/base_admin.html" %}
+
+{% block titulo %}
+Gerenciar Conteúdo | Kordonê Bijoux
+{% endblock %}
+
+{% block header %}
+  {% include 'components/_header_interno.html' %}
+{% endblock %}
+
+{% block conteudo %}
+<div class="visao-geral-conteudo">
+  <h2>Atendentes</h2>
+  <div class="lista-atendentes">
+    {% for atendente in atendentes %}
+    <div class="atendente">
+      <div class="foto-atendente">
+        {% if atendente.foto_url %}
+          <img src="{{ atendente.foto_url }}" alt="{{ atendente.nome }}" width="40" height="40">
+        {% else %}
+        <i class="ri-user-2-fill"></i>
+        {% endif %}
+      </div>
+      <div class="atendente-info">
+        <h2>{{ atendente.nome }}</h2>
+        <h3>{{ atendente.cargo }}</h3>
+        {% for especialidade in atendente.especialidade %}
+          <h4>{{ especialidade }}</h4>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="btn-cards">
+      <button type="button" id="ativar-form">
+        Editar atendentes
+      </button>
+    </div>
+  
+  <div class="promover">
+    <h3> Selecione Bijoux para destacar</h3>
+    <button type="button" id="select-promover">
+      <i class="ri-add-line"></i>
+      Selecione...
+    </button>
+  </div>
+  
+  <div class="adicionar">
+    <h2> Adicione conteùdo (tutoriais , looks , etc) </h2>
+    <form method="POST" action="{{url_for('admin.upload_conteudo')}}" enctype="multipart/form-data" id="form-conteudo">
+      <input type="file" name="midia" id="input-foto">
+      <input type="text" placeholder="Digite o nome..." name="nome_arquivo">
+      <div id="radios-tipo">
+
+        <label for="banner">Banner</label>
+        <input type="radio" name="tipo" value="banners">
+
+        <input type="radio" name="tipo" value="looks">
+        <label for="look">Look</label>
+
+        
+        <input type="radio" name="tipo" value="tutoriais">
+        <label for="tutorial">Tutorial</label>
+      </div>
+        <div class="salvar">
+          <span> Salvar</span>
+          <button type="submit"> Salvar</button>
+        </div>
+    </form>
+  </div>
+</div>
+<!-- Overlay -->
+
+<div id="overlay-atendentes" class="overlay escondido">
+  <div class="forms-atendente">
+    <!-- Cabeçalho -->
+    <div class="cabecalho-form">
+      <button type="button" id="aba-editar" class="aba ativa">
+        Editar
+      </button>
+      <button type="button" id="aba-novo" class="aba">
+        Nova
+      </button>
+    </div>
+    <!-- Painel Editar -->
+    
+    <div id="painel-editar">
+      <!-- checkboxes -->
+      <div class="lista-radio-atendentes">
+        {% for atendente in atendentes %}
+          <div class="item-atendente">
+            <label class="radio-atendente">
+              <input type="radio" name="atendentes" value="{{ atendente.id }}">
+                {{ atendente.nome }}
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="pip-editar-atendente escondido">
+        <form action="{{ url_for('admin.editar_atendente') }}" method="POST" enctype="multipart/form-data" class="form-editar">
+          <input type="hidden" name="id" id="id-atendente">
+          <img src="" alt="" width="40" height="40" id="foto-atendente">
+          <i id="icone-atendente" class="ri-user-2-fill"></i>
+          <label for="input-foto"> Foto:</label>
+          <input type="file" name="foto-atendente" id="input-foto">
+          <label>
+            Nome:
+            <input type="text" id="nome-atendente" name="nome" class="valores nome">
+          </label>
+          <label>
+            Cargo:
+            <input type="text" id="cargo-atendente" name="cargo" class="valores cargo">
+          </label>
+          <label>
+            Funções:
+            <input type="text" id="funcoes-atendente" name="funcoes" class="valores espec">
+          </label>
+          <button type="submit" class="enviar">
+            Salvar alterações
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Painel Nova -->
+    <div id="painel-novo" class="escondido">
+      <form action="{{ url_for('admin.criar_nova_atendente') }}" method="POST" id="form-novo">
+        <label>Foto</label>
+        <input type="file" name="foto-nova-atendente" id="input-foto">
+        <label>Nome</label>
+        <input type="text" name="nome-nova">
+        <label>Cargo</label>
+        <input type="text" name="cargo-nova">
+        <label>Especialidades</label>
+        <small> O que quer que ela faça?</small>
+        <input type="text" name="especialidade-nova" placeholder="Separadas por vírgula">
+        <button type="submit" class="enviar">
+          Criar atendente
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="overlay-bijoux" class="overlay escondido">
+  <div class="form-bijoux">
+    <form action="" id="form-promover">
+      {% for produto in produtos %}
+  
+        {% with contexto="admin-selecao" %}
+            {% include "components/_card_produto.html" %}
+        {% endwith %}
+      {% endfor %}
+      <button type="submit"> Promover </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='Js/Pages/posts.js') }}"></script>
+{% endblock %}

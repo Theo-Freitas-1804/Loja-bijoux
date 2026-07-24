@@ -5,12 +5,11 @@ from .bp import admin_bp
 
 from ..models import db , Produtos , Usuario
 
-from .services.filtros import filtrar_ticket_medio , filtrar_pedidos , filtrar_ultimo_acesso
+from .services.filtros import filtrar_ticket_medio , filtrar_pedidos_cliente , filtrar_ultimo_acesso
 
 from ..utils.tempo import tempo_desde
 
 from ..decorators import admin_required
-print(admin_required)
 
 import datetime
 
@@ -19,7 +18,6 @@ import datetime
 @login_required
 def consultar_clientes():
   clientes = Usuario.query.all()
-  print(consultar_clientes)
   return render_template(
       "Admin/users.html",
       clientes=clientes
@@ -29,7 +27,7 @@ def consultar_clientes():
 
 handlers_filtros = {
   "ticket_medio": filtrar_ticket_medio ,
-  "pedidos": filtrar_pedidos ,
+  "pedidos": filtrar_pedidos_cliente ,
   "atividade": filtrar_ultimo_acesso
 }
 

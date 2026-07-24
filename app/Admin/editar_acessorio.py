@@ -44,6 +44,7 @@ def adicionar_imagem(id):
     return redirect(request.referrer)
     
 @bp_novo_produto.route("/admin/produto/deletar/<int:id>", methods=["POST"])
+@admin_required
 def deletar_produto(id):
   produto = Produtos.query.get_or_404(id)
 
@@ -52,26 +53,32 @@ def deletar_produto(id):
 
   return redirect(request.referrer)
   
-@bp_novo_produto.route("/admin/editar-produto/<id>" , methods = ["GET" , "POST"])
+from flask import flash
+
+@bp_novo_produto.route("/admin/editar-produto/<id>", methods=["GET", "POST"])
+@admin_required
 def editar(id):
-  item= Produtos.query.get_or_404(id)
-  colecoes = Colecoes.query.all()
-  if request.method == "POST":
-    print(request.form)
-    item.nome = request.form.get("nome")
-    
-    colecao_id = request.form.get("colecao")
-    colecao = Colecoes.query.get(colecao_id)
-    item.colecao = colecao
-    
-    item.preco = request.form.get("preco")
-    item.tamanho = request.form.get("tamanho")
-    item.material= request.form.get("material")
-    
-    db.session.commit()
-    
-    
-    return redirect(url_for("principal.pagina_principal"))
-  return render_template("Admin/editar_produto.html" ,
-  item=item , 
-  colecoes=colecoes)
+    item = Produtos.query.get_or_404(id)
+    colecoes = Colecoes.query.all()
+
+    if request.method == "POST":
+        item.nome = request.form.get("nome")
+
+        colecao_id = request.form.get("colecao")
+        item.colecao = Colecoes.query.get(colecao_id)
+
+        item.preco = request.form.get("preco")
+        item.tamanho = request.form.get("tamanho")
+        item.material = request.form.get("material")
+
+        db.session.commit()
+
+        flash("Produto atualizado com sucesso!", "success")
+
+        return redirect(url_for("principal.pagina_principal"))
+
+    return render_template(
+        "Admin/editar_produto.html",
+        item=item,
+        colecoes=colecoes
+    )

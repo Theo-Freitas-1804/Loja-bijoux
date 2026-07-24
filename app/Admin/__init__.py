@@ -4,3 +4,4 @@ from . import painel
 from . import produtos
 from . import clientes
 from . import cupons
+from .routes import postagens

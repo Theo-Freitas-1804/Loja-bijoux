@@ -7,7 +7,17 @@ from app.services.frete import calcular_frete , salvar_endereco
 
 from app.models import Pedido , Endereco
 
+from .tutoriais import responder_compra
+
 import datetime as dt
+
+import random 
+frases = [
+    "Vou acompanhar seu atendimento.",
+    "Estou à disposição para ajudar você.",
+    "Será um prazer atender você.",
+    "Como posso ajudar hoje?",
+]
 
 def responder_cupons():
     cupons = current_user.cupons
@@ -46,24 +56,23 @@ def responder_frete():
       "como 'Casa' ou 'Trabalho' 📦"
   }
     
-def gerar_saudacao(nome):
-    hora = int(dt.datetime.now().strftime("%H"))
-    if 6 <= hora < 12:
-        cumprimento = "Bom dia"
-    elif 12 <= hora < 18:
-        cumprimento = "Boa tarde"
-    else:
-        cumprimento = "Boa noite"
-    
-    return f"""
-    {cumprimento}! Eu sou {nome} e vou te atender agora 😊
-    Como posso ajudar?
-    1️⃣ Cupons
-    2️⃣ Pedidos
-    3️⃣ Entrega
-    4️⃣ Frete
-    """.strip()
-    
+ 
+def gerar_saudacao(atendente):
+  hora = int(dt.datetime.now().strftime("%H"))
+
+  if 6 <= hora < 12:
+      cumprimento = "Bom dia"
+  elif 12 <= hora < 18:
+      cumprimento = "Boa tarde"
+  else:
+      cumprimento = "Boa noite"
+
+  return (
+      f"{cumprimento}, {current_user.nome}! "
+      f"Eu sou {atendente['nome']}, {atendente['cargo']} da Kordonê Bijoux. "
+      f"{random.choice(frases)}"
+  )
+
   # chatbot/handlers.py
 
 
@@ -88,11 +97,15 @@ def responder_endereco():
     'Você também pode adicionar uma tag, '
     'como "Casa" ou "Trabalho".'
 }
+
+
+
 HANDLERS = {
     "cupom": responder_cupons,
     "pedido": responder_pedidos,
     "entrega": responder_entrega,
     "frete": responder_frete , 
-    "saudacao": gerar_saudacao ,
-    "endereco": responder_endereco
+    "saudacao": responder_saudacao ,
+    "endereco": responder_endereco ,
+    "tutorial": responder_compra
 }

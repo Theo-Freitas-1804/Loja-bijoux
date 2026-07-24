@@ -1,61 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title> Editar Acessório | Kordonê Bijoux</title>
+{% extends "Admin/base_admin.html" %}
+
+{% block titulo %}
+Editar acessoório | Kordonê Bijoux
+{% endblock %}
+{% block admin_content %}
   
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_header.css' )}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_pesquisa.css' )}}">
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/style_dropdown.css' )}}">
-  
-  <link rel="stylesheet" href="{{url_for('static' , filename= 'css/editar_produto.css' )}}">
-  
-  
-</head>
-<body>
-  <header>
-    {% include 'components/_header_interno.html' %}
-  </header>
-  
-  <div class="imagens-produto">
-    {% for img in item.imagens %}
-      <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url) }}">
-    {% endfor %}
-  </div>
   
   <div class="dados-produto">
     
-  <form method="POST">
-    <label> Nome:</label>
-    <input type="text" name="nome" value="{{ item.nome }}">
-    <label> Coleção: </label>
-    <select name="colecao">
-      <option value=""
-        {% if item.colecao_id is none %}selected{% endif %}>
-        Sem coleção
-      </option>
+      
+    <form method="POST" id="form-editar" action="{{ url_for('novo_produto.editar', id=item.id_acessorio) }}">
+    <div class="imagens-produto">
+      <div class="descricao">
+        <label> Fotos:</label>
+        <small> Substitua ou adicione novas imagens </small>
+      </div>
+      <div class="lista-imagens">
+        {% for img in item.imagens %}
+          <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url) }}">
+        {% endfor %}
+      
+      </div>
 
-      {% for c in colecoes %}
-        <option
-          value="{{ c.id_colecao }}"
-          {% if c.id_colecao == item.colecao_id %}selected{% endif %}>
-          {{ c.nome_colecao }}
+    </div>
+      <label> Nome:</label>
+      <input type="text" name="nome" value="{{ item.nome }}" id="nome-bijoux">
+      <label> Coleção: </label>
+      <select name="colecao" id="colecao">
+        <option value=""
+          {% if item.colecao_id is none %}selected{% endif %}>
+          Sem coleção
         </option>
-      {% endfor %}
-    
-    </select>
-    <label> Preço: </label>
-    <input type="number" name="preco" value="{{ item.preco }}">
-    <label>Tamanho: </label>
-    <input type="text" name="tamanho" value="{{ item.tamanho }}">
-    <label> Material: </label>
-    <input type="text" name="material" value="{{ item.material }}">
   
-    <button>Salvar</button>
-  </form>
+        {% for c in colecoes %}
+          <option
+            value="{{ c.id_colecao }}"
+            {% if c.id_colecao == item.colecao_id %}selected{% endif %}>
+            {{ c.nome_colecao }}
+          </option>
+        {% endfor %}
+      
+      </select>
+      <label> Preço: </label>
+      <input type="number" name="preco" value="{{ item.preco }}" id="preco">
+      <label>Tamanho: </label>
+      <input type="text" name="tamanho" value="{{ item.tamanho }}" id="tamanho">
+      <label> Material: </label>
+      <input type="text" name="material" value="{{ item.material }}" id="material">
+    
+      <button type="submit" id="atualizar-btn">Salvar</button>
+    </form>
   </div>
   
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

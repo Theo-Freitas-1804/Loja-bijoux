@@ -1,22 +1,30 @@
 // =========================
 // TOAST GLOBAL
 // =========================
-function mostrarToast(mensagem) {
+function mostrarToast(mensagem, categoria = "success") {
 
-  const toast =
-    document.getElementById("toast");
+    const toast = document.getElementById("toast");
 
-  if (!toast) return;
+    if (!toast) return;
 
-  toast.textContent = mensagem;
+    toast.textContent = mensagem;
 
-  toast.classList.add("ativo");
+    // opcional: muda a cor conforme a categoria
+    toast.className = "";
+    toast.classList.add("ativo", categoria);
 
-  setTimeout(() => {
-    toast.classList.remove("ativo");
-  }, 2500);
-
+    setTimeout(() => {
+        toast.classList.remove("ativo");
+    }, 2500);
 }
 
-// exporta globalmente
 window.mostrarToast = mostrarToast;
+
+// =========================
+// FLASH DO FLASK
+// =========================
+if (typeof flashes !== "undefined" && flashes.length > 0) {
+    flashes.forEach(([categoria, mensagem]) => {
+        mostrarToast(mensagem, categoria);
+    });
+}

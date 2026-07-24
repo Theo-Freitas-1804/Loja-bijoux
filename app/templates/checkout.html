@@ -171,27 +171,30 @@ Checkout | Kordonê Bijoux
             <h2>Selecione forma de pagamento</h2>
           </div>
           <div class="pagamentos">
-            <input type="hidden" name="forma_pagamento" id="forma_pagamento">
-            <button type="button" class="pagamento-item">
+            <button type="button" class="pagamento-item" data-pagamento="Crédito">
           <div>
             <strong>Cartão de crédito</strong>
             <span>Contém encargos do cartão</span>
           </div>
           <div class="radio"></div>
           </button>
-          <button type="button" class="pagamento-item">
+          <button type="button" class="pagamento-item" data-pagamento="Débito">
           <div>
             <strong>Cartão de débito</strong>
           </div>
           <div class="radio"></div>
         </button>
-        <button type="button" class="pagamento-item">
+        <button type="button" class="pagamento-item" data-pagamento="Pix">
           <div>
             <strong>Pix</strong>
             <span>Aprovação imediata</span>
           </div>
           <div class="radio"></div>
         </button>
+        <!-- indica qual pagamento foi escolhido -->
+        <input type="hidden" name="forma_pagamento" id="forma_pagamento">
+        
+        
         </div> 
       </div>
       <input

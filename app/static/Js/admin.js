@@ -1,5 +1,5 @@
-console.count("admin.js carregado");
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("Admin")
 // 1 - Controla as seções da página //  
   const btnMais = document.getElementById("btn-mais");
   const painelMais = document.getElementById("painel-mais");

@@ -1,0 +1,458 @@
+Collecting scikit-learn
+  Using cached scikit_learn-1.9.0.tar.gz (7.8 MB)
+  Installing build dependencies: started
+  Installing build dependencies: still running...
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): still running...
+  Preparing metadata (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [425 lines of output]
+      + meson setup /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306 /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306/.mesonpy-u65rr7qp -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md --native-file=/data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306/.mesonpy-u65rr7qp/meson-python-native-file.ini
+      The Meson build system
+      Version: 1.11.2
+      Source dir: /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306
+      Build dir: /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306/.mesonpy-u65rr7qp
+      Build type: native build
+      Project name: scikit-learn
+      Project version: 1.9.0
+      C compiler for the host machine: cc (gcc 14.2.0 "cc (Alpine 14.2.0) 14.2.0")
+      C linker for the host machine: cc ld.bfd 2.43.1
+      C++ compiler for the host machine: clang++ (clang 19.1.4 "Alpine clang version 19.1.4")
+      C++ linker for the host machine: clang++ ld.bfd 2.43.1
+      Cython compiler for the host machine: cython (cython 3.2.9)
+      Host machine cpu family: aarch64
+      Host machine cpu: aarch64
+      Compiler for C supports arguments -Wno-unused-but-set-variable: YES
+      Compiler for C supports arguments -Wno-unused-function: YES
+      Compiler for C supports arguments -Wno-conversion: YES
+      Compiler for C supports arguments -Wno-misleading-indentation: YES
+      Library m found: YES
+      Program sklearn/_build_utils/tempita.py found: YES (/usr/bin/python3 /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306/sklearn/_build_utils/tempita.py)
+      Program python found: YES (/usr/bin/python3)
+      Run-time dependency OpenMP for c found: YES 4.5
+      Program cython found: YES (/data/data/com.foxdebug.acodefree/cache/pip-build-env-fowb_qs1/overlay/bin/cython)
+      Found pkg-config: YES (/usr/bin/pkg-config) 2.3.0
+      Run-time dependency python found: YES 3.12
+      Checking if "scipy cython_blas blas_int" compiles: NO
+      Configuring _blas_int.pxi using configuration
+      Build targets in project: 116
+      
+      scikit-learn 1.9.0
+      
+        User defined options
+          Native files: /data/data/com.foxdebug.acodefree/cache/pip-install-hzua15q8/scikit-learn_f9fe08d9c85f454ba3059d9fcbcdf306/.mesonpy-u65rr7qp/meson-python-native-file.ini
+          b_ndebug    : if-release
+          b_vscrt     : md
+          buildtype   : release
+      
+      Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /data/data/com.foxdebug.acodefree/cache/pip-build-env-fowb_qs1/normal/bin/ninja
+      + /data/data/com.foxdebug.acodefree/cache/pip-build-env-fowb_qs1/normal/bin/ninja
+      [1/257] Copying file sklearn/utils/_sorting.pxd
+      [2/257] Copying file sklearn/utils/_random.pxd
+      [3/257] Copying file sklearn/utils/_openmp_helpers.pxd
+      [4/257] Copying file sklearn/utils/_heap.pxd
+      [5/257] Generating sklearn/utils/_seq_dataset_pxd with a custom command
+      [6/257] Copying file sklearn/utils/_cython_blas.pxd
+      [7/257] Copying file sklearn/utils/_vector_sentinel.pxd
+      [8/257] Generating sklearn/utils/_weight_vector_pxd with a custom command
+      [9/257] Copying file sklearn/utils/_typedefs.pxd
+      [10/257] Copying file sklearn/utils/_bitset.pxd
+      [11/257] Generating sklearn/metrics/_dist_metrics_pxd with a custom command
+      [12/257] Generating sklearn/metrics/_pairwise_distances_reduction/_base_pxd with a custom command
+      [13/257] Copying file sklearn/utils/__init__.py
+      [14/257] Generating sklearn/metrics/_pairwise_distances_reduction/_datasets_pair_pxd with a custom command
+      [15/257] Copying file sklearn/metrics/_pairwise_distances_reduction/_classmode.pxd
+      [16/257] Copying file sklearn/_loss/_loss.pxd
+      [17/257] Copying file sklearn/metrics/__init__.py
+      [18/257] Generating sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors_pxd with a custom command
+      [19/257] Copying file sklearn/metrics/_pairwise_distances_reduction/__init__.py
+      [20/257] Generating sklearn/metrics/_pairwise_distances_reduction/_argkmin_pxd with a custom command
+      [21/257] Generating sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer_pxd with a custom command
+      [22/257] Generating sklearn/neighbors/_binary_tree_pxi with a custom command
+      [23/257] Copying file sklearn/neighbors/_partition_nodes.pxd
+      [24/257] Copying file sklearn/linear_model/__init__.py
+      [25/257] Copying file sklearn/_loss/__init__.py
+      [26/257] Copying file sklearn/neighbors/__init__.py
+      [27/257] Copying file sklearn/__init__.py
+      [28/257] Generating sklearn/_loss/_loss_pyx with a custom command
+      [29/257] Generating sklearn/utils/_seq_dataset_pyx with a custom command
+      [30/257] Generating sklearn/utils/_weight_vector_pyx with a custom command
+      [31/257] Generating sklearn/metrics/_dist_metrics_pyx with a custom command
+      [32/257] Generating sklearn/metrics/_pairwise_distances_reduction/_datasets_pair_pyx with a custom command
+      [33/257] Generating 'sklearn/utils/murmurhash.cpython-312-aarch64-linux-musl.so.p/murmurhash.c'
+      [34/257] Generating 'sklearn/utils/_bitset.cpython-312-aarch64-linux-musl.so.p/_bitset.c'
+      [35/257] Generating 'sklearn/__check_build/_check_build.cpython-312-aarch64-linux-musl.so.p/_check_build.c'
+      [36/257] Generating sklearn/metrics/_pairwise_distances_reduction/_base_pyx with a custom command
+      [37/257] Generating sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer_pyx with a custom command
+      [38/257] Generating sklearn/metrics/_pairwise_distances_reduction/_argkmin_pyx with a custom command
+      [39/257] Generating sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors_pyx with a custom command
+      [40/257] Generating 'sklearn/_isotonic.cpython-312-aarch64-linux-musl.so.p/_isotonic.c'
+      [41/257] Generating 'sklearn/utils/_fast_dict.cpython-312-aarch64-linux-musl.so.p/_fast_dict.cpp'
+      [42/257] Generating sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors_classmode_pyx with a custom command
+      [43/257] Generating sklearn/linear_model/_sag_fast_pyx with a custom command
+      [44/257] Generating sklearn/linear_model/_sgd_fast_pyx with a custom command
+      [45/257] Generating sklearn/_cyutility.c with a custom command
+      [46/257] Generating sklearn/metrics/_pairwise_distances_reduction/_argkmin_classmode_pyx with a custom command
+      [47/257] Generating sklearn/neighbors/_ball_tree_pyx with a custom command
+      [48/257] Generating sklearn/neighbors/_kd_tree_pyx with a custom command
+      [49/257] Generating 'sklearn/utils/arrayfuncs.cpython-312-aarch64-linux-musl.so.p/arrayfuncs.c'
+      [50/257] Generating 'sklearn/utils/_cython_blas.cpython-312-aarch64-linux-musl.so.p/_cython_blas.c'
+      [51/257] Generating 'sklearn/utils/sparsefuncs_fast.cpython-312-aarch64-linux-musl.so.p/sparsefuncs_fast.c'
+      [52/257] Generating 'sklearn/utils/_openmp_helpers.cpython-312-aarch64-linux-musl.so.p/_openmp_helpers.c'
+      [53/257] Generating 'sklearn/utils/_typedefs.cpython-312-aarch64-linux-musl.so.p/_typedefs.c'
+      [54/257] Generating 'sklearn/utils/_isfinite.cpython-312-aarch64-linux-musl.so.p/_isfinite.c'
+      [55/257] Generating 'sklearn/utils/_heap.cpython-312-aarch64-linux-musl.so.p/_heap.c'
+      [56/257] Generating 'sklearn/utils/_sorting.cpython-312-aarch64-linux-musl.so.p/_sorting.c'
+      [57/257] Generating 'sklearn/utils/_random.cpython-312-aarch64-linux-musl.so.p/_random.c'
+      [58/257] Generating 'sklearn/utils/_seq_dataset.cpython-312-aarch64-linux-musl.so.p/_seq_dataset.c'
+      [59/257] Generating 'sklearn/utils/_weight_vector.cpython-312-aarch64-linux-musl.so.p/_weight_vector.c'
+      [60/257] Generating 'sklearn/utils/_vector_sentinel.cpython-312-aarch64-linux-musl.so.p/_vector_sentinel.cpp'
+      [61/257] Generating 'sklearn/metrics/_pairwise_fast.cpython-312-aarch64-linux-musl.so.p/_pairwise_fast.c'
+      [62/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_datasets_pair.cpython-312-aarch64-linux-musl.so.p/_datasets_pair.cpp'
+      [63/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/_base.cpp'
+      [64/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.cpython-312-aarch64-linux-musl.so.p/_middle_term_computer.cpp'
+      [65/257] Generating 'sklearn/metrics/cluster/_expected_mutual_info_fast.cpython-312-aarch64-linux-musl.so.p/_expected_mutual_info_fast.c'
+      [66/257] Generating 'sklearn/cluster/_dbscan_inner.cpython-312-aarch64-linux-musl.so.p/_dbscan_inner.cpp'
+      [67/257] Generating 'sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c'
+      [68/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/_argkmin.cpp'
+      [69/257] Copying file sklearn/cluster/_hdbscan/__init__.py
+      [70/257] Generating 'sklearn/metrics/_dist_metrics.cpython-312-aarch64-linux-musl.so.p/_dist_metrics.c'
+      [71/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_argkmin_classmode.cpython-312-aarch64-linux-musl.so.p/_argkmin_classmode.cpp'
+      [72/257] Generating 'sklearn/cluster/_k_means_common.cpython-312-aarch64-linux-musl.so.p/_k_means_common.c'
+      [73/257] Generating 'sklearn/cluster/_k_means_minibatch.cpython-312-aarch64-linux-musl.so.p/_k_means_minibatch.c'
+      [74/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors_classmode.cpython-312-aarch64-linux-musl.so.p/_radius_neighbors_classmode.cpp'
+      [75/257] Generating 'sklearn/cluster/_k_means_elkan.cpython-312-aarch64-linux-musl.so.p/_k_means_elkan.c'
+      [76/257] Generating 'sklearn/cluster/_hierarchical_fast.cpython-312-aarch64-linux-musl.so.p/_hierarchical_fast.cpp'
+      [77/257] Generating 'sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/_radius_neighbors.cpp'
+      [78/257] Copying file sklearn/ensemble/_hist_gradient_boosting/__init__.py
+      [79/257] Generating 'sklearn/cluster/_k_means_lloyd.cpython-312-aarch64-linux-musl.so.p/_k_means_lloyd.c'
+      [80/257] Generating 'sklearn/decomposition/_cdnmf_fast.cpython-312-aarch64-linux-musl.so.p/_cdnmf_fast.c'
+      [81/257] Generating 'sklearn/decomposition/_online_lda_fast.cpython-312-aarch64-linux-musl.so.p/_online_lda_fast.c'
+      [82/257] Generating 'sklearn/cluster/_hdbscan/_tree.cpython-312-aarch64-linux-musl.so.p/_tree.c'
+      [83/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/_gradient_boosting.cpython-312-aarch64-linux-musl.so.p/_gradient_boosting.c'
+      [84/257] Generating 'sklearn/cluster/_hdbscan/_reachability.cpython-312-aarch64-linux-musl.so.p/_reachability.c'
+      [85/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/histogram.cpython-312-aarch64-linux-musl.so.p/histogram.c'
+      [86/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/splitting.cpython-312-aarch64-linux-musl.so.p/splitting.c'
+      [87/257] Generating 'sklearn/cluster/_hdbscan/_linkage.cpython-312-aarch64-linux-musl.so.p/_linkage.c'
+      [88/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/_binning.cpython-312-aarch64-linux-musl.so.p/_binning.c'
+      [89/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/_predictor.cpython-312-aarch64-linux-musl.so.p/_predictor.c'
+      [90/257] Generating 'sklearn/ensemble/_hist_gradient_boosting/common.cpython-312-aarch64-linux-musl.so.p/common.c'
+      [91/257] Generating 'sklearn/ensemble/_gradient_boosting.cpython-312-aarch64-linux-musl.so.p/_gradient_boosting.c'
+      [92/257] Generating 'sklearn/feature_extraction/_hashing_fast.cpython-312-aarch64-linux-musl.so.p/_hashing_fast.cpp'
+      [93/257] Generating 'sklearn/datasets/_svmlight_format_fast.cpython-312-aarch64-linux-musl.so.p/_svmlight_format_fast.c'
+      [94/257] Generating 'sklearn/linear_model/_sgd_fast.cpython-312-aarch64-linux-musl.so.p/_sgd_fast.c'
+      [95/257] Generating 'sklearn/manifold/_utils.cpython-312-aarch64-linux-musl.so.p/_utils.c'
+      [96/257] Generating 'sklearn/linear_model/_sag_fast.cpython-312-aarch64-linux-musl.so.p/_sag_fast.c'
+      [97/257] Generating 'sklearn/neighbors/_partition_nodes.cpython-312-aarch64-linux-musl.so.p/_partition_nodes.cpp'
+      [98/257] Generating 'sklearn/svm/_newrand.cpython-312-aarch64-linux-musl.so.p/_newrand.cpp'
+      [99/257] Generating 'sklearn/manifold/_barnes_hut_tsne.cpython-312-aarch64-linux-musl.so.p/_barnes_hut_tsne.c'
+      [100/257] Generating 'sklearn/linear_model/_cd_fast.cpython-312-aarch64-linux-musl.so.p/_cd_fast.c'
+      [101/257] Generating 'sklearn/preprocessing/_csr_polynomial_expansion.cpython-312-aarch64-linux-musl.so.p/_csr_polynomial_expansion.c'
+      [102/257] Compiling C++ object sklearn/svm/libliblinear-skl.a.p/src_liblinear_tron.cpp.o
+      [103/257] Generating 'sklearn/preprocessing/_target_encoder_fast.cpython-312-aarch64-linux-musl.so.p/_target_encoder_fast.cpp'
+      [104/257] Compiling C++ object sklearn/svm/libliblinear-skl.a.p/src_liblinear_linear.cpp.o
+      [105/257] Generating 'sklearn/neighbors/_kd_tree.cpython-312-aarch64-linux-musl.so.p/_kd_tree.c'
+      warning: sklearn/neighbors/_binary_tree.pxi:1091:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:1957:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2052:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2221:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2344:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2401:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2402:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2726:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3592:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3687:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3856:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3979:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:4036:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:4037:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_kd_tree.pyx:74:4: Assigning to 'float64_t *' from 'const float64_t *' discards const qualifier
+      warning: sklearn/neighbors/_kd_tree.pyx:75:4: Assigning to 'float64_t *' from 'const float64_t *' discards const qualifier
+      warning: sklearn/neighbors/_kd_tree.pyx:342:4: Assigning to 'float32_t *' from 'const float32_t *' discards const qualifier
+      warning: sklearn/neighbors/_kd_tree.pyx:343:4: Assigning to 'float32_t *' from 'const float32_t *' discards const qualifier
+      [106/257] Generating 'sklearn/svm/_libsvm_sparse.cpython-312-aarch64-linux-musl.so.p/_libsvm_sparse.c'
+      [107/257] Generating 'sklearn/svm/_libsvm.cpython-312-aarch64-linux-musl.so.p/_libsvm.c'
+      [108/257] Generating 'sklearn/svm/_liblinear.cpython-312-aarch64-linux-musl.so.p/_liblinear.c'
+      [109/257] Compiling C++ object sklearn/svm/liblibsvm-skl.a.p/src_libsvm_libsvm_template.cpp.o
+      In file included from ../sklearn/svm/src/libsvm/libsvm_template.cpp:6:
+      ../sklearn/svm/src/libsvm/svm.cpp:1784:9: warning: variable 'sum_alpha' set but not used [-Wunused-but-set-variable]
+       1784 |         double sum_alpha = 0;
+            |                ^
+      In file included from ../sklearn/svm/src/libsvm/libsvm_template.cpp:8:
+      ../sklearn/svm/src/libsvm/svm.cpp:1784:9: warning: variable 'sum_alpha' set but not used [-Wunused-but-set-variable]
+       1784 |         double sum_alpha = 0;
+            |                ^
+      2 warnings generated.
+      [110/257] Generating 'sklearn/neighbors/_ball_tree.cpython-312-aarch64-linux-musl.so.p/_ball_tree.c'
+      warning: sklearn/neighbors/_binary_tree.pxi:1091:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:1957:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2052:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2221:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2344:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2401:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2402:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:2726:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3592:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3687:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3856:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:3979:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:4036:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_binary_tree.pxi:4037:8: Assigning to 'intp_t *' from 'const intp_t *' discards const qualifier
+      warning: sklearn/neighbors/_ball_tree.pyx:107:4: Assigning to 'float64_t *' from 'const float64_t *' discards const qualifier
+      warning: sklearn/neighbors/_ball_tree.pyx:310:4: Assigning to 'float32_t *' from 'const float32_t *' discards const qualifier
+      [111/257] Compiling C object sklearn/__check_build/_check_build.cpython-312-aarch64-linux-musl.so.p/meson-generated__check_build.c.o
+      [112/257] Generating 'sklearn/tree/_utils.cpython-312-aarch64-linux-musl.so.p/_utils.c'
+      [113/257] Generating 'sklearn/tree/_splitter.cpython-312-aarch64-linux-musl.so.p/_splitter.c'
+      [114/257] Compiling C object sklearn/_isotonic.cpython-312-aarch64-linux-musl.so.p/meson-generated__isotonic.c.o
+      [115/257] Generating 'sklearn/tree/_partitioner.cpython-312-aarch64-linux-musl.so.p/_partitioner.c'
+      [116/257] Generating 'sklearn/tree/_criterion.cpython-312-aarch64-linux-musl.so.p/_criterion.c'
+      [117/257] Generating 'sklearn/neighbors/_quad_tree.cpython-312-aarch64-linux-musl.so.p/_quad_tree.c'
+      [118/257] Compiling C++ object sklearn/utils/murmurhash.cpython-312-aarch64-linux-musl.so.p/src_MurmurHash3.cpp.o
+      [119/257] Compiling C object sklearn/utils/_bitset.cpython-312-aarch64-linux-musl.so.p/meson-generated__bitset.c.o
+      [120/257] Compiling C object sklearn/_cyutility.cpython-312-aarch64-linux-musl.so.p/meson-generated_..__cyutility.c.o
+      [121/257] Generating 'sklearn/tree/_tree.cpython-312-aarch64-linux-musl.so.p/_tree.cpp'
+      [122/257] Compiling C object sklearn/utils/_openmp_helpers.cpython-312-aarch64-linux-musl.so.p/meson-generated__openmp_helpers.c.o
+      [123/257] Compiling C object sklearn/utils/_heap.cpython-312-aarch64-linux-musl.so.p/meson-generated__heap.c.o
+      [124/257] Compiling C object sklearn/utils/murmurhash.cpython-312-aarch64-linux-musl.so.p/meson-generated_murmurhash.c.o
+      [125/257] Compiling C object sklearn/utils/arrayfuncs.cpython-312-aarch64-linux-musl.so.p/meson-generated_arrayfuncs.c.o
+      [126/257] Compiling C++ object sklearn/utils/_fast_dict.cpython-312-aarch64-linux-musl.so.p/meson-generated__fast_dict.cpp.o
+      [127/257] Compiling C object sklearn/utils/_sorting.cpython-312-aarch64-linux-musl.so.p/meson-generated__sorting.c.o
+      [128/257] Compiling C object sklearn/utils/_typedefs.cpython-312-aarch64-linux-musl.so.p/meson-generated__typedefs.c.o
+      [129/257] Compiling C object sklearn/utils/_weight_vector.cpython-312-aarch64-linux-musl.so.p/meson-generated__weight_vector.c.o
+      [130/257] Compiling C object sklearn/utils/_isfinite.cpython-312-aarch64-linux-musl.so.p/meson-generated__isfinite.c.o
+      [131/257] Compiling C object sklearn/utils/_cython_blas.cpython-312-aarch64-linux-musl.so.p/meson-generated__cython_blas.c.o
+      [132/257] Compiling C object sklearn/utils/_random.cpython-312-aarch64-linux-musl.so.p/meson-generated__random.c.o
+      [133/257] Compiling C++ object sklearn/utils/_vector_sentinel.cpython-312-aarch64-linux-musl.so.p/meson-generated__vector_sentinel.cpp.o
+      [134/257] Compiling C++ object sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/meson-generated__base.cpp.o
+      FAILED: [code=1] sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/meson-generated__base.cpp.o
+      clang++ -Isklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p -Isklearn/metrics/_pairwise_distances_reduction -I../sklearn/metrics/_pairwise_distances_reduction -I../../../pip-build-env-fowb_qs1/overlay/lib/python3.12/site-packages/numpy/_core/include -I/usr/include/python3.12 -fvisibility=hidden -fvisibility-inlines-hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -std=c++14 -O3 -fPIC -fopenmp -DNPY_NO_DEPRECATED_API=NPY_1_22_API_VERSION -MD -MQ sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/meson-generated__base.cpp.o -MF sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/meson-generated__base.cpp.o.d -o sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/meson-generated__base.cpp.o -c sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/_base.cpp
+      sklearn/metrics/_pairwise_distances_reduction/_base.cpython-312-aarch64-linux-musl.so.p/_base.cpp:1151:18: fatal error: 'omp.h' file not found
+       1151 |         #include <omp.h>
+            |                  ^~~~~~~
+      1 error generated.
+      [135/257] Compiling C++ object sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/meson-generated__argkmin.cpp.o
+      FAILED: [code=1] sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/meson-generated__argkmin.cpp.o
+      clang++ -Isklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p -Isklearn/metrics/_pairwise_distances_reduction -I../sklearn/metrics/_pairwise_distances_reduction -I../../../pip-build-env-fowb_qs1/overlay/lib/python3.12/site-packages/numpy/_core/include -I/usr/include/python3.12 -fvisibility=hidden -fvisibility-inlines-hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -std=c++14 -O3 -fPIC -fopenmp -DNPY_NO_DEPRECATED_API=NPY_1_22_API_VERSION -MD -MQ sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/meson-generated__argkmin.cpp.o -MF sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/meson-generated__argkmin.cpp.o.d -o sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/meson-generated__argkmin.cpp.o -c sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/_argkmin.cpp
+      sklearn/metrics/_pairwise_distances_reduction/_argkmin.cpython-312-aarch64-linux-musl.so.p/_argkmin.cpp:1153:10: fatal error: 'omp.h' file not found
+       1153 | #include <omp.h>
+            |          ^~~~~~~
+      1 error generated.
+      [136/257] Compiling C object sklearn/utils/_seq_dataset.cpython-312-aarch64-linux-musl.so.p/meson-generated__seq_dataset.c.o
+      [137/257] Compiling C++ object sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/meson-generated__radius_neighbors.cpp.o
+      FAILED: [code=1] sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/meson-generated__radius_neighbors.cpp.o
+      clang++ -Isklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p -Isklearn/metrics/_pairwise_distances_reduction -I../sklearn/metrics/_pairwise_distances_reduction -I../../../pip-build-env-fowb_qs1/overlay/lib/python3.12/site-packages/numpy/_core/include -I/usr/include/python3.12 -fvisibility=hidden -fvisibility-inlines-hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -std=c++14 -O3 -fPIC -fopenmp -DNPY_NO_DEPRECATED_API=NPY_1_22_API_VERSION -MD -MQ sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/meson-generated__radius_neighbors.cpp.o -MF sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/meson-generated__radius_neighbors.cpp.o.d -o sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/meson-generated__radius_neighbors.cpp.o -c sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/_radius_neighbors.cpp
+      sklearn/metrics/_pairwise_distances_reduction/_radius_neighbors.cpython-312-aarch64-linux-musl.so.p/_radius_neighbors.cpp:1175:10: fatal error: 'omp.h' file not found
+       1175 | #include <omp.h>
+            |          ^~~~~~~
+      1 error generated.
+      [138/257] Compiling C object sklearn/metrics/_pairwise_fast.cpython-312-aarch64-linux-musl.so.p/meson-generated__pairwise_fast.c.o
+      [139/257] Compiling C++ object sklearn/metrics/_pairwise_distances_reduction/_datasets_pair.cpython-312-aarch64-linux-musl.so.p/meson-generated__datasets_pair.cpp.o
+      [140/257] Compiling C++ object sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.cpython-312-aarch64-linux-musl.so.p/meson-generated__middle_term_computer.cpp.o
+      [141/257] Compiling C object sklearn/metrics/_dist_metrics.cpython-312-aarch64-linux-musl.so.p/meson-generated__dist_metrics.c.o
+      [142/257] Compiling C object sklearn/utils/sparsefuncs_fast.cpython-312-aarch64-linux-musl.so.p/meson-generated_sparsefuncs_fast.c.o
+      [143/257] Compiling C object sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/meson-generated__loss.c.o
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_28loss_gradient',
+          inlined from '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_29loss_gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87080:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87169:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      87169 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_1, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_29loss_gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87102:11: note: '__pyx_v_p' was declared here
+      87102 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_32loss_gradient',
+          inlined from '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_33loss_gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:88312:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:88401:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      88401 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_1, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_33loss_gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:88334:10: note: '__pyx_v_p' was declared here
+      88334 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_44gradient',
+          inlined from '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_45gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:91348:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:91435:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      91435 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_45gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:91368:10: note: '__pyx_v_p' was declared here
+      91368 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_42gradient',
+          inlined from '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_43gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90858:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90945:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      90945 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_43gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90878:10: note: '__pyx_v_p' was declared here
+      90878 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_40gradient',
+          inlined from '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_41gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90368:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90455:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      90455 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_41gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:90388:11: note: '__pyx_v_p' was declared here
+      90388 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_38gradient',
+          inlined from '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_39gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:89878:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:89965:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      89965 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_39gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:89898:11: note: '__pyx_v_p' was declared here
+      89898 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_24loss',
+          inlined from '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_25loss' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:86218:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:86301:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      86301 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_25loss':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:86239:10: note: '__pyx_v_p' was declared here
+      86239 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_22loss',
+          inlined from '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_23loss' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85708:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85791:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      85791 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_23loss':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85729:10: note: '__pyx_v_p' was declared here
+      85729 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_20loss',
+          inlined from '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_21loss' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85198:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85281:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      85281 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_21loss':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:85219:11: note: '__pyx_v_p' was declared here
+      85219 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_18loss',
+          inlined from '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_19loss' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:84688:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:84771:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      84771 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_19loss':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:84709:11: note: '__pyx_v_p' was declared here
+      84709 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_64gradient_proba',
+          inlined from '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_65gradient_proba' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:96140:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:96229:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      96229 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_65gradient_proba':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:96161:10: note: '__pyx_v_p' was declared here
+      96161 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_62gradient_proba',
+          inlined from '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_63gradient_proba' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95635:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95724:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      95724 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_63gradient_proba':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95656:10: note: '__pyx_v_p' was declared here
+      95656 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_60gradient_proba',
+          inlined from '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_61gradient_proba' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95130:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95219:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      95219 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_61gradient_proba':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:95151:11: note: '__pyx_v_p' was declared here
+      95151 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_58gradient_proba',
+          inlined from '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_59gradient_proba' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:94625:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:94714:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      94714 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_59gradient_proba':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:94646:11: note: '__pyx_v_p' was declared here
+      94646 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_54gradient_hessian',
+          inlined from '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_55gradient_hessian' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93759:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93847:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      93847 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_55gradient_hessian':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93780:10: note: '__pyx_v_p' was declared here
+      93780 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_52gradient_hessian',
+          inlined from '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_53gradient_hessian' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93236:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93324:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      93324 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_53gradient_hessian':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:93257:10: note: '__pyx_v_p' was declared here
+      93257 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_50gradient_hessian',
+          inlined from '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_51gradient_hessian' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92713:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92801:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      92801 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_51gradient_hessian':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92734:11: note: '__pyx_v_p' was declared here
+      92734 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_48gradient_hessian',
+          inlined from '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_49gradient_hessian' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92190:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92278:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      92278 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_0__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_49gradient_hessian':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:92211:11: note: '__pyx_v_p' was declared here
+      92211 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_34loss_gradient',
+          inlined from '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_35loss_gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:88928:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:89017:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      89017 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_1, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_1_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_35loss_gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:88950:10: note: '__pyx_v_p' was declared here
+      88950 |   float *__pyx_v_p;
+            |          ^~~~~~~~~
+      In function '__pyx_pf_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_30loss_gradient',
+          inlined from '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_31loss_gradient' at sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87696:13:
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87785:23: warning: '__pyx_v_p' may be used uninitialized [-Wmaybe-uninitialized]
+      87785 |               #pragma omp parallel firstprivate(__pyx_v_p) private(__pyx_t_1, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9) num_threads(__pyx_v_n_threads)
+            |                       ^~~
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c: In function '__pyx_fuse_0_1__pyx_pw_7sklearn_5_loss_5_loss_21CyHalfMultinomialLoss_31loss_gradient':
+      sklearn/_loss/_loss.cpython-312-aarch64-linux-musl.so.p/_loss.c:87718:11: note: '__pyx_v_p' was declared here
+      87718 |   double *__pyx_v_p;
+            |           ^~~~~~~~~
+      ninja: build stopped: subcommand failed.
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> See above for output.
+
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
