@@ -19,7 +19,10 @@ Editar acessoório | Kordonê Bijoux
         {% for img in item.imagens %}
           <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_BIJOUX/' ~ img.url) }}">
         {% endfor %}
-      
+        <button type="button" id="btn-input-foto">
+          <i class="ri-add-circle-fill"></i>
+          <input type="file" multiple hidden id="fotos">
+        </button>
       </div>
 
     </div>
@@ -55,5 +58,7 @@ Editar acessoório | Kordonê Bijoux
 {% endblock %}
 
 {% block scripts %}
+
+<script src="{{url_for('static' , filename='Js/Pages/editar_produto.js')}}"></script>
 
 {% endblock %}

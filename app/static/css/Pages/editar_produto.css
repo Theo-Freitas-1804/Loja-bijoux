@@ -89,9 +89,6 @@
   align-items:center;
   border:2px solid red;
 }*/
-.imagens-produto{
-    border:2px solid blue;
-}
 
 .lista-imagens button{
     margin:0;
@@ -103,14 +100,6 @@
     align-items:center;
 
     flex:0 0 auto;
-
-    background:red;
-}
-
-.teste{
-    width:60px;
-    height:60px;
-    background:red;
 }
 .lista-imagens{
     display:flex;
@@ -118,10 +107,4 @@
     align-items:center;
 
     overflow:auto;
-}
-.lista-imagens > *{
-    position:static !important;
-    float:none !important;
-    margin:0 !important;
-    transform:none !important;
 }
