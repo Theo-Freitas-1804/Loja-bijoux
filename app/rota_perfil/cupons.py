@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for , session , jsonify
 from ..models import db , Usuario , Cupom , UsosCupons
-from .perfil import bp_usuario
+from . import bp_usuario
 
 from ..decorators import login_required
 

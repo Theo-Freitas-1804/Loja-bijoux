@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   border: 1px solid #f542ce;
+  border-radius: 12px;
   gap: 24px;
 
   flex: 0 0 280px;
@@ -277,6 +278,7 @@
   border: 1px solid #1f2423;
   border-radius: 12px;
   gap: 16px;
+  padding: 32px;
 }
 
 #radios-tipo {
@@ -325,4 +327,14 @@
     background: #f7f7f7;
     border-radius: 12px;
     padding: 20px;
+}
+
+.btn-fechar {
+  background: none;
+  border: none;
+}
+
+.form-bijoux , #form-promover, forms-atendente button:hover {
+  background: #A7F3D0;
+  border: 1px solid #121212
 }

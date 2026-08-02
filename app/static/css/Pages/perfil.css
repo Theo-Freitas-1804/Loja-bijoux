@@ -122,7 +122,8 @@
 /* ATIVO */
 
 #opcoes-perfil button.ativo {
-
+  background: #A7F3D0;
+  
   color: black;
 
   font-weight: 600;

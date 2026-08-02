@@ -1,105 +1,232 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Entrar | Kordonê Bijoux</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="card {% if iniciar_login %}virado{% endif %}">
+{% extends "base.html" %}
+
+{% block titulo %}
+Entrar | Kordonê Bijoux
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="wrapper">
+
+    <div class="card {% if iniciar_login %}virado{% endif %}">
+
+        <div class="card-inner">
+
+            <!-- ========================= -->
+            <!-- CADASTRO -->
+            <!-- ========================= -->
+            <section class="front">
+
+                <div class="painel">
+
+
+                    <form
+                        action="{{ url_for('auth.criar_conta') }}"
+                        method="POST"
+                        class="form-login form-cadastro">
+
+                    <h2 class="titulo"> Boas-vindas à Kordonê Bijoux</h2>
+                    <h3>
+                      Sua coleção começa aqui.
+                      &#10024;
+                    </h3>
+                    <p class="subtitulo">
+                      Crie sua conta para acompanhar pedidos,
+                      salvar favoritos e comprar com mais rapidez e conveniência.
+                    </p>
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.args.get('next', '') }}">
+                        <label for="nome"> Nome:</label>
+                        <input
+                            type="text"
+                            name="Nome_cliente"
+                            id="nome"
+                            required>
+                        <label for="email">E-mail:</label>
+                        <input
+                            type="email"
+                            name="email_cliente"
+                            id="email"
+                            required>
+                        <label for="cpf"> CPF:</label>
+                        <input
+                            class="campo-cpf"
+                            id="cpf"
+                            name="cpf"
+                            type="text"
+                            inputmode="numeric"
+                            maxlength="14">
+
+                        <small>
+                            Será usado para emitir a Declaração de Conteúdo dos Correios (DC-e).
+                        </small>
+                        <label for="fone">Telefone:</label>
+                        <input
+                            type="tel"
+                            name="fone"
+                            id="fone"
+                            maxlength="11">
+
+                            <label for="senha"> Crie sua senha:</label>
+                        <div class="campo-senha">
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha_cliente"
+                                required>
+
+                            <button
+                                type="button"
+                                class="btn-senha">
+
+                                <i class="icone-senha ri-eye-line"></i>
+
+                            </button>
+
+                        </div>
+
+                            <label for="confirmar_senha">Confirme a sua senha:</label>
+                        <div class="campo-senha">
+                            <input
+                                type="password"
+                                id="confirmar_senha"
+                                name="confirmar_senha"
+                                required>
+
+                            <button
+                                type="button"
+                                class="btn-senha">
+
+                                <i class="icone-senha ri-eye-line"></i>
+
+                            </button>
+
+                        </div>
+
+                        <small id="msg-senha"></small>
+                        
+                        <div class="salvar">
+                          <button type="submit">
+                              Criar Conta
+                          </button>
+                        </div>
+
+                        <p class="switch">
+                            Já tem uma conta?
+
+                            <a
+                                href="#"
+                                id="btn-virar-login">
+
+                                Entrar
+
+                            </a>
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- ========================= -->
+            <!-- LOGIN -->
+            <!-- ========================= -->
+            <section class="back">
+
+                <div class="painel">
+
+                    <h2 class="titulo">
+                        Entrar
+                    </h2>
+
+                    <form
+                        action="{{ url_for('auth.entrar') }}"
+                        method="POST"
+                        class="form-login form-entrar">
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.args.get('next', '') }}">
+
+                        <input
+                            type="text"
+                            name="id_cliente"
+                            placeholder="E-mail ou nome"
+                            required>
+
+                        <div class="campo-senha">
+
+                            <input
+                                type="password"
+                                id="senha_cliente"
+                                name="senha_cliente"
+                                placeholder="Insira sua senha"
+                                required>
+
+                            <button
+                                type="button"
+                                class="btn-senha">
+
+                                <i class="icone-senha ri-eye-line"></i>
+
+                            </button>
+
+                        </div>
+
+                        <p>
+
+                            Esqueceu a senha?
+
+                            <a href="{{ url_for('senha.gerar_codigo_senha') }}">
+
+                                Recupere aqui
+
+                            </a>
+
+                        </p>
+                        <div id="login-btn">
+                          <button type="submit">
   
-        <!-- FRENTE -->
-        <div class="front">
-          <h2 class="titulo">Cadastre-se</h2>
-          <p class="subtitulo">
-            Tenha seu próprio carrinho, salve endereços, peças favoritas e mais!
-          </p>
+                              Entrar
   
-          <div class="form-box">
-            <form action="{{ url_for('auth.criar_conta') }}" method="POST" class="form-login form-cadastro">
-              
-                <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
-              
-              <input type="text" placeholder="Nome" name="Nome_cliente" required>
-              <input type="email" placeholder="E-mail" name="email_cliente" required>
-              <input type="password" placeholder="Senha" name="senha_cliente" required name="senha_cliente">
-  
-              <button type="submit">Criar Conta</button>
-  
-              <p class="switch">
-                Já tem uma conta?
-                <a href="#" id="btn-virar-login">Entrar</a>
-              </p>
-            </form>
-          </div>
+                          </button>
+                        </div>
+
+                        <p class="switch">
+
+                            Não tem conta?
+
+                            <a
+                                href="#"
+                                id="btn-virar-cadastro">
+
+                                Criar conta
+
+                            </a>
+
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
         </div>
-  
-        <!-- VERSO -->
-        <div class="back">
-          <h2 class="titulo">Entrar</h2>
-  
-          <div class="form-box">
-            <form action="{{ url_for('auth.entrar') }}" method="POST" class="form-login form-entrar">
-              
-                <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
-              
-              <input type="text" placeholder="E-mail ou nome" name="id_cliente" required>
-  
-              <div class="campo-senha">
-                <input type="password" id="senha_cliente" placeholder="Insira sua Senha" name="senha_cliente">
-                <button type="button" id="btn_senha">
-                  <i id="icone_senha" class="ri-eye-line"></i>
-                </button>
-              </div>
-              <p> Esqueceu a senha? <a href="{{url_for('senha.gerar_codigo_senha')}}">Recupere aqui</a></p>
-              <button type="submit">Entrar</button>
-  
-              <p class="switch">
-                Não tem conta?
-                <a href="#" id="btn-virar-cadastro">Criar conta</a>
-              </p>
-            </form>
-          </div>
-        </div>
-  
-      </div>
+
     </div>
-    
-    <div id="toast"></div>
 
-<script src="{{ url_for(
-  'static',
-  filename='Js/home.js'
-) }}"></script>
+</div>
 
-<script src="{{ url_for(
-  'static',
-  filename='Js/auth.js'
-) }}"></script>
-    
-    {% with mensagens = get_flashed_messages(with_categories=true)%}
-      {% if mensagens %}
 
-    <script>
+{% endblock %}
 
-      {% for categoria, mensagem in mensagens %}
+{% block scripts %}
 
-        window.mostrarToast(
-          "{{ mensagem }}"
-        );
+<script src="{{ url_for('static', filename='Js/auth.js') }}"></script>
 
-      {% endfor %}
-
-    </script>
-
-  {% endif %}
-
-{% endwith %}
-    
-</body>
-</html>
+{% endblock %}

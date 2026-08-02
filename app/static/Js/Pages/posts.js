@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const icone = document.getElementById("icone-atendente");
 
   const promoverbtn = document.querySelector("#select-promover")
-  const ovrrlaypromover = document.querySelector("#overlay-bijoux")
+  const overlaypromover = document.querySelector("#overlay-bijoux")
+  
+  const fecharpromover = document.querySelector(".btn-fechar")
   
   console.log("Valor do input" , inputid)
   console.log("Valor do input" , inputnome)
@@ -113,7 +115,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   });
   
   promoverbtn.addEventListener("click" , ()=>{
-    ovrrlaypromover.classList.toggle("escondido")
+    overlaypromover.classList.remove("escondido")
   })
-  
+  fecharpromover.addEventListener("click" , ()=>{
+    overlaypromover.classList.add("escondido")
+  })
 })

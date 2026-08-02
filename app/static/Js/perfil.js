@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const botoes = document.querySelectorAll(".opcao-lista");
   const secoes = document.querySelectorAll(".opcao-nav");
-
+  
+  const btneditar = document.querySelector("#editar-conta")
+  
   botoes.forEach(botao => {
     botao.addEventListener("click", function () {
 
@@ -26,5 +28,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
   });
-
+  
 });

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template , request , current_app , flash , redirect , url_for
 from flask_login import login_user , logout_user , login_required , current_user
-from ..rotas_principais.home import bp_principal
+
+from . import bp_usuario
 
 from ..models import Favorito , Usuario , Produtos , Pedido , Itens , UsosCupons
 
@@ -10,12 +11,12 @@ import secrets
 from ..meu_app import db 
 
  #1. Definição do Blueprint (Nome do Blueprint é 'usuario' para o url_for)
-bp_usuario = Blueprint("usuario", __name__)
+
 extensoes_imagens = ["png" , "jpg" , "gif"]
 
 
 
-@bp_usuario.route("/perfil")
+@bp_usuario.route("/")
 @login_required
 def perfil():
 
@@ -57,7 +58,7 @@ def arquivo_permitido(filename):
     return extensao_limpa in extensoes_imagens
 
 
-@bp_usuario.route("/minha-conta/sair")
+@bp_usuario.route("/sair")
 @login_required
 def sair():
     # 1. Encerra a sessão do Flask-Login e remove o cookie de logi    n
@@ -65,7 +66,7 @@ def sair():
     # 2. Redireciona para a página principal
     return redirect(url_for("principal.pagina_principal"))
     
-@bp_usuario.route("/meu-perfil/deletar-conta")
+@bp_usuario.route("/deletar-conta")
 @login_required
 def deletar_conta():
     db.session.delete(current_user)

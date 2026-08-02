@@ -53,10 +53,14 @@ Meu Perfil | Kordonê Bijoux
         </form>
 
       {% endif %}
-
-      <strong>
-        {{ current_user.nome }}
-      </strong>
+      <div id="area-editar">
+        <strong>
+          {{ current_user.nome }}
+        </strong>
+        <a href="{{url_for('usuario.editar_conta')}}">
+          <i class="ri-edit-2-line"></i>
+        </a>
+      </div>
 
     </div>
 

@@ -52,7 +52,8 @@ class Usuario(UserMixin , db.Model):
     db.DateTime,
     nullable=True
     )
-    
+    fone = db.Column(db.String(40) , nullable=True)
+    cpf = db.Column(db.String(14), nullable=True)
     def __repr__(self):
         return f"<Usuario {self.nome}>"
     def get_id(self):

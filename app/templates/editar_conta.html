@@ -1,0 +1,31 @@
+{%extends "base.html" %}
+
+{% block titulo %}
+{% endblock %}
+
+{% block conteudo %}
+{% endblock %}
+
+{% block scripts %}
+
+<h2> Edite suas informaçoões </h1>
+
+<form action="{{url_for('usuario.editar_conta')}}" method="POST">
+  <label> Foto atual: </label>
+  <label for="foto" class="foto-perfil">
+  <img src="{{ url_for('static', filename='imagens/UPLOADS_FOTOS_PERFIL/' ~ current_user.foto_perfil) }}" class="foto-perfil">
+  </label>
+  <input type="file"
+      id="foto"
+      name="foto"
+      accept="image/*"
+      hidden
+  >
+  <label> Nome: </label>
+  <input type="text" value="{{current_user.nome}}">
+  <label> E-mail::</label>
+  <input type="email" placeholder="novoemail@gmail.com">
+  <label> Cpf:<input type="text" maxlength="14" inputmode="numeric"></label>
+</form>
+
+{% endblock %}

@@ -2,12 +2,13 @@ from flask import Blueprint, render_template , request , current_app , flash , r
 from flask_login import login_user , logout_user , login_required , current_user
 from ..rotas_principais.home import bp_principal
 from ..models import db
-from .perfil import bp_usuario , arquivo_permitido
+from . import bp_usuario
+from .perfil import arquivo_permitido
 import os
 import secrets
 
 
-@bp_usuario.route("/minha-conta/editar-dados", methods= ["GET" , "POST"])
+@bp_usuario.route("/editar-dados", methods= ["GET" , "POST"])
 def upload_foto():
     if request.method == 'POST':
         imagem_adicionada = request.files.get("imagem_adicionada")

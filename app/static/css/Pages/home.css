@@ -4,15 +4,19 @@
   flex-direction: column;
   align-items: center; /* 🔥 ISSO FALTAVA */
   gap: 16px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
-  
+
+
+
 .hero {
   text-align: center;
 }
 
 .hero__titulo {
   margin-bottom: 10px;
+  font-family: italianno;
+  margin-top: 10px;
 }
 
 .nav {
@@ -44,6 +48,17 @@
   display: flex;
   flex-direction: column;
   width: 200px;
+}
+
+.pesquisar-btn {
+  background: none;
+  border: none;
+}
+
+.pesquisar-btn:hover {
+  background-color: #A7F3D0;
+  border: 1px solid #121212;
+  border-radius: 12px;
 }
 
 .main {
@@ -140,11 +155,17 @@ footer h3 {
 }
 
 .bloco-home {
-  margin-top: 80px;
+  margin-top: 76px;
 }
 
 .bloco-home h2 {
   margin-bottom: 32px;
+}
+
+.nav__menu a{
+    font-family:"Poppins", sans-serif;
+    color:#333;
+    text-decoration:none;
 }
 
 @media (min-width: 1024px) {

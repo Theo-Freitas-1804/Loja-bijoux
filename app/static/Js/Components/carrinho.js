@@ -41,7 +41,6 @@ function atualizarCarrinho() {
 
       container.innerHTML = "";
 
-      // carrinho vazio
       if (!data.itens.length) {
 
         container.innerHTML = `
@@ -53,32 +52,21 @@ function atualizarCarrinho() {
         return;
       }
 
-      // render itens
       data.itens.forEach(item => {
 
-        const html = `
+        container.innerHTML += `
           <div class="item-carrinho">
 
-            <img
-              src="/static/imagens/UPLOADS_FOTOS_BIJOUX/${item.imagem}"
-            >
+            <img src="/static/imagens/UPLOADS_FOTOS_BIJOUX/${item.imagem}">
 
             <div>
               <p>${item.nome}</p>
-
-              <p>
-                R$ ${item.preco}
-              </p>
-
-              <p>
-                Qtd: ${item.quantidade}
-              </p>
+              <p>R$ ${item.preco}</p>
+              <p>Qtd: ${item.quantidade}</p>
             </div>
 
           </div>
         `;
-
-        container.innerHTML += html;
 
       });
 
