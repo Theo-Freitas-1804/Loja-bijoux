@@ -24,16 +24,17 @@ Entrar | Kordonê Bijoux
                         action="{{ url_for('auth.criar_conta') }}"
                         method="POST"
                         class="form-login form-cadastro">
-
-                    <h2 class="titulo"> Boas-vindas à Kordonê Bijoux</h2>
-                    <h3>
-                      Sua coleção começa aqui.
-                      &#10024;
-                    </h3>
-                    <p class="subtitulo">
-                      Crie sua conta para acompanhar pedidos,
-                      salvar favoritos e comprar com mais rapidez e conveniência.
-                    </p>
+                      <div class="cabecalho-login">
+                        <h2 class="titulo"> Boas-vindas à Kordonê Bijoux</h2>
+                      <h3 class="cta">
+                        Sua coleção começa aqui.
+                        &#10024;
+                      </h3>
+                      <p class="subtitulo">
+                        Crie sua conta para acompanhar pedidos,
+                        salvar favoritos e comprar com mais rapidez e conveniência.
+                      </p>
+                      </div>
                         <input
                             type="hidden"
                             name="next"
@@ -177,11 +178,11 @@ Entrar | Kordonê Bijoux
 
                         </div>
 
-                        <p>
+                        <p id="ajuda-senha">
 
                             Esqueceu a senha?
 
-                            <a href="{{ url_for('senha.gerar_codigo_senha') }}">
+                            <a href="{{ url_for('senha.gerar_codigo_senha') }}" id="link-senha">
 
                                 Recupere aqui
 
