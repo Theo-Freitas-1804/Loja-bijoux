@@ -6,13 +6,18 @@ from werkzeug.security import generate_password_hash
 from ..models import Usuario, db
 from ..services.enviar_email import enviar_token_senha
 
+from datetime import datetime, timedelta, timezone
+
+fuso_brasilia = timezone(timedelta(hours=-3))
+agora = datetime.now(fuso_brasilia)
+
 bp_recuperar_senha = Blueprint("senha", __name__)
 
 
 # =========================
 # ETAPA 1 - GERAR CÓDIGO
 # =========================
-@bp_recuperar_senha.route("/user/recuperar_senha", methods=["GET", "POST"])
+@bp_recuperar_senha.route("/login/recuperar_senha", methods=["GET", "POST"])
 def gerar_codigo_senha():
   if request.method == "POST":
     user_email = request.form.get("email")
@@ -27,9 +32,9 @@ def gerar_codigo_senha():
     codigo = str(random.randint(100000, 999999))
     # ✔ nomes do banco (mantidos)
     usuario.token_reset = codigo
-    usuario.token_expira = datetime.utcnow() + timedelta(minutes=15)
+    usuario.token_expira = agora + timedelta(minutes=15)
     db.session.commit()
-    enviar_token_senha(user_email, codigo)
+    enviar_token_senha(usuario)
     return render_template(
       "recuperar_senha.html",
       mostrar_codigo=True,

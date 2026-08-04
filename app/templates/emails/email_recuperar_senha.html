@@ -1,0 +1,29 @@
+{% extends "emails/base_email.html" %}
+{% block conteudo %}
+
+<small> Este e-mail é automático , se você não o solicitou , pode ignorá-lo</small>
+
+<h2> Recupere sua senha</h2>
+<p> Olá , {{usuario.nome}} , você solicitou uma recuperação de senha </p>
+<p>
+  Aqui está seu código:
+</p>
+<table align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="
+      background:#f59e0b;
+      color:#111;
+      font-size:34px;
+      font-weight:bold;
+      letter-spacing:8px;
+      padding:18px 32px;
+      border-radius:12px;">
+      {{ usuario.token_reset }}
+    </td>
+  </tr>
+</table>
+<p>
+Você tem até <strong>{{ expira }}</strong> para utilizar esse código.
+</p>
+{% endblock %}
+

@@ -25,6 +25,7 @@
   <div id="etapa-email" class="{% if mostrar_codigo or mostrar_senha %}escondido{% endif %}">
     <form class="form-recuperacao" method="POST" action="{{ url_for('senha.gerar_codigo_senha') }}">
       <input type="email" name="email" placeholder="Digite seu email" required>
+      <small> (O código para recuperar a senha será enviado para o e-mail informado)</small>
       <button type="submit">Receber Código</button>
     </form>
   </div>
